@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Sns</string>
+    <string name="id"> ID</string>
+    <string name="password">PASSWORD</string>
+    <string name="login">LOGIN</string>
+    <string name="app">rabit</string>
+    <string name="register">JOIN</string>
+    <string name="email">EMAIL</string>
+    <string name="passwordCheck">PASSWORD CHECK</string>
+    <string name="phone">PHONE NUMBER</string>
+    <string name="age">AGE</string>
+    <string name="name">NAME</string>
+    <string name="post">POST</string>
+    <string name="prompt">tell people about your today</string>
+</resources>
