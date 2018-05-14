@@ -68,15 +68,18 @@
                 android:text="@string/post" />
         </LinearLayout>
     </LinearLayout>
-<!--
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:orientation="vertical">
 
         <ListView
             android:id="@+id/goalListView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>-->
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"/>
+    </LinearLayout>
 </LinearLayout>

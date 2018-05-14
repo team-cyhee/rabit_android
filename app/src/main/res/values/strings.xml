@@ -8,7 +8,7 @@
     <string name="email">EMAIL</string>
     <string name="passwordCheck">PASSWORD CHECK</string>
     <string name="phone">PHONE NUMBER</string>
-    <string name="age">AGE</string>
+    <string name="birth">BIRTH</string>
     <string name="name">NAME</string>
     <string name="post">POST</string>
     <string name="prompt">tell people about your today</string>

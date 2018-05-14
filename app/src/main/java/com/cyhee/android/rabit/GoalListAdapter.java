@@ -1,4 +1,4 @@
-/*package com.cyhee.android.rabit;
+package com.cyhee.android.rabit;
 
 import android.content.Context;
 import android.view.View;
@@ -34,18 +34,26 @@ public class GoalListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int idx, View convertView, ViewGroup parent) {
-        /* TODO: change View.inflate */
-/*        View v = View.inflate(context, R.layout.goal, null);
+        View v = View.inflate(context, R.layout.goal, null);
         TextView nameText = v.findViewById(R.id.nameText);
-        TextView titleText = v.findViewById(R.id.goalText);
+        TextView titleText = v.findViewById(R.id.titleText);
         TextView dateText = v.findViewById(R.id.dateText);
+        TextView participantText = v.findViewById(R.id.participantText);
+        TextView dailyLogText = v.findViewById(R.id.dailyLogText);
+
+        String date = goalList.get(idx).getgStartDate() + "~ " + goalList.get(idx).getgDays() + "days";
+        String ment1 = " ... ";
+        String ment2 = " days";
+        String parti = goalList.get(idx).getgPname(0)+ment1+goalList.get(idx).getgPday(0)+ment2
+                +"\n"+goalList.get(idx).getgPname(1)+ment1+goalList.get(idx).getgPday(1)+ment2;
 
         nameText.setText(goalList.get(idx).getgName());
         titleText.setText(goalList.get(idx).getgTitle());
-        dateText.setText(goalList.get(idx).getgStartDate());
+        dateText.setText(date);
+        participantText.setText(parti);
+        dailyLogText.setText(goalList.get(idx).getgRecent());
 
         v.setTag(goalList.get(idx).getgEmail()+goalList.get(idx).getgId());
         return v;
     }
 }
-*/

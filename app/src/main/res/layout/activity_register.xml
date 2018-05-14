@@ -6,7 +6,6 @@
     TODO: move cursor automatically
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -103,9 +102,9 @@
                 android:drawableStart="@drawable/phone"
                 android:padding="10dp"
                 android:textColorHint="@color/gray" />
-
+<!-- TODO: register birth format -->
             <EditText
-                android:hint="@string/age"
+                android:hint="@string/birth"
                 android:id="@+id/ageText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -115,13 +114,13 @@
                 android:textColorHint="@color/gray" />
 
             <Button
+                android:text="@string/register"
                 android:id="@+id/registerBtn"
                 android:layout_width="70dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:background="@drawable/rec"
                 android:gravity="center"
-                android:text="@string/register"
                 android:textColor="@color/basic"
                 android:textSize="20sp" />
         </LinearLayout>

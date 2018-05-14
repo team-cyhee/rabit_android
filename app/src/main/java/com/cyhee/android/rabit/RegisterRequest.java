@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterRequest extends StringRequest {
-    final static private String url = "http://172.17.0.1/Register.php";
+    final static private String url = "http://192.168.168.105/Register.php";
     private Map<String, String> params;
 
     public RegisterRequest(String name, String email, String password,

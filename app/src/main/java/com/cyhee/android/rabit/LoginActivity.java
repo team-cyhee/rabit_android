@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText emailText = findViewById(R.id.emailText);
         final EditText passwordText = findViewById(R.id.passwordText);
 
-        final String defaultEmail = sharedPre.getString("email","NONE");
+        final String defaultEmail = sharedPre.getString("email","");
         emailText.setText(defaultEmail);
 
         Button loginBtn = findViewById(R.id.loginBtn);
