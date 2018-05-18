@@ -60,12 +60,12 @@
                 android:background="@drawable/camera" />
 
             <Button
+                android:text="@string/post"
                 android:id="@+id/postBtn"
                 android:layout_width="45dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="2dp"
-                android:background="@drawable/rec_g"
-                android:text="@string/post" />
+                android:background="@drawable/rec_g" />
         </LinearLayout>
     </LinearLayout>
 

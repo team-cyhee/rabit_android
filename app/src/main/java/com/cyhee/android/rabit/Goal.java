@@ -10,9 +10,11 @@ public class Goal {
     private String[][] gParticipant;
     private String gRecent;
     private String gDays;
+    private String gStatus;
 
     protected Goal(String gName, String gEmail, String gTitle, String gStartDate,
-                String gDays, String gId, String[][] gParticipant, String gRecent) {
+                   String gDays, String gId, String[][] gParticipant, String gRecent,
+                   String gStatus) {
         this.gName = gName;
         this.gEmail = gEmail;
         this.gTitle = gTitle;
@@ -21,6 +23,7 @@ public class Goal {
         this.gParticipant = gParticipant;
         this.gRecent = gRecent;
         this.gDays = gDays;
+        this.gStatus = gStatus;
     }
 
     public String getgName() {
@@ -89,5 +92,13 @@ public class Goal {
 
     public void setgDays(String gDays) {
         this.gDays = gDays;
+    }
+
+    public String getgStatus() {
+        return gStatus;
+    }
+
+    public void setgStatus(String gStatus) {
+        this.gStatus = gStatus;
     }
 }
