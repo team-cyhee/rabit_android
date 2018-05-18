@@ -12,4 +12,5 @@
     <string name="name">NAME</string>
     <string name="post">POST</string>
     <string name="prompt">tell people about your today</string>
+    <string name="participants">PARTICIPANTS</string>
 </resources>

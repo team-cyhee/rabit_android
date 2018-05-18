@@ -23,17 +23,15 @@ public class GoalListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int idx) {
-        return goalList.get(idx);
+    public Object getItem(int position) { return goalList.get(position); }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
-    public long getItemId(int idx) {
-        return idx;
-    }
-
-    @Override
-    public View getView(int idx, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         View v = View.inflate(context, R.layout.goal, null);
         TextView nameText = v.findViewById(R.id.nameText);
         TextView titleText = v.findViewById(R.id.titleText);
@@ -41,19 +39,20 @@ public class GoalListAdapter extends BaseAdapter {
         TextView participantText = v.findViewById(R.id.participantText);
         TextView dailyLogText = v.findViewById(R.id.dailyLogText);
 
-        String date = goalList.get(idx).getgStartDate() + "~ " + goalList.get(idx).getgDays() + "days";
+        String date = goalList.get(position).getgStartDate() + "~ " + goalList.get(position).getgDays() + "days";
         String ment1 = " ... ";
         String ment2 = " days";
-        String parti = goalList.get(idx).getgPname(0)+ment1+goalList.get(idx).getgPday(0)+ment2
-                +"\n"+goalList.get(idx).getgPname(1)+ment1+goalList.get(idx).getgPday(1)+ment2;
+        String parti = goalList.get(position).getgPname(0)+ment1+goalList.get(position).getgPday(0)+ment2
+                +"\n"+goalList.get(position).getgPname(1)+ment1+goalList.get(position).getgPday(1)+ment2;
 
-        nameText.setText(goalList.get(idx).getgName());
-        titleText.setText(goalList.get(idx).getgTitle());
+        nameText.setText(goalList.get(position).getgName());
+        titleText.setText(goalList.get(position).getgTitle());
         dateText.setText(date);
         participantText.setText(parti);
-        dailyLogText.setText(goalList.get(idx).getgRecent());
+        dailyLogText.setText(goalList.get(position).getgRecent());
 
-        v.setTag(goalList.get(idx).getgEmail()+goalList.get(idx).getgId());
+        v.setTag(goalList.get(position).getgEmail()+goalList.get(position).getgId());
         return v;
     }
+
 }

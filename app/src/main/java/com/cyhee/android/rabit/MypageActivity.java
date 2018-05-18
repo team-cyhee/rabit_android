@@ -1,7 +1,12 @@
 package com.cyhee.android.rabit;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -28,6 +33,17 @@ public class MypageActivity extends AppCompatActivity {
         goalList.add(new Goal("admin", "admin@gmail.com", "think positively", "2018-01-04", "130", "3", tmp1, "Nothing bad happened today.", "progress"));
         goalListAdp = new GoalListAdapter(getApplicationContext(), goalList);
         goalListView.setAdapter(goalListAdp);
+
+        goalListView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object item = parent.getItemAtPosition(position);
+
+                Intent participantIntent = new Intent (MypageActivity.this, ParticipantsActivity.class);
+                MypageActivity.this.startActivity(participantIntent);
+
+            }
+        });
 
 
     }

@@ -21,21 +21,21 @@ public class ParticipantListAdapter extends BaseAdapter {
     public int getCount() { return participantList.size(); }
 
     @Override
-    public Object getItem(int idx) { return participantList.get(idx); };
+    public Participant getItem(int position) { return participantList.get(position); };
 
     @Override
-    public long getItemId(int idx) { return idx; }
+    public long getItemId(int position) { return position; }
 
     @Override
-    public View getView(int idx, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         View v = View.inflate(context, R.layout.participant, null);
         TextView nameText = v.findViewById(R.id.nameText);
         TextView daysText = v.findViewById(R.id.daysText);
 
-        nameText.setText(participantList.get(idx).getpName());
-        daysText.setText(participantList.get(idx).getpDays());
+        nameText.setText(participantList.get(position).getpName());
+        daysText.setText(participantList.get(position).getpDays());
 
-        v.setTag(participantList.get(idx).getgId()+participantList.get(idx).getgEmail()+participantList.get(idx).getpEmail());
+        v.setTag(participantList.get(position).getgId()+participantList.get(position).getgEmail()+participantList.get(position).getpEmail());
         return v;
     }
 }

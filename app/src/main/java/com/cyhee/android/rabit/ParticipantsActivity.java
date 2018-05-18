@@ -18,9 +18,18 @@ public class ParticipantsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_participants);
 
-        /* TODO: connect Mypage_Goal with Participant List */
         partListView = findViewById(R.id.participantListView);
         partList = new ArrayList<Participant>();
+/*        partList.add(new Participant("0","admin@gmail.com","cy118@naver.com",
+                        "cyp","20180201",107,"process"));
+        partList.add(new Participant("0","admin@gmail.com","whgksdyd23@naver.com",
+                "hy1","20180202",106,"process"));
+        partList.add(new Participant("0","admin@gmail.com","whgksdyd112@naver.com",
+                "hy2","20180203",105,"process"));
+        partList.add(new Participant("0","admin@gmail.com","whgksdyd123@naver.com",
+                "hy3","20180204",104,"process"));
+        partList.add(new Participant("0","admin@gmail.com","whgksdyd222@naver.com",
+                "hy4","20180205",103,"process"));*/
         partListAdp = new ParticipantListAdapter(getApplicationContext(), partList);
         partListView.setAdapter(partListAdp);
     }
