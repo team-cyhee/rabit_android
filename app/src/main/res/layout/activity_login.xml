@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main"
-    tools:context=".LoginActivity">
-<!-- DONE
-    edit action bar
-    TODO: text box auto complete
-        how? using SharedPreferences.Editor(p.714)
- -->
+    android:background="#8E2800"
+    tools:context=".activity.LoginActivity">
+    <!-- DONE
+        edit action bar
+        TODO: text box auto complete
+            how? using SharedPreferences.Editor(p.714)
+     -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:layout_gravity="center"
-                android:textColor="@color/basic"
+                android:textColor="#F2F2F2"
                 android:textSize="40sp"
                 android:textStyle="bold"/>
         </LinearLayout>
@@ -57,10 +56,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:background="@color/basic"
+                android:background="#F2F2F2"
                 android:drawableStart="@drawable/id"
                 android:padding="10dp"
-                android:textColorHint="@color/gray" />
+                android:textColorHint="#8C8681" />
 
             <EditText
                 android:hint="@string/password"
@@ -68,10 +67,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:background="@color/basic"
+                android:background="#F2F2F2"
                 android:drawableStart="@drawable/password"
                 android:padding="10dp"
-                android:textColorHint="@color/gray"
+                android:textColorHint="#8C8681"
                 android:inputType="textPassword"/>
 
             <Button
@@ -79,9 +78,9 @@
                 android:id="@+id/loginBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/gray"
+                android:background="#8C8681"
                 android:textSize="18sp"
-                android:textColor="@color/main"
+                android:textColor="#8E2800"
                 android:textStyle="bold" />
 
             <Button
@@ -90,9 +89,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@color/main"
+                android:background="#8E2800"
                 android:textSize="18sp"
-                android:textColor="@color/gray"
+                android:textColor="#8C8681"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>

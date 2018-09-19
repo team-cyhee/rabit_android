@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sns</string>
+    <string name="app_name">rabit</string>
     <string name="id"> ID</string>
     <string name="password">PASSWORD</string>
     <string name="login">LOGIN</string>
