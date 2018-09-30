@@ -10,7 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/basic"
-    tools:context=".RegisterActivity">
+    tools:context=".sign.login.RegisterActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,12 +51,12 @@
             android:orientation="vertical">
 
             <EditText
-                android:hint="@string/name"
-                android:id="@+id/nameText"
+                android:id="@+id/usernameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:drawableStart="@drawable/id"
+                android:hint="@string/username"
                 android:padding="10dp"
                 android:textColorHint="@color/gray" />
 
@@ -102,7 +102,7 @@
                 android:drawableStart="@drawable/phone"
                 android:padding="10dp"
                 android:textColorHint="@color/gray" />
-<!-- TODO: register birth format -->
+            <!-- TODO: register birth format -->
             <EditText
                 android:hint="@string/birth"
                 android:id="@+id/ageText"
