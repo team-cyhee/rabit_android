@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#8E2800"
-    tools:context=".activity.LoginActivity">
+    tools:context=".sign.login.RegisterActivity">
     <!-- DONE
         edit action bar
         TODO: text box auto complete

@@ -20,12 +20,4 @@ class ExampleUnitTest {
         assert(tokenResponse.isSuccessful)
         print(tokenResponse.body())
     }
-
-    @Test
-    fun resourceApiTest() {
-        val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
-        val request = restClient.users()
-        val response = request.execute()
-        print(response.body())
-    }
 }

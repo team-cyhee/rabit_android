@@ -1,7 +1,11 @@
 package com.cyhee.android.rabit.api.service
 
 import com.cyhee.android.rabit.api.response.TokenData
+import com.cyhee.android.rabit.data.User
+import io.reactivex.Completable
+import io.reactivex.Single
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -17,7 +21,13 @@ interface AuthApi {
     @Headers("Authorization: Basic cmFiaXRfcmVzdDpyYWJpdEBwYXNzd29yZA==")
     @POST("/oauth/token?grant_type=password")
     fun token(
-            @Query("username") username : String,
-            @Query("password") password : String
-    ) : Call<TokenData>
+        @Query("username") username : String,
+        @Query("password") password : String
+    ) : Single<TokenData>
+
+
+    @POST("/v1/users")
+    fun register(
+        @Body user: User
+    ) : Completable
 }
