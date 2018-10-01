@@ -9,10 +9,6 @@ class TokenSharedPreference(context: Context) {
     private val TOKEN = "token"
     private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, Activity.MODE_PRIVATE)
 
-    init {
-        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-    }
-
     // In SharedPreferences
     // apply -> async (better), commit -> sync
     var token: String
