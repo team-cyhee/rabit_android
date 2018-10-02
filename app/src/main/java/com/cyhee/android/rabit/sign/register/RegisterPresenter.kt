@@ -1,9 +1,11 @@
 package com.cyhee.android.rabit.sign.login
 
+import android.util.Log
 import com.cyhee.android.rabit.api.core.AuthApiAdapter
 import com.cyhee.android.rabit.api.response.TokenData
 import com.cyhee.android.rabit.api.service.AuthApi
 import com.cyhee.android.rabit.data.User
+import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
@@ -15,21 +17,34 @@ class RegisterPresenter(private val view : RegisterActivity) : RegisterContract.
     private val restClient: AuthApi = AuthApiAdapter.retrofit(AuthApi::class.java)
 
     override fun register(user : User) {
-        restClient.register(user)
+        restClient.exists(user.username)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe (
                         {
-                            view.success()
+                            view.duplicatedUsername()
                         },
                         {
-                            if(it is HttpException) {
-                                print(it.response())
-                                print(it.response().body())
-                            }
-                            else {
-                                print(it)
-                            }
+                            restClient.register(user)
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(
+                                            {
+                                                view.success()
+                                            },
+                                            {
+                                                if(it is HttpException) {
+                                                    Log.d("register",it.response().toString())
+                                                    Log.d("register",it.response().body().toString())
+                                                    Log.d("register",it.response().body().toString())
+                                                    Log.d("register",it.response().errorBody().toString())
+                                                    Log.d("register",it.response().errorBody()?.string())
+                                                }
+                                                else {
+                                                    Log.d("register",it.toString())
+                                                }
+                                            }
+                                    )
                         }
                 )
     }

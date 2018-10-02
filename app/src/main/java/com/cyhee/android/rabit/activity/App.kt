@@ -7,7 +7,6 @@ import com.cyhee.android.rabit.api.core.preferences.TokenSharedPreference
 class App : Application() {
     init {
         instance = this
-        print("@@@@@@@!!!!!!!!!!!!!!@#@@@@@@@@@@@@")
     }
 
     companion object {

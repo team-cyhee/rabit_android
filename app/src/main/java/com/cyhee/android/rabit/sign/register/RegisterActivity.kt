@@ -39,8 +39,8 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
                     passwordValidator.valid(passwordText)
                 }
 
-        var passwordCheck: Observable<Boolean> = passwordCheckText
-                .textChanges()
+        var passwordCheck: Observable<Boolean> = Observable
+                .merge(passwordText.textChanges(), passwordCheckText.textChanges())
                 .map {
                     if(passwordCheckText.text.toString() != passwordText.text.toString()) {
                         passwordCheckText.error = "패스워드와 패스워드 체크가 다릅니다."
@@ -60,6 +60,7 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
                     }
                     true
                 }
+
 
         Observables.combineLatest(passwordValid, passwordCheck, emailValid) {
             valid1, valid2, valid3 -> valid1 && valid2 && valid3
@@ -86,8 +87,12 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
     }
 
     override fun success() {
-        // TODO
         Log.d("register request", "registered")
+        finish()
+    }
+
+    override fun duplicatedUsername() {
+        usernameText.error = "중복된 username 입니다."
     }
 
     override fun onDestroy() {

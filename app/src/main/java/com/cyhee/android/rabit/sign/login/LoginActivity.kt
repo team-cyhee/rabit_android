@@ -1,6 +1,5 @@
 package com.cyhee.android.rabit.sign.login
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -10,8 +9,6 @@ import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.api.response.TokenData
 import kotlinx.android.synthetic.main.activity_login.*
-import retrofit2.Call
-import retrofit2.Response
 
 /**
  * 로그인 화면을 담당하는 activity
