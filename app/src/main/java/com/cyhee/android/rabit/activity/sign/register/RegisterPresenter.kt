@@ -1,22 +1,17 @@
-package com.cyhee.android.rabit.sign.login
+package com.cyhee.android.rabit.activity.sign.login
 
 import android.util.Log
 import com.cyhee.android.rabit.api.core.AuthApiAdapter
-import com.cyhee.android.rabit.api.response.TokenData
 import com.cyhee.android.rabit.api.service.AuthApi
-import com.cyhee.android.rabit.data.User
-import io.reactivex.Completable
+import com.cyhee.android.rabit.model.UserFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.HttpException
-import retrofit2.Response
 
 class RegisterPresenter(private val view : RegisterActivity) : RegisterContract.Presenter {
     private val restClient: AuthApi = AuthApiAdapter.retrofit(AuthApi::class.java)
 
-    override fun register(user : User) {
+    override fun register(user : UserFactory.Post) {
         restClient.exists(user.username)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

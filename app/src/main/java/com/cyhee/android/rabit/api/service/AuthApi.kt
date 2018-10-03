@@ -1,10 +1,10 @@
 package com.cyhee.android.rabit.api.service
 
 import com.cyhee.android.rabit.api.response.TokenData
-import com.cyhee.android.rabit.data.User
+import com.cyhee.android.rabit.model.User
+import com.cyhee.android.rabit.model.UserFactory
 import io.reactivex.Completable
 import io.reactivex.Single
-import retrofit2.Call
 import retrofit2.http.*
 
 /**
@@ -25,7 +25,7 @@ interface AuthApi {
 
     @POST("/v1/users")
     fun register(
-        @Body user: User
+        @Body user: UserFactory.Post
     ) : Completable
 
     @GET("/v1/users/{username}")

@@ -1,12 +1,9 @@
 package com.cyhee.android.rabit
 
 import com.cyhee.android.rabit.api.core.AuthApiAdapter
-import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.AuthApi
-import com.cyhee.android.rabit.api.service.ResourceApi
-import com.cyhee.android.rabit.data.User
-import com.cyhee.android.rabit.sign.register.validator.EmailValidator
-import com.cyhee.android.rabit.sign.register.validator.PasswordValidator
+import com.cyhee.android.rabit.model.User
+import com.cyhee.android.rabit.activity.sign.register.validator.EmailValidator
 import org.junit.Test
 import java.util.*
 

@@ -1,9 +1,8 @@
-package com.cyhee.android.rabit.sign.login
+package com.cyhee.android.rabit.activity.sign.login
 
 import com.cyhee.android.rabit.base.BasePresenter
 import com.cyhee.android.rabit.base.BaseView
-import com.cyhee.android.rabit.data.User
-import io.reactivex.Completable
+import com.cyhee.android.rabit.model.UserFactory
 
 interface RegisterContract {
     interface View : BaseView<Presenter> {
@@ -12,6 +11,6 @@ interface RegisterContract {
     }
 
     interface Presenter : BasePresenter {
-        fun register(user : User)
+        fun register(user : UserFactory.Post)
     }
 }

@@ -1,20 +1,19 @@
-package com.cyhee.android.rabit.sign.login
+package com.cyhee.android.rabit.activity.sign.login
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
 import com.cyhee.android.rabit.R
-import com.cyhee.android.rabit.data.User
-import com.cyhee.android.rabit.sign.register.validator.EmailValidator
-import com.cyhee.android.rabit.sign.register.validator.PasswordValidator
+import com.cyhee.android.rabit.model.UserFactory
+import com.cyhee.android.rabit.activity.sign.register.validator.EmailValidator
+import com.cyhee.android.rabit.activity.sign.register.validator.PasswordValidator
 import com.jakewharton.rxbinding2.widget.textChanges
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.Observables
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
-import java.util.regex.Pattern
 
 /**
  * 로그인 화면을 담당하는 activity
@@ -77,7 +76,7 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
             val phone = phoneText.text.toString()
             val age = ageText.text.toString()
 
-            val user = User(username, password, email, phone, Date())
+            val user = UserFactory.Post(username, email, password, phone, Date())
 
             if(validAll)
                 presenter.register(user)

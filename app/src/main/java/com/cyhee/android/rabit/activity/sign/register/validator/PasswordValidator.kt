@@ -1,4 +1,4 @@
-package com.cyhee.android.rabit.sign.register.validator
+package com.cyhee.android.rabit.activity.sign.register.validator
 
 import android.widget.TextView
 

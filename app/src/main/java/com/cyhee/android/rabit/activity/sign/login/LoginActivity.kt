@@ -1,4 +1,4 @@
-package com.cyhee.android.rabit.sign.login
+package com.cyhee.android.rabit.activity.sign.login
 
 import android.content.Intent
 import android.os.Bundle
