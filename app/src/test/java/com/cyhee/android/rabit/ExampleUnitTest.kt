@@ -47,18 +47,4 @@ class ExampleUnitTest {
         print("Good!")
     }
 
-    @Test
-    fun nestedApi() {
-        val restClient: AuthApi = AuthApiAdapter.retrofit(AuthApi::class.java)
-        val user = User("abc23","aaaa1234","a@a.c","", Date())
-        restClient.exists(user.username)
-                .onErrorResumeNext {
-                    print(it.toString())
-                    restClient.register(user)
-                }
-                .subscribe{
-                    print("hi")
-                }
-        Thread.sleep(5000)
-    }
 }
