@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".sign.login.LoginActivity">
+        <activity android:name="com.cyhee.android.rabit.activity.sign.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +18,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".sign.login.RegisterActivity"/>
+        <activity android:name="com.cyhee.android.rabit.activity.sign.login.RegisterActivity"/>
+        <activity android:name="com.cyhee.android.rabit.activity.goal.GoalListActivity"/>
     </application>
 
     <!-- permissions -->

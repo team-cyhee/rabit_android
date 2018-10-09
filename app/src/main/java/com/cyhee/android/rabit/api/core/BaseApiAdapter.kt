@@ -29,7 +29,7 @@ abstract class BaseApiAdapter(END_POINT: String) {
 
         okHttpClient = OkHttpClient().newBuilder().apply {
             addInterceptor(httpLogging)
-            addInterceptor(TokenInterceptor())
+            //addInterceptor(TokenInterceptor())
         }.build()
 
         // Retrofit2 + OKHttp3를 연결한다
