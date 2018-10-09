@@ -1,10 +1,8 @@
-package com.cyhee.android.rabit.sign.login
+package com.cyhee.android.rabit.activity.sign.login
 
 import com.cyhee.android.rabit.api.response.TokenData
 import com.cyhee.android.rabit.base.BasePresenter
 import com.cyhee.android.rabit.base.BaseView
-import retrofit2.Call
-import retrofit2.Response
 
 interface LoginContract {
     interface View : BaseView<Presenter> {

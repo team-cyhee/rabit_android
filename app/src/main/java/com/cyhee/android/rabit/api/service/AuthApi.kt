@@ -1,14 +1,11 @@
 package com.cyhee.android.rabit.api.service
 
 import com.cyhee.android.rabit.api.response.TokenData
-import com.cyhee.android.rabit.data.User
+import com.cyhee.android.rabit.model.User
+import com.cyhee.android.rabit.model.UserFactory
 import io.reactivex.Completable
 import io.reactivex.Single
-import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.Headers
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * 로그인 인증 관련 요청을 담당하는 interface
@@ -28,6 +25,11 @@ interface AuthApi {
 
     @POST("/v1/users")
     fun register(
-        @Body user: User
+        @Body user: UserFactory.Post
+    ) : Completable
+
+    @GET("/v1/users/{username}")
+    fun exists(
+        @Path("username") username: String
     ) : Completable
 }

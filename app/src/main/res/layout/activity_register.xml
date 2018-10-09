@@ -10,7 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/basic"
-    tools:context=".sign.login.RegisterActivity">
+    tools:context=".activity.sign.login.RegisterActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

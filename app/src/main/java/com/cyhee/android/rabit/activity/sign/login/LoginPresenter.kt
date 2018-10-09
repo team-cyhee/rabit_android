@@ -1,4 +1,4 @@
-package com.cyhee.android.rabit.sign.login
+package com.cyhee.android.rabit.activity.sign.login
 
 import android.util.Log
 import com.cyhee.android.rabit.api.core.AuthApiAdapter
