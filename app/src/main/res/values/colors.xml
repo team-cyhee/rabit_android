@@ -6,4 +6,5 @@
     <color name="basic">#F2F2F2</color>
     <color name="gray">#8C8681</color>
     <color name="main">#b74b4b</color>
+    <color name="black">#000000</color>
 </resources>

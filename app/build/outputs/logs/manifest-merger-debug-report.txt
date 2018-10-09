@@ -1,17 +1,19 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-27:12
-MERGED from [com.ssomai:android.scalablelayout:2.1.6] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\android.scalablelayout-2.1.6.aar\d3038690e101a37072c001da28b4e4bb\AndroidManifest.xml:2:1-13:12
+ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-28:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\abf5f4a85ae1dda2816bdff23eda539a\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:recyclerview-v7:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-28.0.0.aar\a8b4bc26fb36e7f2dbb7c44085801a2c\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:cardview-v7:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\cardview-v7-28.0.0.aar\894021396ff2055e7e8fc1580becbb89\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\3428a44899606b70cb57a4f156d77140\AndroidManifest.xml:2:1-11:12
 MERGED from [com.jakewharton.rxbinding2:rxbinding-kotlin:2.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\rxbinding-kotlin-2.0.0.aar\5a8212deb451b461644612961dbd936f\AndroidManifest.xml:2:1-8:12
 MERGED from [com.jakewharton.rxbinding2:rxbinding:2.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\rxbinding-2.0.0.aar\47a35102300f7f41fd6cc9e31a8e76dd\AndroidManifest.xml:2:1-8:12
-MERGED from [io.reactivex.rxjava2:rxandroid:2.0.1] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\rxandroid-2.0.1.aar\47ab94f6ff97fdcf634a35708446da6f\AndroidManifest.xml:15:1-21:12
+MERGED from [com.uber.autodispose:autodispose-android-archcomponents:1.0.0-RC2] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\autodispose-android-archcomponents-1.0.0-RC2.aar\16728eea052a9b374ece7b68e2c9c0a2\AndroidManifest.xml:17:1-24:12
+MERGED from [com.uber.autodispose:autodispose-android:1.0.0-RC2] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\autodispose-android-1.0.0-RC2.aar\5eae00e9454dc4f658c4637d2b2134d2\AndroidManifest.xml:17:1-24:12
+MERGED from [io.reactivex.rxjava2:rxandroid:2.0.2] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\rxandroid-2.0.2.aar\82e9ef2ace332d6bc206832df1f2bbf0\AndroidManifest.xml:15:1-21:12
+MERGED from [com.ssomai:android.scalablelayout:2.1.6] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\android.scalablelayout-2.1.6.aar\d3038690e101a37072c001da28b4e4bb\AndroidManifest.xml:2:1-13:12
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\710bccc360ae65e57058857c04d1961d\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\da20b7dea8cd4e94929e7fc144411d43\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\9508ad93e949e16c0af654e9c860df14\AndroidManifest.xml:17:1-22:12
@@ -28,7 +30,6 @@ MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\cy118\.gra
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\cab9c96973122af4d0ab3bb5512d920e\AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\401ceb0a570d6f801bbb4f0aa664dafb\AndroidManifest.xml:17:1-25:12
 MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\057d47c4f934324e6734467e4a638827\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\d3f15912ea8c2aa4bb009b9226c37fc3\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:documentfile:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\3a378b0224981fe191056cde198763a3\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\a894c7038aa1c03a869279184dceb26b\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:print:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\ce1088d35a55ce4b05819170beb89e7a\AndroidManifest.xml:17:1-22:12
@@ -37,29 +38,30 @@ MERGED from [com.android.support:interpolator:28.0.0] C:\Users\cy118\.gradle\cac
 MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\f608a2b5c74bc0cb53395ddb4f32d3f3\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\1da077cb708a936c3caea7851002a552\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\a4d3bef60d5f7e65d3acdd50c9501701\AndroidManifest.xml:17:1-22:12
-INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-27:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\d3f15912ea8c2aa4bb009b9226c37fc3\AndroidManifest.xml:17:1-22:12
+INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-28:12
 	package
 		ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:3:5-38
 		INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml
 		INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml
-		ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-27:12
+		ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-28:12
 		INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml
-		ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-27:12
+		ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:1-28:12
 		INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:5:5-22:19
-MERGED from [com.ssomai:android.scalablelayout:2.1.6] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\android.scalablelayout-2.1.6.aar\d3038690e101a37072c001da28b4e4bb\AndroidManifest.xml:11:5-47
-MERGED from [com.ssomai:android.scalablelayout:2.1.6] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\android.scalablelayout-2.1.6.aar\d3038690e101a37072c001da28b4e4bb\AndroidManifest.xml:11:5-47
+ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:5:5-23:19
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\3428a44899606b70cb57a4f156d77140\AndroidManifest.xml:9:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\3428a44899606b70cb57a4f156d77140\AndroidManifest.xml:9:5-20
+MERGED from [com.ssomai:android.scalablelayout:2.1.6] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\android.scalablelayout-2.1.6.aar\d3038690e101a37072c001da28b4e4bb\AndroidManifest.xml:11:5-47
+MERGED from [com.ssomai:android.scalablelayout:2.1.6] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\android.scalablelayout-2.1.6.aar\d3038690e101a37072c001da28b4e4bb\AndroidManifest.xml:11:5-47
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\cab9c96973122af4d0ab3bb5512d920e\AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\cab9c96973122af4d0ab3bb5512d920e\AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\401ceb0a570d6f801bbb4f0aa664dafb\AndroidManifest.xml:22:5-23:19
@@ -100,16 +102,18 @@ activity#com.cyhee.android.rabit.activity.sign.login.RegisterActivity
 ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:21:9-96
 	android:name
 		ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:21:19-94
-uses-permission#android.permission.INTERNET
-ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:25:5-67
+activity#com.cyhee.android.rabit.activity.goal.GoalListActivity
+ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:22:9-90
 	android:name
-		ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:25:22-64
+		ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:22:19-88
+uses-permission#android.permission.INTERNET
+ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:26:5-67
+	android:name
+		ADDED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml:26:22-64
 uses-sdk
 INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml
 INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml
-MERGED from [com.ssomai:android.scalablelayout:2.1.6] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\android.scalablelayout-2.1.6.aar\d3038690e101a37072c001da28b4e4bb\AndroidManifest.xml:7:5-9:41
-MERGED from [com.ssomai:android.scalablelayout:2.1.6] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\android.scalablelayout-2.1.6.aar\d3038690e101a37072c001da28b4e4bb\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\abf5f4a85ae1dda2816bdff23eda539a\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\abf5f4a85ae1dda2816bdff23eda539a\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:recyclerview-v7:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-28.0.0.aar\a8b4bc26fb36e7f2dbb7c44085801a2c\AndroidManifest.xml:20:5-44
@@ -122,8 +126,14 @@ MERGED from [com.jakewharton.rxbinding2:rxbinding-kotlin:2.0.0] C:\Users\cy118\.
 MERGED from [com.jakewharton.rxbinding2:rxbinding-kotlin:2.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\rxbinding-kotlin-2.0.0.aar\5a8212deb451b461644612961dbd936f\AndroidManifest.xml:6:5-44
 MERGED from [com.jakewharton.rxbinding2:rxbinding:2.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\rxbinding-2.0.0.aar\47a35102300f7f41fd6cc9e31a8e76dd\AndroidManifest.xml:6:5-44
 MERGED from [com.jakewharton.rxbinding2:rxbinding:2.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\rxbinding-2.0.0.aar\47a35102300f7f41fd6cc9e31a8e76dd\AndroidManifest.xml:6:5-44
-MERGED from [io.reactivex.rxjava2:rxandroid:2.0.1] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\rxandroid-2.0.1.aar\47ab94f6ff97fdcf634a35708446da6f\AndroidManifest.xml:19:5-43
-MERGED from [io.reactivex.rxjava2:rxandroid:2.0.1] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\rxandroid-2.0.1.aar\47ab94f6ff97fdcf634a35708446da6f\AndroidManifest.xml:19:5-43
+MERGED from [com.uber.autodispose:autodispose-android-archcomponents:1.0.0-RC2] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\autodispose-android-archcomponents-1.0.0-RC2.aar\16728eea052a9b374ece7b68e2c9c0a2\AndroidManifest.xml:20:5-22:41
+MERGED from [com.uber.autodispose:autodispose-android-archcomponents:1.0.0-RC2] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\autodispose-android-archcomponents-1.0.0-RC2.aar\16728eea052a9b374ece7b68e2c9c0a2\AndroidManifest.xml:20:5-22:41
+MERGED from [com.uber.autodispose:autodispose-android:1.0.0-RC2] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\autodispose-android-1.0.0-RC2.aar\5eae00e9454dc4f658c4637d2b2134d2\AndroidManifest.xml:20:5-22:41
+MERGED from [com.uber.autodispose:autodispose-android:1.0.0-RC2] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\autodispose-android-1.0.0-RC2.aar\5eae00e9454dc4f658c4637d2b2134d2\AndroidManifest.xml:20:5-22:41
+MERGED from [io.reactivex.rxjava2:rxandroid:2.0.2] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\rxandroid-2.0.2.aar\82e9ef2ace332d6bc206832df1f2bbf0\AndroidManifest.xml:19:5-43
+MERGED from [io.reactivex.rxjava2:rxandroid:2.0.2] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\rxandroid-2.0.2.aar\82e9ef2ace332d6bc206832df1f2bbf0\AndroidManifest.xml:19:5-43
+MERGED from [com.ssomai:android.scalablelayout:2.1.6] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\android.scalablelayout-2.1.6.aar\d3038690e101a37072c001da28b4e4bb\AndroidManifest.xml:7:5-9:41
+MERGED from [com.ssomai:android.scalablelayout:2.1.6] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\android.scalablelayout-2.1.6.aar\d3038690e101a37072c001da28b4e4bb\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\710bccc360ae65e57058857c04d1961d\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\710bccc360ae65e57058857c04d1961d\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\da20b7dea8cd4e94929e7fc144411d43\AndroidManifest.xml:20:5-44
@@ -156,8 +166,6 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\cy118\.gra
 MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\401ceb0a570d6f801bbb4f0aa664dafb\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\057d47c4f934324e6734467e4a638827\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\057d47c4f934324e6734467e4a638827\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\d3f15912ea8c2aa4bb009b9226c37fc3\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\d3f15912ea8c2aa4bb009b9226c37fc3\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:documentfile:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\3a378b0224981fe191056cde198763a3\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:documentfile:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\3a378b0224981fe191056cde198763a3\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\a894c7038aa1c03a869279184dceb26b\AndroidManifest.xml:20:5-44
@@ -174,6 +182,8 @@ MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\cy118\.gradle\
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\1da077cb708a936c3caea7851002a552\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\a4d3bef60d5f7e65d3acdd50c9501701\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\a4d3bef60d5f7e65d3acdd50c9501701\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\d3f15912ea8c2aa4bb009b9226c37fc3\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\cy118\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\d3f15912ea8c2aa4bb009b9226c37fc3\AndroidManifest.xml:20:5-44
 INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml
 INJECTED from D:\rabit\rabit_android\app\src\main\AndroidManifest.xml
 	android:targetSdkVersion

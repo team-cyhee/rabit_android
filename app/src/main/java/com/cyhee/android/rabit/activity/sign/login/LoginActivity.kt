@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
+import com.cyhee.android.rabit.activity.goal.GoalListActivity
 import com.cyhee.android.rabit.api.response.TokenData
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -38,6 +39,10 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         Toast.makeText(this@LoginActivity, tokenData.toString(), Toast.LENGTH_SHORT).show()
         Log.d("loginRequest","login success!")
         App.prefs.token = tokenData.accessToken
+
+        val intent = Intent(this@LoginActivity, GoalListActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun fail (t: Throwable?) {
