@@ -11,7 +11,7 @@
     <string name="birth">BIRTH</string>
     <string name="name">NAME</string>
     <string name="post">POST</string>
-    <string name="prompt">tell people about your today</string>
+    <string name="prompt">오늘 하루는 어땠나요?</string>
     <string name="participants">PARTICIPANTS</string>
     <string name="username">USERNAME</string>
 </resources>

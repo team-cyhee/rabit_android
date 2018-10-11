@@ -6,10 +6,10 @@
     android:orientation="vertical">
 
     <include
-        android:id="@+id/topBarLayout"
-        layout="@layout/item_complete_topbar" />
+        android:id="@+id/prevTopBarLayout"
+        layout="@layout/item_complete_prevtopbar" />
 
     <include
         android:id="@+id/goalLogLayout"
-        layout="@layout/item_complete_fullgoal" />
+        layout="@layout/item_complete_fullgoallog" />
 </LinearLayout>
