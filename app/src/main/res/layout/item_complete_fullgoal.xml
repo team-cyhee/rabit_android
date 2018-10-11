@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/goalWriterLayout"
+        layout="@layout/item_part_goalwriter"/>
+
+    <include
+        android:id="@+id/reactionLayout"
+        layout="@layout/item_part_reaction"/>
+
+    <include
+        android:id="@+id/commentListLayout"
+        layout="@layout/item_complete_list"/>
+
+</LinearLayout>
