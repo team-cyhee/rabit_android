@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="24dp"
+    android:orientation="horizontal"
+    android:layout_gravity="center_horizontal">
+
+    <Button
+        android:id="@+id/likeButton"
+        android:layout_width="24dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/thumb" />
+
+    <TextView
+        android:id="@+id/likeNumberText"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/commentNumberText"
+        android:layout_width="74dp"
+        android:layout_height="match_parent"
+        android:drawableStart="@drawable/chat"
+        android:textSize="14sp"/>
+</LinearLayout>
