@@ -7,14 +7,9 @@
 
     <include
         android:id="@+id/topBarLayout"
-        layout="@layout/item_complete_topbar"/>
+        layout="@layout/item_complete_topbar" />
 
     <include
-        android:id="@+id/mainWriteLayout"
-        layout="@layout/item_complete_mainwrite"/>
-
-    <include
-        android:id="@+id/goalLogListLayout"
-        layout="@layout/item_complete_list"/>
-
+        android:id="@+id/goalLogLayout"
+        layout="@layout/item_complete_fullgoal" />
 </LinearLayout>
