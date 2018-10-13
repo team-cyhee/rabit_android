@@ -134,10 +134,9 @@
                 android:background="@color/main"
                 android:text="@string/register"
                 android:textColor="@color/gray"
-                android:textSize="18sp"
                 android:textStyle="bold"
                 sl:scale_left="270"
-                sl:scale_textsize="15"
+                sl:scale_textsize="18"
                 sl:scale_top="280" />
         </com.ssomai.android.scalablelayout.ScalableLayout>
     </LinearLayout>

@@ -1,4 +1,4 @@
-package com.cyhee.android.rabit.activity.goal
+package com.cyhee.android.rabit.activity.main
 
 import android.util.Log
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
@@ -9,31 +9,31 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import retrofit2.HttpException
 
-class GoalPresenter(private val view: GoalListActivity) : GoalContract.Presenter {
+class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
 
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    override fun goals() {
-        restClient.goals()
+    override fun goalLogs() {
+        restClient.goalLogs()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
                 .subscribe(
                         {
-                            Log.d("goal",it.toString())
-                            view.showGoals(it.content)
+                            Log.d("goalLog",it.toString())
+                            view.showGoalLogs(it.content)
                         },
                         {
                             if(it is HttpException) {
-                                Log.d("goal",it.response().toString())
-                                Log.d("goal",it.response().body().toString())
-                                Log.d("goal",it.response().body().toString())
-                                Log.d("goal",it.response().errorBody().toString())
-                                Log.d("goal",it.response().errorBody()?.string())
+                                Log.d("goalLog",it.response().toString())
+                                Log.d("goalLog",it.response().body().toString())
+                                Log.d("goalLog",it.response().body().toString())
+                                Log.d("goalLog",it.response().errorBody().toString())
+                                Log.d("goalLog",it.response().errorBody()?.string())
                             }
                             else {
-                                Log.d("goal",it.toString())
+                                Log.d("goalLog",it.toString())
                             }
                         }
                 )

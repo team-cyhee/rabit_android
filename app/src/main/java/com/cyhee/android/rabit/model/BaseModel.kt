@@ -16,3 +16,12 @@ enum class ContentStatus {
 enum class ContentType {
     USER, FOLLOW, GOAL, GOALLOG, COMMENT, FILE
 }
+
+enum class RadioStatus {
+    // 활성
+    ACTIVE,
+    // 비활성
+    INACTIVE,
+    // 금지됨
+    FORBIDDEN;
+}
