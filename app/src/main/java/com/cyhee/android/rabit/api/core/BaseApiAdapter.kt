@@ -17,11 +17,7 @@ abstract class BaseApiAdapter(END_POINT: String) {
     private var retrofit: Retrofit
 
     // underscores 형식을 받아 camel case 로 변환
-    private var gson: Gson =
-            GsonBuilder()
-                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                    .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
-                    .create()
+    private var gson: Gson = RabitGson.gson()
 
     init{
         val httpLogging = HttpLoggingInterceptor()
