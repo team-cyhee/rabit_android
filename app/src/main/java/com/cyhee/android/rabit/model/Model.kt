@@ -106,7 +106,7 @@ abstract class MainInfo {
 data class GoalInfo (
     var id: Long,
     var author: User,
-    var parent: Goal,
+    var parent: Goal?,
     var content: String,
     var startDate: Date,
     var endDate: Date,

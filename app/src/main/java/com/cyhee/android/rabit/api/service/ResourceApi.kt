@@ -1,8 +1,10 @@
 package com.cyhee.android.rabit.api.service
 
 import com.cyhee.android.rabit.model.*
+import io.reactivex.Completable
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ResourceApi {
@@ -23,4 +25,7 @@ interface ResourceApi {
 
     @GET("/rest/v1/maininfos")
     fun mainInfos() : Single<Page<MainInfo>>
+
+    @POST("/rest/v1/goals/{id}/goallogs")
+    fun postGoalLog(@Path("id") id : Long) : Completable
 }

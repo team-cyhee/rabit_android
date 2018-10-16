@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -24,7 +23,7 @@ class MainActivity: AppCompatActivity(), MainContract.View {
         setContentView(R.layout.activity_main)
 
         presenter.goalNames()
-        presenter.goalLogs()
+        presenter.mainInfos()
 
         mainWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
             val selectedGoal = mainWriteLayout.findViewById<Spinner>(R.id.goalNameList).selectedItem as Goal
@@ -41,14 +40,13 @@ class MainActivity: AppCompatActivity(), MainContract.View {
         //TODO: default 값 지정하기
     }
 
-    override fun showGoalLogs(goalLogs: MutableList<GoalLog>) {
-        // TODO: 최신 댓글 2개정도 불러와서 보여주면 좋을 듯
+    override fun showMainInfos(mainInfos: MutableList<MainInfo>) {
         if (mainAdapter == null) {
-            mainAdapter = MainViewAdapter(goalLogs)
+            mainAdapter = MainViewAdapter(mainInfos)
             goalLogListLayout.findViewById<RecyclerView>(R.id.listView).addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             goalLogListLayout.findViewById<RecyclerView>(R.id.listView).adapter = mainAdapter
         } else {
-            mainAdapter!!.appendGoalLogs(goalLogs)
+            mainAdapter!!.appendMainInfos(mainInfos)
         }
     }
 }
