@@ -7,6 +7,5 @@
         android:id="@+id/text"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="#788c82"/>
+        android:layout_gravity="center_horizontal"/>
 </FrameLayout>

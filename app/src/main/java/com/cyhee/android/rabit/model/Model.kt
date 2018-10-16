@@ -87,3 +87,10 @@ data class Comment (
     val createdDate: Date,
     val lastUpdated: Date
 )
+
+data class Like (
+    val author: User,
+    val type: ContentType,
+    val parentId: Long,
+    val status: RadioStatus
+)
