@@ -1,9 +1,6 @@
 package com.cyhee.android.rabit.api.service
 
-import com.cyhee.android.rabit.model.Comment
-import com.cyhee.android.rabit.model.Goal
-import com.cyhee.android.rabit.model.GoalLog
-import com.cyhee.android.rabit.model.Page
+import com.cyhee.android.rabit.model.*
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -23,4 +20,7 @@ interface ResourceApi {
 
     @GET("/rest/v1/goallogs/{id}/comments")
     fun goalLogStoreComments(@Path("id") id : Long) : Single<Page<Comment>>
+
+    @GET("/rest/v1/maininfos")
+    fun mainInfos() : Single<Page<MainInfo>>
 }

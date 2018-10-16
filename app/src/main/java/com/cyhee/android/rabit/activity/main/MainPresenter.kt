@@ -14,6 +14,31 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
+    override fun goalNames() {
+        restClient.goals()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe(
+                        {
+                            Log.d("goal", it.toString())
+                            view.showGoalNames(it.content)
+                        },
+                        {
+                            if(it is HttpException) {
+                                Log.d("goal",it.response().toString())
+                                Log.d("goal",it.response().body().toString())
+                                Log.d("goal",it.response().body().toString())
+                                Log.d("goal",it.response().errorBody().toString())
+                                Log.d("goal",it.response().errorBody()?.string())
+                            }
+                            else {
+                                Log.d("goal",it.toString())
+                            }
+                        }
+                )
+    }
+
     override fun goalLogs() {
         restClient.goalLogs()
                 .subscribeOn(Schedulers.io())

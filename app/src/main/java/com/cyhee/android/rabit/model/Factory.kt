@@ -11,3 +11,10 @@ object UserFactory {
         val birth: Date?
     )
 }
+
+object GoalLogFactory {
+    data class Post(
+        val goal: Goal,
+        val content: String
+    )
+}
