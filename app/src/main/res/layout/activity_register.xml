@@ -143,12 +143,11 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/black"
-                android:textSize="20sp"
                 android:textStyle="bold"
                 sl:scale_top="305"
                 sl:scale_height="40"
                 sl:scale_width="250"
-                sl:scale_textsize="15" />
+                sl:scale_textsize="20" />
         </com.ssomai.android.scalablelayout.ScalableLayout>
     </LinearLayout>
 </FrameLayout>
