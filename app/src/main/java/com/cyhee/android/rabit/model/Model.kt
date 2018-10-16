@@ -94,3 +94,38 @@ data class Like (
     val parentId: Long,
     val status: RadioStatus
 )
+
+abstract class MainInfo {
+    abstract var likeNum: Int
+    abstract var commentNum: Int
+    abstract var comments: Page<Comment>
+    abstract var lastUpdated: Date
+    abstract var type: ContentType
+}
+
+data class GoalInfo (
+    var id: Long,
+    var author: User,
+    var parent: Goal,
+    var content: String,
+    var startDate: Date,
+    var endDate: Date,
+    var selectedDays: GoalCycle,
+    override var likeNum: Int,
+    override var commentNum: Int,
+    override var comments: Page<Comment>,
+    override var lastUpdated: Date,
+    override var type: ContentType = ContentType.GOAL
+) : MainInfo()
+
+data class GoalLogInfo (
+    var id: Long,
+    var author: User,
+    var goal: Goal,
+    var content: String,
+    override var likeNum: Int,
+    override var commentNum: Int,
+    override var comments: Page<Comment>,
+    override var lastUpdated: Date,
+    override var type: ContentType = ContentType.GOALLOG
+) : MainInfo()
