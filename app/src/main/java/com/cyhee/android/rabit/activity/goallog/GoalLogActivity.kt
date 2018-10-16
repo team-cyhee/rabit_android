@@ -4,13 +4,12 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.view.View
-import android.widget.TextView
+import android.util.Log
 import android.widget.Toast
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.item_complete_list.*
+import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 import kotlinx.android.synthetic.main.item_part_goalwriter.*
 import kotlinx.android.synthetic.main.item_part_text.*
 
@@ -28,6 +27,11 @@ class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
             presenter.goalLog(goalLogId)
         } else {
             Toast.makeText(this, "전달된 goalLog 아이디가 없습니다", Toast.LENGTH_SHORT).show()
+        }
+
+        prevBtn.setOnClickListener {
+            Log.d("preBtn","clicked")
+            finish()
         }
     }
 
