@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity: AppCompatActivity(), MainContract.View {
+
     override var presenter : MainContract.Presenter = MainPresenter(this)
     private var mainAdapter: MainViewAdapter? = null
 
@@ -25,12 +26,13 @@ class MainActivity: AppCompatActivity(), MainContract.View {
         presenter.goalNames()
         presenter.mainInfos()
 
+        // post goalLog
         mainWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
             val selectedGoal = mainWriteLayout.findViewById<Spinner>(R.id.goalNameList).selectedItem as Goal
             val content = mainWriteLayout.findViewById<EditText>(R.id.dailyText).text.toString()
-            val postedGoalLog = GoalLogFactory.Post(selectedGoal, content)
+            val postedGoalLog = GoalLogFactory.Post(content)
             // TODO: 내용이 없을 경우 포스트 안되도록
-            presenter.postGoaLog(postedGoalLog)
+            presenter.postGoaLog(selectedGoal.id, postedGoalLog)
         }
     }
 
@@ -42,11 +44,12 @@ class MainActivity: AppCompatActivity(), MainContract.View {
 
     override fun showMainInfos(mainInfos: MutableList<MainInfo>) {
         if (mainAdapter == null) {
-            mainAdapter = MainViewAdapter(mainInfos)
-            goalLogListLayout.findViewById<RecyclerView>(R.id.listView).addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            goalLogListLayout.findViewById<RecyclerView>(R.id.listView).adapter = mainAdapter
+            mainAdapter = MainViewAdapter(mainInfos, { id, comment: CommentFactory.Post -> presenter.postCommentForGoal(id, comment)}, { id, comment -> presenter.postCommentForGoalLog(id, comment)})
+            mainInfoListLayout.findViewById<RecyclerView>(R.id.listView).addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+            mainInfoListLayout.findViewById<RecyclerView>(R.id.listView).adapter = mainAdapter
         } else {
             mainAdapter!!.appendMainInfos(mainInfos)
         }
     }
+
 }

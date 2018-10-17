@@ -3,6 +3,7 @@ package com.cyhee.android.rabit.activity.main
 import android.util.Log
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
+import com.cyhee.android.rabit.model.CommentFactory
 import com.cyhee.android.rabit.model.GoalLogFactory
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
@@ -15,8 +16,37 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    override fun postGoaLog(goalLog: GoalLogFactory.Post) {
-        restClient.postGoalLog(goalLog.goal.id)
+    override fun postGoaLog(id: Long, goalLog: GoalLogFactory.Post) {
+        restClient.postGoalLog(id, goalLog)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe (
+                        {
+                        },
+                        {
+                            // TODO: post완료되면 화면 새로고침?
+                        }
+                )
+    }
+
+
+    override fun postCommentForGoal(id: Long, comment: CommentFactory.Post) {
+        restClient.postCommentForGoal(id, comment)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe (
+                        {
+                        },
+                        {
+                            // TODO: post완료되면 화면 새로고침?
+                        }
+                )
+    }
+
+    override fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post) {
+        restClient.postCommentForGoalLog(id, comment)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
@@ -62,7 +92,7 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
                 .subscribe(
                         {
                             Log.d("mainInfo",it.toString())
-                            view.showMainInfos(it.content)
+                            view.showMainInfos(it!!.toMutableList())
                         },
                         {
                             if(it is HttpException) {

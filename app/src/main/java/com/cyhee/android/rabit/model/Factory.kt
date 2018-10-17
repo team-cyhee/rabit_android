@@ -14,7 +14,12 @@ object UserFactory {
 
 object GoalLogFactory {
     data class Post(
-        val goal: Goal,
+        val content: String
+    )
+}
+
+object CommentFactory {
+    data class Post(
         val content: String
     )
 }

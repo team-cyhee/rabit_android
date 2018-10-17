@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <include
         android:id="@+id/goalWriterLayout"
         layout="@layout/item_part_goalwriter"/>
@@ -21,10 +22,15 @@
         layout="@layout/item_part_reaction"/>
 
     <include
-        android:id="@+id/commentListLayout"
-        layout="@layout/item_complete_list"/>
+        android:id="@+id/commentGoalLogLayout1"
+        layout="@layout/item_part_comment"/>
 
     <include
-        android:id="@+id/commentWriteLayout"
+        android:id="@+id/commentGoalLogLayout2"
+        layout="@layout/item_part_comment"/>
+
+    <include
+        android:id="@+id/commentGoalLogWriteLayout"
         layout="@layout/item_part_commentwrite"/>
+
 </LinearLayout>
