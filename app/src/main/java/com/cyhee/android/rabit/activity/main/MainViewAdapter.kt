@@ -128,7 +128,7 @@ class MainViewAdapter (
                         }
                         val clickListener = View.OnClickListener {
                             val intentToGoalLog = Intent(it.context, GoalLogActivity::class.java)
-                            intentToGoalLog.putExtra("goalId", mainInfo.id)
+                            intentToGoalLog.putExtra("goalLogId", goalLogInfo.id)
                             it.context.startActivity(intentToGoalLog)
                         }
 
