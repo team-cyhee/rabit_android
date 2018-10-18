@@ -3,6 +3,7 @@ package com.cyhee.android.rabit.activity.goallog
 import android.util.Log
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
+import com.cyhee.android.rabit.client.PostClient
 import com.cyhee.android.rabit.model.CommentFactory
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
@@ -67,18 +68,11 @@ class GoalLogPresenter(private val view: GoalLogActivity) : GoalLogContract.Pres
                 )
     }
 
+    override fun postLikeForGoalLog(id: Long) {
+        PostClient.postLikeForGoalLog(id, scopeProvider)
+    }
     override fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post) {
-        restClient.postCommentForGoalLog(id, comment)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(scopeProvider)
-                .subscribe (
-                        {
-                        },
-                        {
-                            // TODO: post완료되면 화면 새로고침?
-                        }
-                )
+        PostClient.postCommentForGoalLog(id, comment, scopeProvider)
     }
 
 }

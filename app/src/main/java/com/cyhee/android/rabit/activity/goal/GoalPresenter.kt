@@ -3,7 +3,7 @@ package com.cyhee.android.rabit.activity.goal
 import android.util.Log
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
-import com.cyhee.android.rabit.model.Comment
+import com.cyhee.android.rabit.client.PostClient
 import com.cyhee.android.rabit.model.CommentFactory
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
@@ -68,17 +68,11 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
                 )
     }
 
+    override fun postLikeForGoal(id: Long) {
+        PostClient.postLikeForGoal(id, scopeProvider)
+    }
+
     override fun postCommentForGoal(id: Long, comment: CommentFactory.Post) {
-        restClient.postCommentForGoal(id, comment)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(scopeProvider)
-                .subscribe (
-                        {
-                        },
-                        {
-                            // TODO: post완료되면 화면 새로고침?
-                        }
-                )
+        PostClient.postCommentForGoal(id, comment, scopeProvider)
     }
 }

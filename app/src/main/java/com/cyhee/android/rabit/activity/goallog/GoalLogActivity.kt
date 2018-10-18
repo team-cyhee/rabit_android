@@ -52,6 +52,10 @@ class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
 
         text.text = goalLogInfo.content
 
+        likeButton.setOnClickListener {
+            presenter.postLikeForGoalLog(goalLogInfo.id)
+        }
+
         commentWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
             val content = commentWriteLayout.findViewById<EditText>(R.id.commentText).text.toString()
             // TODO: 내용이 없을 경우 포스트 안되도록

@@ -15,6 +15,7 @@ class GoalContract {
     interface Presenter : BasePresenter {
         fun goalInfo(id: Long)
         fun comments(goalId: Long)
+        fun postLikeForGoal(id: Long)
         fun postCommentForGoal(id: Long, comment: CommentFactory.Post)
     }
 }

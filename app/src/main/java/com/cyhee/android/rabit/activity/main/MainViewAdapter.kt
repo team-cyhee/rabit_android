@@ -20,6 +20,8 @@ import java.lang.Exception
 
 class MainViewAdapter (
     private val mainInfos: MutableList<MainInfo>,
+    private val sendLikeForGoal: (Long) -> Unit,
+    private val sendLikeForGoalLog: (Long) -> Unit,
     private val sendCommentForGoal: (Long, CommentFactory.Post) -> Unit,
     private val sendCommentForGoalLog: (Long, CommentFactory.Post) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder>() {
@@ -74,10 +76,13 @@ class MainViewAdapter (
                         }
 
 
-
-                        // TODO: 좋아요 누르기 추가
                         titleText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
                         commentNumberText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
+
+                        // post like
+                        likeButton.setOnClickListener {
+                            sendLikeForGoal(goalInfo.id)
+                        }
 
                         // post comment
                         commentGoalWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
@@ -127,6 +132,12 @@ class MainViewAdapter (
                         textLayout.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
                         commentNumberText.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
 
+                        // post like
+                        likeButton.setOnClickListener {
+                            sendLikeForGoalLog(goalLogInfo.id)
+                        }
+
+                        // post comment
                         commentGoalLogWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
                             val content = commentGoalLogWriteLayout.findViewById<EditText>(R.id.commentText).text.toString()
                             // TODO: 내용이 없을 경우 포스트 안되도록

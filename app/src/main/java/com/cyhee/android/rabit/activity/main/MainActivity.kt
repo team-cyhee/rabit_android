@@ -44,7 +44,11 @@ class MainActivity: AppCompatActivity(), MainContract.View {
 
     override fun showMainInfos(mainInfos: MutableList<MainInfo>) {
         if (mainAdapter == null) {
-            mainAdapter = MainViewAdapter(mainInfos, { id, comment: CommentFactory.Post -> presenter.postCommentForGoal(id, comment)}, { id, comment -> presenter.postCommentForGoalLog(id, comment)})
+            mainAdapter = MainViewAdapter(mainInfos,
+                    { id -> presenter.postLikeForGoal(id)},
+                    { id -> presenter.postLikeForGoalLog(id)},
+                    { id, comment: CommentFactory.Post -> presenter.postCommentForGoal(id, comment)},
+                    { id, comment -> presenter.postCommentForGoalLog(id, comment)})
             mainInfoListLayout.findViewById<RecyclerView>(R.id.listView).addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             mainInfoListLayout.findViewById<RecyclerView>(R.id.listView).adapter = mainAdapter
         } else {

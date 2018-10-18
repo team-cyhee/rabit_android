@@ -3,6 +3,7 @@ package com.cyhee.android.rabit.activity.main
 import android.util.Log
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
+import com.cyhee.android.rabit.client.PostClient
 import com.cyhee.android.rabit.model.CommentFactory
 import com.cyhee.android.rabit.model.GoalLogFactory
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
@@ -15,49 +16,6 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
 
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
-
-    override fun postGoaLog(id: Long, goalLog: GoalLogFactory.Post) {
-        restClient.postGoalLog(id, goalLog)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(scopeProvider)
-                .subscribe (
-                        {
-                        },
-                        {
-                            // TODO: post완료되면 화면 새로고침?
-                        }
-                )
-    }
-
-
-    override fun postCommentForGoal(id: Long, comment: CommentFactory.Post) {
-        restClient.postCommentForGoal(id, comment)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(scopeProvider)
-                .subscribe (
-                        {
-                        },
-                        {
-                            // TODO: post완료되면 화면 새로고침?
-                        }
-                )
-    }
-
-    override fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post) {
-        restClient.postCommentForGoalLog(id, comment)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(scopeProvider)
-                .subscribe (
-                        {
-                        },
-                        {
-                            // TODO: post완료되면 화면 새로고침?
-                        }
-                )
-    }
 
     override fun goalNames() {
         restClient.goals()
@@ -107,5 +65,25 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
                             }
                         }
                 )
+    }
+
+    override fun postGoaLog(id: Long, goalLog: GoalLogFactory.Post) {
+        PostClient.postGoaLog(id, goalLog, scopeProvider)
+    }
+
+    override fun postLikeForGoal(id: Long) {
+        PostClient.postLikeForGoal(id, scopeProvider)
+    }
+
+    override fun postLikeForGoalLog(id: Long) {
+        PostClient.postLikeForGoalLog(id, scopeProvider)
+    }
+
+    override fun postCommentForGoal(id: Long, comment: CommentFactory.Post) {
+        PostClient.postCommentForGoal(id, comment, scopeProvider)
+    }
+
+    override fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post) {
+        PostClient.postCommentForGoalLog(id, comment, scopeProvider)
     }
 }

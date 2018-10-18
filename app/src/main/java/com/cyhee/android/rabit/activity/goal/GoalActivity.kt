@@ -49,7 +49,9 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
         likeNumberText.text = goalInfo.likeNum.toString()
         commentNumberText.text = goalInfo.commentNum.toString()
 
-        // TODO: 좋아요누르기
+        likeButton.setOnClickListener {
+            presenter.postLikeForGoal(goalInfo.id)
+        }
 
         commentWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
             val content = commentWriteLayout.findViewById<EditText>(R.id.commentText).text.toString()
