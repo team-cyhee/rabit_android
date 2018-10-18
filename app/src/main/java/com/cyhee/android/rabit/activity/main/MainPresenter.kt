@@ -3,6 +3,8 @@ package com.cyhee.android.rabit.activity.main
 import android.util.Log
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
+import com.cyhee.android.rabit.model.CommentFactory
+import com.cyhee.android.rabit.model.GoalLogFactory
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,26 +16,94 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    override fun goalLogs() {
-        restClient.goalLogs()
+    override fun postGoaLog(id: Long, goalLog: GoalLogFactory.Post) {
+        restClient.postGoalLog(id, goalLog)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe (
+                        {
+                        },
+                        {
+                            // TODO: post완료되면 화면 새로고침?
+                        }
+                )
+    }
+
+
+    override fun postCommentForGoal(id: Long, comment: CommentFactory.Post) {
+        restClient.postCommentForGoal(id, comment)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe (
+                        {
+                        },
+                        {
+                            // TODO: post완료되면 화면 새로고침?
+                        }
+                )
+    }
+
+    override fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post) {
+        restClient.postCommentForGoalLog(id, comment)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe (
+                        {
+                        },
+                        {
+                            // TODO: post완료되면 화면 새로고침?
+                        }
+                )
+    }
+
+    override fun goalNames() {
+        restClient.goals()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
                 .subscribe(
                         {
-                            Log.d("goalLog",it.toString())
-                            view.showGoalLogs(it.content)
+                            Log.d("goal", it.toString())
+                            view.showGoalNames(it.content)
                         },
                         {
                             if(it is HttpException) {
-                                Log.d("goalLog",it.response().toString())
-                                Log.d("goalLog",it.response().body().toString())
-                                Log.d("goalLog",it.response().body().toString())
-                                Log.d("goalLog",it.response().errorBody().toString())
-                                Log.d("goalLog",it.response().errorBody()?.string())
+                                Log.d("goal",it.response().toString())
+                                Log.d("goal",it.response().body().toString())
+                                Log.d("goal",it.response().body().toString())
+                                Log.d("goal",it.response().errorBody().toString())
+                                Log.d("goal",it.response().errorBody()?.string())
                             }
                             else {
-                                Log.d("goalLog",it.toString())
+                                Log.d("goal",it.toString())
+                            }
+                        }
+                )
+    }
+
+    override fun mainInfos() {
+        restClient.mainInfos()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe(
+                        {
+                            Log.d("mainInfo",it.toString())
+                            view.showMainInfos(it!!.toMutableList())
+                        },
+                        {
+                            if(it is HttpException) {
+                                Log.d("mainInfo",it.response().toString())
+                                Log.d("mainInfo",it.response().body().toString())
+                                Log.d("mainInfo",it.response().body().toString())
+                                Log.d("mainInfo",it.response().errorBody().toString())
+                                Log.d("mainInfo",it.response().errorBody()?.string())
+                            }
+                            else {
+                                Log.d("mainInfo",it.toString())
                             }
                         }
                 )

@@ -34,14 +34,18 @@ data class Goal (
     val id: Long,
     val author: User,
     val parent: Goal?,
-    val content: String?,
+    val content: String,
     val startDate: Date?,
     val endDate: Date?,
     val status: ContentStatus,
     val selectedDays: GoalCycle,
     val createdDate: Date,
     val lastUpdated: Date
-)
+) {
+    override fun toString(): String {
+        return this.content
+    }
+}
 
 enum class GoalCycle {
     // every day
@@ -106,7 +110,7 @@ abstract class MainInfo {
 data class GoalInfo (
     var id: Long,
     var author: User,
-    var parent: Goal,
+    var parent: Goal?,
     var content: String,
     var startDate: Date,
     var endDate: Date,

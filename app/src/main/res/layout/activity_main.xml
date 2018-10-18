@@ -14,7 +14,7 @@
         layout="@layout/item_complete_mainwrite"/>
 
     <include
-        android:id="@+id/goalLogListLayout"
+        android:id="@+id/mainInfoListLayout"
         layout="@layout/item_complete_list"/>
 
 </LinearLayout>

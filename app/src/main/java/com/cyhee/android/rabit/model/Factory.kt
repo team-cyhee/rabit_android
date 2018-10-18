@@ -11,3 +11,15 @@ object UserFactory {
         val birth: Date?
     )
 }
+
+object GoalLogFactory {
+    data class Post(
+        val content: String
+    )
+}
+
+object CommentFactory {
+    data class Post(
+        val content: String
+    )
+}
