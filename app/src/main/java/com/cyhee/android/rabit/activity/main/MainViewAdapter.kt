@@ -78,6 +78,7 @@ class MainViewAdapter (
 
                         titleText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
                         commentNumberText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
+                        likeNumberText.setOnClickListener(IntentListener.toGoalLikeListListener(goalInfo.id))
 
                         // post like
                         likeButton.setOnClickListener {
@@ -131,6 +132,7 @@ class MainViewAdapter (
                         titleText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.id))
                         textLayout.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
                         commentNumberText.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
+                        likeNumberText.setOnClickListener(IntentListener.toGoalLogLikeListListener(goalLogInfo.id))
 
                         // post like
                         likeButton.setOnClickListener {

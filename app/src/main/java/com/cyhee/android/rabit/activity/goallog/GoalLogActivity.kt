@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.cyhee.android.rabit.R
+import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.item_complete_fullgoallog.*
 import kotlinx.android.synthetic.main.item_complete_list.*
@@ -29,6 +30,9 @@ class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
         if (intent.hasExtra("goalLogId")) {
             val goalLogId = intent.getLongExtra("goalLogId", -1)
             presenter.goalLogInfo(goalLogId)
+
+            likeNumberText.setOnClickListener(IntentListener.toGoalLogLikeListListener(goalLogId))
+
         } else {
             Toast.makeText(this, "전달된 goalLog 아이디가 없습니다", Toast.LENGTH_SHORT).show()
         }
@@ -71,7 +75,7 @@ class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
             listView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             listView.adapter = goalLogAdapter
         } else {
-            goalLogAdapter!!.appendGoalLogs(comments)
+            goalLogAdapter!!.appendComments(comments)
         }
     }
 }

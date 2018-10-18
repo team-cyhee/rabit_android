@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.cyhee.android.rabit.R
+import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.item_complete_fullgoal.*
 import kotlinx.android.synthetic.main.item_complete_list.*
@@ -28,6 +29,9 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
         if (intent.hasExtra("goalId")) {
             val goalId = intent.getLongExtra("goalId", -1)
             presenter.goalInfo(goalId)
+
+            likeNumberText.setOnClickListener(IntentListener.toGoalLikeListListener(goalId))
+
         } else {
             Toast.makeText(this, "전달된 goal 아이디가 없습니다", Toast.LENGTH_SHORT).show()
         }

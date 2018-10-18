@@ -24,9 +24,9 @@ class GoalLogViewAdapter (
 
     override fun getItemCount(): Int = comments.size
 
-    fun appendGoalLogs(moreGoals: List<Comment>) {
+    fun appendComments(moreComment: List<Comment>) {
         val index = this.comments.size
-        comments.addAll(moreGoals)
+        comments.addAll(moreComment)
         notifyItemRangeInserted(index, comments.size)
     }
 }
