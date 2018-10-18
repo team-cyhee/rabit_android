@@ -1,6 +1,5 @@
 package com.cyhee.android.rabit.activity.main
 
-import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
@@ -9,8 +8,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.cyhee.android.rabit.R
-import com.cyhee.android.rabit.activity.goallog.GoalLogActivity
 import com.cyhee.android.rabit.base.BaseViewHolder
+import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.item_complete_maingoal.*
 import kotlinx.android.synthetic.main.item_complete_maingoallog.*
@@ -73,15 +72,12 @@ class MainViewAdapter (
                         } else {
                             commentGoalLayout2.visibility = View.GONE
                         }
-                        // TODO: goalActivity 만든 뒤 수정
-                        val clickListener = View.OnClickListener {
-                            val intentToGoalLog = Intent(it.context, GoalLogActivity::class.java)
-                            intentToGoalLog.putExtra("goalId", mainInfo.id)
-                            it.context.startActivity(intentToGoalLog)
-                        }
+
+
 
                         // TODO: 좋아요 누르기 추가
-                        commentNumberText.setOnClickListener(clickListener)
+                        titleText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
+                        commentNumberText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
 
                         // post comment
                         commentGoalWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
@@ -126,14 +122,10 @@ class MainViewAdapter (
                         } else {
                             commentGoalLogLayout2.visibility = View.GONE
                         }
-                        val clickListener = View.OnClickListener {
-                            val intentToGoalLog = Intent(it.context, GoalLogActivity::class.java)
-                            intentToGoalLog.putExtra("goalLogId", goalLogInfo.id)
-                            it.context.startActivity(intentToGoalLog)
-                        }
 
-                        textLayout.setOnClickListener(clickListener)
-                        commentNumberText.setOnClickListener(clickListener)
+                        titleText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.id))
+                        textLayout.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
+                        commentNumberText.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
 
                         commentGoalLogWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
                             val content = commentGoalLogWriteLayout.findViewById<EditText>(R.id.commentText).text.toString()

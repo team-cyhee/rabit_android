@@ -21,6 +21,7 @@
         <activity android:name="com.cyhee.android.rabit.activity.sign.login.RegisterActivity"/>
         <activity android:name="com.cyhee.android.rabit.activity.main.MainActivity"/>
         <activity android:name="com.cyhee.android.rabit.activity.goallog.GoalLogActivity"/>
+        <activity android:name="com.cyhee.android.rabit.activity.goal.GoalActivity"/>
     </application>
 
     <!-- permissions -->

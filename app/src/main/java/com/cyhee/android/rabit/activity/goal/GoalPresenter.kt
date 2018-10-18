@@ -1,8 +1,9 @@
-package com.cyhee.android.rabit.activity.goallog
+package com.cyhee.android.rabit.activity.goal
 
 import android.util.Log
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
+import com.cyhee.android.rabit.model.Comment
 import com.cyhee.android.rabit.model.CommentFactory
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
@@ -10,31 +11,31 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import retrofit2.HttpException
 
-class GoalLogPresenter(private val view: GoalLogActivity) : GoalLogContract.Presenter {
+class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
 
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    override fun goalLogInfo(id: Long) {
-        restClient.goalLogInfo(id)
+    override fun goalInfo(id: Long) {
+        restClient.goalInfo(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
                 .subscribe(
                         {
-                            Log.d("goalLog",it.toString())
-                            view.showGoalLogInfo(it)
+                            Log.d("goal",it.toString())
+                            view.showGoalInfo(it)
                         },
                         {
                             if(it is HttpException) {
-                                Log.d("goalLog",it.response().toString())
-                                Log.d("goalLog",it.response().body().toString())
-                                Log.d("goalLog",it.response().body().toString())
-                                Log.d("goalLog",it.response().errorBody().toString())
-                                Log.d("goalLog",it.response().errorBody()?.string())
+                                Log.d("goal",it.response().toString())
+                                Log.d("goal",it.response().body().toString())
+                                Log.d("goal",it.response().body().toString())
+                                Log.d("goal",it.response().errorBody().toString())
+                                Log.d("goal",it.response().errorBody()?.string())
                             }
                             else {
-                                Log.d("goalLog",it.toString())
+                                Log.d("goal",it.toString())
                             }
                         }
                 )
@@ -42,8 +43,8 @@ class GoalLogPresenter(private val view: GoalLogActivity) : GoalLogContract.Pres
         comments(id)
     }
 
-    override fun comments(goalLogId: Long) {
-        restClient.goalLogStoreComments(goalLogId)
+    override fun comments(goalId: Long) {
+        restClient.goalStoreComments(goalId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
@@ -67,8 +68,8 @@ class GoalLogPresenter(private val view: GoalLogActivity) : GoalLogContract.Pres
                 )
     }
 
-    override fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post) {
-        restClient.postCommentForGoalLog(id, comment)
+    override fun postCommentForGoal(id: Long, comment: CommentFactory.Post) {
+        restClient.postCommentForGoal(id, comment)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
@@ -80,5 +81,4 @@ class GoalLogPresenter(private val view: GoalLogActivity) : GoalLogContract.Pres
                         }
                 )
     }
-
 }
