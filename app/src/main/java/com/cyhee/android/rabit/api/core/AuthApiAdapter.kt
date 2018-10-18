@@ -5,4 +5,4 @@ import com.cyhee.android.rabit.api.resource.RabitUrl
 /**
  * AuthApiAdapter Class
  */
-object AuthApiAdapter : BaseApiAdapter(RabitUrl.authUrl())
+object AuthApiAdapter : BaseApiAdapter(RabitUrl.authUrl(), listOf())
