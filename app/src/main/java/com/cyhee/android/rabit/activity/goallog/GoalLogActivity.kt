@@ -9,8 +9,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.cyhee.android.rabit.R
+import com.cyhee.android.rabit.activity.comment.CommentViewAdapter
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
+import com.cyhee.android.rabit.useful.Fun
 import kotlinx.android.synthetic.main.item_complete_fullgoallog.*
 import kotlinx.android.synthetic.main.item_complete_list.*
 import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
@@ -21,7 +23,7 @@ import kotlinx.android.synthetic.main.item_part_text.*
 
 class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
     override var presenter : GoalLogContract.Presenter = GoalLogPresenter(this)
-    private var goalLogAdapter: GoalLogViewAdapter? = null
+    private var commentAdapter: CommentViewAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,16 +47,25 @@ class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
 
     override fun showGoalLogInfo(goalLogInfo : GoalLogInfo) {
         nameText.text = goalLogInfo.goal.author.username
-        titleText.text = goalLogInfo.goal.content
-        if (goalLogInfo.goal.parent != null) {
-            // 사람 수 추가
-            val original = "${goalLogInfo.goal.parent!!.author.username} 님 외 n명이 함께하는 중"
-            originalWriterText.text = original
+        val goalTitle = goalLogInfo.goal.content + Fun.dateDistance(goalLogInfo)
+        titleText.text = goalTitle
+
+        var companion = when {
+            goalLogInfo.goal.parent != null -> "${goalLogInfo.goal.parent!!.author.username} 님 외 ${goalLogInfo.companionNum}명이 함께하는 중"
+            goalLogInfo.companionNum != 0 -> "${goalLogInfo.companionNum}명이 함께하는 중"
+            else -> "함께 해보세요!"
         }
+
+        companionText.text = companion
         likeNumberText.text = goalLogInfo.likeNum.toString()
         commentNumberText.text = goalLogInfo.commentNum.toString()
 
         text.text = goalLogInfo.content
+
+        when {
+            goalLogInfo.goal.parent != null -> companionText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.parent!!.id))
+            else -> companionText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.id))
+        }
 
         likeButton.setOnClickListener {
             presenter.postLikeForGoalLog(goalLogInfo.id)
@@ -70,12 +81,12 @@ class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
     }
 
     override fun showComments(comments: MutableList<Comment>) {
-        if (goalLogAdapter == null) {
-            goalLogAdapter = GoalLogViewAdapter(comments)
+        if (commentAdapter == null) {
+            commentAdapter = CommentViewAdapter(comments)
             listView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            listView.adapter = goalLogAdapter
+            listView.adapter = commentAdapter
         } else {
-            goalLogAdapter!!.appendComments(comments)
+            commentAdapter!!.appendComments(comments)
         }
     }
 }

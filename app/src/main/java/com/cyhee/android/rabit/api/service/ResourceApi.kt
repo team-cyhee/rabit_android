@@ -16,16 +16,19 @@ interface ResourceApi {
     fun goals() : Single<Page<Goal>>
 
     @GET("/rest/v1/goals/{id}")
-    fun goal(@Path("id") id : Long) : Single<Goal>
+    fun goal(@Path("id") id: Long) : Single<Goal>
+
+    @GET("/rest/v1/goals/{id}/goallogs/info")
+    fun goalStoreGoalLogs(@Path("id") id: Long) : Single<List<GoalLogInfo>>
 
     @GET("/rest/v1/goals/{id}/comments")
-    fun goalStoreComments(@Path("id") id : Long) : Single<Page<Comment>>
+    fun goalStoreComments(@Path("id") id: Long) : Single<Page<Comment>>
 
     @GET("/rest/v1/goals/{id}/likes")
     fun goalStoreLikes(@Path("id") id: Long) : Single<Page<Like>>
 
     @GET("/rest/v1/goals/info/{id}")
-    fun goalInfo(@Path("id") id : Long) : Single<GoalInfo>
+    fun goalInfo(@Path("id") id: Long) : Single<GoalInfo>
 
     @GET("/rest/v1/goallogs")
     fun goalLogs() : Single<Page<GoalLog>>

@@ -11,9 +11,9 @@ data class User (
     val email: String,
     val name: String?,
     val phone: String?,
-    val brith: Date?,
+    val birth: Date?,
     val status: UserStatus,
-    val createdDate: Date,
+    val createDate: Date,
     val lastUpdated: Date
 )
 
@@ -39,7 +39,7 @@ data class Goal (
     val endDate: Date?,
     val status: ContentStatus,
     val selectedDays: GoalCycle,
-    val createdDate: Date,
+    val createDate: Date,
     val lastUpdated: Date
 ) {
     override fun toString(): String {
@@ -77,7 +77,7 @@ data class GoalLog (
     val goal: Goal,
     val content: String?,
     val status: ContentStatus,
-    val createdDate: Date,
+    val createDate: Date,
     val lastUpdated: Date
 )
 
@@ -88,7 +88,7 @@ data class Comment (
     val author: User,
     val content: String?,
     val status: ContentStatus,
-    val createdDate: Date,
+    val createDate: Date,
     val lastUpdated: Date
 )
 
@@ -102,6 +102,7 @@ data class Like (
 abstract class MainInfo {
     abstract var likeNum: Int
     abstract var commentNum: Int
+    abstract var companionNum: Int
     abstract var comments: Page<Comment>
     abstract var lastUpdated: Date
     abstract var type: ContentType
@@ -117,6 +118,7 @@ data class GoalInfo (
     var selectedDays: GoalCycle,
     override var likeNum: Int,
     override var commentNum: Int,
+    override var companionNum: Int,
     override var comments: Page<Comment>,
     override var lastUpdated: Date,
     override var type: ContentType = ContentType.GOAL
@@ -127,8 +129,10 @@ data class GoalLogInfo (
     var author: User,
     var goal: Goal,
     var content: String,
+    var createDate: Date,
     override var likeNum: Int,
     override var commentNum: Int,
+    override var companionNum: Int,
     override var comments: Page<Comment>,
     override var lastUpdated: Date,
     override var type: ContentType = ContentType.GOALLOG

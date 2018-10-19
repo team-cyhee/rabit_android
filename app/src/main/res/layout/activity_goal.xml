@@ -12,4 +12,8 @@
     <include
         android:id="@+id/goalLayout"
         layout="@layout/item_complete_fullgoal" />
+
+    <include
+        android:id="@+id/goalLogListLayout"
+        layout="@layout/item_complete_list" />
 </LinearLayout>

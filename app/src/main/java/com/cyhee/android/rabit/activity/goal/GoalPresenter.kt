@@ -68,6 +68,31 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
                 )
     }
 
+    override fun goalStoreGoalLogs(id: Long) {
+        restClient.goalStoreGoalLogs(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe(
+                        {
+                            Log.d("goal",it.toString())
+                            view.showGoalLogInfos(it!!.toMutableList())
+                        },
+                        {
+                            if(it is HttpException) {
+                                Log.d("goal",it.response().toString())
+                                Log.d("goal",it.response().body().toString())
+                                Log.d("goal",it.response().body().toString())
+                                Log.d("goal",it.response().errorBody().toString())
+                                Log.d("goal",it.response().errorBody()?.string())
+                            }
+                            else {
+                                Log.d("goal",it.toString())
+                            }
+                        }
+                )
+    }
+
     override fun postLikeForGoal(id: Long) {
         PostClient.postLikeForGoal(id, scopeProvider)
     }
@@ -75,4 +100,13 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
     override fun postCommentForGoal(id: Long, comment: CommentFactory.Post) {
         PostClient.postCommentForGoal(id, comment, scopeProvider)
     }
+
+    override fun postLikeForGoalLog(id: Long) {
+        PostClient.postLikeForGoalLog(id, scopeProvider)
+    }
+
+    override fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post) {
+        PostClient.postCommentForGoalLog(id, comment, scopeProvider)
+    }
+
 }
