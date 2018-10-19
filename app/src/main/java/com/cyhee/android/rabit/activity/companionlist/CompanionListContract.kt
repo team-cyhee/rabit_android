@@ -1,16 +1,16 @@
-package com.cyhee.android.rabit.activity.likelist
+package com.cyhee.android.rabit.activity.companionlist
 
 import com.cyhee.android.rabit.base.BasePresenter
 import com.cyhee.android.rabit.base.BaseView
 import com.cyhee.android.rabit.model.*
 
-class LikeListContract {
+class CompanionListContract {
     interface View: BaseView<Presenter> {
-        fun showLikes(likes: MutableList<User>)
+        fun showCompanions(companions: MutableList<User>)
    }
 
     interface Presenter: BasePresenter {
-        fun likesForGoal(id: Long)
-        fun likesForGoalLog(id: Long)
+        fun companionsForGoal(id: Long)
+        fun companionsForGoalLog(id: Long)
     }
 }

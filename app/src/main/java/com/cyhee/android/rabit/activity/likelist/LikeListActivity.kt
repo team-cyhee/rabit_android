@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Toast
 import com.cyhee.android.rabit.R
+import com.cyhee.android.rabit.activity.person.PersonViewAdapter
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_likelist.*
 import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 class LikeListActivity: AppCompatActivity(), LikeListContract.View {
 
     override var presenter : LikeListContract.Presenter = LikeListPresenter(this)
-    private var likeListAdapter: LikeListViewAdapter? = null
+    private var personViewAdapter: PersonViewAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,13 +42,13 @@ class LikeListActivity: AppCompatActivity(), LikeListContract.View {
         }
     }
 
-    override fun showLikes(likes: MutableList<Like>) {
-        if (likeListAdapter == null) {
-            likeListAdapter = LikeListViewAdapter(likes)
+    override fun showLikes(likers: MutableList<User>) {
+        if (personViewAdapter == null) {
+            personViewAdapter = PersonViewAdapter(likers)
             likeListLayout.findViewById<RecyclerView>(R.id.listView).addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            likeListLayout.findViewById<RecyclerView>(R.id.listView).adapter = likeListAdapter
+            likeListLayout.findViewById<RecyclerView>(R.id.listView).adapter = personViewAdapter
         } else {
-            likeListAdapter!!.appendLikes(likes)
+            personViewAdapter!!.appendPeople(likers)
         }
     }
 

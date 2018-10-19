@@ -1,4 +1,4 @@
-package com.cyhee.android.rabit.activity.likelist
+package com.cyhee.android.rabit.activity.companionlist
 
 import android.util.Log
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
@@ -12,56 +12,56 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import retrofit2.HttpException
 
-class LikeListPresenter(private val view: LikeListActivity) : LikeListContract.Presenter {
+class CompanionListPresenter(private val view: CompanionListActivity) : CompanionListContract.Presenter {
 
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    override fun likesForGoal(id: Long) {
+    override fun companionsForGoal(id: Long) {
         restClient.goalStoreLikes(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
                 .subscribe(
                         {
-                            Log.d("likes",it.toString())
-                            view.showLikes(it.content.toMutableList())
+                            Log.d("companions",it.toString())
+                            view.showCompanions(it.content.toMutableList())
                         },
                         {
                             if(it is HttpException) {
-                                Log.d("likes",it.response().toString())
-                                Log.d("likes",it.response().body().toString())
-                                Log.d("likes",it.response().body().toString())
-                                Log.d("likes",it.response().errorBody().toString())
-                                Log.d("likes",it.response().errorBody()?.string())
+                                Log.d("companions",it.response().toString())
+                                Log.d("companions",it.response().body().toString())
+                                Log.d("companions",it.response().body().toString())
+                                Log.d("companions",it.response().errorBody().toString())
+                                Log.d("companions",it.response().errorBody()?.string())
                             }
                             else {
-                                Log.d("likes",it.toString())
+                                Log.d("companions",it.toString())
                             }
                         }
                 )
     }
 
-    override fun likesForGoalLog(id: Long) {
+    override fun companionsForGoalLog(id: Long) {
         restClient.goalLogStoreLikes(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
                 .subscribe(
                         {
-                            Log.d("likes",it.toString())
-                            view.showLikes(it.content.toMutableList())
+                            Log.d("companions",it.toString())
+                            view.showCompanions(it.content.toMutableList())
                         },
                         {
                             if(it is HttpException) {
-                                Log.d("likes",it.response().toString())
-                                Log.d("likes",it.response().body().toString())
-                                Log.d("likes",it.response().body().toString())
-                                Log.d("likes",it.response().errorBody().toString())
-                                Log.d("likes",it.response().errorBody()?.string())
+                                Log.d("companions",it.response().toString())
+                                Log.d("companions",it.response().body().toString())
+                                Log.d("companions",it.response().body().toString())
+                                Log.d("companions",it.response().errorBody().toString())
+                                Log.d("companions",it.response().errorBody()?.string())
                             }
                             else {
-                                Log.d("likes",it.toString())
+                                Log.d("companions",it.toString())
                             }
                         }
                 )

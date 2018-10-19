@@ -23,6 +23,7 @@
         <activity android:name="com.cyhee.android.rabit.activity.goallog.GoalLogActivity"/>
         <activity android:name="com.cyhee.android.rabit.activity.goal.GoalActivity"/>
         <activity android:name="com.cyhee.android.rabit.activity.likelist.LikeListActivity"/>
+        <activity android:name="com.cyhee.android.rabit.activity.companionlist.CompanionListActivity"/>
     </application>
 
     <!-- permissions -->

@@ -25,7 +25,7 @@ interface ResourceApi {
     fun goalStoreComments(@Path("id") id: Long) : Single<Page<Comment>>
 
     @GET("/rest/v1/goals/{id}/likes")
-    fun goalStoreLikes(@Path("id") id: Long) : Single<Page<Like>>
+    fun goalStoreLikes(@Path("id") id: Long) : Single<Page<User>>
 
     @GET("/rest/v1/goals/info/{id}")
     fun goalInfo(@Path("id") id: Long) : Single<GoalInfo>
@@ -40,7 +40,7 @@ interface ResourceApi {
     fun goalLogStoreComments(@Path("id") id: Long) : Single<Page<Comment>>
 
     @GET("/rest/v1/goallogs/{id}/likes")
-    fun goalLogStoreLikes(@Path("id") id: Long) : Single<Page<Like>>
+    fun goalLogStoreLikes(@Path("id") id: Long) : Single<Page<User>>
 
     @GET("/rest/v1/goallogs/info/{id}")
     fun goalLogInfo(@Path("id") id: Long) : Single<GoalLogInfo>
