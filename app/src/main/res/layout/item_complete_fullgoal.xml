@@ -16,4 +16,8 @@
         android:id="@+id/commentListLayout"
         layout="@layout/item_complete_list"/>
 
+    <include
+        android:id="@+id/commentWriteLayout"
+        layout="@layout/item_part_commentwrite"/>
+
 </LinearLayout>

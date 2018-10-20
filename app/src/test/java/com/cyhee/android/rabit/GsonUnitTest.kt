@@ -20,8 +20,8 @@ class GsonUnitTest {
         val goalInfo = GoalInfo(1, user, goal, "content", Date(), Date(),
                 GoalCycle.DAILY, 1, 1, comments, Date())
 
-        val logInfo = GoalLogInfo(1, user, goal, "content", 1,
-                1, comments, Date())
+        val logInfo = GoalLogInfo(1, user, goal, "content", Date(),
+                1, 1, comments, Date())
 
         val goalJson = gson.toJson(goalInfo, GoalInfo::class.java)
         val logJson = gson.toJson(logInfo, GoalLogInfo::class.java)
