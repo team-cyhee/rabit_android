@@ -26,13 +26,10 @@ class GsonUnitTest {
         val goalJson = gson.toJson(goalInfo, GoalInfo::class.java)
         val logJson = gson.toJson(logInfo, GoalLogInfo::class.java)
 
-        println(goalJson)
-        println(logJson)
-
         val goalFromJson = gson.fromJson(goalJson, MainInfo::class.java)
         val logFromJson = gson.fromJson(logJson, MainInfo::class.java)
 
-        println(goalFromJson)
-        println(logFromJson)
+        assert(goalFromJson is GoalInfo)
+        assert(logFromJson is GoalLogInfo)
     }
 }
