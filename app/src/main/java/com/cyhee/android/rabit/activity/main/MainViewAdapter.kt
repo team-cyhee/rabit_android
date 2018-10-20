@@ -1,6 +1,5 @@
 package com.cyhee.android.rabit.activity.main
 
-import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
@@ -9,9 +8,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.cyhee.android.rabit.R
-import com.cyhee.android.rabit.activity.goallog.GoalLogActivity
 import com.cyhee.android.rabit.base.BaseViewHolder
+import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
+import com.cyhee.android.rabit.useful.Fun
 import kotlinx.android.synthetic.main.item_complete_maingoal.*
 import kotlinx.android.synthetic.main.item_complete_maingoallog.*
 import kotlinx.android.synthetic.main.item_part_goalwriter.*
@@ -21,6 +21,8 @@ import java.lang.Exception
 
 class MainViewAdapter (
     private val mainInfos: MutableList<MainInfo>,
+    private val sendLikeForGoal: (Long) -> Unit,
+    private val sendLikeForGoalLog: (Long) -> Unit,
     private val sendCommentForGoal: (Long, CommentFactory.Post) -> Unit,
     private val sendCommentForGoalLog: (Long, CommentFactory.Post) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder>() {
@@ -49,13 +51,15 @@ class MainViewAdapter (
                         var goalInfo: GoalInfo = mainInfo as GoalInfo
                         nameText.text = goalInfo.author.username
                         titleText.text = goalInfo.content
-                        if (goalInfo.parent != null) {
-                            // TODO: 사람 수 추가
-                            val original = "${goalInfo.parent!!.author.username} 님 외 n명이 함께하는 중"
-                            originalWriterText.text = original
+
+                        var companion = when {
+                            goalInfo.parent != null -> "${goalInfo.parent!!.author.username} 님 외 ${goalInfo.companionNum}명이 함께하는 중"
+                            goalInfo.companionNum != 0 -> "${goalInfo.companionNum}명이 함께하는 중"
+                            else -> "함께 해보세요!"
                         }
 
-                        // 좋아요 수, 댓글 수
+                        // 함께하는 사람, 좋아요 수, 댓글 수
+                        companionText.text = companion
                         likeNumberText.text = goalInfo.likeNum.toString()
                         commentNumberText.text = goalInfo.commentNum.toString()
 
@@ -73,15 +77,23 @@ class MainViewAdapter (
                         } else {
                             commentGoalLayout2.visibility = View.GONE
                         }
-                        // TODO: goalActivity 만든 뒤 수정
-                        val clickListener = View.OnClickListener {
-                            val intentToGoalLog = Intent(it.context, GoalLogActivity::class.java)
-                            intentToGoalLog.putExtra("goalId", mainInfo.id)
-                            it.context.startActivity(intentToGoalLog)
+
+
+                        titleText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
+                        commentNumberText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
+                        commentGoalLayout1.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
+                        commentGoalLayout2.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
+                        likeNumberText.setOnClickListener(IntentListener.toGoalLikeListListener(goalInfo.id))
+
+                        when {
+                            goalInfo.parent != null -> companionText.setOnClickListener(IntentListener.toGoalListener(goalInfo.parent!!.id))
+                            else -> companionText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
                         }
 
-                        // TODO: 좋아요 누르기 추가
-                        commentNumberText.setOnClickListener(clickListener)
+                        // post like
+                        likeButton.setOnClickListener {
+                            sendLikeForGoal(goalInfo.id)
+                        }
 
                         // post comment
                         commentGoalWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
@@ -99,15 +111,18 @@ class MainViewAdapter (
             1 -> {
                 mainInfos[position].let { mainInfo ->
                     with(holder as MainViewHolderForGoalLog) {
-                        var goalLogInfo: GoalLogInfo = mainInfo as GoalLogInfo
+                        val goalLogInfo: GoalLogInfo = mainInfo as GoalLogInfo
                         nameText.text = goalLogInfo.goal.author.username
-                        titleText.text = goalLogInfo.goal.content
-                        if (goalLogInfo.goal.parent != null) {
-                            // TODO: 사람 수 추가
-                            val original = "${goalLogInfo.goal.parent!!.author.username} 님 외 n명이 함께하는 중"
-                            originalWriterText.text = original
+                        val goalTitle = goalLogInfo.goal.content + Fun.dateDistance(goalLogInfo)
+                        titleText.text = goalTitle
+
+                        var companion = when {
+                            goalLogInfo.goal.parent != null -> "${goalLogInfo.goal.parent!!.author.username} 님 외 ${goalLogInfo.companionNum}명이 함께하는 중"
+                            goalLogInfo.companionNum != 0 -> "${goalLogInfo.companionNum}명이 함께하는 중"
+                            else -> "함께 해보세요!"
                         }
 
+                        companionText.text = companion
                         text.text = goalLogInfo.content
 
                         likeNumberText.text = goalLogInfo.likeNum.toString()
@@ -126,15 +141,25 @@ class MainViewAdapter (
                         } else {
                             commentGoalLogLayout2.visibility = View.GONE
                         }
-                        val clickListener = View.OnClickListener {
-                            val intentToGoalLog = Intent(it.context, GoalLogActivity::class.java)
-                            intentToGoalLog.putExtra("goalLogId", goalLogInfo.id)
-                            it.context.startActivity(intentToGoalLog)
+
+                        titleText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.id))
+                        textLayout.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
+                        commentGoalLogLayout1.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
+                        commentGoalLogLayout2.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
+                        commentNumberText.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
+                        likeNumberText.setOnClickListener(IntentListener.toGoalLogLikeListListener(goalLogInfo.id))
+
+                        when {
+                            goalLogInfo.goal.parent != null -> companionText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.parent!!.id))
+                            else -> companionText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.id))
                         }
 
-                        textLayout.setOnClickListener(clickListener)
-                        commentNumberText.setOnClickListener(clickListener)
+                        // post like
+                        likeButton.setOnClickListener {
+                            sendLikeForGoalLog(goalLogInfo.id)
+                        }
 
+                        // post comment
                         commentGoalLogWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
                             val content = commentGoalLogWriteLayout.findViewById<EditText>(R.id.commentText).text.toString()
                             // TODO: 내용이 없을 경우 포스트 안되도록

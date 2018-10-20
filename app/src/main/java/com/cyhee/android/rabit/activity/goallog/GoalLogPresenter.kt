@@ -3,6 +3,8 @@ package com.cyhee.android.rabit.activity.goallog
 import android.util.Log
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
+import com.cyhee.android.rabit.client.PostClient
+import com.cyhee.android.rabit.model.CommentFactory
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,15 +16,15 @@ class GoalLogPresenter(private val view: GoalLogActivity) : GoalLogContract.Pres
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    override fun goalLog(id: Long) {
-        restClient.goalLog(id)
+    override fun goalLogInfo(id: Long) {
+        restClient.goalLogInfo(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
                 .subscribe(
                         {
                             Log.d("goalLog",it.toString())
-                            view.showGoalLog(it)
+                            view.showGoalLogInfo(it)
                         },
                         {
                             if(it is HttpException) {
@@ -65,4 +67,12 @@ class GoalLogPresenter(private val view: GoalLogActivity) : GoalLogContract.Pres
                         }
                 )
     }
+
+    override fun postLikeForGoalLog(id: Long) {
+        PostClient.postLikeForGoalLog(id, scopeProvider)
+    }
+    override fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post) {
+        PostClient.postCommentForGoalLog(id, comment, scopeProvider)
+    }
+
 }

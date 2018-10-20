@@ -3,16 +3,19 @@ package com.cyhee.android.rabit.activity.goallog
 import com.cyhee.android.rabit.base.BasePresenter
 import com.cyhee.android.rabit.base.BaseView
 import com.cyhee.android.rabit.model.Comment
-import com.cyhee.android.rabit.model.GoalLog
+import com.cyhee.android.rabit.model.CommentFactory
+import com.cyhee.android.rabit.model.GoalLogInfo
 
 class GoalLogContract {
     interface View: BaseView<Presenter> {
-        fun showGoalLog(goalLog: GoalLog)
+        fun showGoalLogInfo(goalLogInfo: GoalLogInfo)
         fun showComments(comments: MutableList<Comment>)
     }
 
     interface Presenter: BasePresenter {
-        fun goalLog(id: Long)
+        fun goalLogInfo(id: Long)
         fun comments(goalLogId: Long)
+        fun postLikeForGoalLog(id: Long)
+        fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post)
     }
 }

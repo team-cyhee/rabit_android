@@ -41,7 +41,7 @@
         sl:scale_width="300"/>
 
     <TextView
-        android:id="@+id/originalWriterText"
+        android:id="@+id/companionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"

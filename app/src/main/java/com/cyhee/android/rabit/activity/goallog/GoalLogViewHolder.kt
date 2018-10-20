@@ -6,4 +6,4 @@ import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.base.BaseViewHolder
 
 class GoalLogViewHolder(parent: ViewGroup)
-    : BaseViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_part_comment, parent, false))
+    : BaseViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_complete_maingoallog, parent, false))
