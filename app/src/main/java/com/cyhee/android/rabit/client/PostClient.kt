@@ -26,6 +26,19 @@ object PostClient {
                 )
     }
 
+    fun postCompanion(id: Long, scopeProvider: AndroidLifecycleScopeProvider) {
+        restClient.postCompanion(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe (
+                        {
+                        },
+                        {
+                        }
+                )
+    }
+
     fun postLikeForGoal(id: Long, scopeProvider: AndroidLifecycleScopeProvider) {
         restClient.postLikeForGoal(id)
                 .subscribeOn(Schedulers.io())

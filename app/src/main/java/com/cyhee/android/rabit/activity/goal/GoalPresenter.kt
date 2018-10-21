@@ -93,6 +93,10 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
                 )
     }
 
+    override fun postCompanion(id: Long) {
+        PostClient.postCompanion(id, scopeProvider)
+    }
+
     override fun postLikeForGoal(id: Long) {
         PostClient.postLikeForGoal(id, scopeProvider)
     }

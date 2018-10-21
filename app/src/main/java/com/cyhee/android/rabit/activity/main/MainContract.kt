@@ -17,6 +17,7 @@ class MainContract {
         fun goalNames()
         fun mainInfos()
         fun postGoaLog(id: Long, goalLog: GoalLogFactory.Post)
+        fun postCompanion(id: Long)
         fun postLikeForGoal(id: Long)
         fun postLikeForGoalLog(id: Long)
         fun postCommentForGoal(id: Long, comment: CommentFactory.Post)

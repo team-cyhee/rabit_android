@@ -39,6 +39,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         Toast.makeText(this@LoginActivity, tokenData.toString(), Toast.LENGTH_SHORT).show()
         Log.d("loginRequest","login success!")
         App.prefs.token = tokenData.accessToken
+        App.prefs.user = tokenData.user
 
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)

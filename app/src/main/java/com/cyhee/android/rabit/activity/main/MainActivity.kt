@@ -45,6 +45,7 @@ class MainActivity: AppCompatActivity(), MainContract.View {
     override fun showMainInfos(mainInfos: MutableList<MainInfo>) {
         if (mainAdapter == null) {
             mainAdapter = MainViewAdapter(mainInfos,
+                    { id -> presenter.postCompanion(id)},
                     { id -> presenter.postLikeForGoal(id)},
                     { id -> presenter.postLikeForGoalLog(id)},
                     { id, comment: CommentFactory.Post -> presenter.postCommentForGoal(id, comment)},
@@ -55,5 +56,4 @@ class MainActivity: AppCompatActivity(), MainContract.View {
             mainAdapter!!.appendMainInfos(mainInfos)
         }
     }
-
 }
