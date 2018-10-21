@@ -7,11 +7,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.*
 import com.cyhee.android.rabit.R
+import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
-import io.reactivex.Observable
-import io.reactivex.rxkotlin.Observables
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_complete_list.*
+import kotlinx.android.synthetic.main.item_complete_mainwrite.*
 
 
 class MainActivity: AppCompatActivity(), MainContract.View {
@@ -44,10 +44,16 @@ class MainActivity: AppCompatActivity(), MainContract.View {
         }
     }
 
-    override fun showGoalNames(goals: MutableList<Goal>) {
-        val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, goals)
-        mainWriteLayout.findViewById<Spinner>(R.id.goalNameList).adapter = spinnerAdapter
-        //TODO: default 값 지정하기
+    override fun showGoalNames(goals: MutableList<Goal>?) {
+        if (goals == null) {
+            val noGoal: Array<String> = arrayOf("새로운 토끼를 잡아보세요")
+            val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, noGoal)
+            goalNameList.adapter = spinnerAdapter
+            goalNameList.setOnClickListener(IntentListener.toGoalWriteListener())
+        } else {
+            val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, goals)
+            goalNameList.adapter = spinnerAdapter
+        }
     }
 
     override fun showMainInfos(mainInfos: MutableList<MainInfo>) {

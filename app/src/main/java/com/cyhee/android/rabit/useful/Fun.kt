@@ -1,15 +1,12 @@
 package com.cyhee.android.rabit.useful
 
 import com.cyhee.android.rabit.model.GoalLogInfo
-import java.util.*
 
 object Fun {
-
     fun dateDistance(goalLog: GoalLogInfo): String {
-        val startDate: Date? = goalLog.goal.createDate
-        val createDate: Date? = goalLog.createDate
-        val distance: Long? = (createDate!!.time - startDate!!.time) / (24 * 60 * 60 * 1000)
-        println("---$startDate~$createDate=$distance---")
+        val startDate: Long? = (goalLog.goal.createDate).time / (24 * 60 * 60 * 1000)
+        val createDate: Long? = (goalLog.createDate).time / (24 * 60 * 60 * 1000)
+        val distance: Int? = (createDate!! - startDate!!).toInt() + 1
         return " $distance 일차"
     }
 }

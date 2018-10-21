@@ -9,7 +9,7 @@ import com.cyhee.android.rabit.model.MainInfo
 
 class MainContract {
     interface View: BaseView<Presenter> {
-        fun showGoalNames(goals: MutableList<Goal>)
+        fun showGoalNames(goals: MutableList<Goal>?)
         fun showMainInfos(mainInfos: MutableList<MainInfo>)
    }
 

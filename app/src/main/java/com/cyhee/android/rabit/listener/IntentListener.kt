@@ -39,4 +39,8 @@ object IntentListener {
     fun toCompanionWriteListener(id: Long) = View.OnClickListener {
         Log.d("함께하기", "함께하는 페이지로 이동")
     }
+
+    fun toGoalWriteListener() = View.OnClickListener {
+        Log.d("골쓰기","골쓰는 페이지로 이동")
+    }
 }
