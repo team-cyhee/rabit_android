@@ -18,14 +18,14 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
     override fun goalNames() {
-        restClient.goals()
+        restClient.goalsByUser()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
                 .subscribe(
                         {
                             Log.d("goal", it.toString())
-                            view.showGoalNames(it.content)
+                            view.showGoalNames(it.toMutableList())
                         },
                         {
                             if(it is HttpException) {
@@ -69,6 +69,10 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
 
     override fun postGoaLog(id: Long, goalLog: GoalLogFactory.Post) {
         PostClient.postGoaLog(id, goalLog, scopeProvider)
+    }
+
+    override fun postCompanion(id: Long) {
+        PostClient.postCompanion(id, scopeProvider)
     }
 
     override fun postLikeForGoal(id: Long) {

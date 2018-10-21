@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
     <include
-        android:id="@+id/goalWriterLayout"
-        layout="@layout/item_part_goalwriter"/>
+        android:id="@+id/goalLogWriterLayout"
+        layout="@layout/item_part_goallogwriter"/>
 
     <include
         android:id="@+id/imageLayout"

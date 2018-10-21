@@ -1,5 +1,6 @@
 package com.cyhee.android.rabit.activity.main
 
+import android.annotation.SuppressLint
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
@@ -8,7 +9,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.cyhee.android.rabit.R
+import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.base.BaseViewHolder
+import com.cyhee.android.rabit.client.PostClient
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import com.cyhee.android.rabit.useful.Fun
@@ -25,11 +28,14 @@ import android.text.method.TextKeyListener.clear
 
 class MainViewAdapter (
     private val mainInfos: MutableList<MainInfo>,
+    private val sendCompanion: (Long) -> Unit,
     private val sendLikeForGoal: (Long) -> Unit,
     private val sendLikeForGoalLog: (Long) -> Unit,
     private val sendCommentForGoal: (Long, CommentFactory.Post) -> Unit,
     private val sendCommentForGoalLog: (Long, CommentFactory.Post) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder>() {
+
+    private val user = App.prefs.user
 
     override fun getItemViewType(position: Int): Int {
         if (mainInfos[position].type == ContentType.GOAL) {
@@ -47,23 +53,34 @@ class MainViewAdapter (
         throw Exception("goal 또는 goallog만 들어와야함")
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         when (holder.itemViewType) {
             0 -> {
                 mainInfos[position].let { mainInfo ->
                     with(holder as MainViewHolderForGoal) {
-                        var goalInfo: GoalInfo = mainInfo as GoalInfo
+                        val goalInfo: GoalInfo = mainInfo as GoalInfo
                         nameText.text = goalInfo.author.username
                         titleText.text = goalInfo.content
 
-                        var companion = when {
+                        // 함께하는 사람, 시작하는 날, 로그 수, 좋아요 수, 댓글 수
+                        companionText.text = when {
                             goalInfo.parent != null -> "${goalInfo.parent!!.author.username} 님 외 ${goalInfo.companionNum}명이 함께하는 중"
                             goalInfo.companionNum != 0 -> "${goalInfo.companionNum}명이 함께하는 중"
                             else -> "함께 해보세요!"
                         }
+                        startDateText.text = "시작일 ${goalInfo.startDate}"
+                        endDateText.text = when {
+                            goalInfo.endDate != null -> "종료일 ${goalInfo.endDate}"
+                            else -> "종료일 없음"
+                        }
+                        logNumText.text = goalInfo.logNum.toString()
 
-                        // 함께하는 사람, 좋아요 수, 댓글 수
-                        companionText.text = companion
+                        when (user) {
+                            goalInfo.author.username -> goalBtn.text = "당근먹기"
+                            else -> goalBtn.text = "함께하기"
+                        }
+
                         likeNumberText.text = goalInfo.likeNum.toString()
                         commentNumberText.text = goalInfo.commentNum.toString()
 
@@ -86,6 +103,7 @@ class MainViewAdapter (
 
 
                         titleText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
+                        logNum.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
                         commentNumberText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
                         commentGoalLayout1.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
                         commentGoalLayout2.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
@@ -94,6 +112,13 @@ class MainViewAdapter (
                         when {
                             goalInfo.parent != null -> companionText.setOnClickListener(IntentListener.toGoalListener(goalInfo.parent!!.id))
                             else -> companionText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
+                        }
+
+                        // 함께하기 /
+                        when (user) {
+                            // TODO: 이미 companion이면 버튼 안보이게
+                            goalInfo.author.username -> goalBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalInfo.id))
+                            else -> goalBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id))
                         }
 
                         // post like

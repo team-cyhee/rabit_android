@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    sl:scale_base_height="100"
+    sl:scale_base_height="140"
     sl:scale_base_width="360">
 
     <ImageView
@@ -50,4 +50,67 @@
         sl:scale_left="60"
         sl:scale_height="20"
         sl:scale_width="300" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        sl:scale_top="90"
+        sl:scale_left="30"
+        sl:scale_height="40"
+        sl:scale_width="300">
+        
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:orientation="vertical">
+            
+            <TextView
+                android:id="@+id/startDateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"/>
+            
+            <TextView
+                android:id="@+id/endDateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/logNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/logNumText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:text="당근"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"/>
+        </LinearLayout>
+        
+        <Button
+            android:id="@+id/goalBtn"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/main"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/basic"/>
+        
+    </LinearLayout>
+    
 </com.ssomai.android.scalablelayout.ScalableLayout>

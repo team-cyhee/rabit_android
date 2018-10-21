@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.cyhee.android.rabit.R
+import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.activity.comment.CommentViewAdapter
 import com.cyhee.android.rabit.activity.goallog.GoalLogViewAdapter
 import com.cyhee.android.rabit.listener.IntentListener
@@ -26,6 +27,8 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
     override var presenter : GoalContract.Presenter = GoalPresenter(this)
     private var commentAdapter: CommentViewAdapter? = null
     private var goalLogAdapter: GoalLogViewAdapter? = null
+
+    private val user = App.prefs.user
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,19 +55,37 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
         nameText.text = goalInfo.author.username
         titleText.text = goalInfo.content
 
-        var companion = when {
+        // 함께하는 사람, 시작하는 날, 로그 수, 좋아요 수, 댓글 수
+        companionText.text = when {
             goalInfo.parent != null -> "${goalInfo.parent!!.author.username} 님 외 ${goalInfo.companionNum}명이 함께하는 중"
             goalInfo.companionNum != 0 -> "${goalInfo.companionNum}명이 함께하는 중"
             else -> "함께 해보세요!"
         }
+        startDateText.text = "시작일 ${goalInfo.startDate}"
+        endDateText.text = when {
+            goalInfo.endDate != null -> "종료일 ${goalInfo.endDate}"
+            else -> "종료일 없음"
+        }
+        logNumText.text = goalInfo.logNum.toString()
 
-        companionText.text = companion
+        when (user) {
+            goalInfo.author.username -> goalBtn.text = "당근먹기"
+            else -> goalBtn.text = "함께하기"
+        }
         likeNumberText.text = goalInfo.likeNum.toString()
         commentNumberText.text = goalInfo.commentNum.toString()
+
+        likeNumberText.setOnClickListener(IntentListener.toGoalLikeListListener(goalInfo.id))
 
         when {
             goalInfo.parent != null -> companionText.setOnClickListener(IntentListener.toGoalListener(goalInfo.parent!!.id))
             else -> companionText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
+        }
+
+        when (user) {
+            // TODO: 이미 companion이면 버튼 안보이게
+            goalInfo.author.username -> goalBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalInfo.id))
+            else -> goalBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id))
         }
 
         likeButton.setOnClickListener {

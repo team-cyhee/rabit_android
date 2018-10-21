@@ -116,6 +116,7 @@ data class GoalInfo (
     var startDate: Date,
     var endDate: Date,
     var selectedDays: GoalCycle,
+    var logNum: Int,
     override var likeNum: Int,
     override var commentNum: Int,
     override var companionNum: Int,

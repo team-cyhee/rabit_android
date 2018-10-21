@@ -15,6 +15,9 @@ interface ResourceApi {
     @GET("/rest/v1/goals")
     fun goals() : Single<Page<Goal>>
 
+    @GET("/rest/v1/goals/by-user")
+    fun goalsByUser() : Single<List<Goal>>
+
     @GET("/rest/v1/goals/{id}")
     fun goal(@Path("id") id: Long) : Single<Goal>
 
@@ -57,9 +60,13 @@ interface ResourceApi {
     @POST("/rest/v1/goals/{id}/likes")
     fun postLikeForGoal(@Path("id") id: Long) : Completable
 
+    @POST("rest/v1/goals/{id}/companion-goals")
+    fun postCompanion(@Path("id") id : Long) : Completable
+
     @POST("rest/v1/goallogs/{id}/comments")
     fun postCommentForGoalLog(@Path("id") id: Long, @Body comment: CommentFactory.Post) : Completable
 
     @POST("rest/v1/goallogs/{id}/likes")
     fun postLikeForGoalLog(@Path("id") id: Long) : Completable
+
 }

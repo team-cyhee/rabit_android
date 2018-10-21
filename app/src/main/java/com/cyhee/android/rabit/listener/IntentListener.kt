@@ -1,6 +1,7 @@
 package com.cyhee.android.rabit.listener
 
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import com.cyhee.android.rabit.activity.goal.GoalActivity
 import com.cyhee.android.rabit.activity.goallog.GoalLogActivity
@@ -29,5 +30,17 @@ object IntentListener {
         val intentToGoalLogLikeList = Intent(it.context, LikeListActivity::class.java)
         intentToGoalLogLikeList.putExtra("goalLogId", id)
         it.context.startActivity(intentToGoalLogLikeList)
+    }
+
+    fun toGoalLogWriteListener(id: Long) = View.OnClickListener {
+        Log.d("로그쓰기","로그쓰는 페이지로 이동")
+    }
+
+    fun toCompanionWriteListener(id: Long) = View.OnClickListener {
+        Log.d("함께하기", "함께하는 페이지로 이동")
+    }
+
+    fun toGoalWriteListener() = View.OnClickListener {
+        Log.d("골쓰기","골쓰는 페이지로 이동")
     }
 }
