@@ -5,13 +5,13 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.model.*
+import io.reactivex.Observable
+import io.reactivex.rxkotlin.Observables
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item_complete_list.*
 
 
 class MainActivity: AppCompatActivity(), MainContract.View {
@@ -31,8 +31,16 @@ class MainActivity: AppCompatActivity(), MainContract.View {
             val selectedGoal = mainWriteLayout.findViewById<Spinner>(R.id.goalNameList).selectedItem as Goal
             val content = mainWriteLayout.findViewById<EditText>(R.id.dailyText).text.toString()
             val postedGoalLog = GoalLogFactory.Post(content)
-            // TODO: 내용이 없을 경우 포스트 안되도록
+            // TODO: 내용이 없경우 포스트 안되도록
             presenter.postGoaLog(selectedGoal.id, postedGoalLog)
+        }
+
+        // swipe refresh
+        swipeRefresh.setOnRefreshListener {
+            Toast.makeText(this@MainActivity, "refreshed!", Toast.LENGTH_SHORT).show()
+
+            mainAdapter?.clear()
+            presenter.mainInfos()
         }
     }
 
@@ -54,6 +62,8 @@ class MainActivity: AppCompatActivity(), MainContract.View {
         } else {
             mainAdapter!!.appendMainInfos(mainInfos)
         }
+
+        swipeRefresh?.isRefreshing = false
     }
 
 }
