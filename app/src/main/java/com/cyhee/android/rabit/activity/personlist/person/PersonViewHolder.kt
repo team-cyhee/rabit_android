@@ -1,4 +1,4 @@
-package com.cyhee.android.rabit.activity.person
+package com.cyhee.android.rabit.activity.personlist.person
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

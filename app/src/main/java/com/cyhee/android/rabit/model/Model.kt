@@ -7,7 +7,7 @@ import android.telephony.mbms.FileInfo
 
 data class User (
     val id: Long,
-    val username: String?,
+    val username: String,
     val email: String,
     val name: String?,
     val phone: String?,
@@ -138,3 +138,11 @@ data class GoalLogInfo (
     override var lastUpdated: Date,
     override var type: ContentType = ContentType.GOALLOG
 ) : MainInfo()
+
+data class WallInfo (
+    var id: Long,
+    var username: String,
+    var followerNum: Int,
+    var followeeNum: Int,
+    var goalContents: List<String>
+)

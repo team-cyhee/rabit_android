@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ssomai.android.scalablelayout.ScalableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sl="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    sl:scale_base_width="360"
+    sl:scale_base_height="220">
+
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        sl:scale_top="20"
+        sl:scale_left="20"
+        sl:scale_height="45"
+        sl:scale_width="45" />
+
+    <TextView
+        android:id="@+id/nameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        sl:scale_textsize="16"
+        sl:scale_top="20"
+        sl:scale_left="60"
+        sl:scale_height="20"
+        sl:scale_width="280"/>
+
+    <TextView
+        android:id="@+id/followingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        sl:scale_textsize="16"
+        sl:scale_top="40"
+        sl:scale_left="60"
+        sl:scale_height="20"
+        sl:scale_width="100"/>
+
+    <TextView
+        android:id="@+id/followerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        sl:scale_textsize="16"
+        sl:scale_top="40"
+        sl:scale_left="160"
+        sl:scale_height="20"
+        sl:scale_width="100"/>
+
+    <Button
+        android:text="회원 정보 수정"
+        android:id="@+id/editInfoBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/main"
+        android:textColor="@color/basic"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        sl:scale_textsize="16"
+        sl:scale_top="63"
+        sl:scale_left="60"
+        sl:scale_height="20"
+        sl:scale_width="204"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        sl:scale_top="93"
+        sl:scale_left="20"
+        sl:scale_height="70"
+        sl:scale_width="320">
+
+        <TextView
+            android:text="토끼"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:gravity="center"
+            android:background="@color/lightGray"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <LinearLayout
+            android:id="@+id/goalsText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/goal1Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/goal2Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/goal3Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <Button
+            android:text="새 토끼"
+            android:id="@+id/postGoalBtn"
+            android:layout_width="66dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:background="@color/darkGray"
+            android:gravity="center"
+            android:textColor="@color/basic"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <Button
+        android:hint="오늘 하루는 어땠나요?"
+        android:id="@+id/postGoalLogBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn"
+        android:gravity="left"
+        sl:scale_textsize="14"
+        sl:scale_top="180"
+        sl:scale_left="20"
+        sl:scale_height="30"
+        sl:scale_width="320"
+        />
+    
+</com.ssomai.android.scalablelayout.ScalableLayout>

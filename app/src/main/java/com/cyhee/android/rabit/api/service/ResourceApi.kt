@@ -30,6 +30,9 @@ interface ResourceApi {
     @GET("/rest/v1/goals/{id}/likes")
     fun goalStoreLikes(@Path("id") id: Long) : Single<Page<User>>
 
+    @GET("/rest/v1/goals/info/user/{username}")
+    fun userGoalInfos(@Path("username") username: String) : Single<List<GoalInfo>>
+
     @GET("/rest/v1/goals/info/{id}")
     fun goalInfo(@Path("id") id: Long) : Single<GoalInfo>
 
@@ -51,22 +54,36 @@ interface ResourceApi {
     @GET("/rest/v1/maininfos")
     fun mainInfos() : Single<List<MainInfo>?>
 
+    @GET("/rest/v1/maininfos/{username}")
+    fun userMainInfos(@Path("username") username: String) : Single<List<MainInfo>?>
+
+    @GET("/rest/v1/wallinfo/{username}")
+    fun wallInfo(@Path("username") username: String) : Single<WallInfo>
+
+    @GET("/rest/v1/users/{username}/followees")
+    fun followees(@Path("username") username: String) : Single<Page<User>>
+
+    @GET("/rest/v1/users/{username}/followers")
+    fun followers(@Path("username") username: String) : Single<Page<User>>
+
     @POST("/rest/v1/goals/{id}/goallogs")
     fun postGoalLog(@Path("id") id: Long, @Body goalLog: GoalLogFactory.Post) : Completable
 
     @POST("/rest/v1/goals/{id}/comments")
     fun postCommentForGoal(@Path("id") id: Long, @Body comment: CommentFactory.Post) : Completable
 
-    @POST("/rest/v1/goals/{id}/likes")
-    fun postLikeForGoal(@Path("id") id: Long) : Completable
-
-    @POST("rest/v1/goals/{id}/companion-goals")
-    fun postCompanion(@Path("id") id : Long) : Completable
-
     @POST("rest/v1/goallogs/{id}/comments")
     fun postCommentForGoalLog(@Path("id") id: Long, @Body comment: CommentFactory.Post) : Completable
+
+    @POST("rest/v1/users/{username}/followers")
+    fun postFollow(@Path("username") username: String) : Completable
+
+    @POST("/rest/v1/goals/{id}/likes")
+    fun postLikeForGoal(@Path("id") id: Long) : Completable
 
     @POST("rest/v1/goallogs/{id}/likes")
     fun postLikeForGoalLog(@Path("id") id: Long) : Completable
 
+    @POST("rest/v1/goals/{id}/companion-goals")
+    fun postCompanion(@Path("id") id : Long) : Completable
 }

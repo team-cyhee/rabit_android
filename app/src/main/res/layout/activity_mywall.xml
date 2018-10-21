@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/homeTopBarLayout"
+        layout="@layout/item_complete_hometopbar" />
+
+    <include
+        android:id="@+id/myWallLayout"
+        layout="@layout/item_complete_mywall" />
+
+    <include
+        android:id="@+id/myInfoListLayout"
+        layout="@layout/item_complete_list" />
+</LinearLayout>

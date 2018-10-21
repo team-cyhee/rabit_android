@@ -17,7 +17,6 @@ import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_goal.*
 import kotlinx.android.synthetic.main.item_complete_fullgoal.*
-import kotlinx.android.synthetic.main.item_complete_list.*
 import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 import kotlinx.android.synthetic.main.item_part_goalwriter.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
@@ -49,6 +48,8 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
             Log.d("preBtn","clicked")
             finish()
         }
+
+        myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
     }
 
     override fun showGoalInfo(goalInfo : GoalInfo) {

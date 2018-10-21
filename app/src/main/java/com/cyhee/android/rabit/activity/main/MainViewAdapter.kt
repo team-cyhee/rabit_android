@@ -28,7 +28,6 @@ import android.text.method.TextKeyListener.clear
 
 class MainViewAdapter (
     private val mainInfos: MutableList<MainInfo>,
-    private val sendCompanion: (Long) -> Unit,
     private val sendLikeForGoal: (Long) -> Unit,
     private val sendLikeForGoalLog: (Long) -> Unit,
     private val sendCommentForGoal: (Long, CommentFactory.Post) -> Unit,
@@ -101,7 +100,7 @@ class MainViewAdapter (
                             commentGoalLayout2.visibility = View.GONE
                         }
 
-
+                        nameText.setOnClickListener(IntentListener.toWhichWallListListener(user == goalInfo.author.username, goalInfo.author.username))
                         titleText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
                         logNum.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
                         commentNumberText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
@@ -177,6 +176,7 @@ class MainViewAdapter (
                             commentGoalLogLayout2.visibility = View.GONE
                         }
 
+                        nameText.setOnClickListener(IntentListener.toWhichWallListListener(user == goalLogInfo.author.username, goalLogInfo.author.username))
                         titleText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.id))
                         textLayout.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
                         commentGoalLogLayout1.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))

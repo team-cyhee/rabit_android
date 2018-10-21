@@ -22,8 +22,13 @@
         <activity android:name="com.cyhee.android.rabit.activity.main.MainActivity"/>
         <activity android:name="com.cyhee.android.rabit.activity.goallog.GoalLogActivity"/>
         <activity android:name="com.cyhee.android.rabit.activity.goal.GoalActivity"/>
-        <activity android:name="com.cyhee.android.rabit.activity.likelist.LikeListActivity"/>
-        <activity android:name="com.cyhee.android.rabit.activity.companionlist.CompanionListActivity"/>
+        <activity android:name="com.cyhee.android.rabit.activity.personlist.likelist.LikeListActivity"/>
+        <activity android:name="com.cyhee.android.rabit.activity.personlist.companionlist.CompanionListActivity"/>
+        <activity android:name="com.cyhee.android.rabit.activity.mywall.MyWallActivity"/>
+        <activity android:name="com.cyhee.android.rabit.activity.wall.WallActivity"/>
+        <activity android:name="com.cyhee.android.rabit.activity.personlist.followerlist.FollowerListActivity"/>
+        <activity android:name="com.cyhee.android.rabit.activity.personlist.followinglist.FollowingListActivity"/>
+        <activity android:name="com.cyhee.android.rabit.activity.goallist.GoalListActivity"/>
     </application>
 
     <!-- permissions -->
