@@ -46,6 +46,7 @@ class GoalLogViewAdapter (
                 if (goalLogInfo.comments.content.size > 0) {
                     commentGoalLogLayout1.findViewById<TextView>(R.id.commentWriterText).text = goalLogInfo.comments.content[0].author.username
                     commentGoalLogLayout1.findViewById<TextView>(R.id.commentText).text = goalLogInfo.comments.content[0].content
+                    commentGoalLogLayout1.visibility = View.VISIBLE
                 } else {
                     commentGoalLogLayout1.visibility = View.GONE
                 }
@@ -53,6 +54,7 @@ class GoalLogViewAdapter (
                 if (goalLogInfo.comments.content.size > 1) {
                     commentGoalLogLayout2.findViewById<TextView>(R.id.commentWriterText).text = goalLogInfo.comments.content[1].author.username
                     commentGoalLogLayout2.findViewById<TextView>(R.id.commentText).text = goalLogInfo.comments.content[1].content
+                    commentGoalLogLayout2.visibility = View.VISIBLE
                 } else {
                     commentGoalLogLayout2.visibility = View.GONE
                 }
