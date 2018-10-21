@@ -21,6 +21,10 @@ import kotlinx.android.synthetic.main.item_part_goalwriter.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
 import kotlinx.android.synthetic.main.item_part_text.*
 import java.lang.Exception
+import android.R.attr.data
+import android.text.method.TextKeyListener.clear
+
+
 
 class MainViewAdapter (
     private val mainInfos: MutableList<MainInfo>,
@@ -84,6 +88,7 @@ class MainViewAdapter (
                         if (goalInfo.comments.content.size > 0) {
                             commentGoalLayout1.findViewById<TextView>(R.id.commentWriterText).text = goalInfo.comments.content[0].author.username
                             commentGoalLayout1.findViewById<TextView>(R.id.commentText).text = goalInfo.comments.content[0].content
+                            commentGoalLayout1.visibility = View.VISIBLE
                         } else {
                             commentGoalLayout1.visibility = View.GONE
                         }
@@ -91,6 +96,7 @@ class MainViewAdapter (
                         if (goalInfo.comments.content.size > 1) {
                             commentGoalLayout2.findViewById<TextView>(R.id.commentWriterText).text = goalInfo.comments.content[1].author.username
                             commentGoalLayout2.findViewById<TextView>(R.id.commentText).text = goalInfo.comments.content[1].content
+                            commentGoalLayout2.visibility = View.VISIBLE
                         } else {
                             commentGoalLayout2.visibility = View.GONE
                         }
@@ -119,6 +125,8 @@ class MainViewAdapter (
                         likeButton.setOnClickListener {
                             sendLikeForGoal(goalInfo.id)
                         }
+
+                        commentGoalWriteLayout.findViewById<EditText>(R.id.commentText).text.clear()
 
                         // post comment
                         commentGoalWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
@@ -156,6 +164,7 @@ class MainViewAdapter (
                         if (goalLogInfo.comments.content.size > 0) {
                             commentGoalLogLayout1.findViewById<TextView>(R.id.commentWriterText).text = goalLogInfo.comments.content[0].author.username
                             commentGoalLogLayout1.findViewById<TextView>(R.id.commentText).text = goalLogInfo.comments.content[0].content
+                            commentGoalLogLayout1.visibility = View.VISIBLE
                         } else {
                             commentGoalLogLayout1.visibility = View.GONE
                         }
@@ -163,6 +172,7 @@ class MainViewAdapter (
                         if (goalLogInfo.comments.content.size > 1) {
                             commentGoalLogLayout2.findViewById<TextView>(R.id.commentWriterText).text = goalLogInfo.comments.content[1].author.username
                             commentGoalLogLayout2.findViewById<TextView>(R.id.commentText).text = goalLogInfo.comments.content[1].content
+                            commentGoalLogLayout2.visibility = View.VISIBLE
                         } else {
                             commentGoalLogLayout2.visibility = View.GONE
                         }
@@ -183,6 +193,8 @@ class MainViewAdapter (
                         likeButton.setOnClickListener {
                             sendLikeForGoalLog(goalLogInfo.id)
                         }
+
+                        commentGoalLogWriteLayout.findViewById<EditText>(R.id.commentText).text.clear()
 
                         // post comment
                         commentGoalLogWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
@@ -206,7 +218,16 @@ class MainViewAdapter (
 
     fun appendMainInfos(moreMainInfos: List<MainInfo>) {
         val index = this.mainInfos.size
+        Log.d("ViewHolder", "index is $index in appendMainInfos")
         mainInfos.addAll(moreMainInfos)
         notifyItemRangeInserted(index, mainInfos.size)
+    }
+
+    fun clear() {
+        val size = this.mainInfos.size
+        Log.d("ViewHolder", "size is $size in clear")
+        this.mainInfos.clear()
+        //notifyItemRangeRemoved(0, size)
+        notifyDataSetChanged()
     }
 }
