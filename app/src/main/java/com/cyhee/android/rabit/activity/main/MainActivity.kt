@@ -36,7 +36,7 @@ class MainActivity: AppCompatActivity(), MainContract.View {
             val content = mainWriteLayout.findViewById<EditText>(R.id.dailyText).text.toString()
             val postedGoalLog = GoalLogFactory.Post(content)
             // TODO: 내용이 없경우 포스트 안되도록
-            presenter.postGoaLog(selectedGoal.id, postedGoalLog)
+            presenter.postGoalLog(selectedGoal.id, postedGoalLog)
         }
 
         myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
@@ -52,6 +52,7 @@ class MainActivity: AppCompatActivity(), MainContract.View {
 
     override fun showGoalNames(goals: MutableList<Goal>?) {
         if (goals == null) {
+            //TODO: 작동안함
             val noGoal: Array<String> = arrayOf("새로운 토끼를 잡아보세요")
             val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, noGoal)
             goalNameList.adapter = spinnerAdapter

@@ -87,14 +87,10 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
                                 Log.d("goallogs",it.response().errorBody()?.string())
                             }
                             else {
-                                Log.d("goal",it.toString())
+                                Log.d("goallogs",it.toString())
                             }
                         }
                 )
-    }
-
-    override fun postCompanion(id: Long) {
-        PostClient.postCompanion(id, scopeProvider)
     }
 
     override fun postLikeForGoal(id: Long) {

@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.item_complete_fullgoal.*
 import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 import kotlinx.android.synthetic.main.item_part_goalwriter.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
+import java.text.SimpleDateFormat
 
 
 class GoalActivity: AppCompatActivity(), GoalContract.View {
@@ -62,9 +63,12 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
             goalInfo.companionNum != 0 -> "${goalInfo.companionNum}명이 함께하는 중"
             else -> "함께 해보세요!"
         }
-        startDateText.text = "시작일 ${goalInfo.startDate}"
+        startDateText.text = when {
+            goalInfo.startDate != null -> "시작일 ${SimpleDateFormat("dd/MM/yyyy").format(goalInfo.startDate)}"
+            else -> "시작일 없음"
+        }
         endDateText.text = when {
-            goalInfo.endDate != null -> "종료일 ${goalInfo.endDate}"
+            goalInfo.endDate != null -> "종료일 ${SimpleDateFormat("dd/MM/yyyy").format(goalInfo.endDate)}"
             else -> "종료일 없음"
         }
         logNumText.text = goalInfo.logNum.toString()
@@ -85,8 +89,8 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
 
         when (user) {
             // TODO: 이미 companion이면 버튼 안보이게
-            goalInfo.author.username -> goalBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalInfo.id))
-            else -> goalBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id))
+            goalInfo.author.username -> goalBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalInfo.id, goalInfo.content))
+            else -> goalBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id, goalInfo.content))
         }
 
         val isMy = user == goalInfo.author.username

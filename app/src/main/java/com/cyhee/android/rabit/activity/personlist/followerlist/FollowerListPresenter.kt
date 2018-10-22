@@ -15,7 +15,7 @@ class FollowerListPresenter(private val view: FollowerListActivity) : FollowerLi
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
     override fun followers(username: String) {
-        restClient.followees(username)
+        restClient.followers(username)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)

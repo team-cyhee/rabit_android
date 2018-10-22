@@ -29,6 +29,8 @@
         <activity android:name="com.cyhee.android.rabit.activity.personlist.followerlist.FollowerListActivity"/>
         <activity android:name="com.cyhee.android.rabit.activity.personlist.followinglist.FollowingListActivity"/>
         <activity android:name="com.cyhee.android.rabit.activity.goallist.GoalListActivity"/>
+        <activity android:name="com.cyhee.android.rabit.activity.goalwrite.GoalWriteActivity"/>
+        <activity android:name="com.cyhee.android.rabit.activity.goallogwrite.GoalLogWriteActivity"/>
     </application>
 
     <!-- permissions -->

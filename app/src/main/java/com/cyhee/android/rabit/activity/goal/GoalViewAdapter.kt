@@ -14,6 +14,7 @@ import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.item_complete_maingoal.*
 import kotlinx.android.synthetic.main.item_part_goalwriter.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
+import java.text.SimpleDateFormat
 
 class GoalViewAdapter (
     private val goalInfos: MutableList<GoalInfo>,
@@ -37,9 +38,12 @@ class GoalViewAdapter (
                     goalInfo.companionNum != 0 -> "${goalInfo.companionNum}명이 함께하는 중"
                     else -> "함께 해보세요!"
                 }
-                startDateText.text = "시작일 ${goalInfo.startDate}"
+                startDateText.text = when {
+                    goalInfo.startDate != null -> "시작일 ${SimpleDateFormat("dd/MM/yyyy").format(goalInfo.startDate)}"
+                    else -> "시작일 없음"
+                }
                 endDateText.text = when {
-                    goalInfo.endDate != null -> "종료일 ${goalInfo.endDate}"
+                    goalInfo.endDate != null -> "종료일 ${SimpleDateFormat("dd/MM/yyyy").format(goalInfo.endDate)}"
                     else -> "종료일 없음"
                 }
                 logNumText.text = goalInfo.logNum.toString()
@@ -88,8 +92,8 @@ class GoalViewAdapter (
                 // 함께하기 /
                 when (user) {
                     // TODO: 이미 companion이면 버튼 안보이게
-                    goalInfo.author.username -> goalBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalInfo.id))
-                    else -> goalBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id))
+                    goalInfo.author.username -> goalBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalInfo.id, goalInfo.content))
+                    else -> goalBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id, goalInfo.content))
                 }
 
                 // post like
@@ -119,5 +123,13 @@ class GoalViewAdapter (
         val index = this.goalInfos.size
         goalInfos.addAll(moreGoalInfos)
         notifyItemRangeInserted(index, goalInfos.size)
+    }
+
+    fun clear() {
+        val size = this.goalInfos.size
+        Log.d("ViewHolder", "size is $size in clear")
+        this.goalInfos.clear()
+        //notifyItemRangeRemoved(0, size)
+        notifyDataSetChanged()
     }
 }

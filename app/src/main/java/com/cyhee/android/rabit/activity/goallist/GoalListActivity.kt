@@ -13,6 +13,7 @@ import com.cyhee.android.rabit.activity.goal.GoalViewAdapter
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_goallist.*
+import kotlinx.android.synthetic.main.item_complete_list.*
 import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 
 
@@ -30,6 +31,14 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
         if (intent.hasExtra("username")) {
             val username = intent.getStringExtra("username")
             presenter.userGoalInfos(username)
+
+            // swipe refresh
+            swipeRefresh.setOnRefreshListener {
+                Toast.makeText(this@GoalListActivity, "refreshed!", Toast.LENGTH_SHORT).show()
+
+                goalViewAdapter?.clear()
+                presenter.userGoalInfos(username)
+            }
         }
 
         prevBtn.setOnClickListener {
@@ -38,6 +47,8 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
         }
 
         myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
+
+
     }
 
     override fun showGoals(goalInfos: MutableList<GoalInfo>) {

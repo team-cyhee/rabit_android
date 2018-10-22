@@ -66,6 +66,9 @@ interface ResourceApi {
     @GET("/rest/v1/users/{username}/followers")
     fun followers(@Path("username") username: String) : Single<Page<User>>
 
+    @POST("/rest/v1/goals")
+    fun postGoal(@Body goal: GoalFactory.Post): Single<Page<Goal>>
+
     @POST("/rest/v1/goals/{id}/goallogs")
     fun postGoalLog(@Path("id") id: Long, @Body goalLog: GoalLogFactory.Post) : Completable
 
@@ -85,5 +88,5 @@ interface ResourceApi {
     fun postLikeForGoalLog(@Path("id") id: Long) : Completable
 
     @POST("rest/v1/goals/{id}/companion-goals")
-    fun postCompanion(@Path("id") id : Long) : Completable
+    fun postCompanion(@Path("id") id : Long, @Body companionGoal: GoalFactory.Post) : Completable
 }

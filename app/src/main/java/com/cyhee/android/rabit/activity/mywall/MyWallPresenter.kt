@@ -65,10 +65,6 @@ class MyWallPresenter(private val view: MyWallActivity) : MyWallContract.Present
                 )
     }
 
-    override fun postCompanion(id: Long) {
-        PostClient.postCompanion(id, scopeProvider)
-    }
-
     override fun postLikeForGoal(id: Long) {
         PostClient.postLikeForGoal(id, scopeProvider)
     }

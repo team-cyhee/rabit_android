@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.item_part_goalwriter.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
 import kotlinx.android.synthetic.main.item_part_text.*
 import java.lang.Exception
+import java.text.SimpleDateFormat
 
 
 class MainViewAdapter (
@@ -64,9 +65,14 @@ class MainViewAdapter (
                             goalInfo.companionNum != 0 -> "${goalInfo.companionNum}명이 함께하는 중"
                             else -> "함께 해보세요!"
                         }
-                        startDateText.text = "시작일 ${goalInfo.startDate}"
+
+                        // TODO: 나중에 시작일 의무화
+                        startDateText.text = when {
+                            goalInfo.startDate != null -> "시작일 ${SimpleDateFormat("dd/MM/yyyy").format(goalInfo.startDate)}"
+                            else -> "시작일 없음"
+                        }
                         endDateText.text = when {
-                            goalInfo.endDate != null -> "종료일 ${goalInfo.endDate}"
+                            goalInfo.endDate != null -> "종료일 ${SimpleDateFormat("dd/MM/yyyy").format(goalInfo.endDate)}"
                             else -> "종료일 없음"
                         }
                         logNumText.text = goalInfo.logNum.toString()
@@ -115,8 +121,8 @@ class MainViewAdapter (
                         // 함께하기 /
                         when (user) {
                             // TODO: 이미 companion이면 버튼 안보이게
-                            goalInfo.author.username -> goalBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalInfo.id))
-                            else -> goalBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id))
+                            goalInfo.author.username -> goalBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalInfo.id, goalInfo.content))
+                            else -> goalBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id, goalInfo.content))
                         }
 
                         // post like

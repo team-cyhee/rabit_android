@@ -13,7 +13,6 @@ class MyWallContract {
     interface Presenter : BasePresenter {
         fun wallInfo(username: String)
         fun userMainInfos(username: String)
-        fun postCompanion(id: Long)
         fun postLikeForGoal(id: Long)
         fun postLikeForGoalLog(id: Long)
         fun postCommentForGoal(id: Long, comment: CommentFactory.Post)

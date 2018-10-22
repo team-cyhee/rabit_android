@@ -69,9 +69,12 @@ class WallActivity: AppCompatActivity(), WallContract.View {
         nameText.text = wallInfo.username
         followingText.text = "${wallInfo.followeeNum} 팔로잉"
         followerText.text = "${wallInfo.followerNum} 팔로워"
-        goal1Text.text = wallInfo.goalContents[0]
-        goal2Text.text = wallInfo.goalContents[1]
-        goal3Text.text = wallInfo.goalContents[2]
+        if (wallInfo.goalContents.isNotEmpty())
+            goal1Text.text = wallInfo.goalContents[0]
+        if (wallInfo.goalContents.size > 1)
+            goal2Text.text = wallInfo.goalContents[1]
+        if (wallInfo.goalContents.size > 2)
+            goal3Text.text = wallInfo.goalContents[2]
     }
 
     override fun showMainInfos(mainInfos : MutableList<MainInfo>) {
