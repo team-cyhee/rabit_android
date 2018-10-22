@@ -46,7 +46,6 @@ class MyWallActivity: AppCompatActivity(), MyWallContract.View {
             Toast.makeText(this, "전달된 username이 없습니다", Toast.LENGTH_SHORT).show()
         }
 
-
         prevBtn.setOnClickListener {
             Log.d("preBtn","clicked")
             finish()

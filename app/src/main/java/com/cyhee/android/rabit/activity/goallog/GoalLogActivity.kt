@@ -72,6 +72,9 @@ class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
             else -> companionText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.id))
         }
 
+        val isMy = user == goalLogInfo.author.username
+        nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
+
         likeButton.setOnClickListener {
             presenter.postLikeForGoalLog(goalLogInfo.id)
         }

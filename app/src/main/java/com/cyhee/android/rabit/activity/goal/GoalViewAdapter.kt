@@ -69,12 +69,15 @@ class GoalViewAdapter (
                     commentGoalLayout2.visibility = View.GONE
                 }
 
-
+                val isMy = user == goalInfo.author.username
+                nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalInfo.author.username))
                 titleText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
                 logNum.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
                 commentNumberText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
                 commentGoalLayout1.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
                 commentGoalLayout2.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
+                commentGoalLayout1.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalInfo.author.username))
+                commentGoalLayout2.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalInfo.author.username))
                 likeNumberText.setOnClickListener(IntentListener.toGoalLikeListListener(goalInfo.id))
 
                 when {

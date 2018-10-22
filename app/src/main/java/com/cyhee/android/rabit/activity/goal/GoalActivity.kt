@@ -35,7 +35,7 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
 
         if (intent.hasExtra("goalId")) {
             val goalId = intent.getLongExtra("goalId", -1)
-            presenter.goalInfo(goalId)
+            presenter.goalInfos(goalId)
             presenter.goalStoreGoalLogs(goalId)
 
             likeNumberText.setOnClickListener(IntentListener.toGoalLikeListListener(goalId))
@@ -89,6 +89,8 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
             else -> goalBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id))
         }
 
+        val isMy = user == goalInfo.author.username
+        nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalInfo.author.username))
         likeButton.setOnClickListener {
             presenter.postLikeForGoal(goalInfo.id)
         }
@@ -113,7 +115,7 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
     }
 
     override fun showGoalLogInfos(goalLogInfos: MutableList<GoalLogInfo>) {
-        if (goalLogAdapter === null) {
+        if (goalLogAdapter == null) {
             goalLogAdapter = GoalLogViewAdapter(goalLogInfos,
                     { id -> presenter.postLikeForGoalLog(id)},
                     { id, comment -> presenter.postCommentForGoalLog(id, comment)})
