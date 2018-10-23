@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.cyhee.android.rabit.R
+import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.activity.comment.CommentViewAdapter
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
@@ -24,6 +25,8 @@ import kotlinx.android.synthetic.main.item_part_text.*
 class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
     override var presenter : GoalLogContract.Presenter = GoalLogPresenter(this)
     private var commentAdapter: CommentViewAdapter? = null
+
+    private val user = App.prefs.user
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +46,8 @@ class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
             Log.d("preBtn","clicked")
             finish()
         }
+
+        myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
     }
 
     override fun showGoalLogInfo(goalLogInfo : GoalLogInfo) {
@@ -66,6 +71,9 @@ class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
             goalLogInfo.goal.parent != null -> companionText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.parent!!.id))
             else -> companionText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.id))
         }
+
+        val isMy = user == goalLogInfo.author.username
+        nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
 
         likeButton.setOnClickListener {
             presenter.postLikeForGoalLog(goalLogInfo.id)

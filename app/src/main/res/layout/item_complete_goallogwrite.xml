@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ssomai.android.scalablelayout.ScalableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sl="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    sl:scale_base_height="564"
+    sl:scale_base_width="360">
+
+    <Spinner
+        android:id="@+id/goalsNameList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@null"
+        sl:scale_top="20"
+        sl:scale_height="40"
+        sl:scale_width="300">
+    </Spinner>
+
+    <EditText
+        android:hint="내용을 입력해주세요"
+        android:id="@+id/goalLogContentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/btn"
+        sl:scale_textsize="15"
+        sl:scale_top="80"
+        sl:scale_height="195"
+        sl:scale_width="310" />
+
+    <Button
+        android:id="@+id/goalGalleryBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/photo"
+        sl:scale_top="275"
+        sl:scale_left="275"
+        sl:scale_height="25"
+        sl:scale_width="25" />
+
+    <Button
+        android:id="@+id/goalCameraBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/camera"
+        sl:scale_top="275"
+        sl:scale_left="300"
+        sl:scale_height="25"
+        sl:scale_width="25" />
+
+    <Button
+        android:text="작성"
+        android:id="@+id/realGoalLogPostBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/main"
+        android:textColor="@color/basic"
+        android:textStyle="bold"
+        sl:scale_textsize="20"
+        sl:scale_top="300"
+        sl:scale_height="40"
+        sl:scale_width="90"/>
+</com.ssomai.android.scalablelayout.ScalableLayout>

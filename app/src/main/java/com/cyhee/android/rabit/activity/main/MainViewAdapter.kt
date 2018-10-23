@@ -11,7 +11,6 @@ import android.widget.TextView
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.base.BaseViewHolder
-import com.cyhee.android.rabit.client.PostClient
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import com.cyhee.android.rabit.useful.Fun
@@ -21,14 +20,11 @@ import kotlinx.android.synthetic.main.item_part_goalwriter.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
 import kotlinx.android.synthetic.main.item_part_text.*
 import java.lang.Exception
-import android.R.attr.data
-import android.text.method.TextKeyListener.clear
-
+import java.text.SimpleDateFormat
 
 
 class MainViewAdapter (
     private val mainInfos: MutableList<MainInfo>,
-    private val sendCompanion: (Long) -> Unit,
     private val sendLikeForGoal: (Long) -> Unit,
     private val sendLikeForGoalLog: (Long) -> Unit,
     private val sendCommentForGoal: (Long, CommentFactory.Post) -> Unit,
@@ -69,9 +65,14 @@ class MainViewAdapter (
                             goalInfo.companionNum != 0 -> "${goalInfo.companionNum}명이 함께하는 중"
                             else -> "함께 해보세요!"
                         }
-                        startDateText.text = "시작일 ${goalInfo.startDate}"
+
+                        // TODO: 나중에 시작일 의무화
+                        startDateText.text = when {
+                            goalInfo.startDate != null -> "시작일 ${SimpleDateFormat("dd/MM/yyyy").format(goalInfo.startDate)}"
+                            else -> "시작일 없음"
+                        }
                         endDateText.text = when {
-                            goalInfo.endDate != null -> "종료일 ${goalInfo.endDate}"
+                            goalInfo.endDate != null -> "종료일 ${SimpleDateFormat("dd/MM/yyyy").format(goalInfo.endDate)}"
                             else -> "종료일 없음"
                         }
                         logNumText.text = goalInfo.logNum.toString()
@@ -101,12 +102,15 @@ class MainViewAdapter (
                             commentGoalLayout2.visibility = View.GONE
                         }
 
-
+                        val isMy = user == goalInfo.author.username
+                        nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalInfo.author.username))
                         titleText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
                         logNum.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
                         commentNumberText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
                         commentGoalLayout1.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
                         commentGoalLayout2.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
+                        commentGoalLayout1.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalInfo.author.username))
+                        commentGoalLayout2.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalInfo.author.username))
                         likeNumberText.setOnClickListener(IntentListener.toGoalLikeListListener(goalInfo.id))
 
                         when {
@@ -117,8 +121,8 @@ class MainViewAdapter (
                         // 함께하기 /
                         when (user) {
                             // TODO: 이미 companion이면 버튼 안보이게
-                            goalInfo.author.username -> goalBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalInfo.id))
-                            else -> goalBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id))
+                            goalInfo.author.username -> goalBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalInfo.id, goalInfo.content))
+                            else -> goalBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id, goalInfo.content))
                         }
 
                         // post like
@@ -149,7 +153,7 @@ class MainViewAdapter (
                         val goalTitle = goalLogInfo.goal.content + Fun.dateDistance(goalLogInfo)
                         titleText.text = goalTitle
 
-                        var companion = when {
+                        val companion = when {
                             goalLogInfo.goal.parent != null -> "${goalLogInfo.goal.parent!!.author.username} 님 외 ${goalLogInfo.companionNum}명이 함께하는 중"
                             goalLogInfo.companionNum != 0 -> "${goalLogInfo.companionNum}명이 함께하는 중"
                             else -> "함께 해보세요!"
@@ -177,10 +181,14 @@ class MainViewAdapter (
                             commentGoalLogLayout2.visibility = View.GONE
                         }
 
+                        val isMy = user == goalLogInfo.author.username
+                        nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
                         titleText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.id))
                         textLayout.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
                         commentGoalLogLayout1.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
                         commentGoalLogLayout2.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
+                        commentGoalLogLayout1.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
+                        commentGoalLogLayout2.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
                         commentNumberText.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
                         likeNumberText.setOnClickListener(IntentListener.toGoalLogLikeListListener(goalLogInfo.id))
 

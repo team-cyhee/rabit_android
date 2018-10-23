@@ -16,7 +16,7 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    override fun goalInfo(id: Long) {
+    override fun goalInfos(id: Long) {
         restClient.goalInfo(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -75,26 +75,22 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
                 .autoDisposable(scopeProvider)
                 .subscribe(
                         {
-                            Log.d("goal",it.toString())
+                            Log.d("goallogs",it.toString())
                             view.showGoalLogInfos(it!!.toMutableList())
                         },
                         {
                             if(it is HttpException) {
-                                Log.d("goal",it.response().toString())
-                                Log.d("goal",it.response().body().toString())
-                                Log.d("goal",it.response().body().toString())
-                                Log.d("goal",it.response().errorBody().toString())
-                                Log.d("goal",it.response().errorBody()?.string())
+                                Log.d("goallogs",it.response().toString())
+                                Log.d("goallogs",it.response().body().toString())
+                                Log.d("goallogs",it.response().body().toString())
+                                Log.d("goallogs",it.response().errorBody().toString())
+                                Log.d("goallogs",it.response().errorBody()?.string())
                             }
                             else {
-                                Log.d("goal",it.toString())
+                                Log.d("goallogs",it.toString())
                             }
                         }
                 )
-    }
-
-    override fun postCompanion(id: Long) {
-        PostClient.postCompanion(id, scopeProvider)
     }
 
     override fun postLikeForGoal(id: Long) {

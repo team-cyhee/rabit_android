@@ -1,11 +1,8 @@
-package com.cyhee.android.rabit.activity.companionlist
+package com.cyhee.android.rabit.activity.personlist.companionlist
 
 import android.util.Log
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
-import com.cyhee.android.rabit.client.PostClient
-import com.cyhee.android.rabit.model.CommentFactory
-import com.cyhee.android.rabit.model.GoalLogFactory
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
 import io.reactivex.android.schedulers.AndroidSchedulers

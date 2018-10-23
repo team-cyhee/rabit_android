@@ -3,6 +3,7 @@ package com.cyhee.android.rabit.client
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
 import com.cyhee.android.rabit.model.CommentFactory
+import com.cyhee.android.rabit.model.GoalFactory
 import com.cyhee.android.rabit.model.GoalLogFactory
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
@@ -12,7 +13,20 @@ import io.reactivex.schedulers.Schedulers
 object PostClient {
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    fun postGoaLog(id: Long, goalLog: GoalLogFactory.Post, scopeProvider: AndroidLifecycleScopeProvider) {
+    fun postGoal(goal: GoalFactory.Post, scopeProvider: AndroidLifecycleScopeProvider) {
+        restClient.postGoal( goal)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe (
+                        {
+                        },
+                        {
+                        }
+                )
+    }
+
+    fun postGoalLog(id: Long, goalLog: GoalLogFactory.Post, scopeProvider: AndroidLifecycleScopeProvider) {
         restClient.postGoalLog(id, goalLog)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -26,8 +40,21 @@ object PostClient {
                 )
     }
 
-    fun postCompanion(id: Long, scopeProvider: AndroidLifecycleScopeProvider) {
-        restClient.postCompanion(id)
+    fun postCompanion(id: Long, goal: GoalFactory.Post, scopeProvider: AndroidLifecycleScopeProvider) {
+        restClient.postCompanion(id, goal)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe (
+                        {
+                        },
+                        {
+                        }
+                )
+    }
+
+    fun postFollow(username: String, scopeProvider: AndroidLifecycleScopeProvider) {
+        restClient.postFollow(username)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)

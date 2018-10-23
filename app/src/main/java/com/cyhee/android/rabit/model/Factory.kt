@@ -12,6 +12,16 @@ object UserFactory {
     )
 }
 
+object GoalFactory {
+    data class Post(
+        val content: String,
+        val startDate: Date,
+        val endDate: Date?,
+        val doUnit: GoalUnit?,
+        val doTimes: Int?
+    )
+}
+
 object GoalLogFactory {
     data class Post(
         val content: String

@@ -11,14 +11,13 @@ class GoalContract {
     interface View : BaseView<Presenter> {
         fun showGoalInfo(goalInfo: GoalInfo)
         fun showComments(comments: MutableList<Comment>)
-        fun showGoalLogInfos(goalLogInfo: MutableList<GoalLogInfo>)
+        fun showGoalLogInfos(goalLogInfos: MutableList<GoalLogInfo>)
     }
 
     interface Presenter : BasePresenter {
-        fun goalInfo(id: Long)
+        fun goalInfos(id: Long)
         fun goalStoreGoalLogs(id: Long)
         fun comments(goalId: Long)
-        fun postCompanion(id: Long)
         fun postLikeForGoal(id: Long)
         fun postLikeForGoalLog(id: Long)
         fun postCommentForGoal(id: Long, comment: CommentFactory.Post)

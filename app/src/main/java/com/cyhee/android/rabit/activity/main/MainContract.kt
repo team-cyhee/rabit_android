@@ -16,8 +16,7 @@ class MainContract {
     interface Presenter: BasePresenter {
         fun goalNames()
         fun mainInfos()
-        fun postGoaLog(id: Long, goalLog: GoalLogFactory.Post)
-        fun postCompanion(id: Long)
+        fun postGoalLog(id: Long, goalLog: GoalLogFactory.Post)
         fun postLikeForGoal(id: Long)
         fun postLikeForGoalLog(id: Long)
         fun postCommentForGoal(id: Long, comment: CommentFactory.Post)

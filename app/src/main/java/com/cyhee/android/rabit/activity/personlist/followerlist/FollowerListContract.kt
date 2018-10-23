@@ -1,16 +1,15 @@
-package com.cyhee.android.rabit.activity.companionlist
+package com.cyhee.android.rabit.activity.personlist.followerlist
 
 import com.cyhee.android.rabit.base.BasePresenter
 import com.cyhee.android.rabit.base.BaseView
 import com.cyhee.android.rabit.model.*
 
-class CompanionListContract {
+class FollowerListContract {
     interface View: BaseView<Presenter> {
-        fun showCompanions(companions: MutableList<User>)
+        fun showFollowers(followers: MutableList<User>)
    }
 
     interface Presenter: BasePresenter {
-        fun companionsForGoal(id: Long)
-        fun companionsForGoalLog(id: Long)
+        fun followers(username: String)
     }
 }
