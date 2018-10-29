@@ -1,5 +1,6 @@
 package com.cyhee.android.rabit.activity.main
 
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -14,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_complete_list.*
 import kotlinx.android.synthetic.main.item_complete_mainwrite.*
 import kotlinx.android.synthetic.main.item_complete_topbar.*
+import kotlinx.android.synthetic.main.item_part_reaction.*
 
 
 class MainActivity: AppCompatActivity(), MainContract.View {
@@ -66,8 +68,8 @@ class MainActivity: AppCompatActivity(), MainContract.View {
     override fun showMainInfos(mainInfos: MutableList<MainInfo>) {
         if (mainAdapter == null) {
             mainAdapter = MainViewAdapter(mainInfos,
-                    { id -> presenter.postLikeForGoal(id)},
-                    { id -> presenter.postLikeForGoalLog(id)},
+                    { id, post -> presenter.toggleLikeForGoal(id, post)},
+                    { id, post -> presenter.toggleLikeForGoalLog(id, post)},
                     { id, comment: CommentFactory.Post -> presenter.postCommentForGoal(id, comment)},
                     { id, comment -> presenter.postCommentForGoalLog(id, comment)})
             mainInfoListLayout.findViewById<RecyclerView>(R.id.listView).addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
@@ -77,5 +79,18 @@ class MainActivity: AppCompatActivity(), MainContract.View {
         }
 
         swipeRefresh?.isRefreshing = false
+    }
+
+    fun toggleLike(on : Boolean) {
+        if(on)
+            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
+                likeButton.context.getDrawable(R.drawable.thumb_active)
+            else
+                likeButton.context.resources.getDrawable(R.drawable.thumb_active)
+        else
+            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
+                likeButton.context.getDrawable(R.drawable.thumb)
+            else
+                likeButton.context.resources.getDrawable(R.drawable.thumb)
     }
 }

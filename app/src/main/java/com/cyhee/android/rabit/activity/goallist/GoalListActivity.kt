@@ -1,5 +1,6 @@
 package com.cyhee.android.rabit.activity.goallist
 
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -15,6 +16,7 @@ import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_goallist.*
 import kotlinx.android.synthetic.main.item_complete_list.*
 import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
+import kotlinx.android.synthetic.main.item_part_reaction.*
 
 
 class GoalListActivity: AppCompatActivity(), GoalListContract.View {
@@ -54,7 +56,7 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
     override fun showGoals(goalInfos: MutableList<GoalInfo>) {
         if (goalViewAdapter == null) {
             goalViewAdapter = GoalViewAdapter(goalInfos,
-                    { id -> presenter.postLikeForGoal(id)},
+                    { id, post -> presenter.toggleLikeForGoal(id, post)},
                     { id, comment: CommentFactory.Post -> presenter.postCommentForGoal(id, comment)})
             goalListLayout.findViewById<RecyclerView>(R.id.listView).addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             goalListLayout.findViewById<RecyclerView>(R.id.listView).adapter = goalViewAdapter
@@ -63,4 +65,16 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
         }
     }
 
+    fun toggleLike(on : Boolean) {
+        if(on)
+            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
+                likeButton.context.getDrawable(R.drawable.thumb_active)
+            else
+                likeButton.context.resources.getDrawable(R.drawable.thumb_active)
+        else
+            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
+                likeButton.context.getDrawable(R.drawable.thumb)
+            else
+                likeButton.context.resources.getDrawable(R.drawable.thumb)
+    }
 }

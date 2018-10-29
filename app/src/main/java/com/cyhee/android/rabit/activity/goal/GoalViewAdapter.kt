@@ -1,5 +1,6 @@
 package com.cyhee.android.rabit.activity.goal
 
+import android.os.Build
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
@@ -18,7 +19,7 @@ import java.text.SimpleDateFormat
 
 class GoalViewAdapter (
     private val goalInfos: MutableList<GoalInfo>,
-    private val sendLikeForGoal: (Long) -> Unit,
+    private val toggleLikeForGoal: (Long, Boolean) -> Unit,
     private val sendCommentForGoal: (Long, CommentFactory.Post) -> Unit
 ) : RecyclerView.Adapter<GoalViewHolder>() {
 
@@ -96,9 +97,16 @@ class GoalViewAdapter (
                     else -> goalBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id, goalInfo.content))
                 }
 
+                if(goalInfo.liked) {
+                    likeButton.background = if(Build.VERSION.SDK_INT >= 21)
+                        likeButton.context.getDrawable(R.drawable.thumb_active)
+                    else
+                        likeButton.context.resources.getDrawable(R.drawable.thumb_active)
+                }
                 // post like
                 likeButton.setOnClickListener {
-                    sendLikeForGoal(goalInfo.id)
+                    goalInfo.liked = !goalInfo.liked
+                    toggleLikeForGoal(goalInfo.id, goalInfo.liked)
                 }
 
                 commentGoalWriteLayout.findViewById<EditText>(R.id.commentText).text.clear()

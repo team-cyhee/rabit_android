@@ -1,5 +1,7 @@
 package com.cyhee.android.rabit.activity.goallog
 
+import android.os.Build
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
@@ -19,7 +21,7 @@ import kotlinx.android.synthetic.main.item_part_text.*
 
 class GoalLogViewAdapter (
     private val goalLogInfos: MutableList<GoalLogInfo>,
-    private val sendLikeForGoalLog: (Long) -> Unit,
+    private val toggleLikeForGoalLog: (Long, Boolean) -> Unit,
     private val sendCommentForGoalLog: (Long, CommentFactory.Post) -> Unit
 ) : RecyclerView.Adapter<GoalLogViewHolder>() {
 
@@ -78,9 +80,17 @@ class GoalLogViewAdapter (
                     else -> companionText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.id))
                 }
 
+
+                if(goalLogInfo.liked) {
+                    likeButton.background = if(Build.VERSION.SDK_INT >= 21)
+                        likeButton.context.getDrawable(R.drawable.thumb_active)
+                    else
+                        likeButton.context.resources.getDrawable(R.drawable.thumb_active)
+                }
                 // post like
                 likeButton.setOnClickListener {
-                    sendLikeForGoalLog(goalLogInfo.id)
+                    goalLogInfo.liked = !goalLogInfo.liked
+                    toggleLikeForGoalLog(goalLogInfo.id, goalLogInfo.liked)
                 }
 
                 // post comment

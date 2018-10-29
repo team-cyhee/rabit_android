@@ -3,10 +3,7 @@ package com.cyhee.android.rabit.api.service
 import com.cyhee.android.rabit.model.*
 import io.reactivex.Completable
 import io.reactivex.Single
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ResourceApi {
     @GET("/rest/v1/users")
@@ -84,8 +81,14 @@ interface ResourceApi {
     @POST("/rest/v1/goals/{id}/likes")
     fun postLikeForGoal(@Path("id") id: Long) : Completable
 
+    @DELETE("/rest/v1/goals/{id}/likes")
+    fun deleteLikeForGoal(@Path("id") id: Long) : Completable
+
     @POST("rest/v1/goallogs/{id}/likes")
     fun postLikeForGoalLog(@Path("id") id: Long) : Completable
+
+    @DELETE("rest/v1/goallogs/{id}/likes")
+    fun deleteLikeForGoalLog(@Path("id") id: Long) : Completable
 
     @POST("rest/v1/goals/{id}/companion-goals")
     fun postCompanion(@Path("id") id : Long, @Body companionGoal: GoalFactory.Post) : Completable

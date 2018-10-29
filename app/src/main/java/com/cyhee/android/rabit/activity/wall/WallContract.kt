@@ -14,8 +14,8 @@ class WallContract {
         fun wallInfo(username: String)
         fun userMainInfos(username: String)
         fun postFollow(username: String)
-        fun postLikeForGoal(id: Long)
-        fun postLikeForGoalLog(id: Long)
+        fun toggleLikeForGoal(id: Long, post: Boolean)
+        fun toggleLikeForGoalLog(id: Long, post: Boolean)
         fun postCommentForGoal(id: Long, comment: CommentFactory.Post)
         fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post)
     }

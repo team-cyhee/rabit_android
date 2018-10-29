@@ -41,8 +41,24 @@ class GoalListPresenter(private val view: GoalListActivity) : GoalListContract.P
                 )
     }
 
-    override fun postLikeForGoal(id: Long) {
-        PostClient.postLikeForGoal(id, scopeProvider)
+    override fun toggleLikeForGoal(id: Long, post: Boolean) {
+        if(post)
+            PostClient.postLikeForGoal(id, scopeProvider) {
+                view.toggleLike(true)
+            }
+        else
+            restClient.deleteLikeForGoal(id)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .autoDisposable(scopeProvider)
+                    .subscribe(
+                            {
+                                view.toggleLike(false)
+                            },
+                            {
+
+                            }
+                    )
     }
 
     override fun postCommentForGoal(id: Long, comment: CommentFactory.Post) {
