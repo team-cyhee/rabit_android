@@ -5,6 +5,7 @@ import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
 import com.cyhee.android.rabit.client.PostClient
 import com.cyhee.android.rabit.model.CommentFactory
+import com.cyhee.android.rabit.model.GoalInfo
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -24,7 +25,7 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
                 .subscribe(
                         {
                             Log.d("goal",it.toString())
-                            view.showGoalInfo(it)
+                            goalStoreGoalLogs(id, it)
                         },
                         {
                             if(it is HttpException) {
@@ -39,36 +40,9 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
                             }
                         }
                 )
-
-        comments(id)
     }
 
-    override fun comments(goalId: Long) {
-        restClient.goalStoreComments(goalId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(scopeProvider)
-                .subscribe(
-                        {
-                            Log.d("comments",it.toString())
-                            view.showComments(it.content)
-                        },
-                        {
-                            if(it is HttpException) {
-                                Log.d("comments",it.response().toString())
-                                Log.d("comments",it.response().body().toString())
-                                Log.d("comments",it.response().body().toString())
-                                Log.d("comments",it.response().errorBody().toString())
-                                Log.d("comments",it.response().errorBody()?.string())
-                            }
-                            else {
-                                Log.d("comments",it.toString())
-                            }
-                        }
-                )
-    }
-
-    override fun goalStoreGoalLogs(id: Long) {
+    override fun goalStoreGoalLogs(id: Long, goalInfo: GoalInfo) {
         restClient.goalStoreGoalLogs(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -76,7 +50,7 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
                 .subscribe(
                         {
                             Log.d("goallogs",it.toString())
-                            view.showGoalLogInfos(it!!.toMutableList())
+                            view.showGoalLogInfos(goalInfo, it!!.toMutableList())
                         },
                         {
                             if(it is HttpException) {
@@ -96,7 +70,7 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
     override fun toggleLikeForGoal(id: Long, post: Boolean) {
         if(post)
             PostClient.postLikeForGoal(id, scopeProvider) {
-                view.toggleLike(true)
+                //view.toggleLike(true)
             }
         else
             restClient.deleteLikeForGoal(id)
@@ -105,7 +79,7 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
                     .autoDisposable(scopeProvider)
                     .subscribe(
                             {
-                                view.toggleLike(false)
+                                //view.toggleLike(false)
                             },
                             {
 
@@ -121,7 +95,7 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
     override fun toggleLikeForGoalLog(id: Long, post: Boolean) {
         if(post)
             PostClient.postLikeForGoalLog(id, scopeProvider) {
-                view.toggleLike(true)
+                //view.toggleLike(true)
             }
         else
             restClient.deleteLikeForGoalLog(id)
@@ -130,7 +104,7 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
                     .autoDisposable(scopeProvider)
                     .subscribe(
                             {
-                                view.toggleLike(false)
+                                //view.toggleLike(false)
                             },
                             {
 

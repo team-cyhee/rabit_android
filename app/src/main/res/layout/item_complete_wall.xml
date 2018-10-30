@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
+    android:background="@color/basic"
     sl:scale_base_width="360"
     sl:scale_base_height="190">
 
     <ImageView
-        android:id="@+id/profileImage"
+        android:id="@+id/wallProfileImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         sl:scale_top="20"
@@ -18,7 +19,7 @@
         sl:scale_width="45" />
 
     <TextView
-        android:id="@+id/nameText"
+        android:id="@+id/wallNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -31,7 +32,7 @@
         sl:scale_width="280"/>
 
     <TextView
-        android:id="@+id/followingText"
+        android:id="@+id/wallFollowingText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -43,7 +44,7 @@
         sl:scale_width="100"/>
 
     <TextView
-        android:id="@+id/followerText"
+        android:id="@+id/wallFollowerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
@@ -55,7 +56,7 @@
 
     <Button
         android:text="팔로우하기"
-        android:id="@+id/followBtn"
+        android:id="@+id/wallFollowBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/main"
@@ -88,13 +89,13 @@
             android:textColor="@color/black"/>
 
         <LinearLayout
-            android:id="@+id/goalsText"
+            android:id="@+id/wallGoalsText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/goal1Text"
+                android:id="@+id/wallGoal1Text"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginStart="10dp"
@@ -103,7 +104,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/goal2Text"
+                android:id="@+id/wallGoal2Text"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginStart="10dp"
@@ -112,7 +113,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/goal3Text"
+                android:id="@+id/wallGoal3Text"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginStart="10dp"

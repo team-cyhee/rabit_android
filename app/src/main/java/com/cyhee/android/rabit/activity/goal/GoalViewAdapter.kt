@@ -10,134 +10,201 @@ import android.widget.EditText
 import android.widget.TextView
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
+import com.cyhee.android.rabit.base.BaseViewHolder
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
-import kotlinx.android.synthetic.main.item_complete_maingoal.*
+import com.cyhee.android.rabit.useful.Fun
+import kotlinx.android.synthetic.main.item_complete_maingoallog.*
+import kotlinx.android.synthetic.main.item_part_commentwriteform.*
 import kotlinx.android.synthetic.main.item_part_goalwriter.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
+import kotlinx.android.synthetic.main.item_part_text.*
+import java.lang.Exception
 import java.text.SimpleDateFormat
 
 class GoalViewAdapter (
-    private val goalInfos: MutableList<GoalInfo>,
+    private val goalInfo: GoalInfo,
+    private val goalLogInfos: MutableList<GoalLogInfo>,
     private val toggleLikeForGoal: (Long, Boolean) -> Unit,
-    private val sendCommentForGoal: (Long, CommentFactory.Post) -> Unit
-) : RecyclerView.Adapter<GoalViewHolder>() {
+    private val sendCommentForGoalLog: (Long, CommentFactory.Post) -> Unit,
+    private val toggleLikeForGoalLog: (Long, Boolean) -> Unit
+) : RecyclerView.Adapter<BaseViewHolder>() {
 
     private val user = App.prefs.user
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoalViewHolder = GoalViewHolder(parent)
+    override fun getItemViewType(position: Int): Int {
+        return when (position) {
+            0 -> 0
+            else -> 1
+        }
+    }
 
-    override fun onBindViewHolder(holder: GoalViewHolder, position: Int) {
-        goalInfos[position].let { goalInfo ->
-            with(holder) {
-                nameText.text = goalInfo.author.username
-                titleText.text = goalInfo.content
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+        return when (viewType) {
+            0 -> GoalViewHolder(parent)
+            1 -> GoalLogViewHolder(parent)
+            else -> throw Exception("올바르지 못한 데이터 접근")
+        }
+    }
 
-                // 함께하는 사람, 시작하는 날, 로그 수, 좋아요 수, 댓글 수
-                companionText.text = when {
-                    goalInfo.parent != null -> "${goalInfo.parent!!.author.username} 님 외 ${goalInfo.companionNum}명이 함께하는 중"
-                    goalInfo.companionNum != 0 -> "${goalInfo.companionNum}명이 함께하는 중"
-                    else -> "함께 해보세요!"
-                }
-                startDateText.text = when {
-                    goalInfo.startDate != null -> "시작일 ${SimpleDateFormat("dd/MM/yyyy").format(goalInfo.startDate)}"
-                    else -> "시작일 없음"
-                }
-                endDateText.text = when {
-                    goalInfo.endDate != null -> "종료일 ${SimpleDateFormat("dd/MM/yyyy").format(goalInfo.endDate)}"
-                    else -> "종료일 없음"
-                }
-                logNumText.text = goalInfo.logNum.toString()
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        when (holder.itemViewType) {
+            0 -> {
+                with(holder as GoalViewHolder) {
+                    nameText.text = goalInfo.author.username
+                    titleText.text = goalInfo.content
 
-                when (user) {
-                    goalInfo.author.username -> goalBtn.text = "당근먹기"
-                    else -> goalBtn.text = "함께하기"
-                }
+                    // 함께하는 사람, 시작하는 날, 로그 수, 좋아요 수, 댓글 수
+                    companionText.text = when {
+                        goalInfo.parent != null -> "${goalInfo.parent!!.author.username} 님 외 ${goalInfo.companionNum}명이 함께하는 중"
+                        goalInfo.companionNum != 0 -> "${goalInfo.companionNum}명이 함께하는 중"
+                        else -> "함께 해보세요!"
+                    }
+                    startDateText.text = when {
+                        goalInfo.startDate != null -> "시작일 ${SimpleDateFormat("dd/MM/yyyy").format(goalInfo.startDate)}"
+                        else -> "시작일 없음"
+                    }
+                    endDateText.text = when {
+                        goalInfo.endDate != null -> "종료일 ${SimpleDateFormat("dd/MM/yyyy").format(goalInfo.endDate)}"
+                        else -> "종료일 없음"
+                    }
+                    logNumText.text = goalInfo.logNum.toString()
 
-                likeNumberText.text = goalInfo.likeNum.toString()
-                commentNumberText.text = goalInfo.commentNum.toString()
+                    when (user) {
+                        goalInfo.author.username -> goalBtn.text = "당근먹기"
+                        else -> goalBtn.text = "함께하기"
+                    }
+                    likeNumberText.text = goalInfo.likeNum.toString()
+                    commentNumberText.text = goalInfo.commentNum.toString()
 
-                // 댓글 2개
-                if (goalInfo.comments.content.size > 0) {
-                    commentGoalLayout1.findViewById<TextView>(R.id.commentWriterText).text = goalInfo.comments.content[0].author.username
-                    commentGoalLayout1.findViewById<TextView>(R.id.commentText).text = goalInfo.comments.content[0].content
-                    commentGoalLayout1.visibility = View.VISIBLE
-                } else {
-                    commentGoalLayout1.visibility = View.GONE
-                }
+                    likeNumberText.setOnClickListener(IntentListener.toGoalLikeListListener(goalInfo.id))
 
-                if (goalInfo.comments.content.size > 1) {
-                    commentGoalLayout2.findViewById<TextView>(R.id.commentWriterText).text = goalInfo.comments.content[1].author.username
-                    commentGoalLayout2.findViewById<TextView>(R.id.commentText).text = goalInfo.comments.content[1].content
-                    commentGoalLayout2.visibility = View.VISIBLE
-                } else {
-                    commentGoalLayout2.visibility = View.GONE
-                }
+                    when {
+                        goalInfo.parent != null -> companionText.setOnClickListener(IntentListener.toGoalListener(goalInfo.parent!!.id))
+                        else -> companionText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
+                    }
 
-                val isMy = user == goalInfo.author.username
-                nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalInfo.author.username))
-                titleText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
-                logNum.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
-                commentNumberText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
-                commentGoalLayout1.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
-                commentGoalLayout2.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
-                commentGoalLayout1.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalInfo.author.username))
-                commentGoalLayout2.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalInfo.author.username))
-                likeNumberText.setOnClickListener(IntentListener.toGoalLikeListListener(goalInfo.id))
+                    when (user) {
+                        // TODO: 이미 companion이면 버튼 안보이게
+                        goalInfo.author.username -> goalBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalInfo.id, goalInfo.content))
+                        else -> goalBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id, goalInfo.content))
+                    }
 
-                when {
-                    goalInfo.parent != null -> companionText.setOnClickListener(IntentListener.toGoalListener(goalInfo.parent!!.id))
-                    else -> companionText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
-                }
+                    val isMy = user == goalInfo.author.username
+                    nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalInfo.author.username))
 
-                // 함께하기 /
-                when (user) {
-                    // TODO: 이미 companion이면 버튼 안보이게
-                    goalInfo.author.username -> goalBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalInfo.id, goalInfo.content))
-                    else -> goalBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id, goalInfo.content))
-                }
-
-                if(goalInfo.liked) {
-                    likeButton.background = if(Build.VERSION.SDK_INT >= 21)
-                        likeButton.context.getDrawable(R.drawable.thumb_active)
+                    // toggleLike
+                    if (goalInfo.liked)
+                        likeButton.background = if (Build.VERSION.SDK_INT >= 21)
+                            likeButton.context.getDrawable(R.drawable.thumb_active)
+                        else
+                            likeButton.context.resources.getDrawable(R.drawable.thumb_active)
                     else
-                        likeButton.context.resources.getDrawable(R.drawable.thumb_active)
+                        likeButton.background = if (Build.VERSION.SDK_INT >= 21)
+                            likeButton.context.getDrawable(R.drawable.thumb)
+                        else
+                            likeButton.context.resources.getDrawable(R.drawable.thumb)
+                    // toggle like done
+
+                    // post like
+                    likeButton.setOnClickListener {
+                        goalInfo.liked = !goalInfo.liked
+                        toggleLikeForGoal(goalInfo.id, goalInfo.liked)
+                    }
+                    toComment.setOnClickListener(IntentListener.toGoalCommentsListener(goalInfo.id))
                 }
-                // post like
-                likeButton.setOnClickListener {
-                    goalInfo.liked = !goalInfo.liked
-                    toggleLikeForGoal(goalInfo.id, goalInfo.liked)
+            }
+            1 -> {
+                with(holder as GoalLogViewHolder) {
+                    val goalLogInfo = goalLogInfos[position-1]
+                    nameText.text = goalLogInfo.goal.author.username
+                    val goalTitle = goalLogInfo.goal.content + Fun.dateDistance(goalLogInfo)
+                    titleText.text = goalTitle
+
+                    val companion = when {
+                        goalLogInfo.goal.parent != null -> "${goalLogInfo.goal.parent!!.author.username} 님 외 ${goalLogInfo.companionNum}명이 함께하는 중"
+                        goalLogInfo.companionNum != 0 -> "${goalLogInfo.companionNum}명이 함께하는 중"
+                        else -> "함께 해보세요!"
+                    }
+
+                    companionText.text = companion
+                    text.text = goalLogInfo.content
+
+                    likeNumberText.text = goalLogInfo.likeNum.toString()
+                    commentNumberText.text = goalLogInfo.commentNum.toString()
+
+                    if (goalLogInfo.comments.content.size > 0) {
+                        commentGoalLogLayout1.findViewById<TextView>(R.id.commentWriterText).text = goalLogInfo.comments.content[0].author.username
+                        commentGoalLogLayout1.findViewById<TextView>(R.id.commentText).text = goalLogInfo.comments.content[0].content
+                        commentGoalLogLayout1.visibility = View.VISIBLE
+                    } else {
+                        commentGoalLogLayout1.visibility = View.GONE
+                    }
+
+                    if (goalLogInfo.comments.content.size > 1) {
+                        commentGoalLogLayout2.findViewById<TextView>(R.id.commentWriterText).text = goalLogInfo.comments.content[1].author.username
+                        commentGoalLogLayout2.findViewById<TextView>(R.id.commentText).text = goalLogInfo.comments.content[1].content
+                        commentGoalLogLayout2.visibility = View.VISIBLE
+                    } else {
+                        commentGoalLogLayout2.visibility = View.GONE
+                    }
+
+                    val isMy = user == goalLogInfo.author.username
+                    nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
+                    titleText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.id))
+                    textLayout.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
+                    commentGoalLogLayout1.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
+                    commentGoalLogLayout2.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
+                    commentGoalLogLayout1.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
+                    commentGoalLogLayout2.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
+                    commentNumberText.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
+                    likeNumberText.setOnClickListener(IntentListener.toGoalLogLikeListListener(goalLogInfo.id))
+
+                    when {
+                        goalLogInfo.goal.parent != null -> companionText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.parent!!.id))
+                        else -> companionText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.id))
+                    }
+
+                    if (goalLogInfo.liked) {
+                        likeButton.background = if(Build.VERSION.SDK_INT >= 21)
+                            likeButton.context.getDrawable(R.drawable.thumb_active)
+                        else
+                            likeButton.context.resources.getDrawable(R.drawable.thumb)
+                    }
+
+                    // post like
+                    likeButton.setOnClickListener {
+                        goalLogInfo.liked = !goalLogInfo.liked
+                        toggleLikeForGoalLog(goalLogInfo.id, goalLogInfo.liked)
+                    }
+
+                    // post comment
+                    commentGoalLogWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
+                        val content = commentGoalLogWriteLayout.findViewById<EditText>(R.id.postingCommentText).text.toString()
+                        // TODO: 내용이 없을 경우 포스트 안되도록
+                        val postedComment = CommentFactory.Post(content)
+                        sendCommentForGoalLog(goalLogInfo.id, postedComment)
+                    }
+
+
+                    Log.d("ViewHolder", goalLogInfo.toString())
                 }
-
-                commentGoalWriteLayout.findViewById<EditText>(R.id.commentText).text.clear()
-
-                // post comment
-                commentGoalWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
-                    val content = commentGoalWriteLayout.findViewById<EditText>(R.id.commentText).text.toString()
-                    // TODO: 내용이 없을 경우 포스트 안되도록
-                    val postedComment = CommentFactory.Post(content)
-
-                    sendCommentForGoal(goalInfo.id, postedComment)
-                }
-
-                Log.d("ViewHolder", goalInfo.toString())
             }
         }
     }
 
-    override fun getItemCount(): Int = goalInfos.size
+    override fun getItemCount(): Int = goalLogInfos.size + 1
 
-    fun appendGoalInfos(moreGoalInfos: List<GoalInfo>) {
-        val index = this.goalInfos.size
-        goalInfos.addAll(moreGoalInfos)
-        notifyItemRangeInserted(index, goalInfos.size)
+    fun appendGoalLogInfos(moreGoalLogInfos: List<GoalLogInfo>) {
+        val index = this.goalLogInfos.size
+        goalLogInfos.addAll(moreGoalLogInfos)
+        notifyItemRangeInserted(index, goalLogInfos.size)
     }
 
     fun clear() {
-        val size = this.goalInfos.size
+        val size = this.goalLogInfos.size
         Log.d("ViewHolder", "size is $size in clear")
-        this.goalInfos.clear()
-        //notifyItemRangeRemoved(0, size)
+        this.goalLogInfos.clear()
         notifyDataSetChanged()
     }
 }

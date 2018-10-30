@@ -11,7 +11,5 @@ class GoalListContract {
 
     interface Presenter: BasePresenter {
         fun userGoalInfos(username: String)
-        fun toggleLikeForGoal(id: Long, post: Boolean)
-        fun postCommentForGoal(id: Long, comment: CommentFactory.Post)
     }
 }

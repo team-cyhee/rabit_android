@@ -25,8 +25,6 @@ class WallActivity: AppCompatActivity(), WallContract.View {
     override var presenter : WallContract.Presenter = WallPresenter(this)
     private var mainAdapter: MainViewAdapter? = null
 
-    private val user = App.prefs.user
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wall)
@@ -34,23 +32,14 @@ class WallActivity: AppCompatActivity(), WallContract.View {
         if (intent.hasExtra("username")) {
             val username = intent.getStringExtra("username")
             presenter.wallInfo(username)
-            presenter.userMainInfos(username)
-
-            // TODO: 팔로우 - 팔로우 취소 전환
-            followBtn.setOnClickListener {
-                presenter.postFollow(username)
-            }
-            followingText.setOnClickListener(IntentListener.toFollowingListListener(username))
-            followerText.setOnClickListener(IntentListener.toFollowerListListener(username))
-            goalsText.setOnClickListener(IntentListener.toGoalListListener(username))
+            usernameText.text = username
 
             // swipe refresh
-            swipeRefresh.setOnRefreshListener {
+            wallSwipeRefresh.setOnRefreshListener {
                 Toast.makeText(this@WallActivity, "refreshed!", Toast.LENGTH_SHORT).show()
 
                 mainAdapter?.clear()
                 presenter.wallInfo(username)
-                presenter.userMainInfos(username)
             }
         } else {
             Toast.makeText(this, "전달된 username이 없습니다", Toast.LENGTH_SHORT).show()
@@ -65,46 +54,20 @@ class WallActivity: AppCompatActivity(), WallContract.View {
 
     }
 
-    @SuppressLint("SetTextI18n")
-    override fun showWallInfo(wallInfo: WallInfo) {
-        usernameText.text = wallInfo.username
-        nameText.text = wallInfo.username
-        followingText.text = "${wallInfo.followeeNum} 팔로잉"
-        followerText.text = "${wallInfo.followerNum} 팔로워"
-        if (wallInfo.goalContents.isNotEmpty())
-            goal1Text.text = wallInfo.goalContents[0]
-        if (wallInfo.goalContents.size > 1)
-            goal2Text.text = wallInfo.goalContents[1]
-        if (wallInfo.goalContents.size > 2)
-            goal3Text.text = wallInfo.goalContents[2]
-    }
-
-    override fun showMainInfos(mainInfos : MutableList<MainInfo>) {
+    override fun showMainInfos(mainInfos : MutableList<MainInfo>, wallInfo: WallInfo) {
         if (mainAdapter == null) {
-            mainAdapter = MainViewAdapter(mainInfos,
+            mainAdapter = MainViewAdapter(2, mainInfos, wallInfo,
                     { id, post -> presenter.toggleLikeForGoal(id, post)},
                     { id, post -> presenter.toggleLikeForGoalLog(id, post)},
                     { id, comment: CommentFactory.Post -> presenter.postCommentForGoal(id, comment)},
-                    { id, comment -> presenter.postCommentForGoalLog(id, comment)})
-            oneInfoListLayout.findViewById<RecyclerView>(R.id.listView).addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            oneInfoListLayout.findViewById<RecyclerView>(R.id.listView).adapter = mainAdapter
+                    { id, comment -> presenter.postCommentForGoalLog(id, comment)},
+                    { followee: String -> presenter.postFollow(followee)})
+            wallListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+            wallListView.adapter = mainAdapter
         } else {
             mainAdapter!!.appendMainInfos(mainInfos)
         }
 
-        swipeRefresh?.isRefreshing = false
-    }
-
-    fun toggleLike(on : Boolean) {
-        if(on)
-            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
-                likeButton.context.getDrawable(R.drawable.thumb_active)
-            else
-                likeButton.context.resources.getDrawable(R.drawable.thumb_active)
-        else
-            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
-                likeButton.context.getDrawable(R.drawable.thumb)
-            else
-                likeButton.context.resources.getDrawable(R.drawable.thumb)
+        wallSwipeRefresh?.isRefreshing = false
     }
 }

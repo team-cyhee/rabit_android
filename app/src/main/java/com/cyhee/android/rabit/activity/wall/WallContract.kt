@@ -6,13 +6,12 @@ import com.cyhee.android.rabit.model.*
 
 class WallContract {
     interface View : BaseView<Presenter> {
-        fun showWallInfo(wallInfo: WallInfo)
-        fun showMainInfos(mainInfos: MutableList<MainInfo>)
+        fun showMainInfos(mainInfos: MutableList<MainInfo>, wallInfo: WallInfo)
     }
 
     interface Presenter : BasePresenter {
         fun wallInfo(username: String)
-        fun userMainInfos(username: String)
+        fun userMainInfos(username: String, wallInfo: WallInfo)
         fun postFollow(username: String)
         fun toggleLikeForGoal(id: Long, post: Boolean)
         fun toggleLikeForGoalLog(id: Long, post: Boolean)

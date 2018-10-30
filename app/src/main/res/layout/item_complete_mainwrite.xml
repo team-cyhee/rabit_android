@@ -5,66 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    sl:scale_base_height="140"
+    android:background="@color/basic"
+    sl:scale_base_height="45"
     sl:scale_base_width="360">
 
-    <LinearLayout
+    <Button
+        android:hint="오늘 하루는 어땠나요?"
+        android:id="@+id/mainWriteBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical"
-        android:background="@drawable/rec_empty"
-        android:paddingBottom="2dp"
-        sl:scale_top="20"
-        sl:scale_height="105"
-        sl:scale_width="300">
-
-        <EditText
-            android:hint="@string/prompt"
-            android:id="@+id/dailyText"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="top"
-            android:padding="3dp"
-            android:background="@drawable/rec_empty" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:orientation="horizontal">
-
-            <Spinner
-                android:id="@+id/goalNameList"
-                android:layout_width="200dp"
-                android:layout_height="30dp" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/galleryBtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="5dp"
-                android:background="@drawable/photo" />
-
-            <Button
-                android:id="@+id/cameraBtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="5dp"
-                android:background="@drawable/camera" />
-
-            <Button
-                android:text="@string/post"
-                android:id="@+id/postBtn"
-                android:layout_width="45dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="2dp"
-                android:background="@drawable/rec_g" />
-        </LinearLayout>
-    </LinearLayout>
+        android:background="@drawable/btn"
+        android:gravity="start"
+        sl:scale_textsize="14"
+        sl:scale_top="10"
+        sl:scale_left="20"
+        sl:scale_height="30"
+        sl:scale_width="320"
+        />
 </com.ssomai.android.scalablelayout.ScalableLayout>
