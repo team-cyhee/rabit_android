@@ -42,11 +42,12 @@ class MainActivity: AppCompatActivity(), MainContract.View {
 
     override fun showMainInfos(mainInfos: MutableList<MainInfo>) {
         if (mainAdapter == null) {
-            mainAdapter = MainViewAdapter(mainInfos,
+            mainAdapter = MainViewAdapter(0, mainInfos, null,
                     { id -> presenter.postLikeForGoal(id)},
                     { id -> presenter.postLikeForGoalLog(id)},
                     { id, comment: CommentFactory.Post -> presenter.postCommentForGoal(id, comment)},
-                    { id, comment -> presenter.postCommentForGoalLog(id, comment)})
+                    { id, comment -> presenter.postCommentForGoalLog(id, comment)},
+                    { followee: String -> })
             mainListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             mainListView.adapter = mainAdapter
         } else {

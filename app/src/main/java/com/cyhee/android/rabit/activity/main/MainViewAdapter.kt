@@ -17,6 +17,8 @@ import com.cyhee.android.rabit.useful.Fun
 import kotlinx.android.synthetic.main.item_complete_maingoal.*
 import kotlinx.android.synthetic.main.item_complete_maingoallog.*
 import kotlinx.android.synthetic.main.item_complete_mainwrite.*
+import kotlinx.android.synthetic.main.item_complete_mywall.*
+import kotlinx.android.synthetic.main.item_complete_wall.*
 import kotlinx.android.synthetic.main.item_part_goalwriter.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
 import kotlinx.android.synthetic.main.item_part_text.*
@@ -25,11 +27,14 @@ import java.text.SimpleDateFormat
 
 
 class MainViewAdapter (
-    private val mainInfos: MutableList<MainInfo>,
-    private val sendLikeForGoal: (Long) -> Unit,
-    private val sendLikeForGoalLog: (Long) -> Unit,
-    private val sendCommentForGoal: (Long, CommentFactory.Post) -> Unit,
-    private val sendCommentForGoalLog: (Long, CommentFactory.Post) -> Unit
+        private val page: Int,
+        private val mainInfos: MutableList<MainInfo>,
+        private val wallInfo: WallInfo?,
+        private val sendLikeForGoal: (Long) -> Unit,
+        private val sendLikeForGoalLog: (Long) -> Unit,
+        private val sendCommentForGoal: (Long, CommentFactory.Post) -> Unit,
+        private val sendCommentForGoalLog: (Long, CommentFactory.Post) -> Unit,
+        private val sendFollow: (String) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
     private val user = App.prefs.user
@@ -47,7 +52,12 @@ class MainViewAdapter (
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return when (viewType) {
-            0 -> MainViewHolderForWrite(parent)
+            0 -> when (page) {
+                0 -> MainViewHolderForWrite(parent)
+                1 -> MyWallViewHolder(parent)
+                2 -> WallViewHolder(parent)
+                else -> throw Exception("올바른 페이지 접근이 아닙니다.")
+            }
             1 -> MainViewHolderForGoal(parent)
             2 -> MainViewHolderForGoalLog(parent)
             else -> throw Exception("goal 또는 goallog만 들어와야함")
@@ -57,9 +67,50 @@ class MainViewAdapter (
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         when (holder.itemViewType) {
-            0 -> {
-                with(holder as MainViewHolderForWrite) {
-                    mainWriteBtn.setOnClickListener(IntentListener.toGoalLogWriteListener())
+            0 -> when (page) {
+                0 -> {
+                    with(holder as MainViewHolderForWrite) {
+                        mainWriteBtn.setOnClickListener(IntentListener.toGoalLogWriteListener())
+                    }
+                }
+                1 -> {
+                    with(holder as MyWallViewHolder) {
+                        myWallEditInfoBtn.setOnClickListener(IntentListener.toInfoEditListener(user))
+                        myWallPostGoalBtn.setOnClickListener(IntentListener.toGoalWriteListener())
+                        myWallPostGoalLogBtn.setOnClickListener(IntentListener.toGoalLogWriteListener())
+                        myWallFollowingText.setOnClickListener(IntentListener.toFollowingListListener(user))
+                        myWallFollowerText.setOnClickListener(IntentListener.toFollowerListListener(user))
+                        myWallGoalsText.setOnClickListener(IntentListener.toGoalListListener(user))
+
+                        myWallNameText.text = wallInfo!!.username
+                        myWallFollowingText.text = "${wallInfo.followeeNum} 팔로잉"
+                        myWallFollowerText.text = "${wallInfo.followerNum} 팔로워"
+                        if (wallInfo.goalContents.isNotEmpty())
+                            myWallGoal1Text.text = wallInfo.goalContents[0]
+                        if (wallInfo.goalContents.size > 1)
+                            myWallGoal2Text.text = wallInfo.goalContents[1]
+                        if (wallInfo.goalContents.size > 2)
+                            myWallGoal3Text.text = wallInfo.goalContents[2]
+                    }
+                }
+                2 -> {
+                    with(holder as WallViewHolder) {
+                        wallFollowingText.setOnClickListener(IntentListener.toFollowingListListener(wallInfo!!.username))
+                        wallFollowerText.setOnClickListener(IntentListener.toFollowerListListener(wallInfo.username))
+                        wallGoalsText.setOnClickListener(IntentListener.toGoalListListener(wallInfo.username))
+                        wallFollowBtn.setOnClickListener {
+                        }
+
+                        wallNameText.text = wallInfo.username
+                        wallFollowingText.text = "${wallInfo.followeeNum} 팔로잉"
+                        wallFollowerText.text = "${wallInfo.followerNum} 팔로워"
+                        if (wallInfo.goalContents.isNotEmpty())
+                            wallGoal1Text.text = wallInfo.goalContents[0]
+                        if (wallInfo.goalContents.size > 1)
+                            wallGoal2Text.text = wallInfo.goalContents[1]
+                        if (wallInfo.goalContents.size > 2)
+                            wallGoal3Text.text = wallInfo.goalContents[2]
+                    }
                 }
             }
             1 -> {

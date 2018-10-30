@@ -5,6 +5,7 @@ import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
 import com.cyhee.android.rabit.client.PostClient
 import com.cyhee.android.rabit.model.CommentFactory
+import com.cyhee.android.rabit.model.WallInfo
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,7 +24,7 @@ class MyWallPresenter(private val view: MyWallActivity) : MyWallContract.Present
                 .subscribe(
                         {
                             Log.d("wallInfo",it.toString())
-                            view.showWallInfo(it)
+                            userMainInfos(username, it)
                         },
                         {
                             if(it is HttpException) {
@@ -40,7 +41,7 @@ class MyWallPresenter(private val view: MyWallActivity) : MyWallContract.Present
                 )
     }
 
-    override fun userMainInfos(username: String) {
+    override fun userMainInfos(username: String, wallInfo: WallInfo) {
         restClient.userMainInfos(username)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -48,7 +49,7 @@ class MyWallPresenter(private val view: MyWallActivity) : MyWallContract.Present
                 .subscribe(
                         {
                             Log.d("mainInfo",it.toString())
-                            view.showMainInfos(it!!.toMutableList())
+                            view.showMainInfos(it!!.toMutableList(), wallInfo)
                         },
                         {
                             if(it is HttpException) {
