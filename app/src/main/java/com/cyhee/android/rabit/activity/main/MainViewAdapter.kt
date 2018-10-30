@@ -99,6 +99,7 @@ class MainViewAdapter (
                         wallFollowerText.setOnClickListener(IntentListener.toFollowerListListener(wallInfo.username))
                         wallGoalsText.setOnClickListener(IntentListener.toGoalListListener(wallInfo.username))
                         wallFollowBtn.setOnClickListener {
+                            sendFollow(user)
                         }
 
                         wallNameText.text = wallInfo.username
@@ -190,11 +191,11 @@ class MainViewAdapter (
                         sendLikeForGoal(goalInfo.id)
                     }
 
-                    commentGoalWriteLayout.findViewById<EditText>(R.id.commentText).text.clear()
+                    commentGoalWriteLayout.findViewById<EditText>(R.id.postingCommentText).text.clear()
 
                     // post comment
                     commentGoalWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
-                        val content = commentGoalWriteLayout.findViewById<EditText>(R.id.commentText).text.toString()
+                        val content = commentGoalWriteLayout.findViewById<EditText>(R.id.postingCommentText).text.toString()
                         // TODO: 내용이 없을 경우 포스트 안되도록
                         val postedComment = CommentFactory.Post(content)
 
@@ -260,11 +261,11 @@ class MainViewAdapter (
                         sendLikeForGoalLog(goalLogInfo.id)
                     }
 
-                    commentGoalLogWriteLayout.findViewById<EditText>(R.id.commentText).text.clear()
+                    commentGoalLogWriteLayout.findViewById<EditText>(R.id.postingCommentText).text.clear()
 
                     // post comment
                     commentGoalLogWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
-                        val content = commentGoalLogWriteLayout.findViewById<EditText>(R.id.commentText).text.toString()
+                        val content = commentGoalLogWriteLayout.findViewById<EditText>(R.id.postingCommentText).text.toString()
                         // TODO: 내용이 없을 경우 포스트 안되도록
                         val postedComment = CommentFactory.Post(content)
 

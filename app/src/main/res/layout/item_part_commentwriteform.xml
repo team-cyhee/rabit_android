@@ -9,17 +9,10 @@
 
     <EditText
         android:hint="응원해주세요! :>"
-        android:id="@+id/postingCommentText"
-        android:layout_width="230dp"
+        android:id="@+id/toComment"
+        android:layout_width="250dp"
         android:layout_height="25dp"
         android:layout_marginStart="10dp"
         android:background="@drawable/btn"
         android:textSize="14sp"/>
-
-    <Button
-        android:id="@+id/postBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:text="@string/post"
-        android:textSize="14sp" />
 </LinearLayout>

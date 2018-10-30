@@ -17,6 +17,7 @@ import com.cyhee.android.rabit.useful.Fun
 import kotlinx.android.synthetic.main.item_complete_fullgoallog.*
 import kotlinx.android.synthetic.main.item_complete_list.*
 import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
+import kotlinx.android.synthetic.main.item_part_commentwriteform.*
 import kotlinx.android.synthetic.main.item_part_goalwriter.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
 import kotlinx.android.synthetic.main.item_part_text.*
@@ -79,22 +80,8 @@ class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
             presenter.postLikeForGoalLog(goalLogInfo.id)
         }
 
-        commentWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
-            val content = commentWriteLayout.findViewById<EditText>(R.id.commentText).text.toString()
-            // TODO: 내용이 없을 경우 포스트 안되도록
-            val postedComment = CommentFactory.Post(content)
-
-            presenter.postCommentForGoalLog(goalLogInfo.id, postedComment)
-        }
-    }
-
-    override fun showComments(comments: MutableList<Comment>) {
-        if (commentAdapter == null) {
-            commentAdapter = CommentViewAdapter(comments)
-            listView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            listView.adapter = commentAdapter
-        } else {
-            commentAdapter!!.appendComments(comments)
+        toComment.setOnClickListener {
+            IntentListener.toGoalLogCommentsListener(goalLogInfo.id)
         }
     }
 }

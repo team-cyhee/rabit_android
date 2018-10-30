@@ -8,7 +8,6 @@ import android.util.Log
 import android.widget.Toast
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
-import com.cyhee.android.rabit.activity.goal.GoalViewAdapter
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_goallist.*
@@ -20,7 +19,7 @@ import com.cyhee.android.rabit.activity.decoration.CardItemDeco
 class GoalListActivity: AppCompatActivity(), GoalListContract.View {
 
     override var presenter : GoalListContract.Presenter = GoalListPresenter(this)
-    private var goalViewAdapter: GoalViewAdapter? = null
+    private var goalListAdapter: GoalListViewAdapter? = null
 
     private val user = App.prefs.user
 
@@ -41,7 +40,7 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
             goalListSwipeRefresh.setOnRefreshListener {
                 Toast.makeText(this@GoalListActivity, "refreshed!", Toast.LENGTH_SHORT).show()
 
-                goalViewAdapter?.clear()
+                goalListAdapter?.clear()
                 presenter.userGoalInfos(username)
             }
         }
@@ -56,12 +55,12 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
     }
 
     override fun showGoals(goalInfos: MutableList<GoalInfo>) {
-        if (goalViewAdapter == null) {
-            goalViewAdapter = GoalViewAdapter(goalInfos)
+        if (goalListAdapter == null) {
+            goalListAdapter = GoalListViewAdapter(goalInfos)
             goalListListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            goalListListView.adapter = goalViewAdapter
+            goalListListView.adapter = goalListAdapter
         } else {
-            goalViewAdapter!!.appendGoalInfos(goalInfos)
+            goalListAdapter!!.appendGoalInfos(goalInfos)
         }
 
         goalListListView.addItemDecoration(CardItemDeco(this))

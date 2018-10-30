@@ -3,6 +3,7 @@ package com.cyhee.android.rabit.listener
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import com.cyhee.android.rabit.activity.comment.CommentsActivity
 import com.cyhee.android.rabit.activity.personlist.followerlist.FollowerListActivity
 import com.cyhee.android.rabit.activity.personlist.followinglist.FollowingListActivity
 import com.cyhee.android.rabit.activity.goal.GoalActivity
@@ -14,6 +15,7 @@ import com.cyhee.android.rabit.activity.personlist.likelist.LikeListActivity
 import com.cyhee.android.rabit.activity.main.MainActivity
 import com.cyhee.android.rabit.activity.mywall.MyWallActivity
 import com.cyhee.android.rabit.activity.wall.WallActivity
+import com.cyhee.android.rabit.model.ContentType
 
 object IntentListener {
     fun toMainListener() = View.OnClickListener {
@@ -52,6 +54,20 @@ object IntentListener {
         val intentToGoalList = Intent(it.context, GoalListActivity:: class.java)
         intentToGoalList.putExtra("username", username)
         it.context.startActivity(intentToGoalList)
+    }
+
+    fun toGoalCommentsListener(id: Long) = View.OnClickListener {
+        val intentToComments = Intent(it.context, CommentsActivity:: class.java)
+        intentToComments.putExtra("id", id)
+        intentToComments.putExtra("type", "goal")
+        it.context.startActivity(intentToComments)
+    }
+
+    fun toGoalLogCommentsListener(id: Long) = View.OnClickListener {
+        val intentToComments = Intent(it.context, CommentsActivity:: class.java)
+        intentToComments.putExtra("id", id)
+        intentToComments.putExtra("type", "goallog")
+        it.context.startActivity(intentToComments)
     }
 
     fun toFollowingListListener(username: String) = View.OnClickListener {
