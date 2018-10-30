@@ -66,7 +66,7 @@ object PostClient {
                 )
     }
 
-    fun postLikeForGoal(id: Long, scopeProvider: AndroidLifecycleScopeProvider) {
+    fun postLikeForGoal(id: Long, scopeProvider: AndroidLifecycleScopeProvider, callback: () -> Unit) {
         restClient.postLikeForGoal(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -80,7 +80,7 @@ object PostClient {
                 )
     }
 
-    fun postLikeForGoalLog(id: Long, scopeProvider: AndroidLifecycleScopeProvider) {
+    fun postLikeForGoalLog(id: Long, scopeProvider: AndroidLifecycleScopeProvider, callback:() -> Unit) {
         restClient.postLikeForGoalLog(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

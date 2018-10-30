@@ -1,5 +1,6 @@
 package com.cyhee.android.rabit.activity.goallog
 
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -75,8 +76,10 @@ class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
         val isMy = user == goalLogInfo.author.username
         nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
 
+        toggleLike(goalLogInfo.liked)
         likeButton.setOnClickListener {
-            presenter.postLikeForGoalLog(goalLogInfo.id)
+            goalLogInfo.liked = !goalLogInfo.liked
+            presenter.toggleLikeForGoalLog(goalLogInfo.id, goalLogInfo.liked)
         }
 
         commentWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
@@ -96,5 +99,18 @@ class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
         } else {
             commentAdapter!!.appendComments(comments)
         }
+    }
+
+    fun toggleLike(on : Boolean) {
+        if(on)
+            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
+                likeButton.context.getDrawable(R.drawable.thumb_active)
+            else
+                likeButton.context.resources.getDrawable(R.drawable.thumb_active)
+        else
+            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
+                likeButton.context.getDrawable(R.drawable.thumb)
+            else
+                likeButton.context.resources.getDrawable(R.drawable.thumb)
     }
 }

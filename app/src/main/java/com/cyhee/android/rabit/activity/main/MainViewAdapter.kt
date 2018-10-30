@@ -1,6 +1,7 @@
 package com.cyhee.android.rabit.activity.main
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
@@ -25,8 +26,8 @@ import java.text.SimpleDateFormat
 
 class MainViewAdapter (
     private val mainInfos: MutableList<MainInfo>,
-    private val sendLikeForGoal: (Long) -> Unit,
-    private val sendLikeForGoalLog: (Long) -> Unit,
+    private val toggleLikeForGoal: (Long, Boolean) -> Unit,
+    private val toggleLikeForGoalLog: (Long, Boolean) -> Unit,
     private val sendCommentForGoal: (Long, CommentFactory.Post) -> Unit,
     private val sendCommentForGoalLog: (Long, CommentFactory.Post) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder>() {
@@ -125,9 +126,16 @@ class MainViewAdapter (
                             else -> goalBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id, goalInfo.content))
                         }
 
+                        if(goalInfo.liked) {
+                            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
+                                likeButton.context.getDrawable(R.drawable.thumb_active)
+                            else
+                                likeButton.context.resources.getDrawable(R.drawable.thumb_active)
+                        }
                         // post like
                         likeButton.setOnClickListener {
-                            sendLikeForGoal(goalInfo.id)
+                            goalInfo.liked = !goalInfo.liked
+                            toggleLikeForGoal(goalInfo.id, goalInfo.liked)
                         }
 
                         commentGoalWriteLayout.findViewById<EditText>(R.id.commentText).text.clear()
@@ -197,9 +205,16 @@ class MainViewAdapter (
                             else -> companionText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.id))
                         }
 
+                        if(goalLogInfo.liked) {
+                            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
+                                likeButton.context.getDrawable(R.drawable.thumb_active)
+                            else
+                                likeButton.context.resources.getDrawable(R.drawable.thumb_active)
+                        }
                         // post like
                         likeButton.setOnClickListener {
-                            sendLikeForGoalLog(goalLogInfo.id)
+                            goalLogInfo.liked = !goalLogInfo.liked
+                            toggleLikeForGoalLog(goalLogInfo.id, goalLogInfo.liked)
                         }
 
                         commentGoalLogWriteLayout.findViewById<EditText>(R.id.commentText).text.clear()
