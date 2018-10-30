@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_goallist.*
 import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 import android.support.v7.widget.GridLayoutManager
 import com.cyhee.android.rabit.activity.decoration.CardItemDeco
-import kotlinx.android.synthetic.main.item_part_reaction.*
 
 
 class GoalListActivity: AppCompatActivity(), GoalListContract.View {
@@ -53,7 +52,6 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
         }
 
         myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
-
 
     }
 

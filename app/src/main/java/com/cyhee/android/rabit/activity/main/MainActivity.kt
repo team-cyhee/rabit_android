@@ -1,6 +1,5 @@
 package com.cyhee.android.rabit.activity.main
 
-import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration

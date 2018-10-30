@@ -7,12 +7,9 @@ import android.util.Log
 import android.widget.Toast
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
-import com.cyhee.android.rabit.activity.comment.CommentViewAdapter
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import com.cyhee.android.rabit.useful.Fun
-import kotlinx.android.synthetic.main.item_complete_fullgoallog.*
-import kotlinx.android.synthetic.main.item_complete_list.*
 import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 import kotlinx.android.synthetic.main.item_part_commentwriteform.*
 import kotlinx.android.synthetic.main.item_part_goalwriter.*

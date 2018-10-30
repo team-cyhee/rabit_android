@@ -1,12 +1,9 @@
 package com.cyhee.android.rabit.activity.mywall
 
-import android.annotation.SuppressLint
-import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Toast
 import com.cyhee.android.rabit.R
@@ -14,12 +11,8 @@ import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.activity.main.MainViewAdapter
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_mywall.*
 import kotlinx.android.synthetic.main.item_complete_hometopbar.*
-import kotlinx.android.synthetic.main.item_complete_list.*
-import kotlinx.android.synthetic.main.item_complete_mywall.*
-import kotlinx.android.synthetic.main.item_part_reaction.*
 
 
 class MyWallActivity: AppCompatActivity(), MyWallContract.View {
