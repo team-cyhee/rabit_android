@@ -9,12 +9,10 @@ import com.cyhee.android.rabit.model.MainInfo
 
 class MainContract {
     interface View: BaseView<Presenter> {
-        fun showGoalNames(goals: MutableList<Goal>?)
         fun showMainInfos(mainInfos: MutableList<MainInfo>)
    }
 
     interface Presenter: BasePresenter {
-        fun goalNames()
         fun mainInfos()
         fun postGoalLog(id: Long, goalLog: GoalLogFactory.Post)
         fun postLikeForGoal(id: Long)

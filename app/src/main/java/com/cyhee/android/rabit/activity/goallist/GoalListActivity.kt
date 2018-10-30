@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Toast
 import com.cyhee.android.rabit.R
@@ -13,8 +12,9 @@ import com.cyhee.android.rabit.activity.goal.GoalViewAdapter
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_goallist.*
-import kotlinx.android.synthetic.main.item_complete_list.*
 import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
+import android.support.v7.widget.GridLayoutManager
+import com.cyhee.android.rabit.activity.decoration.CardItemDeco
 
 
 class GoalListActivity: AppCompatActivity(), GoalListContract.View {
@@ -32,8 +32,13 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
             val username = intent.getStringExtra("username")
             presenter.userGoalInfos(username)
 
+            val gridLayoutManager = GridLayoutManager(this, 2)
+            goalListListView.layoutManager = gridLayoutManager
+
+            topName.text = username
+
             // swipe refresh
-            swipeRefresh.setOnRefreshListener {
+            goalListSwipeRefresh.setOnRefreshListener {
                 Toast.makeText(this@GoalListActivity, "refreshed!", Toast.LENGTH_SHORT).show()
 
                 goalViewAdapter?.clear()
@@ -48,19 +53,19 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
 
         myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
 
-
     }
 
     override fun showGoals(goalInfos: MutableList<GoalInfo>) {
         if (goalViewAdapter == null) {
-            goalViewAdapter = GoalViewAdapter(goalInfos,
-                    { id -> presenter.postLikeForGoal(id)},
-                    { id, comment: CommentFactory.Post -> presenter.postCommentForGoal(id, comment)})
-            goalListLayout.findViewById<RecyclerView>(R.id.listView).addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            goalListLayout.findViewById<RecyclerView>(R.id.listView).adapter = goalViewAdapter
+            goalViewAdapter = GoalViewAdapter(goalInfos)
+            goalListListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+            goalListListView.adapter = goalViewAdapter
         } else {
             goalViewAdapter!!.appendGoalInfos(goalInfos)
         }
+
+        goalListListView.addItemDecoration(CardItemDeco(this))
+        goalListSwipeRefresh?.isRefreshing = false
     }
 
 }

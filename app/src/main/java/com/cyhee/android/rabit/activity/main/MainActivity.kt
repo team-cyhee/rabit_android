@@ -27,17 +27,9 @@ class MainActivity: AppCompatActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        presenter.goalNames()
         presenter.mainInfos()
 
-        // post goalLog
-        mainWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
-            val selectedGoal = mainWriteLayout.findViewById<Spinner>(R.id.goalNameList).selectedItem as Goal
-            val content = mainWriteLayout.findViewById<EditText>(R.id.dailyText).text.toString()
-            val postedGoalLog = GoalLogFactory.Post(content)
-            // TODO: 내용이 없경우 포스트 안되도록
-            presenter.postGoalLog(selectedGoal.id, postedGoalLog)
-        }
+        mainWriteBtn.setOnClickListener(IntentListener.toGoalLogWriteListener())
 
         myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
 
@@ -47,19 +39,6 @@ class MainActivity: AppCompatActivity(), MainContract.View {
 
             mainAdapter?.clear()
             presenter.mainInfos()
-        }
-    }
-
-    override fun showGoalNames(goals: MutableList<Goal>?) {
-        if (goals == null) {
-            //TODO: 작동안함
-            val noGoal: Array<String> = arrayOf("새로운 토끼를 잡아보세요")
-            val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, noGoal)
-            goalNameList.adapter = spinnerAdapter
-            goalNameList.setOnClickListener(IntentListener.toGoalWriteListener())
-        } else {
-            val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, goals)
-            goalNameList.adapter = spinnerAdapter
         }
     }
 

@@ -6,4 +6,4 @@ import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.base.BaseViewHolder
 
 class GoalViewHolder(parent: ViewGroup)
-    : BaseViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_complete_maingoal, parent, false))
+    : BaseViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_complete_cardgoal, parent, false))
