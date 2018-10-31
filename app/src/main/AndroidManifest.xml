@@ -32,6 +32,8 @@
         <activity android:name="com.cyhee.android.rabit.activity.goalwrite.GoalWriteActivity"/>
         <activity android:name="com.cyhee.android.rabit.activity.goallogwrite.GoalLogWriteActivity"/>
         <activity android:name="com.cyhee.android.rabit.activity.comment.CommentsActivity"/>
+        <activity android:name="com.cyhee.android.rabit.activity.comgl.ComGlActivity" />
+        <activity android:name="com.cyhee.android.rabit.activity.search.SearchActivity"/>
     </application>
 
     <!-- permissions -->

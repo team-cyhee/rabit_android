@@ -30,7 +30,9 @@ class MainActivity: AppCompatActivity(), MainContract.View {
         mainListView.layoutManager = linearLayoutManager
 
         myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
-
+        mainRightFloatBtn.setOnClickListener(IntentListener.toGoalLogWriteListener())
+        mainLeftFloatBtn.setOnClickListener(IntentListener.toComGoalLogListener())
+        searchBtn.setOnClickListener(IntentListener.toSearchListener())
         // swipe refresh
         mainSwipeRefresh.setOnRefreshListener {
             Toast.makeText(this@MainActivity, "refreshed!", Toast.LENGTH_SHORT).show()

@@ -1,4 +1,4 @@
-package com.cyhee.android.rabit.activity.goal
+package com.cyhee.android.rabit.activity.comgl
 
 import android.util.Log
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
@@ -6,26 +6,27 @@ import com.cyhee.android.rabit.api.service.ResourceApi
 import com.cyhee.android.rabit.client.PostClient
 import com.cyhee.android.rabit.model.CommentFactory
 import com.cyhee.android.rabit.model.GoalInfo
+import com.cyhee.android.rabit.model.GoalLogFactory
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import retrofit2.HttpException
 
-class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
+class ComGlPresenter(private val view: ComGlActivity) : ComGlContract.Presenter {
 
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    override fun goalInfos(id: Long) {
-        restClient.goalInfo(id)
+    override fun goalsByUser() {
+        restClient.userGoalInfos()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
                 .subscribe(
                         {
-                            Log.d("goal",it.toString())
-                            goalStoreGoalLogs(id, it)
+                            Log.d("goal", it.toString())
+                            comGls(it[0].id, it.toMutableList())
                         },
                         {
                             if(it is HttpException) {
@@ -42,60 +43,38 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
                 )
     }
 
-    override fun goalStoreGoalLogs(id: Long, goalInfo: GoalInfo) {
-        restClient.goalStoreGoalLogs(id)
+    override fun comGls(id: Long, goals: MutableList<GoalInfo>) {
+        restClient.comGoalLogInfos(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
                 .subscribe(
                         {
-                            Log.d("goallogs",it.toString())
-                            view.showGoalLogInfos(goalInfo, it!!.toMutableList())
+                            Log.d("comgl",it.toString())
+                            view.showComGls(goals, it!!.toMutableList())
                         },
                         {
                             if(it is HttpException) {
-                                Log.d("goallogs",it.response().toString())
-                                Log.d("goallogs",it.response().body().toString())
-                                Log.d("goallogs",it.response().body().toString())
-                                Log.d("goallogs",it.response().errorBody().toString())
-                                Log.d("goallogs",it.response().errorBody()?.string())
+                                Log.d("comgl",it.response().toString())
+                                Log.d("comgl",it.response().body().toString())
+                                Log.d("comgl",it.response().body().toString())
+                                Log.d("comgl",it.response().errorBody().toString())
+                                Log.d("comgl",it.response().errorBody()?.string())
                             }
                             else {
-                                Log.d("goallogs",it.toString())
+                                Log.d("comgl",it.toString())
                             }
                         }
                 )
     }
 
-    override fun toggleLikeForGoal(id: Long, post: Boolean) {
-        if (post)
-            PostClient.postLikeForGoal(id, scopeProvider) {
-                //view.toggleLike(true)
-            }
-        else
-            restClient.deleteLikeForGoal(id)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .autoDisposable(scopeProvider)
-                    .subscribe(
-                            {
-                                //view.toggleLike(false)
-                            },
-                            {
-
-                            }
-                    )
-
-    }
-
-    override fun postCommentForGoal(id: Long, comment: CommentFactory.Post) {
-        PostClient.postCommentForGoal(id, comment, scopeProvider)
+    override fun postGoalLog(id: Long, goalLog: GoalLogFactory.Post) {
+        PostClient.postGoalLog(id, goalLog, scopeProvider)
     }
 
     override fun toggleLikeForGoalLog(id: Long, post: Boolean) {
         if (post)
             PostClient.postLikeForGoalLog(id, scopeProvider) {
-                //view.toggleLike(true)
             }
         else
             restClient.deleteLikeForGoalLog(id)
@@ -104,10 +83,8 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
                     .autoDisposable(scopeProvider)
                     .subscribe(
                             {
-                                //view.toggleLike(false)
                             },
                             {
-
                             }
                     )
     }
@@ -115,5 +92,4 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
     override fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post) {
         PostClient.postCommentForGoalLog(id, comment, scopeProvider)
     }
-
 }
