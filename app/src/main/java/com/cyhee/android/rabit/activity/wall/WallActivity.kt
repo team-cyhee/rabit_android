@@ -10,6 +10,7 @@ import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.main.MainViewAdapter
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
+import kotlinx.android.synthetic.main.activity_wall.*
 import kotlinx.android.synthetic.main.item_complete_hometopbar.*
 
 class WallActivity: AppCompatActivity(), WallContract.View {
