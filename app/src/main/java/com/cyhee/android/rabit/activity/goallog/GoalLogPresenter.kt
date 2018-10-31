@@ -39,33 +39,6 @@ class GoalLogPresenter(private val view: GoalLogActivity) : GoalLogContract.Pres
                             }
                         }
                 )
-
-        comments(id)
-    }
-
-    override fun comments(goalLogId: Long) {
-        restClient.goalLogStoreComments(goalLogId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(scopeProvider)
-                .subscribe(
-                        {
-                            Log.d("comments",it.toString())
-                            view.showComments(it.content)
-                        },
-                        {
-                            if(it is HttpException) {
-                                Log.d("comments",it.response().toString())
-                                Log.d("comments",it.response().body().toString())
-                                Log.d("comments",it.response().body().toString())
-                                Log.d("comments",it.response().errorBody().toString())
-                                Log.d("comments",it.response().errorBody()?.string())
-                            }
-                            else {
-                                Log.d("comments",it.toString())
-                            }
-                        }
-                )
     }
 
     override fun toggleLikeForGoalLog(id: Long, post: Boolean) {
@@ -87,8 +60,4 @@ class GoalLogPresenter(private val view: GoalLogActivity) : GoalLogContract.Pres
                             }
                     )
     }
-    override fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post) {
-        PostClient.postCommentForGoalLog(id, comment, scopeProvider)
-    }
-
 }

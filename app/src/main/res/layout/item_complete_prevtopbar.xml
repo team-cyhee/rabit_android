@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="36dp"
-    android:background="@color/lightGray">
+    android:background="@color/darkGray">
 
     <Button
         android:id="@+id/prevBtn"
@@ -24,6 +24,7 @@
 
         <TextView
             android:text="래빗"
+            android:id="@+id/topName"
             android:layout_width="53dp"
             android:layout_height="36dp"
             android:textColor="@color/black"

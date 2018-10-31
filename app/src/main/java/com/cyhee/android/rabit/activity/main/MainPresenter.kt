@@ -17,31 +17,6 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    override fun goalNames() {
-        restClient.goalsByUser()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(scopeProvider)
-                .subscribe(
-                        {
-                            Log.d("goal", it.toString())
-                            view.showGoalNames(it.toMutableList())
-                        },
-                        {
-                            if(it is HttpException) {
-                                Log.d("goal",it.response().toString())
-                                Log.d("goal",it.response().body().toString())
-                                Log.d("goal",it.response().body().toString())
-                                Log.d("goal",it.response().errorBody().toString())
-                                Log.d("goal",it.response().errorBody()?.string())
-                            }
-                            else {
-                                Log.d("goal",it.toString())
-                            }
-                        }
-                )
-    }
-
     override fun mainInfos() {
         restClient.mainInfos()
                 .subscribeOn(Schedulers.io())
@@ -74,7 +49,7 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
     override fun toggleLikeForGoal(id: Long, post: Boolean) {
         if(post)
             PostClient.postLikeForGoal(id, scopeProvider) {
-                view.toggleLike(true)
+                //view.toggleLike(true)
             }
         else
             restClient.deleteLikeForGoal(id)
@@ -83,7 +58,7 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
                     .autoDisposable(scopeProvider)
                     .subscribe(
                             {
-                                view.toggleLike(false)
+                                //view.toggleLike(false)
                             },
                             {
 
@@ -95,7 +70,7 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
     override fun toggleLikeForGoalLog(id: Long, post: Boolean) {
         if(post)
             PostClient.postLikeForGoalLog(id, scopeProvider) {
-                view.toggleLike(true)
+                //view.toggleLike(true)
             }
         else
             restClient.deleteLikeForGoalLog(id)
@@ -104,7 +79,7 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
                     .autoDisposable(scopeProvider)
                     .subscribe(
                             {
-                                view.toggleLike(false)
+                                //view.toggleLike(false)
                             },
                             {
 

@@ -5,24 +5,22 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Toast
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
-import com.cyhee.android.rabit.activity.goal.GoalViewAdapter
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_goallist.*
-import kotlinx.android.synthetic.main.item_complete_list.*
 import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
-import kotlinx.android.synthetic.main.item_part_reaction.*
+import android.support.v7.widget.GridLayoutManager
+import com.cyhee.android.rabit.activity.decoration.CardItemDeco
 
 
 class GoalListActivity: AppCompatActivity(), GoalListContract.View {
 
     override var presenter : GoalListContract.Presenter = GoalListPresenter(this)
-    private var goalViewAdapter: GoalViewAdapter? = null
+    private var goalListAdapter: GoalListViewAdapter? = null
 
     private val user = App.prefs.user
 
@@ -34,11 +32,16 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
             val username = intent.getStringExtra("username")
             presenter.userGoalInfos(username)
 
+            val gridLayoutManager = GridLayoutManager(this, 2)
+            goalListListView.layoutManager = gridLayoutManager
+
+            topName.text = username
+
             // swipe refresh
-            swipeRefresh.setOnRefreshListener {
+            goalListSwipeRefresh.setOnRefreshListener {
                 Toast.makeText(this@GoalListActivity, "refreshed!", Toast.LENGTH_SHORT).show()
 
-                goalViewAdapter?.clear()
+                goalListAdapter?.clear()
                 presenter.userGoalInfos(username)
             }
         }
@@ -50,31 +53,19 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
 
         myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
 
-
     }
 
     override fun showGoals(goalInfos: MutableList<GoalInfo>) {
-        if (goalViewAdapter == null) {
-            goalViewAdapter = GoalViewAdapter(goalInfos,
-                    { id, post -> presenter.toggleLikeForGoal(id, post)},
-                    { id, comment: CommentFactory.Post -> presenter.postCommentForGoal(id, comment)})
-            goalListLayout.findViewById<RecyclerView>(R.id.listView).addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            goalListLayout.findViewById<RecyclerView>(R.id.listView).adapter = goalViewAdapter
+        if (goalListAdapter == null) {
+            goalListAdapter = GoalListViewAdapter(goalInfos)
+            goalListListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+            goalListListView.adapter = goalListAdapter
         } else {
-            goalViewAdapter!!.appendGoalInfos(goalInfos)
+            goalListAdapter!!.appendGoalInfos(goalInfos)
         }
+
+        goalListListView.addItemDecoration(CardItemDeco(this))
+        goalListSwipeRefresh?.isRefreshing = false
     }
 
-    fun toggleLike(on : Boolean) {
-        if(on)
-            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
-                likeButton.context.getDrawable(R.drawable.thumb_active)
-            else
-                likeButton.context.resources.getDrawable(R.drawable.thumb_active)
-        else
-            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
-                likeButton.context.getDrawable(R.drawable.thumb)
-            else
-                likeButton.context.resources.getDrawable(R.drawable.thumb)
-    }
 }
