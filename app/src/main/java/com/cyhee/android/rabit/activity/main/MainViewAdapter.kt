@@ -197,6 +197,13 @@ class MainViewAdapter (
                     likeButton.setOnClickListener {
                         goalInfo.liked = !goalInfo.liked
                         toggleLikeForGoal(goalInfo.id, goalInfo.liked)
+
+                        if (goalInfo.liked) {
+                            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
+                                likeButton.context.getDrawable(R.drawable.thumb_active)
+                            else
+                                likeButton.context.resources.getDrawable(R.drawable.thumb)
+                        }
                     }
 
                     commentGoalWriteLayout.findViewById<EditText>(R.id.postingCommentText).text.clear()
@@ -274,6 +281,13 @@ class MainViewAdapter (
                     likeButton.setOnClickListener {
                         goalLogInfo.liked = !goalLogInfo.liked
                         toggleLikeForGoalLog(goalLogInfo.id, goalLogInfo.liked)
+
+                        if (goalLogInfo.liked) {
+                            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
+                                likeButton.context.getDrawable(R.drawable.thumb_active)
+                            else
+                                likeButton.context.resources.getDrawable(R.drawable.thumb)
+                        }
                     }
 
                     commentGoalLogWriteLayout.findViewById<EditText>(R.id.postingCommentText).text.clear()
@@ -294,7 +308,7 @@ class MainViewAdapter (
         }
     }
 
-    override fun getItemCount(): Int = mainInfos.size
+    override fun getItemCount(): Int = mainInfos.size + 1
 
     fun appendMainInfos(moreMainInfos: List<MainInfo>) {
         val index = this.mainInfos.size

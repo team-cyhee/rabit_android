@@ -93,7 +93,7 @@ class GoalViewAdapter (
                     val isMy = user == goalInfo.author.username
                     nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalInfo.author.username))
 
-                    // toggleLike
+                    // like
                     if (goalInfo.liked)
                         likeButton.background = if (Build.VERSION.SDK_INT >= 21)
                             likeButton.context.getDrawable(R.drawable.thumb_active)
@@ -104,12 +104,22 @@ class GoalViewAdapter (
                             likeButton.context.getDrawable(R.drawable.thumb)
                         else
                             likeButton.context.resources.getDrawable(R.drawable.thumb)
-                    // toggle like done
 
                     // post like
                     likeButton.setOnClickListener {
                         goalInfo.liked = !goalInfo.liked
                         toggleLikeForGoal(goalInfo.id, goalInfo.liked)
+
+                        if (goalInfo.liked)
+                            likeButton.background = if (Build.VERSION.SDK_INT >= 21)
+                                likeButton.context.getDrawable(R.drawable.thumb_active)
+                            else
+                                likeButton.context.resources.getDrawable(R.drawable.thumb_active)
+                        else
+                            likeButton.background = if (Build.VERSION.SDK_INT >= 21)
+                                likeButton.context.getDrawable(R.drawable.thumb)
+                            else
+                                likeButton.context.resources.getDrawable(R.drawable.thumb)
                     }
                     toComment.setOnClickListener(IntentListener.toGoalCommentsListener(goalInfo.id))
                 }
@@ -166,7 +176,7 @@ class GoalViewAdapter (
                     }
 
                     if (goalLogInfo.liked) {
-                        likeButton.background = if(Build.VERSION.SDK_INT >= 21)
+                        likeButton.background = if (Build.VERSION.SDK_INT >= 21)
                             likeButton.context.getDrawable(R.drawable.thumb_active)
                         else
                             likeButton.context.resources.getDrawable(R.drawable.thumb)
@@ -176,6 +186,13 @@ class GoalViewAdapter (
                     likeButton.setOnClickListener {
                         goalLogInfo.liked = !goalLogInfo.liked
                         toggleLikeForGoalLog(goalLogInfo.id, goalLogInfo.liked)
+
+                        if (goalLogInfo.liked) {
+                            likeButton.background = if (Build.VERSION.SDK_INT >= 21)
+                                likeButton.context.getDrawable(R.drawable.thumb_active)
+                            else
+                                likeButton.context.resources.getDrawable(R.drawable.thumb)
+                        }
                     }
 
                     // post comment

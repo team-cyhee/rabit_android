@@ -30,6 +30,9 @@ interface ResourceApi {
     @GET("/rest/v1/goals/info/user/{username}")
     fun userGoalInfos(@Path("username") username: String) : Single<List<GoalInfo>>
 
+    @GET("/rest/v1/goals/info/user")
+    fun userGoalInfos() : Single<List<GoalInfo>>
+
     @GET("/rest/v1/goals/info/{id}")
     fun goalInfo(@Path("id") id: Long) : Single<GoalInfo>
 
@@ -48,6 +51,9 @@ interface ResourceApi {
     @GET("/rest/v1/goallogs/info/{id}")
     fun goalLogInfo(@Path("id") id: Long) : Single<GoalLogInfo>
 
+    @GET("/rest/v1/goallogs/info/com/{id}")
+    fun comGoalLogInfos(@Path("id") id: Long) : Single<List<GoalLogInfo>>
+
     @GET("/rest/v1/maininfos")
     fun mainInfos() : Single<List<MainInfo>?>
 
@@ -62,6 +68,15 @@ interface ResourceApi {
 
     @GET("/rest/v1/users/{username}/followers")
     fun followers(@Path("username") username: String) : Single<Page<User>>
+
+    @GET("/rest/v1/users/search")
+    fun searchUsers(@Query("keyword") keyword: String) : Single<Page<User>>
+
+    @GET("/rest/v1/goals/search")
+    fun searchGoals(@Query("keyword") keyword: String) : Single<Page<Goal>>
+
+    @GET("/rest/v1/goallogs/search")
+    fun searchGoalLogs(@Query("keyword") keyword: String) : Single<Page<GoalLog>>
 
     @POST("/rest/v1/goals")
     fun postGoal(@Body goal: GoalFactory.Post): Single<Page<Goal>>

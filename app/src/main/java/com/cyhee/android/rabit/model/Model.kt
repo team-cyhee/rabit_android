@@ -110,7 +110,11 @@ data class GoalInfo (
     override var lastUpdated: Date,
     override var liked: Boolean,
     override var type: ContentType = ContentType.GOAL
-) : MainInfo()
+) : MainInfo() {
+    override fun toString(): String {
+        return this.content
+    }
+}
 
 data class GoalLogInfo (
     var id: Long,
@@ -133,4 +137,11 @@ data class WallInfo (
     var followerNum: Int,
     var followeeNum: Int,
     var goalContents: List<String>
+)
+
+data class SearchForm (
+    var id: Long,
+    var type: ContentType,
+    var user: User,
+    var content: String?
 )
