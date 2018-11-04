@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="94dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/logo_w"
+                android:src="@drawable/logo"
                 sl:scale_top="40"
                 sl:scale_height="75"
                 sl:scale_width="75"/>

@@ -20,7 +20,7 @@
         <ImageView
             android:layout_width="35dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/logo_w"/>
+            android:src="@drawable/logo"/>
 
         <TextView
             android:text="래빗"

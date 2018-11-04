@@ -38,6 +38,7 @@ object IntentListener {
     }
 
     fun toWhichWallListListener(isMy: Boolean, username: String)  = View.OnClickListener {
+        println("----$isMy---$username")
         val intentToWhichWall = when (isMy) {
             true -> Intent(it.context, MyWallActivity:: class.java)
             false -> Intent(it.context, WallActivity:: class.java)

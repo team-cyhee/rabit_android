@@ -24,15 +24,14 @@ class SearchViewAdapter (
             with(holder) {
                 nameText.text = result.content
                 Log.d("ViewHolder", result.toString())
-                // TODO: intent안됨
-                nameText.setOnClickListener{
+                nameText.setOnClickListener(
                     when (result.type) {
                         ContentType.USER -> IntentListener.toWhichWallListListener(user == result.user.username, result.user.username)
                         ContentType.GOAL -> IntentListener.toGoalListener(result.id)
                         ContentType.GOALLOG -> IntentListener.toGoalLogListener(result.id)
                         else -> throw Exception("잘못된 타입의 검색 결과입니다.")
                     }
-                }
+                )
             }
         }
     }
