@@ -15,32 +15,7 @@ class CompanionListPresenter(private val view: CompanionListActivity) : Companio
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
     override fun companionsForGoal(id: Long) {
-        restClient.goalStoreLikes(id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(scopeProvider)
-                .subscribe(
-                        {
-                            Log.d("companions",it.toString())
-                            view.showCompanions(it.content.toMutableList())
-                        },
-                        {
-                            if(it is HttpException) {
-                                Log.d("companions",it.response().toString())
-                                Log.d("companions",it.response().body().toString())
-                                Log.d("companions",it.response().body().toString())
-                                Log.d("companions",it.response().errorBody().toString())
-                                Log.d("companions",it.response().errorBody()?.string())
-                            }
-                            else {
-                                Log.d("companions",it.toString())
-                            }
-                        }
-                )
-    }
-
-    override fun companionsForGoalLog(id: Long) {
-        restClient.goalLogStoreLikes(id)
+        restClient.goalCompanions(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)

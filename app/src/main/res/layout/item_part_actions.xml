@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="35dp"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal"
+    android:layout_gravity="center_horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@drawable/rect_sq"
+        android:orientation="horizontal"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_profile" />
+
+
+        <Button
+            android:id="@+id/likeBtn"
+            android:layout_width="62dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:text="응원해"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@drawable/rect_sq"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_profile"/>
+
+        <Button
+            android:id="@+id/coBtn"
+            android:layout_width="72dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:text="함께하기"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@drawable/rect_sq"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_profile"/>
+
+        <Button
+            android:id="@+id/cmtPostBtn"
+            android:layout_width="68dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:text="댓글달기"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</LinearLayout>

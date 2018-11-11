@@ -11,7 +11,7 @@ import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import com.cyhee.android.rabit.useful.Fun
 import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
-import kotlinx.android.synthetic.main.item_part_commentwriteform.*
+import kotlinx.android.synthetic.main.item_part_actions.*
 import kotlinx.android.synthetic.main.item_part_goalwriter.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
 import kotlinx.android.synthetic.main.item_part_text.*
@@ -49,47 +49,40 @@ class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
         val goalTitle = goalLogInfo.goal.content + Fun.dateDistance(goalLogInfo)
         titleText.text = goalTitle
 
-        val companion = when {
-            goalLogInfo.goal.parent != null -> "${goalLogInfo.goal.parent!!.author.username} 님 외 ${goalLogInfo.companionNum}명이 함께하는 중"
-            goalLogInfo.companionNum != 0 -> "${goalLogInfo.companionNum}명이 함께하는 중"
-            else -> "함께 해보세요!"
-        }
-
-        companionText.text = companion
+        comNumberText.text = goalLogInfo.companionNum.toString()
         likeNumberText.text = goalLogInfo.likeNum.toString()
         commentNumberText.text = goalLogInfo.commentNum.toString()
 
         text.text = goalLogInfo.content
 
-        when {
-            goalLogInfo.goal.parent != null -> companionText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.parent!!.id))
-            else -> companionText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.id))
-        }
+        comNumberText.setOnClickListener(IntentListener.toCompanionListListener(goalLogInfo.goal.id))
 
         val isMy = user == goalLogInfo.author.username
         nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
 
         toggleLike(goalLogInfo.liked)
-        likeButton.setOnClickListener {
+        likeBtn.setOnClickListener {
             goalLogInfo.liked = !goalLogInfo.liked
             presenter.toggleLikeForGoalLog(goalLogInfo.id, goalLogInfo.liked)
         }
-
-        toComment.setOnClickListener {
-            IntentListener.toGoalLogCommentsListener(goalLogInfo.id)
+        cmtPostBtn.setOnClickListener(IntentListener.toGoalLogCommentsListener(goalLogInfo.id))
+        when (user) {
+            // TODO: 이미 companion이면 버튼 안보이게
+            goalLogInfo.author.username -> coBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalLogInfo.goal.id, goalLogInfo.goal.content))
+            else -> coBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalLogInfo.goal.id, goalLogInfo.goal.content))
         }
     }
 
     fun toggleLike(on : Boolean) {
         if(on)
             likeButton.background = if(Build.VERSION.SDK_INT >= 21)
-                likeButton.context.getDrawable(R.drawable.thumb_active)
+                likeButton.context.getDrawable(R.drawable.ic_heart_black)
             else
-                likeButton.context.resources.getDrawable(R.drawable.thumb_active)
+                likeButton.context.resources.getDrawable(R.drawable.ic_heart_black)
         else
             likeButton.background = if(Build.VERSION.SDK_INT >= 21)
-                likeButton.context.getDrawable(R.drawable.thumb)
+                likeButton.context.getDrawable(R.drawable.ic_heart_outline)
             else
-                likeButton.context.resources.getDrawable(R.drawable.thumb)
+                likeButton.context.resources.getDrawable(R.drawable.ic_heart_outline)
     }
 }

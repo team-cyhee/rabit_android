@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
     android:orientation="horizontal"
+    android:background="@color/lightGray"
     android:layout_gravity="center_horizontal">
 
     <EditText
-        android:hint="응원해주세요! :>"
+        android:hint="   응원해주세요! :>"
         android:id="@+id/postingCommentText"
-        android:layout_width="230dp"
-        android:layout_height="25dp"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
         android:layout_marginStart="10dp"
-        android:background="@drawable/btn"
+        android:background="@drawable/rect_sq"
         android:textSize="14sp"/>
 
     <Button
         android:id="@+id/postBtn"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:text="@string/post"
+        android:text="작성"
         android:textSize="14sp" />
 </LinearLayout>

@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ssomai.android.scalablelayout.ScalableLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:sl="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:background="@color/basic"
-    sl:scale_base_height="45"
-    sl:scale_base_width="360">
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
+    android:paddingTop="12dp"
+    android:background="@color/basic">
 
     <Button
-        android:hint="오늘 하루는 어땠나요?"
         android:id="@+id/mainWriteBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn"
-        android:gravity="start"
-        sl:scale_textsize="14"
-        sl:scale_top="10"
-        sl:scale_left="20"
-        sl:scale_height="30"
-        sl:scale_width="320"
-        />
-</com.ssomai.android.scalablelayout.ScalableLayout>
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/rect_sq"
+        android:gravity="center_vertical"
+        android:hint="    오늘 하루는 어땠나요?" />
+</LinearLayout>

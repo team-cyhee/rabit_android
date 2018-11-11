@@ -140,7 +140,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn"
-        android:gravity="left"
+        android:gravity="center_vertical"
         sl:scale_textsize="14"
         sl:scale_top="180"
         sl:scale_left="20"

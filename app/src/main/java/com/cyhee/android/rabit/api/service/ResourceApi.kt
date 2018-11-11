@@ -27,6 +27,9 @@ interface ResourceApi {
     @GET("/rest/v1/goals/{id}/likes")
     fun goalStoreLikes(@Path("id") id: Long) : Single<Page<User>>
 
+    @GET("/rest/v1/goals/{id}/companions")
+    fun goalCompanions(@Path("id") id: Long) : Single<Page<User>>
+
     @GET("/rest/v1/goals/info/user/{username}")
     fun userGoalInfos(@Path("username") username: String) : Single<List<GoalInfo>>
 

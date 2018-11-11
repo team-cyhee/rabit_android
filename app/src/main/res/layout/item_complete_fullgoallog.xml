@@ -21,6 +21,6 @@
         layout="@layout/item_part_reaction"/>
 
     <include
-        android:id="@+id/commentWriteFormLayout"
-        layout="@layout/item_part_commentwriteform"/>
+        android:id="@+id/commentWriteLayout"
+        layout="@layout/item_part_actions"/>
 </LinearLayout>
