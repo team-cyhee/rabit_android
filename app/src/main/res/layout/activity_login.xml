@@ -99,7 +99,8 @@
                 sl:scale_top="170"
                 sl:scale_width="250" />
 
-            <Button
+            <!-- @See https://stackoverflow.com/questions/16314651/customize-android-facebook-login-button -->
+            <com.facebook.login.widget.LoginButton
                 android:id="@+id/facebookLoginBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

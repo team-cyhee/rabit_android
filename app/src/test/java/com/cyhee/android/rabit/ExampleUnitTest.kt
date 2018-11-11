@@ -15,11 +15,19 @@ import java.util.*
 class ExampleUnitTest {
     @Test
     fun loginTest() {
-       /* val restClient: AuthApi = AuthApiAdapter.retrofit(AuthApi::class.java)
-        val tokenRequest = restClient.token("user1", "user1")
-        val tokenResponse = tokenRequest.execute()
-        assert(tokenResponse.isSuccessful)
-        print(tokenResponse.body())*/
+        val restClient: AuthApi = AuthApiAdapter.retrofit(AuthApi::class.java)
+        restClient.tokenByFacebook("Bearer EAAEONxzmYMEBAPdmgpAnAqDJ2YqOc8MQznaE8Nw02DgBuN2f9iTfSgXUPXOlC8Q8bIw9Bx4Xr3vnf7rP7rdlx1KPLNWCZC03jtMxvQ3mFEGuWAEt9Bm5CHOgiIdmfN7jusXZCslncW1iQROsTGZBg4HftZCtyPv8SP7FU7rW5HLKYZAZCt5HLC7pttOYlqBAUnFFnYwZALqYAZDZD")
+                .subscribe(
+                        {
+                            print("hi")
+                            print(it)
+                        },
+                        {
+                            print("Bye")
+                        }
+                )
+
+        Thread.sleep(1000)
     }
 
     @Test

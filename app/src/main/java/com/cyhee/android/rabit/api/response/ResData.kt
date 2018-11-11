@@ -12,3 +12,13 @@ data class TokenData (
     val user: String,
     val jti: String
 )
+
+data class TokenVerified (
+    val userName: String,
+    val scope: List<String> = ArrayList(),
+    val active: Boolean,
+    val exp: Long,
+    val user: String,
+    val jti: String,
+    val clientId: String
+)

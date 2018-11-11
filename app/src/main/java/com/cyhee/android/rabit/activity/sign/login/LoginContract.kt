@@ -12,5 +12,7 @@ interface LoginContract {
 
     interface Presenter : BasePresenter {
         fun login(username: String, password: String)
+        fun loginByFacebook(token: String)
+        fun loginByGoogle(token: String)
     }
 }

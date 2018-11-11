@@ -16,6 +16,7 @@ object RabitGson {
                 .registerTypeAdapter(Date::class.java, DateDeserializer)
                 .registerTypeAdapter(Date::class.java, DateSerializer)
                 .registerTypeAdapter(MainInfo::class.java, MainInfoDeserializer)
+                .setLenient()
                 .create()
     }
 }

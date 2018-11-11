@@ -14,4 +14,9 @@
     <string name="prompt">오늘 하루는 어땠나요?</string>
     <string name="participants">PARTICIPANTS</string>
     <string name="username">USERNAME</string>
+    <string name="facebook_app_id">297104847560897</string>
+    <string name="fb_login_protocol_scheme">fb297104847560897</string>
+    <string name="confirm">확인</string>
+    <string name="unknown_error_message">에러가 발생하였습니다.</string>
+    <string name="canceled">취소되었습니다.</string>
 </resources>
