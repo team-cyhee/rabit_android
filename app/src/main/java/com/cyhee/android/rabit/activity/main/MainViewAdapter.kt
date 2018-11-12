@@ -80,37 +80,23 @@ class MainViewAdapter (
                         myWallPostGoalLogBtn.setOnClickListener(IntentListener.toGoalLogWriteListener())
                         myWallFollowingText.setOnClickListener(IntentListener.toFollowingListListener(user))
                         myWallFollowerText.setOnClickListener(IntentListener.toFollowerListListener(user))
-                        myWallGoalsText.setOnClickListener(IntentListener.toGoalListListener(user))
 
                         myWallNameText.text = wallInfo!!.username
-                        myWallFollowingText.text = "${wallInfo.followeeNum} 팔로잉"
-                        myWallFollowerText.text = "${wallInfo.followerNum} 팔로워"
-                        if (wallInfo.goalContents.isNotEmpty())
-                            myWallGoal1Text.text = wallInfo.goalContents[0]
-                        if (wallInfo.goalContents.size > 1)
-                            myWallGoal2Text.text = wallInfo.goalContents[1]
-                        if (wallInfo.goalContents.size > 2)
-                            myWallGoal3Text.text = wallInfo.goalContents[2]
+                        myWallFollowingText.text = wallInfo.followeeNum.toString()
+                        myWallFollowerText.text = wallInfo.followerNum.toString()
                     }
                 }
                 2 -> {
                     with(holder as WallViewHolder) {
                         wallFollowingText.setOnClickListener(IntentListener.toFollowingListListener(wallInfo!!.username))
                         wallFollowerText.setOnClickListener(IntentListener.toFollowerListListener(wallInfo.username))
-                        wallGoalsText.setOnClickListener(IntentListener.toGoalListListener(wallInfo.username))
                         wallFollowBtn.setOnClickListener {
                             sendFollow(user)
                         }
 
                         wallNameText.text = wallInfo.username
-                        wallFollowingText.text = "${wallInfo.followeeNum} 팔로잉"
-                        wallFollowerText.text = "${wallInfo.followerNum} 팔로워"
-                        if (wallInfo.goalContents.isNotEmpty())
-                            wallGoal1Text.text = wallInfo.goalContents[0]
-                        if (wallInfo.goalContents.size > 1)
-                            wallGoal2Text.text = wallInfo.goalContents[1]
-                        if (wallInfo.goalContents.size > 2)
-                            wallGoal3Text.text = wallInfo.goalContents[2]
+                        wallFollowingText.text = wallInfo.followeeNum.toString()
+                        wallFollowerText.text = wallInfo.followerNum.toString()
                     }
                 }
             }
