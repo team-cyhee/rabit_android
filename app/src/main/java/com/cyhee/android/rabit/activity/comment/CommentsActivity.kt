@@ -13,6 +13,7 @@ import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 import com.cyhee.android.rabit.activity.decoration.CardItemDeco
 import kotlinx.android.synthetic.main.activity_commentlist.*
+import kotlinx.android.synthetic.main.item_part_commentwrite.*
 import java.lang.Exception
 
 
@@ -73,4 +74,8 @@ class CommentsActivity: AppCompatActivity(), CommentsContract.View {
         commentSwipeRefresh?.isRefreshing = false
     }
 
+    fun addComment(comment: Comment) {
+        commentsAdapter!!.appendComments(listOf(comment))
+        postingCommentText.text.clear()
+    }
 }
