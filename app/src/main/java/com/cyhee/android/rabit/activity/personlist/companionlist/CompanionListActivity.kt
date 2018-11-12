@@ -22,6 +22,11 @@ class CompanionListActivity: AppCompatActivity(), CompanionListContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_companionlist)
 
+        if (intent.hasExtra("goalId")) {
+            val goalId = intent.getLongExtra("goalId", -1)
+            presenter.companionsForGoal(goalId)
+        }
+
         prevBtn.setOnClickListener {
             Log.d("preBtn","clicked")
             finish()

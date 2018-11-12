@@ -15,6 +15,7 @@ import com.cyhee.android.rabit.activity.goalwrite.GoalWriteActivity
 import com.cyhee.android.rabit.activity.personlist.likelist.LikeListActivity
 import com.cyhee.android.rabit.activity.main.MainActivity
 import com.cyhee.android.rabit.activity.mywall.MyWallActivity
+import com.cyhee.android.rabit.activity.personlist.companionlist.CompanionListActivity
 import com.cyhee.android.rabit.activity.search.SearchActivity
 import com.cyhee.android.rabit.activity.wall.WallActivity
 import com.cyhee.android.rabit.model.ContentType
@@ -38,6 +39,7 @@ object IntentListener {
     }
 
     fun toWhichWallListListener(isMy: Boolean, username: String)  = View.OnClickListener {
+        println("----$isMy---$username")
         val intentToWhichWall = when (isMy) {
             true -> Intent(it.context, MyWallActivity:: class.java)
             false -> Intent(it.context, WallActivity:: class.java)
@@ -104,6 +106,12 @@ object IntentListener {
         val intentToGoalLogLikeList = Intent(it.context, LikeListActivity::class.java)
         intentToGoalLogLikeList.putExtra("goalLogId", id)
         it.context.startActivity(intentToGoalLogLikeList)
+    }
+
+    fun toCompanionListListener(id: Long) = View.OnClickListener {
+        val intentToCompanionList = Intent(it.context, CompanionListActivity::class.java)
+        intentToCompanionList.putExtra("goalId", id)
+        it.context.startActivity(intentToCompanionList)
     }
 
     fun toGoalLogWriteListener(id: Long, content: String) = View.OnClickListener {

@@ -41,17 +41,6 @@
         sl:scale_height="20"
         sl:scale_width="300"/>
 
-    <TextView
-        android:id="@+id/companionText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        sl:scale_textsize="16"
-        sl:scale_top="70"
-        sl:scale_left="60"
-        sl:scale_height="20"
-        sl:scale_width="300" />
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -101,16 +90,6 @@
                 android:layout_height="wrap_content"
                 android:textSize="12sp"/>
         </LinearLayout>
-        
-        <Button
-            android:id="@+id/goalBtn"
-            android:layout_width="75dp"
-            android:layout_height="25dp"
-            android:layout_gravity="center_vertical"
-            android:background="@color/main"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:textColor="@color/basic"/>
         
     </LinearLayout>
     

@@ -11,6 +11,5 @@ class CompanionListContract {
 
     interface Presenter: BasePresenter {
         fun companionsForGoal(id: Long)
-        fun companionsForGoalLog(id: Long)
     }
 }

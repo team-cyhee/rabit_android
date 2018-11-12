@@ -47,8 +47,6 @@ class MainActivity: AppCompatActivity(), MainContract.View {
             mainAdapter = MainViewAdapter(0, mainInfos, null,
                     { id, post -> presenter.toggleLikeForGoal(id, post)},
                     { id, post -> presenter.toggleLikeForGoalLog(id, post)},
-                    { id, comment: CommentFactory.Post -> presenter.postCommentForGoal(id, comment)},
-                    { id, comment -> presenter.postCommentForGoalLog(id, comment)},
                     { followee: String -> })
             mainListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             mainListView.adapter = mainAdapter

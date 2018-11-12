@@ -53,8 +53,6 @@ class MyWallActivity: AppCompatActivity(), MyWallContract.View {
             mainAdapter = MainViewAdapter(1, mainInfos, wallInfo,
                     { id, post -> presenter.toggleLikeForGoal(id, post)},
                     { id, post -> presenter.toggleLikeForGoalLog(id, post)},
-                    { id, comment: CommentFactory.Post -> presenter.postCommentForGoal(id, comment)},
-                    { id, comment -> presenter.postCommentForGoalLog(id, comment)},
                     { followee: String -> })
             myWallListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             myWallListView.adapter = mainAdapter

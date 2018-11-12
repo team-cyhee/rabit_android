@@ -16,6 +16,7 @@ import com.cyhee.android.rabit.useful.Fun
 import kotlinx.android.synthetic.main.item_complete_comg.*
 import kotlinx.android.synthetic.main.item_complete_comgl.*
 import kotlinx.android.synthetic.main.item_part_comglwriter.*
+import kotlinx.android.synthetic.main.item_part_actions.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
 import kotlinx.android.synthetic.main.item_part_text.*
 
@@ -94,39 +95,34 @@ class ComGlViewAdapter (
                     commentGoalLogLayout2.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
                     commentGoalLogLayout1.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
                     commentGoalLogLayout2.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
-                    commentNumberText.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
+                    commentNumberText.setOnClickListener(IntentListener.toGoalLogCommentsListener(goalLogInfo.id))
                     likeNumberText.setOnClickListener(IntentListener.toGoalLogLikeListListener(goalLogInfo.id))
 
                     if (goalLogInfo.liked) {
                         likeButton.background = if (Build.VERSION.SDK_INT >= 21)
-                            likeButton.context.getDrawable(R.drawable.thumb_active)
+                            likeButton.context.getDrawable(R.drawable.ic_heart_black)
                         else
-                            likeButton.context.resources.getDrawable(R.drawable.thumb)
+                            likeButton.context.resources.getDrawable(R.drawable.ic_heart_outline)
                     }
                     // post like
-                    likeButton.setOnClickListener {
+                    likeBtn.setOnClickListener {
                         goalLogInfo.liked = !goalLogInfo.liked
                         toggleLikeForGoalLog(goalLogInfo.id, goalLogInfo.liked)
 
                         if (goalLogInfo.liked) {
                             likeButton.background = if(Build.VERSION.SDK_INT >= 21)
-                                likeButton.context.getDrawable(R.drawable.thumb_active)
+                                likeButton.context.getDrawable(R.drawable.ic_heart_black)
                             else
-                                likeButton.context.resources.getDrawable(R.drawable.thumb)
+                                likeButton.context.resources.getDrawable(R.drawable.ic_heart_outline)
                         }
                     }
 
-                    commentGoalLogWriteLayout.findViewById<EditText>(R.id.postingCommentText).text.clear()
-
-                    // post comment
-                    commentGoalLogWriteLayout.findViewById<Button>(R.id.postBtn).setOnClickListener {
-                        val content = commentGoalLogWriteLayout.findViewById<EditText>(R.id.postingCommentText).text.toString()
-                        // TODO: 내용이 없을 경우 포스트 안되도록
-                        val postedComment = CommentFactory.Post(content)
-
-                        sendCommentForGoalLog(goalLogInfo.id, postedComment)
+                    cmtPostBtn.setOnClickListener(IntentListener.toGoalLogCommentsListener(goalLogInfo.id))
+                    when (user) {
+                        // TODO: 이미 companion이면 버튼 안보이게
+                        goalLogInfo.author.username -> coBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalLogInfo.goal.id, goalLogInfo.goal.content))
+                        else -> coBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalLogInfo.goal.id, goalLogInfo.goal.content))
                     }
-
 
                     Log.d("ViewHolder", goalLogInfo.toString())
                 }

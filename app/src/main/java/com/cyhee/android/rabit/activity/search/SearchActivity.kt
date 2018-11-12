@@ -132,7 +132,7 @@ class SearchActivity: AppCompatActivity(), SearchContract.View {
     override fun showGoalLogResult(goalLogs: MutableList<GoalLog>) {
         var results: MutableList<SearchForm> = ArrayList()
         for (goalLog in goalLogs) {
-            val result = SearchForm(goalLog.id, ContentType.GOAL, goalLog.goal.author, goalLog.content)
+            val result = SearchForm(goalLog.id, ContentType.GOALLOG, goalLog.goal.author, goalLog.content)
             results.add(result)
         }
         if (searchAdapter == null) {
