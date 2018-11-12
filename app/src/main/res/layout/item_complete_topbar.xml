@@ -33,11 +33,4 @@
             android:textStyle="bold"
             android:textSize="26sp"/>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/myWallBtn"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_gravity="right"
-        android:background="@drawable/id_b"/>
 </FrameLayout>

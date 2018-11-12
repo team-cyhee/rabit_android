@@ -13,9 +13,6 @@ import android.widget.TabHost
 import android.widget.Toast
 import kotlinx.android.synthetic.main.item_complete_searchtab.*
 
-
-
-
 class SearchActivity: AppCompatActivity(), SearchContract.View {
 
     override var presenter : SearchContract.Presenter = SearchPresenter(this)

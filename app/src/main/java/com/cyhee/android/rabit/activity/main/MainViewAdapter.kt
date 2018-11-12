@@ -6,8 +6,6 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App

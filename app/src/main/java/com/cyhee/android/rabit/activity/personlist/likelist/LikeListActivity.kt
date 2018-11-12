@@ -44,8 +44,6 @@ class LikeListActivity: AppCompatActivity(), LikeListContract.View {
             Log.d("preBtn","clicked")
             finish()
         }
-
-        myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
     }
 
     override fun showLikes(likers: MutableList<User>) {

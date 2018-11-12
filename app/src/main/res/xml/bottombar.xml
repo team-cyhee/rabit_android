@@ -1,0 +1,27 @@
+<tabs>
+    <tab
+        id="@+id/tabHome"
+        icon="@drawable/ic_home"
+        inActiveColor="#4De9e9e9"
+        activeColor="@color/colorPrimaryDark"/>
+
+    <tab
+        id="@+id/tabWall"
+        icon="@drawable/ic_message_square"
+        inActiveColor="#4De9e9e9"
+        activeColor="@color/colorPrimaryDark"/>
+
+    <tab
+        id="@+id/tabGoal"
+        icon="@drawable/ic_tag"
+        inActiveColor="#4De9e9e9"
+        activeColor="@color/colorPrimaryDark"/>
+
+    <tab
+        id="@+id/tabSetting"
+        icon="@drawable/ic_user"
+        inActiveColor="#4De9e9e9"
+        activeColor="@color/colorPrimaryDark"/>
+
+
+</tabs>

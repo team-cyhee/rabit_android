@@ -28,7 +28,6 @@ class ComGlActivity: AppCompatActivity(), ComGlContract.View {
         val linearLayoutManager = LinearLayoutManager(this)
         comGlListView.layoutManager = linearLayoutManager
 
-        myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
         comGlRightFloatBtn.setOnClickListener(IntentListener.toGoalLogWriteListener())
         comGlLeftFloatBtn.setOnClickListener(IntentListener.toMainListener())
         searchBtn.setOnClickListener(IntentListener.toSearchListener())

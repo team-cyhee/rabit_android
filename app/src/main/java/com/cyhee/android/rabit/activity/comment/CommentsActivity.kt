@@ -52,8 +52,6 @@ class CommentsActivity: AppCompatActivity(), CommentsContract.View {
             Log.d("preBtn","clicked")
             finish()
         }
-
-        myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
     }
 
     override fun showComments(comments: MutableList<Comment>, id: Long, type: ContentType) {

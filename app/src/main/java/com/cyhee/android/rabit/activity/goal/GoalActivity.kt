@@ -37,8 +37,6 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
             Log.d("preBtn","clicked")
             finish()
         }
-
-        myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
     }
 
     override fun showGoalLogInfos(goalInfo: GoalInfo, goalLogInfos: MutableList<GoalLogInfo>) {

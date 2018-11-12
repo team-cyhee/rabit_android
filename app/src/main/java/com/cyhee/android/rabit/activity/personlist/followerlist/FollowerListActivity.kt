@@ -36,7 +36,6 @@ class FollowerListActivity: AppCompatActivity(), FollowerListContract.View {
             finish()
         }
 
-        myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
     }
 
     override fun showFollowers(followers: MutableList<User>) {
