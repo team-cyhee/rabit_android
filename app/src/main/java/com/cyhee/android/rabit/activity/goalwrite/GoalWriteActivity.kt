@@ -36,8 +36,6 @@ class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
             finish()
         }
 
-        myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
-
         var radio: RadioButton = noneBtn
         goalRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             radio = findViewById(checkedId)

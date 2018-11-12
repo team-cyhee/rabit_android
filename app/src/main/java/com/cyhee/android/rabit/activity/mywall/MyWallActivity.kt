@@ -1,5 +1,6 @@
 package com.cyhee.android.rabit.activity.mywall
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -8,6 +9,8 @@ import android.util.Log
 import android.widget.Toast
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
+import com.cyhee.android.rabit.activity.goallist.GoalListActivity
+import com.cyhee.android.rabit.activity.main.MainActivity
 import com.cyhee.android.rabit.activity.main.MainViewAdapter
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
@@ -24,6 +27,7 @@ class MyWallActivity: AppCompatActivity(), MyWallContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mywall)
+        bottomBar.selectTabAtPosition(1)
 
         if (intent.hasExtra("username")) {
             val username = intent.getStringExtra("username")
@@ -41,11 +45,25 @@ class MyWallActivity: AppCompatActivity(), MyWallContract.View {
             Toast.makeText(this, "전달된 username이 없습니다", Toast.LENGTH_SHORT).show()
         }
 
+        bottomBar.setOnTabSelectListener { tabId ->
+            when (tabId) {
+                R.id.tabHome -> {
+                    val intentToMain = Intent(this, MainActivity:: class.java)
+                    intentToMain.putExtra("username", user)
+                    startActivity(intentToMain)
+                }
+                R.id.tabGoal -> {
+                    val intentToGoalList = Intent(this, GoalListActivity:: class.java)
+                    intentToGoalList.putExtra("username", user)
+                    startActivity(intentToGoalList)
+                }
+            }
+        }
+
         prevBtn.setOnClickListener {
             Log.d("preBtn","clicked")
             finish()
         }
-        mainBtn.setOnClickListener(IntentListener.toMainListener())
     }
 
     override fun showMainInfos(mainInfos : MutableList<MainInfo>, wallInfo: WallInfo) {

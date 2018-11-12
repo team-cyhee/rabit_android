@@ -41,8 +41,6 @@ class WallActivity: AppCompatActivity(), WallContract.View {
             Log.d("preBtn","clicked")
             finish()
         }
-        mainBtn.setOnClickListener(IntentListener.toMainListener())
-
 
     }
 

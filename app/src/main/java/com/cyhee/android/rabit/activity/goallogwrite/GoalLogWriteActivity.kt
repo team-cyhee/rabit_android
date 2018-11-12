@@ -37,8 +37,6 @@ class GoalLogWriteActivity: AppCompatActivity(), GoalLogWriteContract.View {
             finish()
         }
 
-        myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
-
         realGoalLogPostBtn.setOnClickListener{
             val content = goalLogContentText.text.toString()
             val goalLog = GoalLogFactory.Post(content)

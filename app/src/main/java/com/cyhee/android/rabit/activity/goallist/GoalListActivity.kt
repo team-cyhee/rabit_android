@@ -1,5 +1,6 @@
 package com.cyhee.android.rabit.activity.goallist
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -14,7 +15,8 @@ import kotlinx.android.synthetic.main.activity_goallist.*
 import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 import android.support.v7.widget.GridLayoutManager
 import com.cyhee.android.rabit.activity.decoration.CardItemDeco
-
+import com.cyhee.android.rabit.activity.main.MainActivity
+import com.cyhee.android.rabit.activity.mywall.MyWallActivity
 
 class GoalListActivity: AppCompatActivity(), GoalListContract.View {
 
@@ -26,6 +28,7 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_goallist)
+        bottomBar.selectTabAtPosition(2)
 
         if (intent.hasExtra("username")) {
             val username = intent.getStringExtra("username")
@@ -49,8 +52,20 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
             Log.d("preBtn","clicked")
             finish()
         }
-
-        myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
+        bottomBar.setOnTabSelectListener { tabId ->
+            when (tabId) {
+                R.id.tabHome -> {
+                    val intentToMain = Intent(this, MainActivity::class.java)
+                    intentToMain.putExtra("username", user)
+                    startActivity(intentToMain)
+                }
+                R.id.tabWall -> {
+                    val intentToMyWall = Intent(this, MyWallActivity::class.java)
+                    intentToMyWall.putExtra("username", user)
+                    startActivity(intentToMyWall)
+                }
+            }
+        }
 
     }
 

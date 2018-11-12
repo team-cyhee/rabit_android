@@ -35,8 +35,6 @@ class FollowingListActivity: AppCompatActivity(), FollowingListContract.View {
             Log.d("preBtn","clicked")
             finish()
         }
-
-        myWallBtn.setOnClickListener(IntentListener.toMyWallListener(user))
     }
 
     override fun showFollowees(followees: MutableList<User>) {

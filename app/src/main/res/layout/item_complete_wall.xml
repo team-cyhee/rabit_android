@@ -163,20 +163,6 @@
                     android:textSize="14sp" />
 
             </LinearLayout>
-
-
         </LinearLayout>
-
-        <Button
-            android:id="@+id/wallPostGoalLogBtn"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:background="@drawable/rect_sq"
-            android:gravity="center"
-            android:hint="오늘 하루는 어땠나요?" />
     </LinearLayout>
 </RelativeLayout>
