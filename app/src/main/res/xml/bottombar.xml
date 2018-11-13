@@ -13,7 +13,7 @@
 
     <tab
         id="@+id/tabGoal"
-        icon="@drawable/ic_tag"
+        icon="@drawable/ic_message_square"
         inActiveColor="#4De9e9e9"
         activeColor="@color/colorPrimaryDark"/>
 

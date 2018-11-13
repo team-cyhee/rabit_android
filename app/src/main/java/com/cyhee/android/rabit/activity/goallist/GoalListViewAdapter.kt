@@ -24,12 +24,10 @@ class GoalListViewAdapter (
 
                 cardGoalName.text = goalInfo.content
 
-                cardGoalDateText.text = Fun.dateDistance(goalInfo.startDate)
-
-                cardGoalComBtn.text = when (user) {
+/*                cardGoalComBtn.text = when (user) {
                     goalInfo.author.username -> "당근먹기"
                     else -> "함께하기"
-                }
+                }*/
 
                 // 함께하기
                 when (user) {
@@ -37,6 +35,9 @@ class GoalListViewAdapter (
                     goalInfo.author.username -> cardGoalComBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalInfo.id, goalInfo.content))
                     else -> cardGoalComBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id, goalInfo.content))
                 }
+
+                cardGoalLogBtn.setOnClickListener(IntentListener.toGoalLogListListener(goalInfo.id))
+                cardGoalComLogBtn.setOnClickListener(IntentListener.toComGoalLogListener(goalInfo.id))
 
                 Log.d("ViewHolder", goalInfo.toString())
             }

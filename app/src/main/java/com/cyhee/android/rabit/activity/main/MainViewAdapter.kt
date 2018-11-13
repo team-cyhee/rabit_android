@@ -86,10 +86,11 @@ class MainViewAdapter (
                 }
                 2 -> {
                     with(holder as WallViewHolder) {
-                        wallFollowingText.setOnClickListener(IntentListener.toFollowingListListener(wallInfo!!.username))
+                        wallGoalListBtn.setOnClickListener(IntentListener.toGoalListListener(wallInfo!!.username))
+                        wallFollowingText.setOnClickListener(IntentListener.toFollowingListListener(wallInfo.username))
                         wallFollowerText.setOnClickListener(IntentListener.toFollowerListListener(wallInfo.username))
                         wallFollowBtn.setOnClickListener {
-                            sendFollow(user)
+                            sendFollow(wallInfo.username)
                         }
 
                         wallNameText.text = wallInfo.username

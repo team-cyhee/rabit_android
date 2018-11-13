@@ -22,11 +22,8 @@ import kotlinx.android.synthetic.main.item_part_text.*
 
 
 class ComGlViewAdapter (
-        private val spinner: ArrayAdapter<GoalInfo>,
         private val comGls: MutableList<GoalLogInfo>,
-        private val toggleLikeForGoalLog: (Long, Boolean) -> Unit,
-        private val sendCommentForGoalLog: (Long, CommentFactory.Post) -> Unit,
-        private val selectGoal: (Long) -> Unit
+        private val toggleLikeForGoalLog: (Long, Boolean) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
     private val user = App.prefs.user
@@ -51,12 +48,7 @@ class ComGlViewAdapter (
         when (holder.itemViewType) {
             0 -> {
                 with (holder as GoalSelectViewHolder) {
-                    goalNameList.adapter = spinner
-                    selectGoalBtn.setOnClickListener {
-                        val selectedGoal = goalNameList.selectedItem as GoalInfo
-                        comGlText.text = "${selectedGoal.companionNum+1}명이 함께하는 중"
-                        selectGoal(selectedGoal.id)
-                    }
+                    comGlText.text = "명이 함께하는 중"
                 }
             }
             1 -> {

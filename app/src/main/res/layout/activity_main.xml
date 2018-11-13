@@ -37,5 +37,5 @@
         android:layout_height="50dp"
         android:layout_gravity="bottom"
         app:bb_tabXmlResource="@xml/bottombar"
-        app:bb_behavior="iconsOnly" />
+        app:bb_behavior="iconsOnly|shy" />
 </android.support.design.widget.CoordinatorLayout>

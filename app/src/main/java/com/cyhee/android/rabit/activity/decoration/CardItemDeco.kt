@@ -11,7 +11,7 @@ class CardItemDeco(c: Context) : RecyclerView.ItemDecoration() {
     private val paintGray: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
     init {
-        paintGray.color = Color.rgb(204, 204, 204)
+        paintGray.color = Color.rgb(242, 242, 242)
         paintGray.style = Paint.Style.STROKE
         paintGray.strokeWidth = 10f
     }

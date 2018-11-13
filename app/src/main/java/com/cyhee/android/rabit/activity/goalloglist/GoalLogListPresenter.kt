@@ -1,4 +1,4 @@
-package com.cyhee.android.rabit.activity.comgl
+package com.cyhee.android.rabit.activity.goalloglist
 
 import android.util.Log
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
@@ -12,31 +12,31 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import retrofit2.HttpException
 
-class ComGlPresenter(private val view: ComGlActivity) : ComGlContract.Presenter {
+class GoalLogListPresenter(private val view: GoalLogListActivity) : GoalLogListContract.Presenter {
 
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    override fun comGls(id: Long) {
-        restClient.comGoalLogInfos(id)
+    override fun goalLogs(id: Long) {
+        restClient.goalStoreGoalLogs(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
                 .subscribe(
                         {
-                            Log.d("comgl",it.toString())
+                            Log.d("goalGl",it.toString())
                             view.showComGls(it!!.toMutableList())
                         },
                         {
                             if(it is HttpException) {
-                                Log.d("comgl",it.response().toString())
-                                Log.d("comgl",it.response().body().toString())
-                                Log.d("comgl",it.response().body().toString())
-                                Log.d("comgl",it.response().errorBody().toString())
-                                Log.d("comgl",it.response().errorBody()?.string())
+                                Log.d("goalGl",it.response().toString())
+                                Log.d("goalGl",it.response().body().toString())
+                                Log.d("goalGl",it.response().body().toString())
+                                Log.d("goalGl",it.response().errorBody().toString())
+                                Log.d("goalGl",it.response().errorBody()?.string())
                             }
                             else {
-                                Log.d("comgl",it.toString())
+                                Log.d("goalGl",it.toString())
                             }
                         }
                 )

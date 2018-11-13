@@ -18,7 +18,7 @@
             android:background="#fff">
 
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/wallProfileImage"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
@@ -81,6 +81,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/wallGoalListBtn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
