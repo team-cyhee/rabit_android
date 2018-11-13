@@ -5,7 +5,6 @@ import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
 import com.cyhee.android.rabit.client.PostClient
 import com.cyhee.android.rabit.model.CommentFactory
-import com.cyhee.android.rabit.model.GoalInfo
 import com.cyhee.android.rabit.model.GoalLogFactory
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
@@ -18,32 +17,7 @@ class ComGlPresenter(private val view: ComGlActivity) : ComGlContract.Presenter 
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    override fun goalsByUser() {
-        restClient.userGoalInfos()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(scopeProvider)
-                .subscribe(
-                        {
-                            Log.d("goal", it.toString())
-                            comGls(it[0].id, it.toMutableList())
-                        },
-                        {
-                            if(it is HttpException) {
-                                Log.d("goal",it.response().toString())
-                                Log.d("goal",it.response().body().toString())
-                                Log.d("goal",it.response().body().toString())
-                                Log.d("goal",it.response().errorBody().toString())
-                                Log.d("goal",it.response().errorBody()?.string())
-                            }
-                            else {
-                                Log.d("goal",it.toString())
-                            }
-                        }
-                )
-    }
-
-    override fun comGls(id: Long, goals: MutableList<GoalInfo>) {
+    override fun comGls(id: Long) {
         restClient.comGoalLogInfos(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -51,7 +25,7 @@ class ComGlPresenter(private val view: ComGlActivity) : ComGlContract.Presenter 
                 .subscribe(
                         {
                             Log.d("comgl",it.toString())
-                            view.showComGls(goals, it!!.toMutableList())
+                            view.showComGls(it!!.toMutableList())
                         },
                         {
                             if(it is HttpException) {

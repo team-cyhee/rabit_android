@@ -23,31 +23,30 @@ class ComGlActivity: AppCompatActivity(), ComGlContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comgoallog)
 
-        presenter.goalsByUser()
+        if (intent.hasExtra("goalId")) {
+            val goalId = intent.getLongExtra("goalId", -1)
+            presenter.comGls(goalId)
 
-        val linearLayoutManager = LinearLayoutManager(this)
-        comGlListView.layoutManager = linearLayoutManager
+            // swipe refresh
+            comGlSwipeRefresh.setOnRefreshListener {
+                Toast.makeText(this@ComGlActivity, "refreshed!", Toast.LENGTH_SHORT).show()
 
-        comGlRightFloatBtn.setOnClickListener(IntentListener.toGoalLogWriteListener())
-        comGlLeftFloatBtn.setOnClickListener(IntentListener.toMainListener())
+                comGlAdapter?.clear()
+                presenter.comGls(goalId)
+            }
+        } else {
+            Toast.makeText(this, "전달된 goalId가 없습니다", Toast.LENGTH_SHORT).show()
+        }
+
         searchBtn.setOnClickListener(IntentListener.toSearchListener())
 
-        // swipe refresh
-        comGlSwipeRefresh.setOnRefreshListener {
-            Toast.makeText(this@ComGlActivity, "refreshed!", Toast.LENGTH_SHORT).show()
 
-            comGlAdapter?.clear()
-            presenter.goalsByUser()
-        }
     }
 
-    override fun showComGls(goals: MutableList<GoalInfo>, comGls: MutableList<GoalLogInfo>) {
-        val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, goals)
+    override fun showComGls(comGls: MutableList<GoalLogInfo>) {
         if (comGlAdapter == null) {
-            comGlAdapter = ComGlViewAdapter(spinnerAdapter, comGls,
-                    { id, post -> presenter.toggleLikeForGoalLog(id, post)},
-                    { id, comment -> presenter.postCommentForGoalLog(id, comment)},
-                    { id -> presenter.comGls(id, goals)})
+            comGlAdapter = ComGlViewAdapter(comGls
+            ) { id, post -> presenter.toggleLikeForGoalLog(id, post)}
             comGlListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             comGlListView.adapter = comGlAdapter
         } else {

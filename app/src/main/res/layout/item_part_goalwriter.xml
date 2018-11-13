@@ -8,7 +8,7 @@
     sl:scale_base_height="140"
     sl:scale_base_width="360">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profileImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

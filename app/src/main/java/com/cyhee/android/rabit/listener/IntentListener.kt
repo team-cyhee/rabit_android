@@ -60,8 +60,9 @@ object IntentListener {
         it.context.startActivity(intentToGoalList)
     }
 
-    fun toComGoalLogListener() = View.OnClickListener {
+    fun toComGoalLogListener(id: Long) = View.OnClickListener {
         val intentToComGoalLog = Intent(it.context, ComGlActivity:: class.java)
+        intentToComGoalLog.putExtra("goalId", id)
         it.context.startActivity(intentToComGoalLog)
     }
 

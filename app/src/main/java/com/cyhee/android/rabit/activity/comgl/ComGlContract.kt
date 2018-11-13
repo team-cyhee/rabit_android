@@ -6,13 +6,12 @@ import com.cyhee.android.rabit.model.*
 
 class ComGlContract {
     interface View: BaseView<Presenter> {
-        fun showComGls(goals: MutableList<GoalInfo>, comGls: MutableList<GoalLogInfo>)
+        fun showComGls(comGls: MutableList<GoalLogInfo>)
         fun setWriteGoalId(id: Long)
    }
 
     interface Presenter: BasePresenter {
-        fun goalsByUser()
-        fun comGls(id: Long, goals: MutableList<GoalInfo>)
+        fun comGls(id: Long)
         fun postGoalLog(id: Long, goalLog: GoalLogFactory.Post)
         fun toggleLikeForGoalLog(id: Long, post:Boolean)
         fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post)

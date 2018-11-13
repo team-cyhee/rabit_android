@@ -18,7 +18,7 @@
             android:background="#fff">
 
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/myWallProfileImage"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
@@ -164,10 +164,12 @@
                     android:textSize="14sp" />
 
             </LinearLayout>
-
-
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#ACACAC" />
         <Button
             android:id="@+id/myWallPostGoalLogBtn"
             android:layout_width="match_parent"
