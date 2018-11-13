@@ -18,6 +18,7 @@ class CommentViewAdapter (
         private val sendComment: (Long, CommentFactory.Post) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
+    private val TAG = CommentViewAdapter::class.qualifiedName
     private val user = App.prefs.user
 
     override fun getItemViewType(position: Int): Int {
@@ -51,7 +52,7 @@ class CommentViewAdapter (
 
                 val isMy = user == comment.author.username
                 commentWriterText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, comment.author.username))
-                Log.d("ViewHolder", comment.toString())
+                Log.d(TAG, comment.toString())
             }
         }
     }
@@ -61,12 +62,13 @@ class CommentViewAdapter (
     fun appendComments(moreGoals: List<Comment>) {
         val index = this.comments.size
         comments.addAll(moreGoals)
-        notifyItemRangeInserted(index, comments.size)
+        notifyItemRangeInserted(index, moreGoals.size)
+        Log.d(TAG, "${moreGoals.size} is inserted in index $index")
     }
 
     fun clear() {
         val size = this.comments.size
-        Log.d("ViewHolder", "size is $size in clear")
+        Log.d(TAG, "size is $size in clear")
         this.comments.clear()
         //notifyItemRangeRemoved(0, size)
         notifyDataSetChanged()

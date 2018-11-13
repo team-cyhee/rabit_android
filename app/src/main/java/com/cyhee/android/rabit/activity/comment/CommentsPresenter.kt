@@ -1,6 +1,7 @@
 package com.cyhee.android.rabit.activity.comment
 
 import android.util.Log
+import com.cyhee.android.rabit.activity.base.DialogHandler
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
 import com.cyhee.android.rabit.client.PostClient
@@ -68,10 +69,53 @@ class CommentsPresenter(private val view: CommentsActivity) : CommentsContract.P
     }
 
     override fun postCommentForGoal(id: Long, comment: CommentFactory.Post) {
-        PostClient.postCommentForGoal(id, comment, scopeProvider)
+//        PostClient.postCommentForGoal(id, comment, scopeProvider)
+        restClient.postCommentForGoal(id, comment)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe(
+                        {
+                            it.headers().get("Location")?.apply {
+                                addComment(this.split("/").last().toLong())
+                            }
+                        },
+                        {
+                            DialogHandler.errorDialog(it, view)
+                        }
+                )
     }
 
     override fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post) {
-        PostClient.postCommentForGoalLog(id, comment, scopeProvider)
+//        PostClient.postCommentForGoalLog(id, comment, scopeProvider)
+        restClient.postCommentForGoalLog(id, comment)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe(
+                        {
+                            it.headers().get("Location")?.apply {
+                                addComment(this.split("/").last().toLong())
+                            }
+                        },
+                        {
+                            DialogHandler.errorDialog(it, view)
+                        }
+                )
+    }
+
+    private fun addComment(id: Long) {
+        restClient.comment(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe(
+                        {
+                            view.addComment(it)
+                        },
+                        {
+                            DialogHandler.errorDialog(it, view)
+                        }
+                )
     }
 }
