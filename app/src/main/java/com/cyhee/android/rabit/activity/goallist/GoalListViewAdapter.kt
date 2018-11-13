@@ -36,7 +36,7 @@ class GoalListViewAdapter (
                     else -> cardGoalComBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id, goalInfo.content))
                 }
 
-                //cardGoalLogBtn.setOnClickListener(IntentListener.toGoalLogListListener(goalInfo.id))
+                cardGoalLogBtn.setOnClickListener(IntentListener.toGoalLogListListener(goalInfo.id))
                 cardGoalComLogBtn.setOnClickListener(IntentListener.toComGoalLogListener(goalInfo.id))
 
                 Log.d("ViewHolder", goalInfo.toString())

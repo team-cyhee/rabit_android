@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightGray"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/topBarLayout"
+            layout="@layout/item_complete_topbar"/>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/glListSwipeRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/glListListView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@color/lightGray"
+                android:orientation="vertical"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </LinearLayout>
+
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        app:bb_tabXmlResource="@xml/bottombar"
+        app:bb_behavior="iconsOnly|shy" />
+</android.support.design.widget.CoordinatorLayout>

@@ -10,6 +10,7 @@ import com.cyhee.android.rabit.activity.personlist.followinglist.FollowingListAc
 import com.cyhee.android.rabit.activity.goal.GoalActivity
 import com.cyhee.android.rabit.activity.goallist.GoalListActivity
 import com.cyhee.android.rabit.activity.goallog.GoalLogActivity
+import com.cyhee.android.rabit.activity.goalloglist.GoalLogListActivity
 import com.cyhee.android.rabit.activity.goallogwrite.GoalLogWriteActivity
 import com.cyhee.android.rabit.activity.goalwrite.GoalWriteActivity
 import com.cyhee.android.rabit.activity.personlist.likelist.LikeListActivity
@@ -64,6 +65,12 @@ object IntentListener {
         val intentToComGoalLog = Intent(it.context, ComGlActivity:: class.java)
         intentToComGoalLog.putExtra("goalId", id)
         it.context.startActivity(intentToComGoalLog)
+    }
+
+    fun toGoalLogListListener(id: Long) = View.OnClickListener {
+        val intentToGoalLogList = Intent(it.context, GoalLogListActivity:: class.java)
+        intentToGoalLogList.putExtra("goalId", id)
+        it.context.startActivity(intentToGoalLogList)
     }
 
     fun toSearchListener() = View.OnClickListener {
