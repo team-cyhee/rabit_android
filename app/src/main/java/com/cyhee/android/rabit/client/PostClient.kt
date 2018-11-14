@@ -92,9 +92,10 @@ object PostClient {
                 .autoDisposable(scopeProvider)
                 .subscribe (
                         {
+                            callback()
                         },
                         {
-                            // TODO: post완료되면 화면 새로고침?
+                            Log.d(TAG, "Get error from postLikeForGoalLog")
                         }
                 )
     }
