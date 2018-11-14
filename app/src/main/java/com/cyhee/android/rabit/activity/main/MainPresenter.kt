@@ -1,10 +1,12 @@
 package com.cyhee.android.rabit.activity.main
 
 import android.util.Log
+import com.cyhee.android.rabit.activity.base.DialogHandler
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
 import com.cyhee.android.rabit.client.PostClient
 import com.cyhee.android.rabit.model.CommentFactory
+import com.cyhee.android.rabit.model.ContentType
 import com.cyhee.android.rabit.model.GoalLogFactory
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
@@ -48,9 +50,18 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
 
     override fun toggleLikeForGoal(id: Long, post: Boolean) {
         if(post)
-            PostClient.postLikeForGoal(id, scopeProvider) {
-                //view.toggleLike(true)
-            }
+            restClient.postLikeForGoal(id)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .autoDisposable(scopeProvider)
+                    .subscribe(
+                            {
+                                view.toggleLike(id, ContentType.GOAL, true)
+                            },
+                            {
+                                DialogHandler.errorDialog(it, view)
+                            }
+                    )
         else
             restClient.deleteLikeForGoal(id)
                     .subscribeOn(Schedulers.io())
@@ -58,10 +69,10 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
                     .autoDisposable(scopeProvider)
                     .subscribe(
                             {
-                                //view.toggleLike(false)
+                                view.toggleLike(id, ContentType.GOAL, false)
                             },
                             {
-
+                                DialogHandler.errorDialog(it, view)
                             }
                     )
 
@@ -69,9 +80,18 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
 
     override fun toggleLikeForGoalLog(id: Long, post: Boolean) {
         if(post)
-            PostClient.postLikeForGoalLog(id, scopeProvider) {
-                //view.toggleLike(true)
-            }
+            restClient.postLikeForGoalLog(id)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .autoDisposable(scopeProvider)
+                    .subscribe(
+                            {
+                                view.toggleLike(id, ContentType.GOALLOG, true)
+                            },
+                            {
+                                DialogHandler.errorDialog(it, view)
+                            }
+                    )
         else
             restClient.deleteLikeForGoalLog(id)
                     .subscribeOn(Schedulers.io())
@@ -79,10 +99,10 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
                     .autoDisposable(scopeProvider)
                     .subscribe(
                             {
-                                //view.toggleLike(false)
+                                view.toggleLike(id, ContentType.GOALLOG, false)
                             },
                             {
-
+                                DialogHandler.errorDialog(it, view)
                             }
                     )
     }

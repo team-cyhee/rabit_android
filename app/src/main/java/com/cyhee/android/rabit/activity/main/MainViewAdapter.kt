@@ -2,6 +2,7 @@ package com.cyhee.android.rabit.activity.main
 
 import android.annotation.SuppressLint
 import android.os.Build
+import android.support.v7.widget.DrawableUtils
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
@@ -13,6 +14,7 @@ import com.cyhee.android.rabit.base.BaseViewHolder
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import com.cyhee.android.rabit.useful.Fun
+import com.cyhee.android.rabit.util.DrawableUtil
 import kotlinx.android.synthetic.main.item_complete_maingoal.*
 import kotlinx.android.synthetic.main.item_complete_maingoallog.*
 import kotlinx.android.synthetic.main.item_complete_mainwrite.*
@@ -35,6 +37,7 @@ class MainViewAdapter (
         private val sendFollow: (String) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
+    private val TAG = MainViewAdapter::class.qualifiedName
     private val user = App.prefs.user
 
     override fun getItemViewType(position: Int): Int {
@@ -164,23 +167,17 @@ class MainViewAdapter (
                         else -> coBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id, goalInfo.content))
                     }
 
-                    if (goalInfo.liked) {
-                        likeButton.background = if(Build.VERSION.SDK_INT >= 21)
-                            likeButton.context.getDrawable(R.drawable.ic_heart_black)
-                        else
-                            likeButton.context.resources.getDrawable(R.drawable.ic_heart_outline)
-                    }
+                    likeButton.background =
+                            if (goalInfo.liked) DrawableUtil.getDrawable(likeBtn.context, R.drawable.ic_heart_black)
+                            else DrawableUtil.getDrawable(likeBtn.context, R.drawable.ic_heart_outline)
+
+                    likeBtnWrapper.background =
+                            if (goalInfo.liked) DrawableUtil.getDrawable(likeBtn.context, R.drawable.rect_sq_red)
+                            else DrawableUtil.getDrawable(likeBtn.context, R.drawable.rect_sq)
+
                     // post like
                     likeBtn.setOnClickListener {
-                        goalInfo.liked = !goalInfo.liked
-                        toggleLikeForGoal(goalInfo.id, goalInfo.liked)
-
-                        if (goalInfo.liked) {
-                            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
-                                likeButton.context.getDrawable(R.drawable.ic_heart_black)
-                            else
-                                likeButton.context.resources.getDrawable(R.drawable.ic_heart_outline)
-                        }
+                        toggleLikeForGoal(goalInfo.id, !goalInfo.liked)
                     }
 
                     cmtPostBtn.setOnClickListener(IntentListener.toGoalCommentsListener(goalInfo.id))
@@ -230,23 +227,17 @@ class MainViewAdapter (
 
                     comNumberText.setOnClickListener(IntentListener.toCompanionListListener(goalLogInfo.goal.id))
 
-                    if (goalLogInfo.liked) {
-                        likeButton.background = if(Build.VERSION.SDK_INT >= 21)
-                            likeButton.context.getDrawable(R.drawable.ic_heart_black)
-                        else
-                            likeButton.context.resources.getDrawable(R.drawable.ic_heart_outline)
-                    }
+                    likeButton.background =
+                            if (goalLogInfo.liked) DrawableUtil.getDrawable(likeBtn.context, R.drawable.ic_heart_black)
+                            else DrawableUtil.getDrawable(likeBtn.context, R.drawable.ic_heart_outline)
+
+                    likeBtnWrapper.background =
+                            if (goalLogInfo.liked) DrawableUtil.getDrawable(likeBtn.context, R.drawable.rect_sq_red)
+                            else DrawableUtil.getDrawable(likeBtn.context, R.drawable.rect_sq)
+
                     // post like
                     likeBtn.setOnClickListener {
-                        goalLogInfo.liked = !goalLogInfo.liked
-                        toggleLikeForGoalLog(goalLogInfo.id, goalLogInfo.liked)
-
-                        if (goalLogInfo.liked) {
-                            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
-                                likeButton.context.getDrawable(R.drawable.ic_heart_black)
-                            else
-                                likeButton.context.resources.getDrawable(R.drawable.ic_heart_outline)
-                        }
+                        toggleLikeForGoalLog(goalLogInfo.id, !goalLogInfo.liked)
                     }
 
                     cmtPostBtn.setOnClickListener(IntentListener.toGoalLogCommentsListener(goalLogInfo.id))
@@ -269,6 +260,22 @@ class MainViewAdapter (
         Log.d("ViewHolder", "index is $index in appendMainInfos")
         mainInfos.addAll(moreMainInfos)
         notifyItemRangeInserted(index, mainInfos.size)
+    }
+
+    fun toggleLike(id: Long, type: ContentType, boolean: Boolean) {
+        Log.d(TAG, "toggleLike $id, $type, $boolean")
+        this.mainInfos.forEachIndexed { index, info ->
+            if ((type == ContentType.GOAL && info is GoalInfo && info.id == id) ||
+                    (type == ContentType.GOALLOG && info is GoalLogInfo && info.id == id)) {
+                info.liked = boolean
+
+                if(boolean) info.likeNum++
+                else info.likeNum--
+
+                Log.d(TAG, "$index changed")
+                notifyItemChanged(index + 1)
+            }
+        }
     }
 
     fun clear() {
