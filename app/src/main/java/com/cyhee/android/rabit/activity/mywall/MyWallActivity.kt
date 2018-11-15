@@ -20,9 +20,11 @@ import kotlinx.android.synthetic.main.item_complete_hometopbar.*
 
 
 class MyWallActivity: AppCompatActivity(), MyWallContract.View {
+
     override var presenter : MyWallContract.Presenter = MyWallPresenter(this)
     private var mainAdapter: MainViewAdapter? = null
 
+    private val TAG = MyWallActivity::class.qualifiedName
     private val user = App.prefs.user
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,5 +86,10 @@ class MyWallActivity: AppCompatActivity(), MyWallContract.View {
         }
 
         myWallSwipeRefresh?.isRefreshing = false
+    }
+
+    fun toggleLike(id: Long, type: ContentType, boolean: Boolean) {
+        Log.d(TAG, "toggle like $id, $type, $boolean")
+        mainAdapter!!.toggleLike(id, type, boolean)
     }
 }

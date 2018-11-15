@@ -1,7 +1,6 @@
 package com.cyhee.android.rabit.activity.main
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
@@ -9,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
+import com.cyhee.android.rabit.activity.base.GoalLogViewBinder
+import com.cyhee.android.rabit.activity.base.GoalViewBinder
 import com.cyhee.android.rabit.base.BaseViewHolder
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import com.cyhee.android.rabit.useful.Fun
-import kotlinx.android.synthetic.main.item_complete_maingoal.*
+import com.cyhee.android.rabit.util.DrawableUtil
 import kotlinx.android.synthetic.main.item_complete_maingoallog.*
 import kotlinx.android.synthetic.main.item_complete_mainwrite.*
 import kotlinx.android.synthetic.main.item_complete_mywall.*
@@ -23,7 +24,6 @@ import kotlinx.android.synthetic.main.item_part_goalwriter.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
 import kotlinx.android.synthetic.main.item_part_text.*
 import java.lang.Exception
-import java.text.SimpleDateFormat
 
 
 class MainViewAdapter (
@@ -35,6 +35,7 @@ class MainViewAdapter (
         private val sendFollow: (String) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
+    private val TAG = MainViewAdapter::class.qualifiedName
     private val user = App.prefs.user
 
     override fun getItemViewType(position: Int): Int {
@@ -100,125 +101,12 @@ class MainViewAdapter (
                 }
             }
             1 -> {
-                with(holder as MainViewHolderForGoal) {
-                    val goalInfo: GoalInfo = mainInfos[position-1] as GoalInfo
-                    nameText.text = goalInfo.author.username
-                    titleText.text = goalInfo.content
-
-                    // 함께하는 사람, 시작하는 날, 로그 수, 좋아요 수, 댓글 수
-                    comNumberText.text = goalInfo.companionNum.toString()
-
-                    // TODO: 나중에 시작일 의무화
-                    startDateText.text = when {
-                        goalInfo.startDate != null -> "시작일 ${SimpleDateFormat("dd/MM/yyyy").format(goalInfo.startDate)}"
-                        else -> "시작일 없음"
-                    }
-                    endDateText.text = when {
-                        goalInfo.endDate != null -> "종료일 ${SimpleDateFormat("dd/MM/yyyy").format(goalInfo.endDate)}"
-                        else -> "종료일 없음"
-                    }
-                    logNumText.text = goalInfo.logNum.toString()
-
-                    when (user) {
-                        goalInfo.author.username -> coBtn.text = "당근먹기"
-                        else -> coBtn.text = "함께하기"
-                    }
-
-                    likeNumberText.text = goalInfo.likeNum.toString()
-                    commentNumberText.text = goalInfo.commentNum.toString()
-
-
-                    val isMy = user == goalInfo.author.username
-                    nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalInfo.author.username))
-                    titleText.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
-                    logNum.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
-                    commentNumberText.setOnClickListener(IntentListener.toGoalCommentsListener(goalInfo.id))
-                    likeNumberText.setOnClickListener(IntentListener.toGoalLikeListListener(goalInfo.id))
-
-                    comNumberText.setOnClickListener(IntentListener.toCompanionListListener(goalInfo.id))
-
-                    // 함께하기 /
-                    when (user) {
-                        // TODO: 이미 companion이면 버튼 안보이게
-                        goalInfo.author.username -> coBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalInfo.id, goalInfo.content))
-                        else -> coBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id, goalInfo.content))
-                    }
-
-                    if (goalInfo.liked) {
-                        likeButton.background = if(Build.VERSION.SDK_INT >= 21)
-                            likeButton.context.getDrawable(R.drawable.ic_heart_black)
-                        else
-                            likeButton.context.resources.getDrawable(R.drawable.ic_heart_outline)
-                    }
-                    // post like
-                    likeBtn.setOnClickListener {
-                        goalInfo.liked = !goalInfo.liked
-                        toggleLikeForGoal(goalInfo.id, goalInfo.liked)
-
-                        if (goalInfo.liked) {
-                            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
-                                likeButton.context.getDrawable(R.drawable.ic_heart_black)
-                            else
-                                likeButton.context.resources.getDrawable(R.drawable.ic_heart_outline)
-                        }
-                    }
-
-                    cmtPostBtn.setOnClickListener(IntentListener.toGoalCommentsListener(goalInfo.id))
-
-                    Log.d("ViewHolder", goalInfo.toString())
-                }
+                val goalInfo: GoalInfo = mainInfos[position-1] as GoalInfo
+                GoalViewBinder.bind(holder as MainViewHolderForGoal, goalInfo, toggleLikeForGoal)
             }
             2 -> {
-                with(holder as MainViewHolderForGoalLog) {
-                    val goalLogInfo: GoalLogInfo = mainInfos[position-1] as GoalLogInfo
-                    nameText.text = goalLogInfo.goal.author.username
-                    val goalTitle = goalLogInfo.goal.content + Fun.dateDistance(goalLogInfo)
-                    titleText.text = goalTitle
-
-                    comNumberText.text = goalLogInfo.companionNum.toString()
-                    text.text = goalLogInfo.content
-
-                    likeNumberText.text = goalLogInfo.likeNum.toString()
-                    commentNumberText.text = goalLogInfo.commentNum.toString()
-
-
-                    val isMy = user == goalLogInfo.author.username
-                    nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
-                    titleText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.id))
-                    textLayout.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
-                    commentNumberText.setOnClickListener(IntentListener.toGoalLogCommentsListener(goalLogInfo.id))
-                    likeNumberText.setOnClickListener(IntentListener.toGoalLogLikeListListener(goalLogInfo.id))
-
-                    comNumberText.setOnClickListener(IntentListener.toCompanionListListener(goalLogInfo.goal.id))
-
-                    if (goalLogInfo.liked) {
-                        likeButton.background = if(Build.VERSION.SDK_INT >= 21)
-                            likeButton.context.getDrawable(R.drawable.ic_heart_black)
-                        else
-                            likeButton.context.resources.getDrawable(R.drawable.ic_heart_outline)
-                    }
-                    // post like
-                    likeBtn.setOnClickListener {
-                        goalLogInfo.liked = !goalLogInfo.liked
-                        toggleLikeForGoalLog(goalLogInfo.id, goalLogInfo.liked)
-
-                        if (goalLogInfo.liked) {
-                            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
-                                likeButton.context.getDrawable(R.drawable.ic_heart_black)
-                            else
-                                likeButton.context.resources.getDrawable(R.drawable.ic_heart_outline)
-                        }
-                    }
-
-                    cmtPostBtn.setOnClickListener(IntentListener.toGoalLogCommentsListener(goalLogInfo.id))
-                    when (user) {
-                        // TODO: 이미 companion이면 버튼 안보이게
-                        goalLogInfo.author.username -> coBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalLogInfo.goal.id, goalLogInfo.goal.content))
-                        else -> coBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalLogInfo.goal.id, goalLogInfo.goal.content))
-                    }
-
-                    Log.d("ViewHolder", goalLogInfo.toString())
-                }
+                val goalLogInfo: GoalLogInfo = mainInfos[position-1] as GoalLogInfo
+                GoalLogViewBinder.bind(holder as MainViewHolderForGoalLog, goalLogInfo, toggleLikeForGoalLog)
             }
         }
     }
@@ -232,9 +120,25 @@ class MainViewAdapter (
         notifyItemRangeInserted(index, mainInfos.size)
     }
 
+    fun toggleLike(id: Long, type: ContentType, boolean: Boolean) {
+        Log.d(TAG, "toggleLike $id, $type, $boolean")
+        this.mainInfos.forEachIndexed { index, info ->
+            if ((type == ContentType.GOAL && info is GoalInfo && info.id == id) ||
+                    (type == ContentType.GOALLOG && info is GoalLogInfo && info.id == id)) {
+                info.liked = boolean
+
+                if(boolean) info.likeNum++
+                else info.likeNum--
+
+                Log.d(TAG, "$index changed")
+                notifyItemChanged(index + 1)
+            }
+        }
+    }
+
     fun clear() {
         val size = this.mainInfos.size
-        Log.d("ViewHolder", "size is $size in clear")
+        Log.d(TAG, "size is $size in clear")
         this.mainInfos.clear()
         notifyDataSetChanged()
     }

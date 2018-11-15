@@ -1,6 +1,7 @@
 package com.cyhee.android.rabit.activity.goal
 
 import android.util.Log
+import com.cyhee.android.rabit.activity.base.DialogHandler
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
 import com.cyhee.android.rabit.client.PostClient
@@ -45,7 +46,7 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
     override fun toggleLikeForGoal(id: Long, post: Boolean) {
         if (post)
             PostClient.postLikeForGoal(id, scopeProvider) {
-                //view.toggleLike(true)
+                view.toggleLike(true)
             }
         else
             restClient.deleteLikeForGoal(id)
@@ -54,10 +55,10 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
                     .autoDisposable(scopeProvider)
                     .subscribe(
                             {
-                                //view.toggleLike(false)
+                                view.toggleLike(false)
                             },
                             {
-
+                                DialogHandler.errorDialog(it, view)
                             }
                     )
 

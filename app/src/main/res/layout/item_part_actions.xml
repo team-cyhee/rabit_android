@@ -8,6 +8,7 @@
     android:layout_gravity="center_horizontal">
 
     <LinearLayout
+        android:id="@+id/likeBtnWrapper"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"

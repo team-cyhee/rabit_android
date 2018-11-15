@@ -58,4 +58,8 @@ class ComGlActivity: AppCompatActivity(), ComGlContract.View {
 
     override fun setWriteGoalId(id: Long) {
     }
+
+    fun toggleLike(id: Long, boolean: Boolean) {
+        comGlAdapter!!.toggleLike(id, boolean)
+    }
 }

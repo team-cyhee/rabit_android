@@ -1,6 +1,7 @@
 package com.cyhee.android.rabit.activity.goallog
 
 import android.util.Log
+import com.cyhee.android.rabit.activity.base.DialogHandler
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
 import com.cyhee.android.rabit.client.PostClient
@@ -56,7 +57,7 @@ class GoalLogPresenter(private val view: GoalLogActivity) : GoalLogContract.Pres
                                 view.toggleLike(false)
                             },
                             {
-
+                                DialogHandler.errorDialog(it, view)
                             }
                     )
     }

@@ -77,4 +77,8 @@ class MainActivity: AppCompatActivity(), MainContract.View {
 
         mainSwipeRefresh?.isRefreshing = false
     }
+
+    fun toggleLike(id: Long, type: ContentType, boolean: Boolean) {
+        mainAdapter!!.toggleLike(id, type, boolean)
+    }
 }

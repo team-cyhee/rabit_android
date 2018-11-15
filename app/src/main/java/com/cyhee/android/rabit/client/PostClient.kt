@@ -1,5 +1,7 @@
 package com.cyhee.android.rabit.client
 
+import android.util.Log
+import com.cyhee.android.rabit.activity.base.DialogHandler
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
 import com.cyhee.android.rabit.model.CommentFactory
@@ -11,6 +13,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 object PostClient {
+
+    private val TAG = PostClient::class.qualifiedName
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
     fun postGoal(goal: GoalFactory.Post, scopeProvider: AndroidLifecycleScopeProvider) {
@@ -73,9 +77,10 @@ object PostClient {
                 .autoDisposable(scopeProvider)
                 .subscribe (
                         {
+                            callback()
                         },
                         {
-                            // TODO: post완료되면 화면 새로고침?
+                            Log.d(TAG, "Get error from postLikeForGoal")
                         }
                 )
     }
@@ -87,9 +92,10 @@ object PostClient {
                 .autoDisposable(scopeProvider)
                 .subscribe (
                         {
+                            callback()
                         },
                         {
-                            // TODO: post완료되면 화면 새로고침?
+                            Log.d(TAG, "Get error from postLikeForGoalLog")
                         }
                 )
     }
