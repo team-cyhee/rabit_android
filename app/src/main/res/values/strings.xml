@@ -4,6 +4,9 @@
 
     <string name="facebook_app_id">297104847560897</string>
     <string name="fb_login_protocol_scheme">fb297104847560897</string>
+    <string name="confirm">확인</string>
+    <string name="unknown_error_message">에러가 발생하였습니다.</string>
+    <string name="canceled">취소되었습니다.</string>
 
     <string name="register_welcome">Welcome Aboard!</string>
     <string name="login_welcome">Welcome Back to Rabit</string>
