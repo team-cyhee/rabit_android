@@ -26,11 +26,11 @@
             android:src="@drawable/logo"/>
 
         <TextView
-            android:text="래빗"
+            android:text="@string/app"
             android:layout_width="53dp"
             android:layout_height="36dp"
             android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="26sp"/>
+            android:gravity="center"
+            android:textSize="15sp"/>
     </LinearLayout>
 </FrameLayout>

@@ -10,6 +10,7 @@ import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.activity.goallist.GoalListActivity
 import com.cyhee.android.rabit.activity.mywall.MyWallActivity
+import com.cyhee.android.rabit.activity.settings.SettingsActivity
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -45,6 +46,10 @@ class MainActivity: AppCompatActivity(), MainContract.View {
                     val intentToGoalList = Intent(this, GoalListActivity:: class.java)
                     intentToGoalList.putExtra("username", user)
                     startActivity(intentToGoalList)
+                }
+                R.id.tabSetting -> {
+                    val intentToSettings = Intent(this, SettingsActivity::class.java)
+                    startActivity(intentToSettings)
                 }
             }
         }

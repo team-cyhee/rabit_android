@@ -140,7 +140,6 @@ class MainViewAdapter (
         val size = this.mainInfos.size
         Log.d(TAG, "size is $size in clear")
         this.mainInfos.clear()
-        //notifyItemRangeRemoved(0, size)
         notifyDataSetChanged()
     }
 }

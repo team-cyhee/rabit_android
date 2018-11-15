@@ -1,6 +1,5 @@
 package com.cyhee.android.rabit.useful
 
-import android.widget.Button
 import com.cyhee.android.rabit.model.GoalLogInfo
 import java.util.*
 

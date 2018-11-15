@@ -20,7 +20,6 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
 
     private val TAG = GoalActivity::class.qualifiedName
     override var presenter : GoalContract.Presenter = GoalPresenter(this)
-    private var goalAdapter: GoalViewAdapter? = null
     private lateinit var goalInfo: GoalInfo
 
     private val user = App.prefs.user
@@ -42,7 +41,7 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
         }
     }
 
-    override fun showGoalLogInfos(goalInfo: GoalInfo, goalLogInfos: MutableList<GoalLogInfo>) {
+    override fun showGoalInfos(goalInfo: GoalInfo) {
         this.goalInfo = goalInfo
         val contentView = (findViewById<ViewGroup>(android.R.id.content))!!.getChildAt(0)
         GoalViewBinder.bind(BaseLayoutContainer(contentView), goalInfo) { id, bool ->

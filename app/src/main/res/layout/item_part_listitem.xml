@@ -5,16 +5,17 @@
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
     android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
     android:orientation="horizontal">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profileImage"
+        android:id="@+id/itemImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/profile"/>
 
     <TextView
-        android:id="@+id/nameText"
+        android:id="@+id/itemNameText"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_weight="1"
@@ -23,12 +24,4 @@
         android:textSize="20sp"
         android:textColor="@color/black"
         android:textStyle="bold" />
-
-    <Button
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:layout_gravity="end|center_vertical"
-        android:background="@drawable/rect_brown"
-        android:text="@string/following"
-        android:textColor="@color/white" />
 </LinearLayout>

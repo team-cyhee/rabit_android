@@ -26,7 +26,7 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome Back to Rabit"
+            android:text="@string/login_welcome"
             android:textColor="#323643"
             android:textSize="21.3sp"/>
 
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:textSize="15.4sp"
             android:textColor="#606470"
-            android:text="habit makes life better"/>
+            android:text="@string/rabit_info"/>
 
 
         <android.support.v7.widget.CardView
@@ -68,7 +68,7 @@
                     android:id="@+id/emailText"
                     android:background="#00000000"
                     android:layout_marginStart="10dp"
-                    android:hint="Email"
+                    android:hint="@string/email"
                     android:textColorHint="#000000"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -102,7 +102,7 @@
                     android:id="@+id/passwordText"
                     android:background="#00000000"
                     android:layout_marginStart="10dp"
-                    android:hint="Password"
+                    android:hint="@string/password"
                     android:inputType="textPassword"
                     android:textColorHint="#000000"
                     android:layout_width="match_parent"
@@ -112,12 +112,12 @@
         </android.support.v7.widget.CardView>
 
         <TextView
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:layout_marginTop="19.2dp"
             android:layout_marginEnd="28.9dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Forgot password?"
+            android:text="@string/password_prompt"
             android:textColor="#606470"
             android:textSize="15.4sp"/>
 
@@ -131,7 +131,7 @@
             android:layout_marginEnd="28.9dp"
             android:background="@drawable/rect_brown"
             android:gravity="center"
-            android:text="LogIn"
+            android:text="@string/login"
             android:textColor="#fbfbfb"
             android:textSize="15.4sp" />
 
@@ -152,7 +152,7 @@
                 android:layout_marginEnd="3dp"
                 android:background="@drawable/rect_black"
                 android:gravity="center"
-                android:text="facebook login"
+                android:text="@string/facebook_login"
                 android:textColor="@color/white"
                 android:textSize="10sp" />
 
@@ -167,7 +167,7 @@
                 android:layout_marginEnd="28.9dp"
                 android:background="@drawable/rect_black"
                 android:gravity="center"
-                android:text="google login"
+                android:text="@string/google_login"
                 android:textColor="@color/white"
                 android:textSize="10sp" />
         </LinearLayout>
@@ -186,7 +186,7 @@
             android:textColor="#606470"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New User?" />
+            android:text="@string/register_prompt" />
 
         <TextView
             android:id="@+id/registerBtn"
@@ -196,7 +196,7 @@
             android:layout_height="wrap_content"
             android:textSize="15.4sp"
             android:textColor="#3277d8"
-            android:text="Sign up for a new account" />
+            android:text="@string/to_register" />
 
     </LinearLayout>
 
