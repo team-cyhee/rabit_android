@@ -18,12 +18,8 @@ import kotlinx.android.synthetic.main.item_complete_goallogwrite.*
 import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 import java.io.File
 import java.io.IOException
-import android.widget.Toast
 import android.graphics.Bitmap
-import android.R.attr.data
-
-
-
+import android.provider.MediaStore.MediaColumns
 
 
 
@@ -98,21 +94,16 @@ class GoalLogWriteActivity: AppCompatActivity(), GoalLogWriteContract.View {
     }
 
 
-    //앨범 선택 클릭
+    //앨범 선택
     private fun selectAlbum() {
-
-        //앨범 열기
         val intent = Intent(Intent.ACTION_PICK)
-
         intent.type = MediaStore.Images.Media.CONTENT_TYPE
-        //intent.type = "image/*"
-
         startActivityForResult(intent, ALBUM)
 
     }
 
-    //사진 찍기 클릭
-    fun takePhoto() {
+    //사진 찍기
+    private fun takePhoto() {
 
         val state = Environment.getExternalStorageState()
 
@@ -170,6 +161,8 @@ class GoalLogWriteActivity: AppCompatActivity(), GoalLogWriteContract.View {
 
     private fun cropImage(uri: Uri?) {
         val intent = Intent("com.android.camera.action.CROP")
+        intent.flags = Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+        intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
         intent.setDataAndType(uri, "image/*")
         intent.putExtra("outputX", 200)
         intent.putExtra("outputY", 200)
@@ -182,7 +175,6 @@ class GoalLogWriteActivity: AppCompatActivity(), GoalLogWriteContract.View {
             startActivityForResult(intent, CROP)
         }
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
