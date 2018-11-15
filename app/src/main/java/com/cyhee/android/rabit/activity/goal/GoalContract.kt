@@ -9,12 +9,11 @@ import com.cyhee.android.rabit.model.GoalLogInfo
 
 class GoalContract {
     interface View : BaseView<Presenter> {
-        fun showGoalLogInfos(goalInfo: GoalInfo, goalLogInfos: MutableList<GoalLogInfo>)
+        fun showGoalInfos(goalInfo: GoalInfo)
     }
 
     interface Presenter : BasePresenter {
         fun goalInfos(id: Long)
-        fun goalStoreGoalLogs(id: Long, goalInfo: GoalInfo)
         fun toggleLikeForGoal(id: Long, post:Boolean)
         fun toggleLikeForGoalLog(id: Long, post:Boolean)
         fun postCommentForGoal(id: Long, comment: CommentFactory.Post)

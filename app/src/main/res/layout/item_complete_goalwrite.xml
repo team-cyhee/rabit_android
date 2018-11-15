@@ -21,35 +21,35 @@
         sl:scale_width="360">
 
         <RadioButton
-            android:text = "매일"
+            android:text="@string/everyday"
             android:id="@+id/dailyBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
 
         <RadioButton
-            android:text = "주별"
+            android:text="@string/weekly"
             android:id="@+id/weeklyBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <RadioButton
-            android:text = "월별"
+            android:text="@string/monthly"
             android:id="@+id/monthlyBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <RadioButton
-            android:text = "년별"
+            android:text="@string/yearly"
             android:id="@+id/yearlyBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <RadioButton
-            android:text = "none"
+            android:text="@string/none"
             android:id="@+id/noneBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
     </RadioGroup>
 
     <EditText
-        android:hint="횟수"
+        android:hint="@string/times"
         android:id="@+id/goalTimeText"
         android:layout_width="313dp"
         android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
         sl:scale_height="30" />
 
     <TextView
-        android:text="번"
+        android:text="@string/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -84,7 +84,7 @@
         sl:scale_height="30"/>
 
     <EditText
-        android:hint="목표를 입력해주세요"
+        android:hint="@string/goal_write_prompt"
         android:id="@+id/goalContentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
         sl:scale_width="310" />
 
     <EditText
-        android:hint="시작일"
+        android:hint="@string/start_date"
         android:id="@+id/goalStartText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
         sl:scale_width="310" />
 
     <EditText
-        android:hint="종료일"
+        android:hint="@string/end_date"
         android:id="@+id/goalEndText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
         sl:scale_width="310" />
 
     <Button
-        android:text="작성"
+        android:text="@string/post"
         android:id="@+id/realGoalPostBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

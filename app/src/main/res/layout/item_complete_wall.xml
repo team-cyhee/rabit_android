@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
 
     <LinearLayout
@@ -46,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Syracuse, New York"
+                    android:text="@string/user_info"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -61,7 +60,7 @@
                 android:background="@drawable/rounded"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="FOLLOW ME"
+                android:text="@string/follow_prompt"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimaryDark" />
 
@@ -100,7 +99,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Carrots"
+                    android:text="@string/carrot"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -130,7 +129,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Followers"
+                    android:text="@string/followers"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -160,7 +159,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Following"
+                    android:text="@string/following"
                     android:textSize="14sp" />
 
             </LinearLayout>

@@ -6,7 +6,7 @@
         android:name=".activity.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/app"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
@@ -36,6 +36,7 @@
         <activity android:name="com.cyhee.android.rabit.activity.comgl.ComGlActivity" />
         <activity android:name="com.cyhee.android.rabit.activity.search.SearchActivity"/>
         <activity android:name="com.cyhee.android.rabit.activity.goalloglist.GoalLogListActivity"/>
+        <activity android:name="com.cyhee.android.rabit.activity.settings.SettingsActivity" />
         <!-- facebook -->
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         <activity android:name="com.facebook.FacebookActivity" android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:label="@string/app_name" />
@@ -47,9 +48,25 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+
+        <!-- provider -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.cyhee.android.rabit"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
     <!-- permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera2" />
+
 
 </manifest>

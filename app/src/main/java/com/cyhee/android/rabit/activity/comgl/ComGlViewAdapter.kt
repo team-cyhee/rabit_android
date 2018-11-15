@@ -63,30 +63,10 @@ class ComGlViewAdapter (
                     likeNumberText.text = goalLogInfo.likeNum.toString()
                     commentNumberText.text = goalLogInfo.commentNum.toString()
 
-                    if (goalLogInfo.comments.content.size > 0) {
-                        commentGoalLogLayout1.findViewById<TextView>(R.id.commentWriterText).text = goalLogInfo.comments.content[0].author.username
-                        commentGoalLogLayout1.findViewById<TextView>(R.id.commentText).text = goalLogInfo.comments.content[0].content
-                        commentGoalLogLayout1.visibility = View.VISIBLE
-                    } else {
-                        commentGoalLogLayout1.visibility = View.GONE
-                    }
-
-                    if (goalLogInfo.comments.content.size > 1) {
-                        commentGoalLogLayout2.findViewById<TextView>(R.id.commentWriterText).text = goalLogInfo.comments.content[1].author.username
-                        commentGoalLogLayout2.findViewById<TextView>(R.id.commentText).text = goalLogInfo.comments.content[1].content
-                        commentGoalLogLayout2.visibility = View.VISIBLE
-                    } else {
-                        commentGoalLogLayout2.visibility = View.GONE
-                    }
-
                     val isMy = user == goalLogInfo.author.username
                     nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
                     titleText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.id))
                     textLayout.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
-                    commentGoalLogLayout1.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
-                    commentGoalLogLayout2.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
-                    commentGoalLogLayout1.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
-                    commentGoalLogLayout2.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
                     commentNumberText.setOnClickListener(IntentListener.toGoalLogCommentsListener(goalLogInfo.id))
                     likeNumberText.setOnClickListener(IntentListener.toGoalLogLikeListListener(goalLogInfo.id))
 

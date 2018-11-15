@@ -25,7 +25,7 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
                 .subscribe(
                         {
                             Log.d("goal",it.toString())
-                            goalStoreGoalLogs(id, it)
+                            view.showGoalInfos(it)
                         },
                         {
                             if(it is HttpException) {
@@ -37,31 +37,6 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
                             }
                             else {
                                 Log.d("goal",it.toString())
-                            }
-                        }
-                )
-    }
-
-    override fun goalStoreGoalLogs(id: Long, goalInfo: GoalInfo) {
-        restClient.goalStoreGoalLogs(id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(scopeProvider)
-                .subscribe(
-                        {
-                            Log.d("goallogs",it.toString())
-                            view.showGoalLogInfos(goalInfo, it!!.toMutableList())
-                        },
-                        {
-                            if(it is HttpException) {
-                                Log.d("goallogs",it.response().toString())
-                                Log.d("goallogs",it.response().body().toString())
-                                Log.d("goallogs",it.response().body().toString())
-                                Log.d("goallogs",it.response().errorBody().toString())
-                                Log.d("goallogs",it.response().errorBody()?.string())
-                            }
-                            else {
-                                Log.d("goallogs",it.toString())
                             }
                         }
                 )
