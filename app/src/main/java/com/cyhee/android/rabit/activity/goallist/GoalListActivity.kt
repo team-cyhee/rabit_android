@@ -17,6 +17,7 @@ import android.support.v7.widget.GridLayoutManager
 import com.cyhee.android.rabit.activity.decoration.CardItemDeco
 import com.cyhee.android.rabit.activity.main.MainActivity
 import com.cyhee.android.rabit.activity.mywall.MyWallActivity
+import com.cyhee.android.rabit.activity.settings.SettingsActivity
 
 class GoalListActivity: AppCompatActivity(), GoalListContract.View {
 
@@ -52,6 +53,7 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
             Log.d("preBtn","clicked")
             finish()
         }
+
         bottomBar.setOnTabSelectListener { tabId ->
             when (tabId) {
                 R.id.tabHome -> {
@@ -63,6 +65,10 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
                     val intentToMyWall = Intent(this, MyWallActivity::class.java)
                     intentToMyWall.putExtra("username", user)
                     startActivity(intentToMyWall)
+                }
+                R.id.tabSetting -> {
+                    val intentToSettings = Intent(this, SettingsActivity::class.java)
+                    startActivity(intentToSettings)
                 }
             }
         }
