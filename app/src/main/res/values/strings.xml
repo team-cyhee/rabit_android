@@ -1,22 +1,58 @@
 <resources>
-    <string name="app_name">rabit</string>
-    <string name="id"> ID</string>
-    <string name="password">PASSWORD</string>
-    <string name="login">LOGIN</string>
     <string name="app">rabit</string>
-    <string name="register">JOIN</string>
-    <string name="email">EMAIL</string>
-    <string name="passwordCheck">PASSWORD CHECK</string>
-    <string name="phone">PHONE NUMBER</string>
-    <string name="birth">BIRTH</string>
-    <string name="name">NAME</string>
-    <string name="post">POST</string>
-    <string name="prompt">오늘 하루는 어땠나요?</string>
-    <string name="participants">PARTICIPANTS</string>
-    <string name="username">USERNAME</string>
+    <string name="team">team_dirty_straw</string>
+
     <string name="facebook_app_id">297104847560897</string>
     <string name="fb_login_protocol_scheme">fb297104847560897</string>
-    <string name="confirm">확인</string>
-    <string name="unknown_error_message">에러가 발생하였습니다.</string>
-    <string name="canceled">취소되었습니다.</string>
+
+    <string name="register_welcome">Welcome Aboard!</string>
+    <string name="login_welcome">Welcome Back to Rabit</string>
+    <string name="rabit_info">habit makes life better</string>
+    <string name="signup_info">Signup with Rabit in simple steps</string>
+    <string name="login_prompt">Already a User?</string>
+    <string name="password_prompt">Forgot password?</string>
+    <string name="register_prompt">New User?</string>
+    <string name="to_register">Sign up for a new account</string>
+
+    <string name="sign_up">Sign Up</string>
+    <string name="to_login">Login now</string>
+
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="password_check">Password Check</string>
+    <string name="phone">Phone Number</string>
+    <string name="age">Age</string>
+    <string name="login">Login</string>
+    <string name="facebook_login">facebook login</string>
+    <string name="google_login">google login</string>
+
+    <string name="carrot">Carrots</string>
+    <string name="following">Following</string>
+    <string name="followers">Followers</string>
+    <string name="post">작성</string>
+    <string name="like">응원해</string>
+    <string name="companion">함께하기</string>
+    <string name="comment">댓글달기</string>
+    <string name="logout">로그아웃</string>
+
+    <string name="search_prompt">함께할 토끼를 찾아보세요</string>
+    <string name="comment_prompt">   응원해주세요! :></string>
+    <string name="log_write_prompt">오늘 하루는 어땠나요?</string>
+    <string name="goal_write_prompt">목표를 입력해주세요</string>
+    <string name="content_write_prompt">내용을 입력해주세요</string>
+
+    <string name="user_info">Syracuse, New York</string>
+    <string name="follow_prompt">FOLLOW ME</string>
+    <string name="edit_profile">EDIT PROFILE</string>
+
+    <string name="everyday">매일</string>
+    <string name="weekly">주별</string>
+    <string name="monthly">월별</string>
+    <string name="yearly">년별</string>
+    <string name="none">none</string>
+    <string name="times">횟수</string>
+    <string name="time">번</string>
+    <string name="start_date">시작일</string>
+    <string name="end_date">종료일</string>
 </resources>

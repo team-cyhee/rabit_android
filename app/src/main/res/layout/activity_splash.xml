@@ -28,7 +28,7 @@
             android:layout_height="70dp"
             android:layout_gravity="center_horizontal"
             android:text="@string/app"
-            android:textSize="40dp"
+            android:textSize="40sp"
             android:textColor="@color/basic"
             android:textStyle="bold" />
 
@@ -41,6 +41,6 @@
         android:gravity="center"
         android:layout_marginBottom="50dp"
         android:textColor="@color/colorPrimary"
-        android:textSize="15dp"
-        android:text="+@team DirtyStraw"/>
+        android:textSize="15sp"
+        android:text="@string/team"/>
 </FrameLayout>

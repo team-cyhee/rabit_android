@@ -15,5 +15,5 @@
         android:layout_height="30dp"
         android:background="@drawable/rect_sq"
         android:gravity="center_vertical"
-        android:hint="    오늘 하루는 어땠나요?" />
+        android:hint="@string/log_write_prompt" />
 </LinearLayout>

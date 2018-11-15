@@ -18,7 +18,7 @@
         android:layout_height="40dp"
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
-        android:hint="함께할 토끼를 찾아보세요"
+        android:hint="@string/search_prompt"
         android:textColor="@color/black"
         android:textSize="15sp" />
 

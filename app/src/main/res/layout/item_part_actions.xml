@@ -29,7 +29,7 @@
             android:layout_width="62dp"
             android:layout_height="match_parent"
             android:background="@null"
-            android:text="응원해"
+            android:text="@string/like"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -54,7 +54,7 @@
             android:layout_width="72dp"
             android:layout_height="match_parent"
             android:background="@null"
-            android:text="함께하기"
+            android:text="@string/companion"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -79,7 +79,7 @@
             android:layout_width="68dp"
             android:layout_height="match_parent"
             android:background="@null"
-            android:text="댓글달기"
+            android:text="@string/comment"
             android:textSize="14sp" />
     </LinearLayout>
 

@@ -85,7 +85,7 @@
                 android:textSize="12sp"/>
 
             <TextView
-                android:text="당근"
+                android:text="@string/carrot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"/>

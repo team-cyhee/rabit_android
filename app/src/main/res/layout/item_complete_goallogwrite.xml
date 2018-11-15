@@ -16,7 +16,7 @@
     </Spinner>
 
     <EditText
-        android:hint="내용을 입력해주세요"
+        android:hint="@string/content_write_prompt"
         android:id="@+id/goalLogContentText"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
@@ -52,7 +52,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal|end"
             android:background="@color/main"
-            android:text="작성"
+            android:text="@string/post"
             android:textColor="@color/basic"
             android:textStyle="bold" />
     </LinearLayout>
