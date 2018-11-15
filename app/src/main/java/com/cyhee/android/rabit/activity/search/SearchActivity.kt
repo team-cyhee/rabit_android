@@ -101,7 +101,7 @@ class SearchActivity: AppCompatActivity(), SearchContract.View {
             results.add(result)
         }
         if (searchAdapter == null) {
-            searchAdapter = SearchViewAdapter(results)
+            searchAdapter = SearchViewAdapter(0, results)
             userSearchListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             userSearchListView.adapter = searchAdapter
         } else {
@@ -117,7 +117,7 @@ class SearchActivity: AppCompatActivity(), SearchContract.View {
             results.add(result)
         }
         if (searchAdapter == null) {
-            searchAdapter = SearchViewAdapter(results)
+            searchAdapter = SearchViewAdapter(1, results)
             goalSearchListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             goalSearchListView.adapter = searchAdapter
         } else {
@@ -133,7 +133,7 @@ class SearchActivity: AppCompatActivity(), SearchContract.View {
             results.add(result)
         }
         if (searchAdapter == null) {
-            searchAdapter = SearchViewAdapter(results)
+            searchAdapter = SearchViewAdapter(2, results)
             goalLogSearchListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             goalLogSearchListView.adapter = searchAdapter
         } else {

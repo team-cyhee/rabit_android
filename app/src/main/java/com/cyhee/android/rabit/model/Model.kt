@@ -88,7 +88,6 @@ abstract class MainInfo {
     abstract var likeNum: Int
     abstract var commentNum: Int
     abstract var companionNum: Int
-    abstract var comments: Page<Comment>
     abstract var lastUpdated: Date
     abstract var type: ContentType
     abstract var liked: Boolean
@@ -106,7 +105,6 @@ data class GoalInfo (
     override var likeNum: Int,
     override var commentNum: Int,
     override var companionNum: Int,
-    override var comments: Page<Comment>,
     override var lastUpdated: Date,
     override var liked: Boolean,
     override var type: ContentType = ContentType.GOAL
@@ -125,7 +123,6 @@ data class GoalLogInfo (
     override var likeNum: Int,
     override var commentNum: Int,
     override var companionNum: Int,
-    override var comments: Page<Comment>,
     override var lastUpdated: Date,
     override var liked: Boolean,
     override var type: ContentType = ContentType.GOALLOG

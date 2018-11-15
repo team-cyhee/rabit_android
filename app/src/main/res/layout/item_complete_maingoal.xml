@@ -23,12 +23,5 @@
             android:id="@+id/commentGoalWriteLayout"
             layout="@layout/item_part_actions"/>
 
-        <include
-            android:id="@+id/commentGoalLayout1"
-            layout="@layout/item_part_comment"/>
-
-        <include
-            android:id="@+id/commentGoalLayout2"
-            layout="@layout/item_part_comment"/>
     </LinearLayout>
 </android.support.v7.widget.CardView>

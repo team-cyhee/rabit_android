@@ -18,7 +18,6 @@ import java.text.SimpleDateFormat
 
 class GoalActivity: AppCompatActivity(), GoalContract.View {
     override var presenter : GoalContract.Presenter = GoalPresenter(this)
-    private var goalAdapter: GoalViewAdapter? = null
 
     private val user = App.prefs.user
 
@@ -39,7 +38,7 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
         }
     }
 
-    override fun showGoalLogInfos(goalInfo: GoalInfo, goalLogInfos: MutableList<GoalLogInfo>) {
+    override fun showGoalInfos(goalInfo: GoalInfo) {
         nameText.text = goalInfo.author.username
         titleText.text = goalInfo.content
 
@@ -104,16 +103,5 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
                     likeButton.context.resources.getDrawable(R.drawable.ic_heart_outline)
         }
         cmtPostBtn.setOnClickListener(IntentListener.toGoalCommentsListener(goalInfo.id))
-       /* if (goalAdapter == null) {
-            goalAdapter = GoalViewAdapter(goalInfo, goalLogInfos,
-                    { id, post -> presenter.toggleLikeForGoalLog(id, post)},
-                    { id, comment -> presenter.postCommentForGoalLog(id, comment) },
-                    { id, post -> presenter.toggleLikeForGoal(id, post)})
-            goalListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            goalListView.adapter = goalAdapter
-        } else {
-            goalAdapter!!.appendGoalLogInfos(goalLogInfos)
-        }
-        */
     }
 }
