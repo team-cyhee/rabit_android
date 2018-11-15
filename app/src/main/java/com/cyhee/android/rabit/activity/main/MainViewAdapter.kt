@@ -138,7 +138,7 @@ class MainViewAdapter (
 
     fun clear() {
         val size = this.mainInfos.size
-        Log.d("ViewHolder", "size is $size in clear")
+        Log.d(TAG, "size is $size in clear")
         this.mainInfos.clear()
         //notifyItemRangeRemoved(0, size)
         notifyDataSetChanged()

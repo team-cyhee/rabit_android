@@ -40,34 +40,13 @@ object GoalViewBinder {
             }
 
             likeNumberText.text = item.likeNum.toString()
-            /*commentNumberText.text = item.commentNum.toString()
-
-            // 댓글 2개
-            if (item.comments.content.size > 0) {
-                commentGoalLayout1.findViewById<TextView>(R.id.commentWriterText).text = item.comments.content[0].author.username
-                commentGoalLayout1.findViewById<TextView>(R.id.commentText).text = item.comments.content[0].content
-                commentGoalLayout1.visibility = View.VISIBLE
-            } else {
-                commentGoalLayout1.visibility = View.GONE
-            }
-
-            if (item.comments.content.size > 1) {
-                commentGoalLayout2.findViewById<TextView>(R.id.commentWriterText).text = item.comments.content[1].author.username
-                commentGoalLayout2.findViewById<TextView>(R.id.commentText).text = item.comments.content[1].content
-                commentGoalLayout2.visibility = View.VISIBLE
-            } else {
-                commentGoalLayout2.visibility = View.GONE
-            }*/
+            commentNumberText.text = item.commentNum.toString()
 
             val isMy = user == item.author.username
             nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, item.author.username))
             titleText.setOnClickListener(IntentListener.toGoalListener(item.id))
             logNum.setOnClickListener(IntentListener.toGoalListener(item.id))
             commentNumberText.setOnClickListener(IntentListener.toGoalCommentsListener(item.id))
-           /* commentGoalLayout1.setOnClickListener(IntentListener.toGoalListener(item.id))
-            commentGoalLayout2.setOnClickListener(IntentListener.toGoalListener(item.id))
-            commentGoalLayout1.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, item.author.username))
-            commentGoalLayout2.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, item.author.username))*/
             likeNumberText.setOnClickListener(IntentListener.toGoalLikeListListener(item.id))
 
             comNumberText.setOnClickListener(IntentListener.toCompanionListListener(item.id))

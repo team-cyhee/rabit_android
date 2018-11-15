@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.*
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
+import com.cyhee.android.rabit.activity.base.GoalLogViewBinder
+import com.cyhee.android.rabit.activity.main.MainViewHolderForGoalLog
 import com.cyhee.android.rabit.base.BaseViewHolder
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
@@ -26,6 +28,7 @@ class ComGlViewAdapter (
         private val toggleLikeForGoalLog: (Long, Boolean) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
+    private val TAG = ComGlViewAdapter::class.qualifiedName
     private val user = App.prefs.user
 
     override fun getItemViewType(position: Int): Int {
@@ -52,72 +55,8 @@ class ComGlViewAdapter (
                 }
             }
             1 -> {
-                with(holder as ComGlViewHolder) {
-                    val goalLogInfo: GoalLogInfo = comGls[position-1]
-                    nameText.text = goalLogInfo.goal.author.username
-                    val goalTitle = goalLogInfo.goal.content + Fun.dateDistance(goalLogInfo)
-                    titleText.text = goalTitle
-
-                    text.text = goalLogInfo.content
-
-                    likeNumberText.text = goalLogInfo.likeNum.toString()
-                    commentNumberText.text = goalLogInfo.commentNum.toString()
-
-                    if (goalLogInfo.comments.content.size > 0) {
-                        commentGoalLogLayout1.findViewById<TextView>(R.id.commentWriterText).text = goalLogInfo.comments.content[0].author.username
-                        commentGoalLogLayout1.findViewById<TextView>(R.id.commentText).text = goalLogInfo.comments.content[0].content
-                        commentGoalLogLayout1.visibility = View.VISIBLE
-                    } else {
-                        commentGoalLogLayout1.visibility = View.GONE
-                    }
-
-                    if (goalLogInfo.comments.content.size > 1) {
-                        commentGoalLogLayout2.findViewById<TextView>(R.id.commentWriterText).text = goalLogInfo.comments.content[1].author.username
-                        commentGoalLogLayout2.findViewById<TextView>(R.id.commentText).text = goalLogInfo.comments.content[1].content
-                        commentGoalLogLayout2.visibility = View.VISIBLE
-                    } else {
-                        commentGoalLogLayout2.visibility = View.GONE
-                    }
-
-                    val isMy = user == goalLogInfo.author.username
-                    nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
-                    titleText.setOnClickListener(IntentListener.toGoalListener(goalLogInfo.goal.id))
-                    textLayout.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
-                    commentGoalLogLayout1.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
-                    commentGoalLogLayout2.setOnClickListener(IntentListener.toGoalLogListener(goalLogInfo.id))
-                    commentGoalLogLayout1.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
-                    commentGoalLogLayout2.findViewById<TextView>(R.id.commentWriterText).setOnClickListener(IntentListener.toWhichWallListListener(isMy, goalLogInfo.author.username))
-                    commentNumberText.setOnClickListener(IntentListener.toGoalLogCommentsListener(goalLogInfo.id))
-                    likeNumberText.setOnClickListener(IntentListener.toGoalLogLikeListListener(goalLogInfo.id))
-
-                    if (goalLogInfo.liked) {
-                        likeButton.background = if (Build.VERSION.SDK_INT >= 21)
-                            likeButton.context.getDrawable(R.drawable.ic_heart_black)
-                        else
-                            likeButton.context.resources.getDrawable(R.drawable.ic_heart_outline)
-                    }
-                    // post like
-                    likeBtn.setOnClickListener {
-                        goalLogInfo.liked = !goalLogInfo.liked
-                        toggleLikeForGoalLog(goalLogInfo.id, goalLogInfo.liked)
-
-                        if (goalLogInfo.liked) {
-                            likeButton.background = if(Build.VERSION.SDK_INT >= 21)
-                                likeButton.context.getDrawable(R.drawable.ic_heart_black)
-                            else
-                                likeButton.context.resources.getDrawable(R.drawable.ic_heart_outline)
-                        }
-                    }
-
-                    cmtPostBtn.setOnClickListener(IntentListener.toGoalLogCommentsListener(goalLogInfo.id))
-                    when (user) {
-                        // TODO: 이미 companion이면 버튼 안보이게
-                        goalLogInfo.author.username -> coBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalLogInfo.goal.id, goalLogInfo.goal.content))
-                        else -> coBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalLogInfo.goal.id, goalLogInfo.goal.content))
-                    }
-
-                    Log.d("ViewHolder", goalLogInfo.toString())
-                }
+                val goalLogInfo = comGls[position-1]
+                GoalLogViewBinder.bind(holder as ComGlViewHolder, goalLogInfo, toggleLikeForGoalLog)
             }
         }
     }
@@ -129,6 +68,21 @@ class ComGlViewAdapter (
         Log.d("ViewHolder", "index is $index in appendMainInfos")
         comGls.addAll(moreComGls)
         notifyItemRangeInserted(index, comGls.size)
+    }
+
+    fun toggleLike(id: Long, boolean: Boolean) {
+        Log.d(TAG, "toggleLike $id, $boolean")
+        this.comGls.forEachIndexed { index, info ->
+            if (info.id == id) {
+                info.liked = boolean
+
+                if(boolean) info.likeNum++
+                else info.likeNum--
+
+                Log.d(TAG, "$index changed")
+                notifyItemChanged(index + 1)
+            }
+        }
     }
 
     fun clear() {

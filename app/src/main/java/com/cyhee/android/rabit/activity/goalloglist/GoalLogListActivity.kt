@@ -59,4 +59,8 @@ class GoalLogListActivity: AppCompatActivity(), GoalLogListContract.View {
 
     override fun setWriteGoalId(id: Long) {
     }
+
+    fun toggleLike(id: Long, boolean: Boolean) {
+        comGlAdapter!!.toggleLike(id, boolean)
+    }
 }

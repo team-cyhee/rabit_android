@@ -1,10 +1,12 @@
 package com.cyhee.android.rabit.activity.mywall
 
 import android.util.Log
+import com.cyhee.android.rabit.activity.base.DialogHandler
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
 import com.cyhee.android.rabit.client.PostClient
 import com.cyhee.android.rabit.model.CommentFactory
+import com.cyhee.android.rabit.model.ContentType
 import com.cyhee.android.rabit.model.WallInfo
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
@@ -13,6 +15,8 @@ import io.reactivex.schedulers.Schedulers
 import retrofit2.HttpException
 
 class MyWallPresenter(private val view: MyWallActivity) : MyWallContract.Presenter {
+
+    private val TAG = MyWallPresenter::class.qualifiedName
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
@@ -69,7 +73,7 @@ class MyWallPresenter(private val view: MyWallActivity) : MyWallContract.Present
     override fun toggleLikeForGoal(id: Long, post: Boolean) {
         if(post)
             PostClient.postLikeForGoal(id, scopeProvider) {
-                //view.toggleLike(true)
+                view.toggleLike(id, ContentType.GOAL, true)
             }
         else
             restClient.deleteLikeForGoal(id)
@@ -78,10 +82,10 @@ class MyWallPresenter(private val view: MyWallActivity) : MyWallContract.Present
                     .autoDisposable(scopeProvider)
                     .subscribe(
                             {
-                                //view.toggleLike(false)
+                                view.toggleLike(id, ContentType.GOAL, false)
                             },
                             {
-
+                                DialogHandler.errorDialog(it, view)
                             }
                     )
 
@@ -90,7 +94,8 @@ class MyWallPresenter(private val view: MyWallActivity) : MyWallContract.Present
     override fun toggleLikeForGoalLog(id: Long, post: Boolean) {
         if(post)
             PostClient.postLikeForGoalLog(id, scopeProvider) {
-                //view.toggleLike(true)
+                Log.d(TAG, "callback")
+                view.toggleLike(id, ContentType.GOALLOG, true)
             }
         else
             restClient.deleteLikeForGoalLog(id)
@@ -99,10 +104,10 @@ class MyWallPresenter(private val view: MyWallActivity) : MyWallContract.Present
                     .autoDisposable(scopeProvider)
                     .subscribe(
                             {
-                                //view.toggleLike(false)
+                                view.toggleLike(id, ContentType.GOALLOG, false)
                             },
                             {
-
+                                DialogHandler.errorDialog(it, view)
                             }
                     )
     }
