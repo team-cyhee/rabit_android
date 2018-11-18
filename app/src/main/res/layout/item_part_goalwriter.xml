@@ -41,6 +41,11 @@
         sl:scale_height="20"
         sl:scale_width="300"/>
 
+    <ImageView
+        android:id="@+id/goalImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

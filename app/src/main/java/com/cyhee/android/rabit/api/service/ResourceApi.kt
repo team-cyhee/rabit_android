@@ -2,9 +2,14 @@ package com.cyhee.android.rabit.api.service
 
 import com.cyhee.android.rabit.model.*
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
+
 
 interface ResourceApi {
     @GET("/rest/v1/users")
@@ -114,4 +119,12 @@ interface ResourceApi {
 
     @GET("/rest/v1/comments/{id}")
     fun comment(@Path("id") id: Long) : Single<Comment>
+
+    @Multipart
+    @POST("/rest/v1/files")
+    fun fileUpload(@Part("description") description: RequestBody, @Part file: MultipartBody.Part): Single<Response<Void>>
+
+    @Streaming
+    @GET("/rest/v1/files/{id}")
+    fun fileDownload(@Path("id") id: Long): Observable<Response<ResponseBody>>
 }
