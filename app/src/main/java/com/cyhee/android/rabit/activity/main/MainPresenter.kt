@@ -45,7 +45,7 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
     }
 
     override fun postGoalLog(id: Long, goalLog: GoalLogFactory.Post) {
-        PostClient.postGoalLog(id, goalLog, scopeProvider)
+        PostClient.postGoalLog(id, goalLog, scopeProvider){}
     }
 
     override fun toggleLikeForGoal(id: Long, post: Boolean) {

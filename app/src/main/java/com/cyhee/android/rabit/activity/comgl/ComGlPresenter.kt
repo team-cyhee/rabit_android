@@ -44,7 +44,7 @@ class ComGlPresenter(private val view: ComGlActivity) : ComGlContract.Presenter 
     }
 
     override fun postGoalLog(id: Long, goalLog: GoalLogFactory.Post) {
-        PostClient.postGoalLog(id, goalLog, scopeProvider)
+        PostClient.postGoalLog(id, goalLog, scopeProvider){}
     }
 
     override fun toggleLikeForGoalLog(id: Long, post: Boolean) {

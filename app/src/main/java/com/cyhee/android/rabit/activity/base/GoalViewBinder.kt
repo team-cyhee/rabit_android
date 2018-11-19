@@ -13,8 +13,16 @@ import kotlinx.android.synthetic.main.item_part_actions.*
 import kotlinx.android.synthetic.main.item_part_goalwriter.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
 import java.text.SimpleDateFormat
+import com.bumptech.glide.Glide
+import com.cyhee.android.rabit.api.resource.RabitUrl
+import com.facebook.internal.Utility
+
 
 object GoalViewBinder {
+
+    private val TAG = GoalViewBinder::class.qualifiedName
+    private val baseUrl = "${RabitUrl.resourceUrl()}/rest/v1/files"
+
     @SuppressLint("SimpleDateFormat")
     fun bind(holder: LayoutContainer, item: GoalInfo, likeListener: (Long, Boolean) -> Unit) {
         val user = App.prefs.user
@@ -80,6 +88,10 @@ object GoalViewBinder {
             }
 
             cmtPostBtn.setOnClickListener(IntentListener.toGoalCommentsListener(item.id))
+
+            if(goalImage != null && !Utility.isNullOrEmpty(item.file)) {
+                Glide.with(holder.containerView).load("$baseUrl/${item.file.first().id}").into(goalImage)
+            }
 
             Log.d("ViewHolder", item.toString())
         }

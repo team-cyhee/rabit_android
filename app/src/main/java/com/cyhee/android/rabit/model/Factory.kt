@@ -25,7 +25,9 @@ object GoalFactory {
 object GoalLogFactory {
     data class Post(
         val content: String
-    )
+    ) {
+        var fileId: Long? = null
+    }
 }
 
 object CommentFactory {

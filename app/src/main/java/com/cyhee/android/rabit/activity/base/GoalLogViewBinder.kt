@@ -3,8 +3,10 @@ package com.cyhee.android.rabit.activity.base
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
+import com.bumptech.glide.Glide
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
+import com.cyhee.android.rabit.api.resource.RabitUrl
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.GoalLogInfo
 import com.cyhee.android.rabit.useful.Fun
@@ -18,6 +20,10 @@ import kotlinx.android.synthetic.main.item_part_text.*
 import java.text.SimpleDateFormat
 
 object GoalLogViewBinder {
+
+    private val TAG = GoalLogViewBinder::class.qualifiedName
+    private val baseUrl = "${RabitUrl.resourceUrl()}/rest/v1/files"
+
     @SuppressLint("SimpleDateFormat")
     fun bind(holder: LayoutContainer, item: GoalLogInfo, likeListener: (Long, Boolean) -> Unit) {
         val user = App.prefs.user
@@ -65,6 +71,11 @@ object GoalLogViewBinder {
                 // TODO: 이미 companion이면 버튼 안보이게
                 item.author.username -> coBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(item.goal.id, item.goal.content))
                 else -> coBtn.setOnClickListener(IntentListener.toCompanionWriteListener(item.goal.id, item.goal.content))
+            }
+
+            if(logImage != null && item.file.isNotEmpty()) {
+                Log.d(TAG, "$baseUrl/${item.file.first().id}")
+                Glide.with(holder.containerView).load("$baseUrl/${item.file.first().id}").into(logImage)
             }
 
             Log.d("ViewHolder", item.toString())

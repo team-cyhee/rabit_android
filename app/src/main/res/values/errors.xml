@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_default">에러가 발생했습니다.</string>
+    <string name="error_can_not_create_file">파일을 생성할 수 없습니다</string>
+</resources>

@@ -44,7 +44,7 @@ class GoalLogListPresenter(private val view: GoalLogListActivity) : GoalLogListC
     }
 
     override fun postGoalLog(id: Long, goalLog: GoalLogFactory.Post) {
-        PostClient.postGoalLog(id, goalLog, scopeProvider)
+        PostClient.postGoalLog(id, goalLog, scopeProvider){}
     }
 
     override fun toggleLikeForGoalLog(id: Long, post: Boolean) {

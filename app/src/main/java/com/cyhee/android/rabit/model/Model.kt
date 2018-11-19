@@ -3,6 +3,8 @@ package com.cyhee.android.rabit.model
 import java.util.*
 import android.telephony.mbms.FileInfo
 
+import kotlin.collections.ArrayList
+
 data class User (
     val id: Long,
     val username: String,
@@ -82,6 +84,15 @@ data class Like (
     val status: RadioStatus
 )
 
+data class FileInfo (
+    val id: Long,
+    val path: String,
+    val size: Long,
+    val name: String,
+    val orgName: String,
+    val extension: String
+)
+
 abstract class MainInfo {
     abstract var likeNum: Int
     abstract var commentNum: Int
@@ -92,20 +103,21 @@ abstract class MainInfo {
 }
 
 data class GoalInfo (
-    var id: Long,
-    var author: User,
-    var parent: Goal?,
-    var content: String,
-    var startDate: Date,
-    var endDate: Date?,
-    var selectedDays: GoalCycle,
-    var logNum: Int,
-    override var likeNum: Int,
-    override var commentNum: Int,
-    override var companionNum: Int,
-    override var lastUpdated: Date,
-    override var liked: Boolean,
-    override var type: ContentType = ContentType.GOAL
+        var id: Long,
+        var author: User,
+        var parent: Goal?,
+        var content: String,
+        var startDate: Date,
+        var endDate: Date?,
+        var selectedDays: GoalCycle,
+        var logNum: Int,
+        var file: List<FileInfo> = ArrayList(),
+        override var likeNum: Int,
+        override var commentNum: Int,
+        override var companionNum: Int,
+        override var lastUpdated: Date,
+        override var liked: Boolean,
+        override var type: ContentType = ContentType.GOAL
 ) : MainInfo() {
     override fun toString(): String {
         return this.content
@@ -118,6 +130,7 @@ data class GoalLogInfo (
     var goal: Goal,
     var content: String,
     var createDate: Date,
+    var file: List<FileInfo> = ArrayList(),
     override var likeNum: Int,
     override var commentNum: Int,
     override var companionNum: Int,
@@ -131,7 +144,7 @@ data class WallInfo (
     var username: String,
     var followerNum: Int,
     var followeeNum: Int,
-    var goalContents: List<String>
+    var goalContents: List<String> = ArrayList()
 )
 
 data class SearchForm (
