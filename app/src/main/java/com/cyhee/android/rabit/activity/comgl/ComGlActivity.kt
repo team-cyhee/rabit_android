@@ -27,6 +27,11 @@ class ComGlActivity: AppCompatActivity(), ComGlContract.View {
             val goalId = intent.getLongExtra("goalId", -1)
             presenter.comGls(goalId)
 
+            searchBtn.setOnClickListener(IntentListener.toSearchListener())
+            toUpBtn.setOnClickListener{
+                comGlListView.smoothScrollToPosition(0)
+            }
+
             // swipe refresh
             comGlSwipeRefresh.setOnRefreshListener {
                 Toast.makeText(this@ComGlActivity, "refreshed!", Toast.LENGTH_SHORT).show()
@@ -39,8 +44,6 @@ class ComGlActivity: AppCompatActivity(), ComGlContract.View {
         }
 
         searchBtn.setOnClickListener(IntentListener.toSearchListener())
-
-
     }
 
     override fun showComGls(comGls: MutableList<GoalLogInfo>) {

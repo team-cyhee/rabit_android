@@ -39,7 +39,7 @@
     <string name="comment">댓글달기</string>
     <string name="logout">로그아웃</string>
 
-    <string name="search_prompt">함께할 토끼를 찾아보세요</string>
+    <string name="search_prompt">함께할 래빗을 찾아보세요</string>
     <string name="comment_prompt">   응원해주세요! :></string>
     <string name="log_write_prompt">오늘 하루는 어땠나요?</string>
     <string name="goal_write_prompt">목표를 입력해주세요</string>

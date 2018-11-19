@@ -9,7 +9,9 @@ import com.cyhee.android.rabit.activity.goallist.GoalListActivity
 import com.cyhee.android.rabit.activity.main.MainActivity
 import com.cyhee.android.rabit.activity.mywall.MyWallActivity
 import com.cyhee.android.rabit.activity.sign.login.LoginActivity
+import com.cyhee.android.rabit.listener.IntentListener
 import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.item_complete_topbar.*
 
 class SettingsActivity: AppCompatActivity(), SettingsContract.View {
 
@@ -22,6 +24,7 @@ class SettingsActivity: AppCompatActivity(), SettingsContract.View {
         setContentView(R.layout.activity_settings)
         bottomBar.selectTabAtPosition(3)
 
+        searchBtn.setOnClickListener(IntentListener.toSearchListener())
         logoutBtn.setOnClickListener{
             App.prefs.user = ""
             App.prefs.token = ""

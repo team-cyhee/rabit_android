@@ -1,5 +1,6 @@
 package com.cyhee.android.rabit.activity.base
 
+import android.annotation.SuppressLint
 import android.util.Log
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
@@ -13,6 +14,7 @@ import kotlinx.android.synthetic.main.item_part_reaction.*
 import java.text.SimpleDateFormat
 
 object GoalViewBinder {
+    @SuppressLint("SimpleDateFormat")
     fun bind(holder: LayoutContainer, item: GoalInfo, likeListener: (Long, Boolean) -> Unit) {
         val user = App.prefs.user
 
@@ -20,6 +22,7 @@ object GoalViewBinder {
             nameText.text = item.author.username
             titleText.text = item.content
 
+            createDate.text = SimpleDateFormat("MM/dd/yyy").format(item.lastUpdated)
             // 함께하는 사람, 시작하는 날, 로그 수, 좋아요 수, 댓글 수
             comNumberText.text = item.companionNum.toString()
 

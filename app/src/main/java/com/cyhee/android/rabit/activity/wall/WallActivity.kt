@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.main.MainViewAdapter
+import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_wall.*
 import kotlinx.android.synthetic.main.item_complete_usertopbar.*
@@ -26,6 +27,11 @@ class WallActivity: AppCompatActivity(), WallContract.View {
             val username = intent.getStringExtra("username")
             presenter.wallInfo(username)
             usernameText.text = username
+
+            searchBtn.setOnClickListener(IntentListener.toSearchListener())
+            toUpBtn.setOnClickListener{
+                wallListView.smoothScrollToPosition(0)
+            }
 
             // swipe refresh
             wallSwipeRefresh.setOnRefreshListener {

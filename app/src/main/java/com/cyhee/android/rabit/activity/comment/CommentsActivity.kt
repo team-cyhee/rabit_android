@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.widget.Toast
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
-import com.cyhee.android.rabit.listener.IntentListener
-import com.cyhee.android.rabit.model.*
 import com.cyhee.android.rabit.activity.decoration.CardItemDeco
+import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_commentlist.*
 import kotlinx.android.synthetic.main.item_part_commentwrite.*
 import java.lang.Exception

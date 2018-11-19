@@ -3,8 +3,6 @@ package com.cyhee.android.rabit.model
 import java.util.*
 import android.telephony.mbms.FileInfo
 
-
-
 data class User (
     val id: Long,
     val username: String,

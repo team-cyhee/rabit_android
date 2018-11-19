@@ -1,5 +1,6 @@
 package com.cyhee.android.rabit.activity.base
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
 import android.widget.TextView
@@ -19,11 +20,13 @@ import kotlinx.android.synthetic.main.item_part_text.*
 import java.text.SimpleDateFormat
 
 object GoalLogViewBinder {
+    @SuppressLint("SimpleDateFormat")
     fun bind(holder: LayoutContainer, item: GoalLogInfo, likeListener: (Long, Boolean) -> Unit) {
         val user = App.prefs.user
 
         with(holder) {
             nameText.text = item.goal.author.username
+            createDate.text = SimpleDateFormat("MM/dd/yyy").format(item.createDate)
             val goalTitle = item.goal.content + Fun.dateDistance(item)
             titleText.text = goalTitle
 

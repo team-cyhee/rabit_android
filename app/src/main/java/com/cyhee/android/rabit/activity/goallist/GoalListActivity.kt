@@ -15,6 +15,7 @@ import com.cyhee.android.rabit.activity.decoration.CardItemDeco
 import com.cyhee.android.rabit.activity.main.MainActivity
 import com.cyhee.android.rabit.activity.mywall.MyWallActivity
 import com.cyhee.android.rabit.activity.settings.SettingsActivity
+import com.cyhee.android.rabit.listener.IntentListener
 import kotlinx.android.synthetic.main.item_complete_usertopbar.*
 
 class GoalListActivity: AppCompatActivity(), GoalListContract.View {
@@ -37,6 +38,11 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
             goalListListView.layoutManager = gridLayoutManager
 
             usernameText.text = username
+
+            searchBtn.setOnClickListener(IntentListener.toSearchListener())
+            toUpBtn.setOnClickListener{
+                goalListListView.smoothScrollToPosition(0)
+            }
 
             // swipe refresh
             goalListSwipeRefresh.setOnRefreshListener {

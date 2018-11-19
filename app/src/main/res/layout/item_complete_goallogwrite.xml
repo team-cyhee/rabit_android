@@ -20,7 +20,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/rect_sq" />
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:background="@null" />
 
     <EditText
         android:hint="@string/content_write_prompt"

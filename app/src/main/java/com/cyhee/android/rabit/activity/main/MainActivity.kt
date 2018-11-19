@@ -34,6 +34,9 @@ class MainActivity: AppCompatActivity(), MainContract.View {
         mainListView.layoutManager = linearLayoutManager
 
         searchBtn.setOnClickListener(IntentListener.toSearchListener())
+        toUpBtn.setOnClickListener{
+            mainListView.smoothScrollToPosition(0)
+        }
 
         bottomBar.setOnTabSelectListener { tabId ->
             when (tabId) {

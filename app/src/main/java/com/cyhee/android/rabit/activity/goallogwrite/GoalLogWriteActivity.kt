@@ -9,16 +9,13 @@ import android.provider.MediaStore
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.widget.*
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
-import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.item_complete_goallogwrite.*
 import java.io.File
 import java.io.IOException
 import android.graphics.Bitmap
-import android.provider.MediaStore.MediaColumns
 
 
 

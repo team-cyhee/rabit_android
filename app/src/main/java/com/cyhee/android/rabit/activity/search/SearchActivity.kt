@@ -42,10 +42,15 @@ class SearchActivity: AppCompatActivity(), SearchContract.View {
         spec.setIndicator("goalLog")
         searchTab.addTab(spec)
 
+        selectedTab = searchTab.currentTab
+        searchBtn.performClick()
+
         searchTab.setOnTabChangedListener {
             selectedTab = searchTab.currentTab
+
             searchAdapter?.clear()
             searchAdapter = null
+            searchBtn.performClick()
         }
 
         searchBtn.setOnClickListener {
