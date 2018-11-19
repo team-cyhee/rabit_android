@@ -10,6 +10,8 @@ import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.activity.base.DialogHandler
 import com.cyhee.android.rabit.activity.main.MainActivity
+import com.cyhee.android.rabit.activity.sign.find.FindPasswordActivity
+import com.cyhee.android.rabit.activity.sign.register.RegisterActivity
 import com.cyhee.android.rabit.api.response.TokenData
 import com.facebook.CallbackManager
 import kotlinx.android.synthetic.main.activity_login.*
@@ -21,11 +23,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.auth.api.Auth
-import com.google.firebase.auth.GoogleAuthProvider
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.firebase.auth.FirebaseAuth
-
-
 
 
 /**
@@ -35,9 +32,8 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, GoogleApiClient.O
 
     private val TAG = LoginActivity::class.qualifiedName
     private val RC_SIGN_IN = 1000
-    private var mAuth: FirebaseAuth? = null
     private var mGoogleApiClient: GoogleApiClient? = null
-    private val WEB_CLIENT_ID = "392949556910-9h23r7qdrhamh4evqsd2mdndretngll2.apps.googleusercontent.com"
+    private val WEB_CLIENT_ID = "911047158248-u72ju0uvg1l95fiehhpdund7vf182as9.apps.googleusercontent.com"
     private val callbackManager = CallbackManager.Factory.create()
     // Configure sign-in to request the user's ID, email address, and basic
     // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -48,7 +44,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, GoogleApiClient.O
         setContentView(R.layout.activity_login)
 
         loginBtn.setOnClickListener {
-            val username = emailText.text.toString()
+            val username = usernameText.text.toString()
             val password = passwordText.text.toString()
 
             presenter.login(username, password)
@@ -59,14 +55,27 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, GoogleApiClient.O
             startActivity(intent)
         }
 
+        findPasswordBtn.setOnClickListener {
+            val intent = Intent(this@LoginActivity, FindPasswordActivity::class.java)
+            startActivity(intent)
+        }
+
         setFacebook()
         setGoogle()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         Log.d(TAG, "requestCode = $requestCode, resultCode = $resultCode")
-        callbackManager.onActivityResult(requestCode, resultCode, data)
+        onActivityResultFacebook(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
+        onActivityResultGoogle(requestCode, resultCode, data)
+    }
+
+    private fun onActivityResultFacebook(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun onActivityResultGoogle(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == RC_SIGN_IN) {
             val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
             Log.d(TAG, result.isSuccess.toString())
@@ -74,6 +83,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, GoogleApiClient.O
                 Log.d(TAG,"success on google login")
                 val account = result.signInAccount
                 val token: String = account?.idToken!!
+                Log.d(TAG, "trying login with $token")
                 presenter.loginByGoogle(token)
             }
             else{
@@ -105,6 +115,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, GoogleApiClient.O
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(WEB_CLIENT_ID)
                 .requestEmail()
+                .requestProfile()
                 .build()
 
         mGoogleApiClient = GoogleApiClient.Builder(this)
@@ -112,15 +123,13 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, GoogleApiClient.O
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
                 .build()
 
-        mAuth = FirebaseAuth.getInstance()
-
         googleLoginBtn.setOnClickListener{
             var signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient)
             startActivityForResult(signInIntent,RC_SIGN_IN)
         }
     }
 
-    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
+    /*private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
         Log.e(TAG, "firebaseAuthWithGoogle():" + acct.id!!)
         val credential = GoogleAuthProvider.getCredential(acct?.idToken, null)
         mAuth!!.signInWithCredential(credential)
@@ -134,7 +143,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, GoogleApiClient.O
                         Log.d(TAG, "firebaseAuthWithGoogle():" + acct.id!!)
                     }
                 }
-    }
+    }*/
 
     override fun onConnectionFailed(@NonNull connectionResult: ConnectionResult) {
     }

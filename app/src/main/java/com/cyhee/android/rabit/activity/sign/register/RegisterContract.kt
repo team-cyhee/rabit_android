@@ -1,4 +1,4 @@
-package com.cyhee.android.rabit.activity.sign.login
+package com.cyhee.android.rabit.activity.sign.register
 
 import com.cyhee.android.rabit.base.BasePresenter
 import com.cyhee.android.rabit.base.BaseView

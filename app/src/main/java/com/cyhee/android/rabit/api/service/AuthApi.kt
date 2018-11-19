@@ -69,4 +69,9 @@ interface AuthApi {
     fun exists(
         @Path("username") username: String
     ) : Completable
+
+    @PUT("/v1/users/{username}/password")
+    fun findPassword(
+            @Path("username") username: String
+    ) : Completable
 }

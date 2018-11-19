@@ -1,4 +1,4 @@
-package com.cyhee.android.rabit.activity.sign.login
+package com.cyhee.android.rabit.activity.sign.register
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

@@ -29,6 +29,7 @@
     <string name="login">Login</string>
     <string name="facebook_login">facebook login</string>
     <string name="google_login">google login</string>
+    <string name="username">ID</string>
 
     <string name="carrot">Carrots</string>
     <string name="following">Following</string>
@@ -58,4 +59,9 @@
     <string name="time">번</string>
     <string name="start_date">시작일</string>
     <string name="end_date">종료일</string>
+
+    <!--FindPasswordActivity-->
+    <string name="find_password">Find Password</string>
+    <string name="find_password_description">Enter ID to find password</string>
+    <string name="find_password_confirm">이메일을 확인해 주세요.</string>
 </resources>
