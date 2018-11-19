@@ -6,12 +6,6 @@
     android:layout_marginTop="5dp"
     android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/prevBtn"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:background="@drawable/prev"/>
-
     <EditText
         android:id="@+id/searchText"
         android:layout_width="0dp"

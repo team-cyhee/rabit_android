@@ -67,11 +67,6 @@ class SearchActivity: AppCompatActivity(), SearchContract.View {
             }
         }
 
-        prevBtn.setOnClickListener {
-            Log.d("preBtn","clicked")
-            finish()
-        }
-
         userSearchSwipeRefresh.setOnRefreshListener {
             Toast.makeText(this@SearchActivity, "refreshed!", Toast.LENGTH_SHORT).show()
 

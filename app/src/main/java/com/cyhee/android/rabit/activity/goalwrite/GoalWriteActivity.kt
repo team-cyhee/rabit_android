@@ -10,7 +10,6 @@ import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.item_complete_goalwrite.*
-import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 import java.util.*
 
 
@@ -30,10 +29,6 @@ class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
             goalContentText.setTextColor(Color.rgb(1,1,1))
             goalContentText.isEnabled = false
 
-        }
-        prevBtn.setOnClickListener {
-            Log.d("preBtn","clicked")
-            finish()
         }
 
         var radio: RadioButton = noneBtn

@@ -13,9 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <include
-            android:id="@+id/prevTopBarLayout"
-            layout="@layout/item_complete_prevtopbar" />
+            android:id="@+id/userTopBarLayout"
+            layout="@layout/item_complete_usertopbar" />
 
         <android.support.v4.widget.SwipeRefreshLayout
             xmlns:android="http://schemas.android.com/apk/res/android"

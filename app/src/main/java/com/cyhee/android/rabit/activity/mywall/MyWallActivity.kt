@@ -13,10 +13,9 @@ import com.cyhee.android.rabit.activity.goallist.GoalListActivity
 import com.cyhee.android.rabit.activity.main.MainActivity
 import com.cyhee.android.rabit.activity.main.MainViewAdapter
 import com.cyhee.android.rabit.activity.settings.SettingsActivity
-import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_mywall.*
-import kotlinx.android.synthetic.main.item_complete_hometopbar.*
+import kotlinx.android.synthetic.main.item_complete_usertopbar.*
 
 
 class MyWallActivity: AppCompatActivity(), MyWallContract.View {
@@ -65,11 +64,6 @@ class MyWallActivity: AppCompatActivity(), MyWallContract.View {
                     startActivity(intentToSettings)
                 }
             }
-        }
-
-        prevBtn.setOnClickListener {
-            Log.d("preBtn","clicked")
-            finish()
         }
     }
 

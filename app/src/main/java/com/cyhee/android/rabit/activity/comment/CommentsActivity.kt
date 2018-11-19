@@ -10,7 +10,6 @@ import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
-import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 import com.cyhee.android.rabit.activity.decoration.CardItemDeco
 import kotlinx.android.synthetic.main.activity_commentlist.*
 import kotlinx.android.synthetic.main.item_part_commentwrite.*
@@ -47,11 +46,6 @@ class CommentsActivity: AppCompatActivity(), CommentsContract.View {
                     else -> throw Exception("잘못된 댓글 요청입니다.")
                 }
             }
-        }
-
-        prevBtn.setOnClickListener {
-            Log.d("preBtn","clicked")
-            finish()
         }
     }
 

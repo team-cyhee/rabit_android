@@ -13,8 +13,8 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/prevTopBarLayout"
-            layout="@layout/item_complete_prevtopbar" />
+            android:id="@+id/nullTopBarLayout"
+            layout="@layout/item_complete_nulltopbar" />
 
         <android.support.v4.widget.SwipeRefreshLayout
             xmlns:android="http://schemas.android.com/apk/res/android"

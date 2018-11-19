@@ -5,19 +5,17 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.widget.Toast
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
-import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_goallist.*
-import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 import android.support.v7.widget.GridLayoutManager
 import com.cyhee.android.rabit.activity.decoration.CardItemDeco
 import com.cyhee.android.rabit.activity.main.MainActivity
 import com.cyhee.android.rabit.activity.mywall.MyWallActivity
 import com.cyhee.android.rabit.activity.settings.SettingsActivity
+import kotlinx.android.synthetic.main.item_complete_usertopbar.*
 
 class GoalListActivity: AppCompatActivity(), GoalListContract.View {
 
@@ -38,7 +36,7 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
             val gridLayoutManager = GridLayoutManager(this, 2)
             goalListListView.layoutManager = gridLayoutManager
 
-            topName.text = username
+            usernameText.text = username
 
             // swipe refresh
             goalListSwipeRefresh.setOnRefreshListener {
@@ -47,11 +45,6 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
                 goalListAdapter?.clear()
                 presenter.userGoalInfos(username)
             }
-        }
-
-        prevBtn.setOnClickListener {
-            Log.d("preBtn","clicked")
-            finish()
         }
 
         bottomBar.setOnTabSelectListener { tabId ->

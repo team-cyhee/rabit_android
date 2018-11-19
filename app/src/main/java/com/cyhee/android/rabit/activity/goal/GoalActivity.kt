@@ -11,7 +11,6 @@ import com.cyhee.android.rabit.activity.base.GoalViewBinder
 import com.cyhee.android.rabit.base.BaseLayoutContainer
 import com.cyhee.android.rabit.model.*
 import com.cyhee.android.rabit.util.DrawableUtil
-import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 import kotlinx.android.synthetic.main.item_part_actions.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
 
@@ -33,11 +32,6 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
             presenter.goalInfos(goalId)
         } else {
             Toast.makeText(this, "전달된 goal 아이디가 없습니다", Toast.LENGTH_SHORT).show()
-        }
-
-        prevBtn.setOnClickListener {
-            Log.d("preBtn","clicked")
-            finish()
         }
     }
 

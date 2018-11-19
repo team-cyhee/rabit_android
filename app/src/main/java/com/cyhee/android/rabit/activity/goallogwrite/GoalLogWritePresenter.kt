@@ -16,7 +16,7 @@ class GoalLogWritePresenter(private val view: GoalLogWriteActivity) : GoalLogWri
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    override fun goalNames() {
+    /*override fun goalNames() {
         restClient.goalsByUser()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -39,7 +39,7 @@ class GoalLogWritePresenter(private val view: GoalLogWriteActivity) : GoalLogWri
                             }
                         }
                 )
-    }
+    }*/
 
     override fun postGoalLog(id: Long, goalLog: GoalLogFactory.Post) {
         PostClient.postGoalLog(id, goalLog, scopeProvider)

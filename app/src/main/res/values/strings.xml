@@ -1,4 +1,65 @@
 <resources>
+    <string name="app">래빗</string>
+    <string name="team">team_sticky_straw</string>
+
+    <string name="facebook_app_id">297104847560897</string>
+    <string name="fb_login_protocol_scheme">fb297104847560897</string>
+    <string name="confirm">확인</string>
+    <string name="unknown_error_message">에러가 발생하였습니다.</string>
+    <string name="canceled">취소되었습니다.</string>
+
+    <string name="register_welcome">래빗에 오신걸 환영해요!</string>
+    <string name="login_welcome">래빗과 함께해요</string>
+    <string name="rabit_info">habit makes life better</string>
+    <string name="signup_info">간단하게 래빗에 가입하기</string>
+    <string name="login_prompt">이미 가입했나요?</string>
+    <string name="password_prompt">비밀번호를 잊어버렸나요?</string>
+    <string name="register_prompt">아직 회원이 아닌가요?</string>
+    <string name="to_register">빠르게 가입하기</string>
+
+    <string name="sign_up">가입하기</string>
+    <string name="to_login">로그인하기</string>
+
+    <string name="name">이름</string>
+    <string name="email">이메일</string>
+    <string name="password">비밀번호</string>
+    <string name="password_check">비밀번호 확인</string>
+    <string name="phone">핸드폰 번호</string>
+    <string name="age">나이</string>
+    <string name="login">로그인</string>
+    <string name="facebook_login">페이스북 로그인</string>
+    <string name="google_login">구글 로그인</string>
+
+    <string name="carrot">캐럿</string>
+    <string name="following">팔로잉</string>
+    <string name="followers">팔로워</string>
+    <string name="post">작성</string>
+    <string name="like">응원해</string>
+    <string name="companion">함께하기</string>
+    <string name="comment">댓글달기</string>
+    <string name="logout">로그아웃</string>
+
+    <string name="search_prompt">함께할 토끼를 찾아보세요</string>
+    <string name="comment_prompt">   응원해주세요! :></string>
+    <string name="log_write_prompt">오늘 하루는 어땠나요?</string>
+    <string name="goal_write_prompt">목표를 입력해주세요</string>
+    <string name="content_write_prompt">내용을 입력해주세요</string>
+
+    <string name="user_info">Syracuse, New York</string>
+    <string name="follow_prompt">팔루우하기</string>
+    <string name="edit_profile">회원정보 수정</string>
+
+    <string name="everyday">매일</string>
+    <string name="weekly">주별</string>
+    <string name="monthly">월별</string>
+    <string name="yearly">년별</string>
+    <string name="none">none</string>
+    <string name="times">횟수</string>
+    <string name="time">번</string>
+    <string name="start_date">시작일</string>
+    <string name="end_date">종료일</string>
+</resources>
+<!-- <resources>
     <string name="app">rabit</string>
     <string name="team">team_dirty_straw</string>
 
@@ -58,4 +119,4 @@
     <string name="time">번</string>
     <string name="start_date">시작일</string>
     <string name="end_date">종료일</string>
-</resources>
+</resources> -->

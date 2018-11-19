@@ -9,10 +9,8 @@ import android.util.Log
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.activity.personlist.person.PersonViewAdapter
-import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_likelist.*
-import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 
 
 class FollowerListActivity: AppCompatActivity(), FollowerListContract.View {
@@ -29,11 +27,6 @@ class FollowerListActivity: AppCompatActivity(), FollowerListContract.View {
         if (intent.hasExtra("username")) {
             val username = intent.getStringExtra("username")
             presenter.followers(username)
-        }
-
-        prevBtn.setOnClickListener {
-            Log.d("preBtn","clicked")
-            finish()
         }
 
     }

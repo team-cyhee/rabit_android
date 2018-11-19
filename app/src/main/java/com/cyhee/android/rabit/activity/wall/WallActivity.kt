@@ -8,10 +8,9 @@ import android.util.Log
 import android.widget.Toast
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.main.MainViewAdapter
-import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_wall.*
-import kotlinx.android.synthetic.main.item_complete_hometopbar.*
+import kotlinx.android.synthetic.main.item_complete_usertopbar.*
 
 class WallActivity: AppCompatActivity(), WallContract.View {
 
@@ -37,11 +36,6 @@ class WallActivity: AppCompatActivity(), WallContract.View {
             }
         } else {
             Toast.makeText(this, "전달된 username이 없습니다", Toast.LENGTH_SHORT).show()
-        }
-
-        prevBtn.setOnClickListener {
-            Log.d("preBtn","clicked")
-            finish()
         }
 
     }

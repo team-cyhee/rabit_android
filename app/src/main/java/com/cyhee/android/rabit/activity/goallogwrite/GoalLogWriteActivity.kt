@@ -15,7 +15,6 @@ import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.item_complete_goallogwrite.*
-import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 import java.io.File
 import java.io.IOException
 import android.graphics.Bitmap
@@ -45,16 +44,12 @@ class GoalLogWriteActivity: AppCompatActivity(), GoalLogWriteContract.View {
         if (intent.hasExtra("goalId")) {
             goalId = intent.getLongExtra("goalId", -1)
             val content = intent.getStringExtra("content")
-            val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, arrayListOf(content))
-            goalsNameList.adapter = spinnerAdapter
-            goalsNameList.isEnabled = false
+            //val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, arrayListOf(content))
+            //goalsNameList.adapter = spinnerAdapter
+            //goalsNameList.isEnabled = false
+            goalName.text = content
         } else {
-            presenter.goalNames()
-        }
-
-        prevBtn.setOnClickListener {
-            Log.d("preBtn","clicked")
-            finish()
+            //presenter.goalNames()
         }
 
         goalLogGalleryBtn.setOnClickListener {
@@ -68,18 +63,18 @@ class GoalLogWriteActivity: AppCompatActivity(), GoalLogWriteContract.View {
         realGoalLogPostBtn.setOnClickListener{
             val content = goalLogContentText.text.toString()
             val goalLog = GoalLogFactory.Post(content)
-            val img =
 
             if (goalId != (-1).toLong()) {
                 presenter.postGoalLog(goalId, goalLog)
             } else {
-                val selectedGoal = goalsNameList.selectedItem as Goal
-                presenter.postGoalLog(selectedGoal.id, goalLog)
+                //val selectedGoal = goalsNameList.selectedItem as Goal
+                //presenter.postGoalLog(selectedGoal.id, goalLog)
             }
 
         }
     }
 
+    /*
     override fun showGoalNames(goals: MutableList<Goal>?) {
         if (goals == null) {
             //TODO: 작동안함
@@ -91,7 +86,7 @@ class GoalLogWriteActivity: AppCompatActivity(), GoalLogWriteContract.View {
             val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, goals)
             goalsNameList.adapter = spinnerAdapter
         }
-    }
+    }*/
 
 
     //앨범 선택
