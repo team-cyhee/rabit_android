@@ -52,6 +52,8 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.0.0'
+    // RxPermission
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
     // Auto Dispose
     implementation 'com.uber.autodispose:autodispose-ktx:1.0.0-RC2'
     implementation 'com.uber.autodispose:autodispose-android-archcomponents:1.0.0-RC2'
@@ -80,6 +82,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:15.0.1'
     implementation 'com.roughike:bottom-bar:2.3.1'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.2.0'
 }
 
 // ADD THIS AT THE BOTTOM

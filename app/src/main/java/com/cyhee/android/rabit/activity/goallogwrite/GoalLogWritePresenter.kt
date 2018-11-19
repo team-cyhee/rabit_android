@@ -1,10 +1,13 @@
 package com.cyhee.android.rabit.activity.goallogwrite
 
+import android.net.Uri
 import android.util.Log
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
 import com.cyhee.android.rabit.client.PostClient
+import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.GoalLogFactory
+import com.cyhee.android.rabit.util.FileClient
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -42,6 +45,22 @@ class GoalLogWritePresenter(private val view: GoalLogWriteActivity) : GoalLogWri
     }
 
     override fun postGoalLog(id: Long, goalLog: GoalLogFactory.Post) {
-        PostClient.postGoalLog(id, goalLog, scopeProvider)
+        PostClient.postGoalLog(id, goalLog, scopeProvider){}
+    }
+
+    override fun upload(parentId: Long, goalLog: GoalLogFactory.Post, fileUri: Uri?) {
+        if(fileUri != null)
+            FileClient.uploadFile(fileUri, view, scopeProvider) { path ->
+                goalLog.fileId = path.split("/").last().toLongOrNull()
+                PostClient.postGoalLog(parentId, goalLog, scopeProvider) {
+                    // TODO add log to original activity
+                    view.finish()
+                }
+            }
+        else
+            PostClient.postGoalLog(parentId, goalLog, scopeProvider) {
+                // TODO add log to original activity
+                view.finish()
+            }
     }
 }

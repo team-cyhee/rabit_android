@@ -30,13 +30,15 @@ object PostClient {
                 )
     }
 
-    fun postGoalLog(id: Long, goalLog: GoalLogFactory.Post, scopeProvider: AndroidLifecycleScopeProvider) {
+    fun postGoalLog(id: Long, goalLog: GoalLogFactory.Post, scopeProvider: AndroidLifecycleScopeProvider, callback: () -> Unit) {
         restClient.postGoalLog(id, goalLog)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
                 .subscribe (
                         {
+                            Log.d(TAG, "a goal log posted")
+                            callback()
                         },
                         {
                             // TODO: post완료되면 화면 새로고침?
