@@ -116,22 +116,30 @@ object IntentListener {
         it.context.startActivity(intentToGoalLogLikeList)
     }
 
+
     fun toCompanionListListener(id: Long) = View.OnClickListener {
         val intentToCompanionList = Intent(it.context, CompanionListActivity::class.java)
         intentToCompanionList.putExtra("goalId", id)
         it.context.startActivity(intentToCompanionList)
     }
 
-    fun toGoalLogWriteListener(id: Long, content: String) = View.OnClickListener {
+    fun toGoalLogWriteListener(id: Long, goalContent: String) = View.OnClickListener {
         val intentToGoalLogWrite = Intent(it.context, GoalLogWriteActivity::class.java)
         intentToGoalLogWrite.putExtra("goalId", id)
-        intentToGoalLogWrite.putExtra("content", content)
+        intentToGoalLogWrite.putExtra("goalContent", goalContent)
         it.context.startActivity(intentToGoalLogWrite)
     }
 
     fun toGoalLogWriteListener() = View.OnClickListener {
         val intentToGoalLogWrite = Intent(it.context, GoalLogWriteActivity::class.java)
         it.context.startActivity(intentToGoalLogWrite)
+    }
+
+    fun toGoalLogEditListener(id: Long, goalContent: String, content: String) = View.OnClickListener {
+        val intentToGoalLogWrite = Intent(it.context, GoalLogWriteActivity::class.java)
+        intentToGoalLogWrite.putExtra("goalLogId", id)
+        intentToGoalLogWrite.putExtra("goalContent", goalContent)
+        intentToGoalLogWrite.putExtra("content", content)
     }
 
     fun toCompanionWriteListener(id: Long, content: String) = View.OnClickListener {

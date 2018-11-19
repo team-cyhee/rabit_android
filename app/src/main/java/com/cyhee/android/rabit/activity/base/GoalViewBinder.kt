@@ -2,6 +2,7 @@ package com.cyhee.android.rabit.activity.base
 
 import android.annotation.SuppressLint
 import android.util.Log
+import android.view.View
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.listener.IntentListener
@@ -19,6 +20,10 @@ object GoalViewBinder {
         val user = App.prefs.user
 
         with(holder) {
+            if (item.author.username == user) {
+                editGoal.visibility = View.VISIBLE
+            }
+
             nameText.text = item.author.username
             titleText.text = item.content
 

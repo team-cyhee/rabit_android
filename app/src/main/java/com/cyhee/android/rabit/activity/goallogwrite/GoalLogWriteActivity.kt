@@ -71,7 +71,6 @@ class GoalLogWriteActivity: AppCompatActivity(), GoalLogWriteContract.View {
         }
     }
 
-    /*
     override fun showGoalNames(goals: MutableList<Goal>?) {
         if (goals == null) {
             //TODO: 작동안함
@@ -83,7 +82,7 @@ class GoalLogWriteActivity: AppCompatActivity(), GoalLogWriteContract.View {
             val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, goals)
             goalsNameList.adapter = spinnerAdapter
         }
-    }*/
+    }
 
 
     //앨범 선택

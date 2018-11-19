@@ -44,7 +44,10 @@ interface ResourceApi {
     fun goalLogs() : Single<Page<GoalLog>>
 
     @GET("/rest/v1/goallogs/{id}")
-    fun goalLog(@Path("id") id : Long) : Single<GoalLog>
+    fun goalLog(@Path("id") id: Long) : Single<GoalLog>
+
+    @PUT("rest/v1/goallogs/{id}")
+    fun putGoalLog(@Path("id") id: Long, goalLog: GoalLogFactory.Post) : Single<GoalLog>
 
     @GET("/rest/v1/goallogs/{id}/comments")
     fun goalLogStoreComments(@Path("id") id: Long) : Single<Page<Comment>>

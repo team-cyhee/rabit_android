@@ -3,18 +3,16 @@ package com.cyhee.android.rabit.activity.base
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
-import android.widget.TextView
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.listener.IntentListener
-import com.cyhee.android.rabit.model.GoalInfo
 import com.cyhee.android.rabit.model.GoalLogInfo
 import com.cyhee.android.rabit.useful.Fun
 import com.cyhee.android.rabit.util.DrawableUtil
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_complete_maingoallog.*
 import kotlinx.android.synthetic.main.item_part_actions.*
-import kotlinx.android.synthetic.main.item_part_goalwriter.*
+import kotlinx.android.synthetic.main.item_part_goallogwriter.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
 import kotlinx.android.synthetic.main.item_part_text.*
 import java.text.SimpleDateFormat
@@ -25,6 +23,10 @@ object GoalLogViewBinder {
         val user = App.prefs.user
 
         with(holder) {
+            if (item.author.username == user) {
+                editGoalLog.visibility = View.VISIBLE
+            }
+
             nameText.text = item.goal.author.username
             createDate.text = SimpleDateFormat("MM/dd/yyy").format(item.createDate)
             val goalTitle = item.goal.content + Fun.dateDistance(item)
@@ -42,7 +44,7 @@ object GoalLogViewBinder {
             textLayout.setOnClickListener(IntentListener.toGoalLogListener(item.id))
             commentNumberText.setOnClickListener(IntentListener.toGoalLogCommentsListener(item.id))
             likeNumberText.setOnClickListener(IntentListener.toGoalLogLikeListListener(item.id))
-
+            editGoalLog.setOnClickListener(IntentListener.toGoalLogEditListener(item.id, item.goal.content, item.content))
             comNumberText.setOnClickListener(IntentListener.toCompanionListListener(item.goal.id))
 
             likeButton.background =
