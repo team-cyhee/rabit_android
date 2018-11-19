@@ -5,6 +5,7 @@ import android.util.Log
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
 import com.cyhee.android.rabit.client.PostClient
+import com.cyhee.android.rabit.client.PutClient
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.GoalLogFactory
 import com.cyhee.android.rabit.util.FileClient
@@ -19,7 +20,7 @@ class GoalLogWritePresenter(private val view: GoalLogWriteActivity) : GoalLogWri
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    /*override fun goalNames() {
+    override fun goalNames() {
         restClient.goalsByUser()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -42,10 +43,18 @@ class GoalLogWritePresenter(private val view: GoalLogWriteActivity) : GoalLogWri
                             }
                         }
                 )
-    }*/
+    }
 
     override fun postGoalLog(id: Long, goalLog: GoalLogFactory.Post) {
-        PostClient.postGoalLog(id, goalLog, scopeProvider){}
+        PostClient.postGoalLog(id, goalLog, scopeProvider) {
+            view.finish()
+        }
+    }
+
+    override fun editGoalLog(id: Long, goalLog: GoalLogFactory.Post) {
+        PutClient.putGoalLog(id, goalLog, scopeProvider) {
+            view.finish()
+        }
     }
 
     override fun upload(parentId: Long, goalLog: GoalLogFactory.Post, fileUri: Uri?) {

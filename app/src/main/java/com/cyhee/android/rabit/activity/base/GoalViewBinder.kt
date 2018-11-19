@@ -64,6 +64,7 @@ object GoalViewBinder {
             logNum.setOnClickListener(IntentListener.toGoalListener(item.id))
             commentNumberText.setOnClickListener(IntentListener.toGoalCommentsListener(item.id))
             likeNumberText.setOnClickListener(IntentListener.toGoalLikeListListener(item.id))
+            editGoal.setOnClickListener(IntentListener.toGoalEditListener(item.id, item.content))
 
             comNumberText.setOnClickListener(IntentListener.toCompanionListListener(item.id))
 

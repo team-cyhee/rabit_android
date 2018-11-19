@@ -40,7 +40,6 @@ object IntentListener {
     }
 
     fun toWhichWallListListener(isMy: Boolean, username: String)  = View.OnClickListener {
-        println("----$isMy---$username")
         val intentToWhichWall = when (isMy) {
             true -> Intent(it.context, MyWallActivity:: class.java)
             false -> Intent(it.context, WallActivity:: class.java)
@@ -140,6 +139,7 @@ object IntentListener {
         intentToGoalLogWrite.putExtra("goalLogId", id)
         intentToGoalLogWrite.putExtra("goalContent", goalContent)
         intentToGoalLogWrite.putExtra("content", content)
+        it.context.startActivity(intentToGoalLogWrite)
     }
 
     fun toCompanionWriteListener(id: Long, content: String) = View.OnClickListener {
@@ -152,6 +152,10 @@ object IntentListener {
     fun toGoalWriteListener() = View.OnClickListener {
         val intentToGoalWrite = Intent(it.context, GoalWriteActivity::class.java)
         it.context.startActivity(intentToGoalWrite)
+    }
+
+    fun toGoalEditListener(id: Long, content: String) = View.OnClickListener {
+
     }
 
     fun toInfoEditListener(username: String) = View.OnClickListener {

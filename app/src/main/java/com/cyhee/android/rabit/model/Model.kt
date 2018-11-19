@@ -1,7 +1,6 @@
 package com.cyhee.android.rabit.model
 
 import java.util.*
-import android.telephony.mbms.FileInfo
 
 import kotlin.collections.ArrayList
 

@@ -2,9 +2,7 @@ package com.cyhee.android.rabit.activity.goallogwrite
 
 import android.app.Activity
 import android.arch.lifecycle.Lifecycle
-import android.content.Context
 import android.content.Intent
-import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -12,9 +10,9 @@ import android.provider.MediaStore
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
-import com.cyhee.android.rabit.activity.base.DialogHandler
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.item_complete_goallogwrite.*
@@ -22,17 +20,9 @@ import java.io.File
 import java.io.IOException
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
-import com.uber.autodispose.autoDisposable
-import io.reactivex.internal.schedulers.IoScheduler
-import android.support.v4.app.ActivityCompat
-import android.content.DialogInterface
-import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-import android.content.pm.PackageManager
-import android.support.v4.content.ContextCompat
+import android.widget.ArrayAdapter
 import android.widget.Toast
-import com.cyhee.android.rabit.activity.main.MainActivity
-
-
+import com.uber.autodispose.autoDisposable
 
 
 class GoalLogWriteActivity: AppCompatActivity(), GoalLogWriteContract.View {
@@ -59,14 +49,62 @@ class GoalLogWriteActivity: AppCompatActivity(), GoalLogWriteContract.View {
         setContentView(R.layout.activity_goallogwrite)
 
         var goalId: Long = -1
-        if (intent.hasExtra("goalId")) {
-            goalId = intent.getLongExtra("goalId", -1)
-            val content = intent.getStringExtra("content")
-            val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, arrayListOf(content))
-            goalsNameList.adapter = spinnerAdapter
-            goalsNameList.isEnabled = false
-        } else {
-            presenter.goalNames()
+        when {
+            intent.hasExtra("goalId") -> {
+                goalName.visibility = View.VISIBLE
+                goalsNameList.visibility = View.GONE
+                goalId = intent.getLongExtra("goalId", -1)
+                val goalContent = intent.getStringExtra("goalContent")
+                goalName.text = goalContent
+
+                realGoalLogPostBtn.setOnClickListener{
+                    val content = goalLogContentText.text.toString()
+                    val goalLog = GoalLogFactory.Post(content)
+
+                    if (mCurrentPhotoPath != null) {
+                        presenter.upload(goalId, goalLog, Uri.parse(mCurrentPhotoPath))
+                    } else {
+                        presenter.postGoalLog(goalId, goalLog)
+                    }
+                }
+            }
+            intent.hasExtra("goalLogId") -> {
+                goalName.visibility = View.VISIBLE
+                goalsNameList.visibility = View.GONE
+
+                val goalLogId = intent.getLongExtra("goalLogId", -1)
+                val goalContent = intent.getStringExtra("goalContent")
+                val content = intent.getStringExtra("content")
+
+                goalName.text = goalContent
+                realGoalLogPostBtn.text = "수정"
+                goalLogContentText.setText(content)
+
+                realGoalLogPostBtn.setOnClickListener {
+                    val editedContent = goalLogContentText.text.toString()
+                    val goalLog = GoalLogFactory.Post(editedContent)
+
+                    presenter.editGoalLog(goalLogId, goalLog)
+                }
+            }
+            else -> {
+                goalsNameList.visibility = View.VISIBLE
+                goalName.visibility = View.GONE
+                presenter.goalNames()
+
+                realGoalLogPostBtn.setOnClickListener{
+                    val content = goalLogContentText.text.toString()
+                    val goalLog = GoalLogFactory.Post(content)
+                    val selectedGoal = goalsNameList.selectedItem as Goal
+                    val parentId = selectedGoal.id
+
+                    if (mCurrentPhotoPath != null) {
+                        presenter.upload(parentId, goalLog, Uri.parse(mCurrentPhotoPath))
+                    } else {
+                        presenter.postGoalLog(parentId, goalLog)
+                    }
+                }
+            }
         }
 
         goalLogGalleryBtn.setOnClickListener {
@@ -75,21 +113,6 @@ class GoalLogWriteActivity: AppCompatActivity(), GoalLogWriteContract.View {
 
         goalLogCameraBtn.setOnClickListener {
             validatePermissions{captureCamera()}
-        }
-
-        realGoalLogPostBtn.setOnClickListener{
-            val content = goalLogContentText.text.toString()
-            val goalLog = GoalLogFactory.Post(content)
-
-            val parentId =
-                    if (goalId != -1L) {
-                        goalId
-                    } else {
-                        val selectedGoal = goalsNameList.selectedItem as Goal
-                        selectedGoal.id
-                    }
-
-            presenter.upload(parentId, goalLog, Uri.parse(mCurrentPhotoPath))
         }
     }
 

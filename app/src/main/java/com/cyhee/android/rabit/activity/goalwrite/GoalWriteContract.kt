@@ -10,5 +10,6 @@ class GoalWriteContract {
     interface Presenter : BasePresenter {
         fun postGoal(goal: GoalFactory.Post)
         fun postCompanion(id: Long, goal: GoalFactory.Post)
+        fun editGoal(id: Long, goal: GoalFactory.Post)
     }
 }

@@ -14,26 +14,28 @@ object PutClient {
     private val TAG = PutClient::class.qualifiedName
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    fun putGoal(goal: GoalFactory.Post, scopeProvider: AndroidLifecycleScopeProvider) {
-        restClient.postGoal( goal)
+    fun putGoal(id: Long, goal: GoalFactory.Post, scopeProvider: AndroidLifecycleScopeProvider, callback: () -> Unit) {
+        restClient.putGoal(id, goal)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
                 .subscribe (
                         {
+                            callback()
                         },
                         {
                         }
                 )
     }
 
-    fun putGoalLog(id: Long, goalLog: GoalLogFactory.Post, scopeProvider: AndroidLifecycleScopeProvider) {
+    fun putGoalLog(id: Long, goalLog: GoalLogFactory.Post, scopeProvider: AndroidLifecycleScopeProvider, callback: () -> Unit) {
         restClient.putGoalLog(id, goalLog)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
                 .subscribe (
                         {
+                            callback()
                         },
                         {
                             // TODO: post완료되면 화면 새로고침?
