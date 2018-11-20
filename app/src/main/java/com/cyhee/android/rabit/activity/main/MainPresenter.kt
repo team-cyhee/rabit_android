@@ -79,7 +79,7 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
     }
 
     override fun toggleLikeForGoalLog(id: Long, post: Boolean) {
-        if(post)
+        if (post)
             restClient.postLikeForGoalLog(id)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -113,5 +113,33 @@ class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
 
     override fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post) {
         PostClient.postCommentForGoalLog(id, comment, scopeProvider)
+    }
+
+    override fun deleteGoal(id: Long) {
+        restClient.deleteGoal(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe(
+                        {
+                        },
+                        {
+                            DialogHandler.errorDialog(it, view)
+                        }
+                )
+    }
+
+    override fun deleteGoalLog(id: Long) {
+        restClient.deleteGoalLog(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe(
+                        {
+                        },
+                        {
+                            DialogHandler.errorDialog(it, view)
+                        }
+                )
     }
 }

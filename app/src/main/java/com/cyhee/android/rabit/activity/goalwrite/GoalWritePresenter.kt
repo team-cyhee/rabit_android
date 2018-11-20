@@ -11,7 +11,9 @@ class GoalWritePresenter(private val view: GoalWriteActivity) : GoalWriteContrac
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
 
     override fun postGoal(goal: GoalFactory.Post) {
-        PostClient.postGoal(goal, scopeProvider)
+        PostClient.postGoal(goal, scopeProvider) {
+            view.finish()
+        }
     }
 
     override fun editGoal(id: Long, goal: GoalFactory.Post) {
@@ -21,6 +23,8 @@ class GoalWritePresenter(private val view: GoalWriteActivity) : GoalWriteContrac
     }
 
     override fun postCompanion(id: Long, goal: GoalFactory.Post) {
-        PostClient.postCompanion(id, goal, scopeProvider)
+        PostClient.postCompanion(id, goal, scopeProvider) {
+            view.finish()
+        }
     }
 }

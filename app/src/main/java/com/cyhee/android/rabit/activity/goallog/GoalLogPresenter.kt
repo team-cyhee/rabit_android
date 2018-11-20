@@ -61,4 +61,18 @@ class GoalLogPresenter(private val view: GoalLogActivity) : GoalLogContract.Pres
                             }
                     )
     }
+
+    override fun deleteGoalLog(id: Long) {
+        restClient.deleteGoalLog(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe(
+                        {
+                        },
+                        {
+                            DialogHandler.errorDialog(it, view)
+                        }
+                )
+    }
 }

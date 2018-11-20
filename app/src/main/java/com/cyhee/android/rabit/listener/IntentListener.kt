@@ -1,5 +1,7 @@
 package com.cyhee.android.rabit.listener
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.View
@@ -20,6 +22,9 @@ import com.cyhee.android.rabit.activity.personlist.companionlist.CompanionListAc
 import com.cyhee.android.rabit.activity.search.SearchActivity
 import com.cyhee.android.rabit.activity.wall.WallActivity
 import com.cyhee.android.rabit.model.ContentType
+import com.cyhee.android.rabit.model.GoalUnit
+import java.text.SimpleDateFormat
+import java.util.*
 
 object IntentListener {
     fun toMainListener() = View.OnClickListener {
@@ -142,10 +147,12 @@ object IntentListener {
         it.context.startActivity(intentToGoalLogWrite)
     }
 
-    fun toCompanionWriteListener(id: Long, content: String) = View.OnClickListener {
+    fun toCompanionWriteListener(id: Long, content: String, doUnit: GoalUnit?, doTimes: Int?) = View.OnClickListener {
         val intentToCompanionWrite = Intent(it.context, GoalWriteActivity::class.java)
         intentToCompanionWrite.putExtra("parent", id)
         intentToCompanionWrite.putExtra("content", content)
+        if (doUnit != null) intentToCompanionWrite.putExtra("unit", doUnit.toString())
+        if (doTimes != null) intentToCompanionWrite.putExtra("times", doTimes)
         it.context.startActivity(intentToCompanionWrite)
     }
 
@@ -154,11 +161,39 @@ object IntentListener {
         it.context.startActivity(intentToGoalWrite)
     }
 
-    fun toGoalEditListener(id: Long, content: String) = View.OnClickListener {
-
+    @SuppressLint("SimpleDateFormat")
+    fun toGoalEditListener(id: Long, content: String, doUnit: GoalUnit?, doTimes: Int?, startDate: Date?, endDate: Date?) = View.OnClickListener {
+        val intentToGoalWrite = Intent(it.context, GoalWriteActivity::class.java)
+        intentToGoalWrite.putExtra("goalId", id)
+        intentToGoalWrite.putExtra("content", content)
+        if (doUnit != null) intentToGoalWrite.putExtra("unit", doUnit.toString())
+        if (doTimes != null) intentToGoalWrite.putExtra("times", doTimes)
+        if (startDate != null) intentToGoalWrite.putExtra("startDate", SimpleDateFormat("MM/dd/yyy").format(startDate))
+        if (endDate != null) intentToGoalWrite.putExtra("endDate",  SimpleDateFormat("MM/dd/yyy").format(endDate))
+        it.context.startActivity(intentToGoalWrite)
     }
 
     fun toInfoEditListener(username: String) = View.OnClickListener {
         Log.d("회원정보수정", "회원정보 수정 페이지로 이동")
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun toGoalEdit(id: Long, content: String, doUnit: GoalUnit?, doTimes: Int?, startDate: Date?, endDate: Date?, context: Context) {
+        val intentToGoalWrite = Intent(context, GoalWriteActivity::class.java)
+        intentToGoalWrite.putExtra("goalId", id)
+        intentToGoalWrite.putExtra("content", content)
+        if (doUnit != null) intentToGoalWrite.putExtra("unit", doUnit.toString())
+        if (doTimes != null) intentToGoalWrite.putExtra("times", doTimes)
+        if (startDate != null) intentToGoalWrite.putExtra("startDate", SimpleDateFormat("MM/dd/yyy").format(startDate))
+        if (endDate != null) intentToGoalWrite.putExtra("endDate",  SimpleDateFormat("MM/dd/yyy").format(endDate))
+        context.startActivity(intentToGoalWrite)
+    }
+
+    fun toGoalLogEdit(id: Long, goalContent: String, content: String, context: Context)  {
+        val intentToGoalLogWrite = Intent(context, GoalLogWriteActivity::class.java)
+        intentToGoalLogWrite.putExtra("goalLogId", id)
+        intentToGoalLogWrite.putExtra("goalContent", goalContent)
+        intentToGoalLogWrite.putExtra("content", content)
+        context.startActivity(intentToGoalLogWrite)
     }
 }

@@ -120,4 +120,32 @@ class MyWallPresenter(private val view: MyWallActivity) : MyWallContract.Present
         PostClient.postCommentForGoalLog(id, comment, scopeProvider)
     }
 
+    override fun deleteGoal(id: Long) {
+        restClient.deleteGoal(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe(
+                        {
+                        },
+                        {
+                            DialogHandler.errorDialog(it, view)
+                        }
+                )
+    }
+
+    override fun deleteGoalLog(id: Long) {
+        restClient.deleteGoalLog(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe(
+                        {
+                        },
+                        {
+                            DialogHandler.errorDialog(it, view)
+                        }
+                )
+    }
+
 }

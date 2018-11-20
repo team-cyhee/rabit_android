@@ -3,6 +3,7 @@ package com.cyhee.android.rabit.activity.base
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
+import android.widget.PopupMenu
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.listener.IntentListener
@@ -17,14 +18,13 @@ import com.bumptech.glide.Glide
 import com.cyhee.android.rabit.api.resource.RabitUrl
 import com.facebook.internal.Utility
 
-
 object GoalViewBinder {
 
     private val TAG = GoalViewBinder::class.qualifiedName
     private val baseUrl = "${RabitUrl.resourceUrl()}/rest/v1/files"
 
     @SuppressLint("SimpleDateFormat")
-    fun bind(holder: LayoutContainer, item: GoalInfo, likeListener: (Long, Boolean) -> Unit) {
+    fun bind(holder: LayoutContainer, item: GoalInfo, likeListener: (Long, Boolean) -> Unit, deleteGoal: (Long) -> Unit) {
         val user = App.prefs.user
 
         with(holder) {
@@ -64,15 +64,33 @@ object GoalViewBinder {
             logNum.setOnClickListener(IntentListener.toGoalListener(item.id))
             commentNumberText.setOnClickListener(IntentListener.toGoalCommentsListener(item.id))
             likeNumberText.setOnClickListener(IntentListener.toGoalLikeListListener(item.id))
-            editGoal.setOnClickListener(IntentListener.toGoalEditListener(item.id, item.content))
-
             comNumberText.setOnClickListener(IntentListener.toCompanionListListener(item.id))
+
+            editGoal.setOnClickListener{
+                val pm = PopupMenu(editGoal.context, editGoal)
+                pm.menuInflater.inflate(R.menu.edit_delete, pm.menu)
+
+                pm.setOnMenuItemClickListener {menu ->
+                    when (menu.itemId) {
+                        R.id.edit -> {
+                            IntentListener.toGoalEdit(item.id, item.content, item.doUnit, item.doTimes, item.startDate, item.endDate, editGoal.context)
+                            true
+                        }
+                        R.id.delete -> {
+                            DialogHandler.checkDialog("래빗 삭제하기", "정말 삭제하시겠어요?", editGoal.context, item.id, deleteGoal)
+                            true
+                        }
+                        else -> false
+                    }
+                }
+                pm.show()
+            }
 
             // 함께하기 /
             when (user) {
                 // TODO: 이미 companion이면 버튼 안보이게
                 item.author.username -> coBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(item.id, item.content))
-                else -> coBtn.setOnClickListener(IntentListener.toCompanionWriteListener(item.id, item.content))
+                else -> coBtn.setOnClickListener(IntentListener.toCompanionWriteListener(item.id, item.content, item.doUnit, item.doTimes))
             }
 
             likeButton.background =

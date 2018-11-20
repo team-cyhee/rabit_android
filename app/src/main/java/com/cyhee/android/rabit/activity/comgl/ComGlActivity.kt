@@ -48,8 +48,9 @@ class ComGlActivity: AppCompatActivity(), ComGlContract.View {
 
     override fun showComGls(comGls: MutableList<GoalLogInfo>) {
         if (comGlAdapter == null) {
-            comGlAdapter = ComGlViewAdapter(comGls
-            ) { id, post -> presenter.toggleLikeForGoalLog(id, post)}
+            comGlAdapter = ComGlViewAdapter(comGls,
+                    { id, post -> presenter.toggleLikeForGoalLog(id, post)},
+                    { id -> presenter.deleteGoalLog(id)})
             comGlListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             comGlListView.adapter = comGlAdapter
         } else {

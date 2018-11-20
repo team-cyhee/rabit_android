@@ -38,6 +38,8 @@
     <string name="companion">함께하기</string>
     <string name="comment">댓글달기</string>
     <string name="logout">로그아웃</string>
+    <string name="edit">수정하기</string>
+    <string name="delete">삭제하기</string>
 
     <string name="search_prompt">함께할 래빗을 찾아보세요</string>
     <string name="comment_prompt">   응원해주세요! :></string>

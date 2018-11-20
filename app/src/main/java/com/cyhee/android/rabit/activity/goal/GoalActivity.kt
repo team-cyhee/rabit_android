@@ -38,9 +38,9 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
     override fun showGoalInfos(goalInfo: GoalInfo) {
         this.goalInfo = goalInfo
         val contentView = (findViewById<ViewGroup>(android.R.id.content))!!.getChildAt(0)
-        GoalViewBinder.bind(BaseLayoutContainer(contentView), goalInfo) { id, bool ->
-            presenter.toggleLikeForGoal(id, bool)
-        }
+        GoalViewBinder.bind(BaseLayoutContainer(contentView), goalInfo,
+                { id, bool -> presenter.toggleLikeForGoal(id, bool) },
+                { id -> presenter.deleteGoal(id) })
     }
 
     fun toggleLike(bool: Boolean) {

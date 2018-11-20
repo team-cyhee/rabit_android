@@ -42,9 +42,9 @@ class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
     override fun showGoalLogInfo(goalLogInfo : GoalLogInfo) {
         this.goalLogInfo = goalLogInfo
         val contentView = (findViewById<ViewGroup>(android.R.id.content))!!.getChildAt(0)
-        GoalLogViewBinder.bind(BaseLayoutContainer(contentView), goalLogInfo) { id, bool ->
-            presenter.toggleLikeForGoalLog(id, bool)
-        }
+        GoalLogViewBinder.bind(BaseLayoutContainer(contentView), goalLogInfo,
+                { id, bool -> presenter.toggleLikeForGoalLog(id, bool)},
+                {id -> presenter.deleteGoalLog(id)})
     }
 
     fun toggleLike(bool: Boolean) {

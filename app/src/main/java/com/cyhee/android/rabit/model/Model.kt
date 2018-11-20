@@ -51,11 +51,6 @@ enum class GoalUnit {
     DAILY, WEEKLY, MONTHLY, YEARLY
 }
 
-data class GoalCycle (
-    val unit: GoalUnit?,
-    val times: Int?
-)
-
 data class GoalLog (
     val id: Long,
     val goal: Goal,
@@ -108,7 +103,8 @@ data class GoalInfo (
         var content: String,
         var startDate: Date,
         var endDate: Date?,
-        var selectedDays: GoalCycle,
+        var doUnit: GoalUnit?,
+        var doTimes: Int?,
         var logNum: Int,
         var file: List<FileInfo> = ArrayList(),
         override var likeNum: Int,

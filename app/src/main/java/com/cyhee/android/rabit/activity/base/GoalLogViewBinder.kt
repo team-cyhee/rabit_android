@@ -3,6 +3,7 @@ package com.cyhee.android.rabit.activity.base
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
+import android.widget.PopupMenu
 import com.bumptech.glide.Glide
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
@@ -25,7 +26,7 @@ object GoalLogViewBinder {
     private val baseUrl = "${RabitUrl.resourceUrl()}/rest/v1/files"
 
     @SuppressLint("SimpleDateFormat")
-    fun bind(holder: LayoutContainer, item: GoalLogInfo, likeListener: (Long, Boolean) -> Unit) {
+    fun bind(holder: LayoutContainer, item: GoalLogInfo, likeListener: (Long, Boolean) -> Unit, deleteGoalLog: (Long) -> Unit) {
         val user = App.prefs.user
 
         with(holder) {
@@ -53,6 +54,25 @@ object GoalLogViewBinder {
             editGoalLog.setOnClickListener(IntentListener.toGoalLogEditListener(item.id, item.goal.content, item.content))
             comNumberText.setOnClickListener(IntentListener.toCompanionListListener(item.goal.id))
 
+            editGoalLog.setOnClickListener{
+                val pm = PopupMenu(editGoalLog.context, editGoalLog)
+                pm.menuInflater.inflate(R.menu.edit_delete, pm.menu)
+
+                pm.setOnMenuItemClickListener {menu ->
+                    when (menu.itemId) {
+                        R.id.edit -> {
+                            IntentListener.toGoalLogEdit(item.id, item.goal.content, item.content, editGoalLog.context)
+                            true
+                        }
+                        R.id.delete -> {
+                            DialogHandler.checkDialog("캐럿 삭제하기", "정말 삭제하시겠어요?", editGoalLog.context, item.id, deleteGoalLog)
+                            true
+                        }
+                        else -> false
+                    }
+                }
+                pm.show()
+            }
             likeButton.background =
                     if (item.liked) DrawableUtil.getDrawable(likeBtn.context, R.drawable.ic_heart_black)
                     else DrawableUtil.getDrawable(likeBtn.context, R.drawable.ic_heart_outline)
@@ -70,7 +90,7 @@ object GoalLogViewBinder {
             when (user) {
                 // TODO: 이미 companion이면 버튼 안보이게
                 item.author.username -> coBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(item.goal.id, item.goal.content))
-                else -> coBtn.setOnClickListener(IntentListener.toCompanionWriteListener(item.goal.id, item.goal.content))
+                else -> coBtn.setOnClickListener(IntentListener.toCompanionWriteListener(item.goal.id, item.goal.content, item.goal.doUnit, item.goal.doTimes))
             }
 
             if(logImage != null && item.file.isNotEmpty()) {

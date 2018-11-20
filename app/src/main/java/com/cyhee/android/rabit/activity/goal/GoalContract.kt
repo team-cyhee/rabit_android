@@ -18,5 +18,6 @@ class GoalContract {
         fun toggleLikeForGoalLog(id: Long, post:Boolean)
         fun postCommentForGoal(id: Long, comment: CommentFactory.Post)
         fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post)
+        fun deleteGoal(id: Long)
     }
 }

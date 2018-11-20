@@ -27,6 +27,9 @@ interface ResourceApi {
     @PUT("rest/v1/goals/{id}")
     fun putGoal(@Path("id") id: Long, @Body goal: GoalFactory.Post) : Completable
 
+    @DELETE("rest/v1/goals/{id}")
+    fun deleteGoal(@Path("id") id: Long) : Completable
+
     @GET("/rest/v1/goals/{id}/goallogs/info")
     fun goalStoreGoalLogs(@Path("id") id: Long) : Single<List<GoalLogInfo>>
 
@@ -56,6 +59,9 @@ interface ResourceApi {
 
     @PUT("rest/v1/goallogs/{id}")
     fun putGoalLog(@Path("id") id: Long, @Body goalLog: GoalLogFactory.Post) : Completable
+
+    @DELETE("rest/v1/goallogs/{id}")
+    fun deleteGoalLog(@Path("id") id: Long) : Completable
 
     @GET("/rest/v1/goallogs/{id}/comments")
     fun goalLogStoreComments(@Path("id") id: Long) : Single<Page<Comment>>
