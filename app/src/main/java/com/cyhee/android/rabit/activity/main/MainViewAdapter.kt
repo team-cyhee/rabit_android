@@ -3,26 +3,16 @@ package com.cyhee.android.rabit.activity.main
 import android.annotation.SuppressLint
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.activity.base.GoalLogViewBinder
 import com.cyhee.android.rabit.activity.base.GoalViewBinder
 import com.cyhee.android.rabit.base.BaseViewHolder
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
-import com.cyhee.android.rabit.useful.Fun
-import com.cyhee.android.rabit.util.DrawableUtil
-import kotlinx.android.synthetic.main.item_complete_maingoallog.*
 import kotlinx.android.synthetic.main.item_complete_mainwrite.*
 import kotlinx.android.synthetic.main.item_complete_mywall.*
 import kotlinx.android.synthetic.main.item_complete_wall.*
-import kotlinx.android.synthetic.main.item_part_actions.*
-import kotlinx.android.synthetic.main.item_part_goalwriter.*
-import kotlinx.android.synthetic.main.item_part_reaction.*
-import kotlinx.android.synthetic.main.item_part_text.*
 import java.lang.Exception
 
 
@@ -32,7 +22,9 @@ class MainViewAdapter (
         private val wallInfo: WallInfo?,
         private val toggleLikeForGoal: (Long, Boolean) -> Unit,
         private val toggleLikeForGoalLog: (Long, Boolean) -> Unit,
-        private val sendFollow: (String) -> Unit
+        private val sendFollow: (String) -> Unit,
+        private val deleteGoal: (Long) -> Unit,
+        private val deleteGoalLog: (Long) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
     private val TAG = MainViewAdapter::class.qualifiedName
@@ -102,11 +94,11 @@ class MainViewAdapter (
             }
             1 -> {
                 val goalInfo: GoalInfo = mainInfos[position-1] as GoalInfo
-                GoalViewBinder.bind(holder as MainViewHolderForGoal, goalInfo, toggleLikeForGoal)
+                GoalViewBinder.bind(holder as MainViewHolderForGoal, goalInfo, toggleLikeForGoal, deleteGoal)
             }
             2 -> {
                 val goalLogInfo: GoalLogInfo = mainInfos[position-1] as GoalLogInfo
-                GoalLogViewBinder.bind(holder as MainViewHolderForGoalLog, goalLogInfo, toggleLikeForGoalLog)
+                GoalLogViewBinder.bind(holder as MainViewHolderForGoalLog, goalLogInfo, toggleLikeForGoalLog, deleteGoalLog)
             }
         }
     }

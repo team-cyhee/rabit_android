@@ -24,6 +24,12 @@ interface ResourceApi {
     @GET("/rest/v1/goals/{id}")
     fun goal(@Path("id") id: Long) : Single<Goal>
 
+    @PUT("rest/v1/goals/{id}")
+    fun putGoal(@Path("id") id: Long, @Body goal: GoalFactory.Post) : Completable
+
+    @DELETE("rest/v1/goals/{id}")
+    fun deleteGoal(@Path("id") id: Long) : Completable
+
     @GET("/rest/v1/goals/{id}/goallogs/info")
     fun goalStoreGoalLogs(@Path("id") id: Long) : Single<List<GoalLogInfo>>
 
@@ -49,7 +55,13 @@ interface ResourceApi {
     fun goalLogs() : Single<Page<GoalLog>>
 
     @GET("/rest/v1/goallogs/{id}")
-    fun goalLog(@Path("id") id : Long) : Single<GoalLog>
+    fun goalLog(@Path("id") id: Long) : Single<GoalLog>
+
+    @PUT("rest/v1/goallogs/{id}")
+    fun putGoalLog(@Path("id") id: Long, @Body goalLog: GoalLogFactory.Post) : Completable
+
+    @DELETE("rest/v1/goallogs/{id}")
+    fun deleteGoalLog(@Path("id") id: Long) : Completable
 
     @GET("/rest/v1/goallogs/{id}/comments")
     fun goalLogStoreComments(@Path("id") id: Long) : Single<Page<Comment>>
@@ -119,6 +131,9 @@ interface ResourceApi {
 
     @GET("/rest/v1/comments/{id}")
     fun comment(@Path("id") id: Long) : Single<Comment>
+
+    @POST("rest/v1/questions")
+    fun postQuestion(@Body question: QuestionFactory.Post) : Completable
 
     @Multipart
     @POST("/rest/v1/files")

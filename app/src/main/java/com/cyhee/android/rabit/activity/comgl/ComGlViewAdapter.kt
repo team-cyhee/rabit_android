@@ -25,7 +25,8 @@ import kotlinx.android.synthetic.main.item_part_text.*
 
 class ComGlViewAdapter (
         private val comGls: MutableList<GoalLogInfo>,
-        private val toggleLikeForGoalLog: (Long, Boolean) -> Unit
+        private val toggleLikeForGoalLog: (Long, Boolean) -> Unit,
+        private val deleteGoalLog: (Long) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
     private val TAG = ComGlViewAdapter::class.qualifiedName
@@ -56,7 +57,7 @@ class ComGlViewAdapter (
             }
             1 -> {
                 val goalLogInfo = comGls[position-1]
-                GoalLogViewBinder.bind(holder as ComGlViewHolder, goalLogInfo, toggleLikeForGoalLog)
+                GoalLogViewBinder.bind(holder as ComGlViewHolder, goalLogInfo, toggleLikeForGoalLog, deleteGoalLog)
             }
         }
     }

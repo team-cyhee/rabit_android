@@ -13,7 +13,6 @@ import com.cyhee.android.rabit.activity.personlist.person.PersonViewAdapter
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_likelist.*
-import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 
 
 class LikeListActivity: AppCompatActivity(), LikeListContract.View {
@@ -38,11 +37,6 @@ class LikeListActivity: AppCompatActivity(), LikeListContract.View {
                 presenter.likesForGoalLog(goalLogId)
             }
             else -> Toast.makeText(this, "전달된 goal/goalLog 아이디가 없습니다", Toast.LENGTH_SHORT).show()
-        }
-
-        prevBtn.setOnClickListener {
-            Log.d("preBtn","clicked")
-            finish()
         }
     }
 

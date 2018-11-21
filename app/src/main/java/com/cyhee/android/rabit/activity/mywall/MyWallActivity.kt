@@ -16,7 +16,7 @@ import com.cyhee.android.rabit.activity.settings.SettingsActivity
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_mywall.*
-import kotlinx.android.synthetic.main.item_complete_hometopbar.*
+import kotlinx.android.synthetic.main.item_complete_usertopbar.*
 
 
 class MyWallActivity: AppCompatActivity(), MyWallContract.View {
@@ -36,6 +36,11 @@ class MyWallActivity: AppCompatActivity(), MyWallContract.View {
             val username = intent.getStringExtra("username")
             presenter.wallInfo(username)
             usernameText.text = username
+
+            searchBtn.setOnClickListener(IntentListener.toSearchListener())
+            toUpBtn.setOnClickListener{
+                myWallListView.smoothScrollToPosition(0)
+            }
 
             // swipe refresh
             myWallSwipeRefresh.setOnRefreshListener {
@@ -66,11 +71,6 @@ class MyWallActivity: AppCompatActivity(), MyWallContract.View {
                 }
             }
         }
-
-        prevBtn.setOnClickListener {
-            Log.d("preBtn","clicked")
-            finish()
-        }
     }
 
     override fun showMainInfos(mainInfos : MutableList<MainInfo>, wallInfo: WallInfo) {
@@ -78,7 +78,9 @@ class MyWallActivity: AppCompatActivity(), MyWallContract.View {
             mainAdapter = MainViewAdapter(1, mainInfos, wallInfo,
                     { id, post -> presenter.toggleLikeForGoal(id, post)},
                     { id, post -> presenter.toggleLikeForGoalLog(id, post)},
-                    { followee: String -> })
+                    { followee: String -> },
+                    { id -> presenter.deleteGoal(id)},
+                    { id -> presenter.deleteGoalLog(id)})
             myWallListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             myWallListView.adapter = mainAdapter
         } else {

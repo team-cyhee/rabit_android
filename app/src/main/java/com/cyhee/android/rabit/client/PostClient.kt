@@ -17,13 +17,14 @@ object PostClient {
     private val TAG = PostClient::class.qualifiedName
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    fun postGoal(goal: GoalFactory.Post, scopeProvider: AndroidLifecycleScopeProvider) {
+    fun postGoal(goal: GoalFactory.Post, scopeProvider: AndroidLifecycleScopeProvider, callback: () -> Unit) {
         restClient.postGoal( goal)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
                 .subscribe (
                         {
+                            callback()
                         },
                         {
                         }
@@ -46,13 +47,14 @@ object PostClient {
                 )
     }
 
-    fun postCompanion(id: Long, goal: GoalFactory.Post, scopeProvider: AndroidLifecycleScopeProvider) {
+    fun postCompanion(id: Long, goal: GoalFactory.Post, scopeProvider: AndroidLifecycleScopeProvider, callback: () -> Unit) {
         restClient.postCompanion(id, goal)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
                 .subscribe (
                         {
+                            callback()
                         },
                         {
                         }

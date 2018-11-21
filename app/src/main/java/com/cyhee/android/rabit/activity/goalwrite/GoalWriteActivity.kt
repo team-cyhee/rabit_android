@@ -10,7 +10,6 @@ import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.item_complete_goalwrite.*
-import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 import java.util.*
 
 
@@ -24,16 +23,36 @@ class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
         setContentView(R.layout.activity_goalwrite)
 
         var parent: Long? = null
+        var goalId: Long? = null
         if (intent.hasExtra("parent")) {
             parent = intent.getLongExtra("parent", -1)
-            goalContentText.setText(intent.getStringExtra("content"))
-            goalContentText.setTextColor(Color.rgb(1,1,1))
             goalContentText.isEnabled = false
-
+        } else if (intent.hasExtra("goalId")) {
+            goalId = intent.getLongExtra("goalId", -1)
+            realGoalPostBtn.text = "수정"
         }
-        prevBtn.setOnClickListener {
-            Log.d("preBtn","clicked")
-            finish()
+
+        if (parent != null || goalId != null) {
+            goalContentText.setText(intent.getStringExtra("content"))
+
+            if (intent.hasExtra("unit") && intent.hasExtra("times")) {
+                goalRadioGroup.findViewById<RadioButton>(resources.getIdentifier
+                ("${intent.getStringExtra("unit").toString().toLowerCase()}Btn", "id", packageName)).isChecked = true
+                for (i in 0 until goalRadioGroup.childCount) {
+                    goalRadioGroup.getChildAt(i).isEnabled = false
+                }
+                goalTimeText.setText(intent.getIntExtra("times", -1).toString())
+                goalTimeText.isEnabled = false
+            }
+
+            if (intent.hasExtra("startDate")) {
+                goalStartText.setText(intent.getStringExtra("startDate"))
+            }
+            if (intent.hasExtra("endDate")) {
+                goalStartText.setText(intent.getStringExtra("endDate"))
+            }
+
+            goalContentText.setTextColor(Color.rgb(1,1,1))
         }
 
         var radio: RadioButton = noneBtn
@@ -61,10 +80,12 @@ class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
 
             val goal = GoalFactory.Post(content, startDate, null, unit, times)
 
-            if (parent == null) {
-                presenter.postGoal(goal)
-            } else {
+            if (parent != null) {
                 presenter.postCompanion(parent, goal)
+            } else if (goalId != null) {
+                presenter.editGoal(goalId, goal)
+            } else {
+                presenter.postGoal(goal)
             }
 
         }

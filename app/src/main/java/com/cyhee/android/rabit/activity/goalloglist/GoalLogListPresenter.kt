@@ -70,4 +70,18 @@ class GoalLogListPresenter(private val view: GoalLogListActivity) : GoalLogListC
     override fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post) {
         PostClient.postCommentForGoalLog(id, comment, scopeProvider)
     }
+
+    override fun deleteGoalLog(id: Long) {
+        restClient.deleteGoalLog(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe(
+                        {
+                        },
+                        {
+                            DialogHandler.errorDialog(it, view)
+                        }
+                )
+    }
 }
