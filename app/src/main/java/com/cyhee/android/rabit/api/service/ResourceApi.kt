@@ -132,6 +132,9 @@ interface ResourceApi {
     @GET("/rest/v1/comments/{id}")
     fun comment(@Path("id") id: Long) : Single<Comment>
 
+    @POST("rest/v1/questions")
+    fun postQuestion(@Body question: QuestionFactory.Post) : Completable
+
     @Multipart
     @POST("/rest/v1/files")
     fun fileUpload(@Part("description") description: RequestBody, @Part file: MultipartBody.Part): Single<Response<Void>>

@@ -19,6 +19,7 @@ import com.cyhee.android.rabit.activity.personlist.likelist.LikeListActivity
 import com.cyhee.android.rabit.activity.main.MainActivity
 import com.cyhee.android.rabit.activity.mywall.MyWallActivity
 import com.cyhee.android.rabit.activity.personlist.companionlist.CompanionListActivity
+import com.cyhee.android.rabit.activity.question.QuestionActivity
 import com.cyhee.android.rabit.activity.search.SearchActivity
 import com.cyhee.android.rabit.activity.wall.WallActivity
 import com.cyhee.android.rabit.model.ContentType
@@ -176,6 +177,12 @@ object IntentListener {
     fun toInfoEditListener(username: String) = View.OnClickListener {
         Log.d("회원정보수정", "회원정보 수정 페이지로 이동")
     }
+
+    fun toQuestionWriteListener() = View.OnClickListener {
+        val intentToQuestionWrite = Intent(it.context, QuestionActivity::class.java)
+        it.context.startActivity(intentToQuestionWrite)
+    }
+
 
     @SuppressLint("SimpleDateFormat")
     fun toGoalEdit(id: Long, content: String, doUnit: GoalUnit?, doTimes: Int?, startDate: Date?, endDate: Date?, context: Context) {

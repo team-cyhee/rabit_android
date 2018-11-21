@@ -25,12 +25,17 @@ class SettingsActivity: AppCompatActivity(), SettingsContract.View {
         bottomBar.selectTabAtPosition(3)
 
         searchBtn.setOnClickListener(IntentListener.toSearchListener())
+
+        /* question */
+        csBtn.setOnClickListener(IntentListener.toQuestionWriteListener())
+
+        /* logout */
         logoutBtn.setOnClickListener{
             App.prefs.user = ""
             App.prefs.token = ""
             App.prefs.refreshToken = ""
             val intentToLogin = Intent(it.context, LoginActivity::class.java)
-            finishAffinity();
+            finishAffinity()
             it.context.startActivity(intentToLogin)
         }
 

@@ -16,6 +16,42 @@
             layout="@layout/item_complete_topbar" />
 
         <Button
+            android:id="@+id/alarmBtn"
+            android:text="@string/alarm"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_sq"
+            android:gravity="start|center_vertical"/>
+
+        <Button
+            android:id="@+id/noticeBtn"
+            android:text="@string/notice"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_sq"
+            android:gravity="start|center_vertical"/>
+
+        <Button
+            android:id="@+id/csBtn"
+            android:text="@string/customer_service"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_sq"
+            android:gravity="start|center_vertical"/>
+
+        <Button
+            android:id="@+id/appEvalBtn"
+            android:text="@string/evaluate"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_sq"
+            android:gravity="start|center_vertical"/>
+
+        <Button
             android:id="@+id/logoutBtn"
             android:text="@string/logout"
             android:padding="10dp"

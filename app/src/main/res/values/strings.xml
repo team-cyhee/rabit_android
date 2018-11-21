@@ -37,15 +37,23 @@
     <string name="like">응원해</string>
     <string name="companion">함께하기</string>
     <string name="comment">댓글달기</string>
-    <string name="logout">로그아웃</string>
     <string name="edit">수정하기</string>
     <string name="delete">삭제하기</string>
+    <string name="send">보내기</string>
+
+    <string name="logout">로그아웃</string>
+    <string name="evaluate">앱 평가히기</string>
+    <string name="customer_service">문의하기</string>
+    <string name="alarm">알림</string>
+    <string name="notice">공지사항</string>
 
     <string name="search_prompt">함께할 래빗을 찾아보세요</string>
     <string name="comment_prompt">   응원해주세요! :></string>
     <string name="log_write_prompt">오늘 하루는 어땠나요?</string>
     <string name="goal_write_prompt">목표를 입력해주세요</string>
     <string name="content_write_prompt">내용을 입력해주세요</string>
+    <string name="question_prompt">문의사항을 적어서 래빗 서비스를 더 좋게 만들어주세요 ^-^</string>
+    <string name="question_info">* 보내주신 문의 사항은 모두 꼼꼼히 검토됩니다.</string>
 
     <string name="user_info">Syracuse, New York</string>
     <string name="follow_prompt">팔루우하기</string>
