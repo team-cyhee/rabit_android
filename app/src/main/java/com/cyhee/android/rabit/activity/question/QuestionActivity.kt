@@ -22,7 +22,6 @@ class QuestionActivity: AppCompatActivity(), QuestionContract.View {
 
         searchBtn.setOnClickListener(IntentListener.toSearchListener())
 
-        /* question */
         post_question_btn.setOnClickListener {
             val content = question_content.text.toString()
             val question = QuestionFactory.Post(content)

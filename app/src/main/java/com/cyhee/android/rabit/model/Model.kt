@@ -148,3 +148,9 @@ data class SearchForm (
     var user: User,
     var content: String?
 )
+
+data class Notice (
+    var id: Long,
+    var title: String,
+    var content: String
+)
