@@ -18,6 +18,8 @@ import com.cyhee.android.rabit.activity.goalwrite.GoalWriteActivity
 import com.cyhee.android.rabit.activity.personlist.likelist.LikeListActivity
 import com.cyhee.android.rabit.activity.main.MainActivity
 import com.cyhee.android.rabit.activity.mywall.MyWallActivity
+import com.cyhee.android.rabit.activity.notice.NoticeActivity
+import com.cyhee.android.rabit.activity.noticelist.NoticeListActivity
 import com.cyhee.android.rabit.activity.personlist.companionlist.CompanionListActivity
 import com.cyhee.android.rabit.activity.question.QuestionActivity
 import com.cyhee.android.rabit.activity.search.SearchActivity
@@ -183,6 +185,16 @@ object IntentListener {
         it.context.startActivity(intentToQuestionWrite)
     }
 
+    fun toNoticeListListener() = View.OnClickListener {
+        val intentToNoticeList = Intent(it.context, NoticeListActivity::class.java)
+        it.context.startActivity(intentToNoticeList)
+    }
+
+    fun toNoticeListener(id: Long) = View.OnClickListener {
+        val intentToNoticeList = Intent(it.context, NoticeActivity::class.java)
+        intentToNoticeList.putExtra("noticeId", id)
+        it.context.startActivity(intentToNoticeList)
+    }
 
     @SuppressLint("SimpleDateFormat")
     fun toGoalEdit(id: Long, content: String, doUnit: GoalUnit?, doTimes: Int?, startDate: Date?, endDate: Date?, context: Context) {

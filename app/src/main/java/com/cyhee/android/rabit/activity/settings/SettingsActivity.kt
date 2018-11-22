@@ -29,6 +29,9 @@ class SettingsActivity: AppCompatActivity(), SettingsContract.View {
         /* question */
         csBtn.setOnClickListener(IntentListener.toQuestionWriteListener())
 
+        /* notice */
+        noticeBtn.setOnClickListener(IntentListener.toNoticeListListener())
+
         /* logout */
         logoutBtn.setOnClickListener{
             App.prefs.user = ""

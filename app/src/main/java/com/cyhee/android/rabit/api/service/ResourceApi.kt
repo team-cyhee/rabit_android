@@ -142,4 +142,10 @@ interface ResourceApi {
     @Streaming
     @GET("/rest/v1/files/{id}")
     fun fileDownload(@Path("id") id: Long): Observable<Response<ResponseBody>>
+
+    @GET("/rest/v1/notices/titles")
+    fun noticeTitles() : Single<Page<Notice>>
+
+    @GET("/rest/v1/notices/{id}")
+    fun notice(@Path("id") id: Long) : Single<Notice>
 }

@@ -38,6 +38,8 @@
         <activity android:name="com.cyhee.android.rabit.activity.goalloglist.GoalLogListActivity"/>
         <activity android:name="com.cyhee.android.rabit.activity.settings.SettingsActivity" />
         <activity android:name="com.cyhee.android.rabit.activity.question.QuestionActivity"/>
+        <activity android:name="com.cyhee.android.rabit.activity.noticelist.NoticeListActivity"/>
+        <activity android:name="com.cyhee.android.rabit.activity.notice.NoticeActivity"/>
         <!-- facebook -->
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         <activity android:name="com.facebook.FacebookActivity" android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:label="@string/app_name" />
