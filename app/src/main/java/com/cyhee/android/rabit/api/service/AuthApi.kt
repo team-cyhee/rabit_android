@@ -50,23 +50,31 @@ interface AuthApi {
         @Header("Authorization") token: String
     ) : Single<TokenData>
 
+    @GET("/oauth/token/{social}")
+    fun tokenBySocial (
+        @Path("social") social: String,
+        @Header("Authorization") token: String
+    ) : Single<TokenData>
+
     @POST("/v1/users")
     fun register(
         @Body user: UserFactory.Post
     ) : Completable
 
-    @POST("/oauth/token/facebook")
-    fun registerByFacebook (
-        @Header("Authorization") token: String
-    ) : Completable
-
-    @POST("/oauth/token/google")
-    fun registerByGoogle (
-        @Header("Authorization") token: String
+    @POST("/oauth/token/{social}")
+    fun socialRegister(
+        @Path("social") social: String,
+        @Header("Authorization") token: String,
+        @Body user: UserFactory.Post
     ) : Completable
 
     @GET("/v1/users/{username}")
     fun exists(
         @Path("username") username: String
+    ) : Completable
+
+    @PUT("/v1/users/{username}/password")
+    fun findPassword(
+            @Path("username") username: String
     ) : Completable
 }

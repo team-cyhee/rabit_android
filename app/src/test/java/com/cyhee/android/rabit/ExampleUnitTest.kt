@@ -35,6 +35,7 @@ class ExampleUnitTest {
         assert(EmailValidator.valid("email@a.c"))
         assert(!(EmailValidator.valid("email@a")))
         assert(!(EmailValidator.valid("email")))
+        assert(!(EmailValidator.valid("")))
     }
 
     @Test

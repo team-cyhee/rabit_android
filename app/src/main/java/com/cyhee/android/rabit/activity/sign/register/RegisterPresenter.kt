@@ -1,4 +1,4 @@
-package com.cyhee.android.rabit.activity.sign.login
+package com.cyhee.android.rabit.activity.sign.register
 
 import android.util.Log
 import com.cyhee.android.rabit.api.core.AuthApiAdapter
@@ -12,10 +12,11 @@ import retrofit2.HttpException
 
 class RegisterPresenter(private val view : RegisterActivity) : RegisterContract.Presenter {
 
+    private val TAG = RegisterPresenter::class.qualifiedName
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: AuthApi = AuthApiAdapter.retrofit(AuthApi::class.java)
 
-    override fun register(user : UserFactory.Post) {
+    override fun register(user: UserFactory.Post) {
         restClient.exists(user.username)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -25,12 +26,47 @@ class RegisterPresenter(private val view : RegisterActivity) : RegisterContract.
                             view.duplicatedUsername()
                         },
                         {
-                            restClient.register(user)
+                                restClient.register(user)
+                                        .subscribeOn(Schedulers.io())
+                                        .observeOn(AndroidSchedulers.mainThread())
+                                        .subscribe(
+                                                {
+                                                    view.resultWithBasic(user.username, user.password)
+                                                },
+                                                {
+                                                    if(it is HttpException) {
+                                                        Log.d("register",it.response().toString())
+                                                        Log.d("register",it.response().body().toString())
+                                                        Log.d("register",it.response().body().toString())
+                                                        Log.d("register",it.response().errorBody().toString())
+                                                        Log.d("register",it.response().errorBody()?.string())
+                                                    }
+                                                    else {
+                                                        Log.d("register",it.toString())
+                                                    }
+                                                }
+                                        )
+                        }
+                )
+    }
+
+    override fun socialRegister(type: String, token: String, user: UserFactory.Post) {
+        Log.d(TAG,"socialRegister $type $token")
+        restClient.exists(user.username)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe (
+                        {
+                            view.duplicatedUsername()
+                        },
+                        {
+                            restClient.socialRegister(type, "Bearer $token", user)
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe(
                                             {
-                                                view.success()
+                                                view.resultWithBearer(type, token)
                                             },
                                             {
                                                 if(it is HttpException) {
