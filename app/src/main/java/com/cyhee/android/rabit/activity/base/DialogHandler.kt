@@ -1,12 +1,13 @@
 package com.cyhee.android.rabit.activity.base
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.util.Log
+import com.afollestad.materialdialogs.DialogAction
 import com.afollestad.materialdialogs.MaterialDialog
 import com.cyhee.android.rabit.R
-import com.cyhee.android.rabit.activity.sign.login.LoginPresenter
 import retrofit2.HttpException
-import java.lang.Exception
 
 object DialogHandler {
 
@@ -16,7 +17,7 @@ object DialogHandler {
         when (exception) {
             is HttpException -> {
                 Log.d(TAG, exception.response().errorBody()?.string())
-                showMessageDialog(R.string.error_default, context)
+                showMessageDialog(exception.response().errorBody()!!.string(), context)
             }
             else -> {
                 Log.d(TAG, exception.message)
@@ -33,10 +34,40 @@ object DialogHandler {
         showMessageDialog(id, context)
     }
 
+    fun confirmDialog(msg: String = "", context: Context, callback: ()->Unit) {
+        showMessageDialog(msg, context, callback)
+    }
+
+    fun checkDialog(title: String, body: String, context:Context, id: Long,  func: (Long) -> Unit) {
+        AlertDialog.Builder(context)
+                .setTitle(title)
+                .setMessage(body)
+                .setCancelable(true)
+                .setPositiveButton("네"
+                ) { _: DialogInterface, _: Int ->
+                    func(id)
+                }
+                .setNegativeButton("아니오"
+                ) { _: DialogInterface, _: Int ->
+                }
+                .create()
+                .show()
+    }
+
     private fun showMessageDialog(msg: String = "", context: Context) {
         MaterialDialog.Builder(context)
                 .content(msg)
                 .positiveText(R.string.confirm)
+                .show()
+    }
+
+    private fun showMessageDialog(msg: String = "", context: Context, callback: ()->Unit) {
+        MaterialDialog.Builder(context)
+                .content(msg)
+                .positiveText(R.string.confirm)
+                .onPositive { _: MaterialDialog, _: DialogAction ->
+                    callback()
+                }
                 .show()
     }
 

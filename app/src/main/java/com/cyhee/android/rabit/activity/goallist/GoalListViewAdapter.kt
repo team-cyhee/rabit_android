@@ -33,7 +33,7 @@ class GoalListViewAdapter (
                 when (user) {
                     // TODO: 이미 companion이면 버튼 안보이게
                     goalInfo.author.username -> cardGoalComBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalInfo.id, goalInfo.content))
-                    else -> cardGoalComBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id, goalInfo.content))
+                    else -> cardGoalComBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id, goalInfo.content, goalInfo.doUnit, goalInfo.doTimes))
                 }
 
                 cardGoalLogBtn.setOnClickListener(IntentListener.toGoalLogListListener(goalInfo.id))

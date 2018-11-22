@@ -1,45 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ssomai.android.scalablelayout.ScalableLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:sl="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    sl:scale_base_height="140"
-    sl:scale_base_width="360">
+    android:orientation="vertical">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profileImage"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/profile"
-        sl:scale_top="20"
-        sl:scale_left="20"
-        sl:scale_height="25"
-        sl:scale_width="25" />
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/nameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        sl:scale_textsize="15"
-        sl:scale_top="20"
-        sl:scale_left="60"
-        sl:scale_height="27"
-        sl:scale_width="232"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImage"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/profile" />
+
+        <TextView
+            android:id="@+id/nameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/createDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/editGoal"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="invisible"
+                android:background="@drawable/info"/>
+        </LinearLayout>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="65dp"
+        android:padding="5dp"
         android:textColor="@color/black"
-        sl:scale_textsize="16"
-        sl:scale_top="50"
-        sl:scale_left="60"
-        sl:scale_height="20"
-        sl:scale_width="300"/>
+        android:textSize="16sp" />
 
     <ImageView
         android:id="@+id/goalImage"
@@ -49,35 +68,35 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        sl:scale_top="90"
-        sl:scale_left="30"
-        sl:scale_height="40"
-        sl:scale_width="300">
-        
+        android:padding="5dp">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="50dp"
             android:orientation="vertical">
-            
+
             <TextView
                 android:id="@+id/startDateText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"/>
-            
+                android:textSize="12sp" />
+
             <TextView
                 android:id="@+id/endDateText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/logNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginEnd="10dp"
             android:orientation="vertical">
 
@@ -86,16 +105,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:textStyle="bold"
-                android:textSize="12sp"/>
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:text="@string/carrot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"/>
+                android:text="@string/carrot"
+                android:textSize="12sp" />
         </LinearLayout>
-        
+
     </LinearLayout>
-    
-</com.ssomai.android.scalablelayout.ScalableLayout>
+</LinearLayout>

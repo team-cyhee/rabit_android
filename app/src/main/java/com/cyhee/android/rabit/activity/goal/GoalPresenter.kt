@@ -92,4 +92,18 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
         PostClient.postCommentForGoalLog(id, comment, scopeProvider)
     }
 
+    override fun deleteGoal(id: Long) {
+        restClient.deleteGoal(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDisposable(scopeProvider)
+                .subscribe(
+                        {
+                        },
+                        {
+                            DialogHandler.errorDialog(it, view)
+                        }
+                )
+    }
+
 }

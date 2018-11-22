@@ -11,7 +11,6 @@ import com.cyhee.android.rabit.activity.base.GoalViewBinder
 import com.cyhee.android.rabit.base.BaseLayoutContainer
 import com.cyhee.android.rabit.model.*
 import com.cyhee.android.rabit.util.DrawableUtil
-import kotlinx.android.synthetic.main.item_complete_prevtopbar.*
 import kotlinx.android.synthetic.main.item_part_actions.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
 
@@ -34,19 +33,14 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
         } else {
             Toast.makeText(this, "전달된 goal 아이디가 없습니다", Toast.LENGTH_SHORT).show()
         }
-
-        prevBtn.setOnClickListener {
-            Log.d("preBtn","clicked")
-            finish()
-        }
     }
 
     override fun showGoalInfos(goalInfo: GoalInfo) {
         this.goalInfo = goalInfo
         val contentView = (findViewById<ViewGroup>(android.R.id.content))!!.getChildAt(0)
-        GoalViewBinder.bind(BaseLayoutContainer(contentView), goalInfo) { id, bool ->
-            presenter.toggleLikeForGoal(id, bool)
-        }
+        GoalViewBinder.bind(BaseLayoutContainer(contentView), goalInfo,
+                { id, bool -> presenter.toggleLikeForGoal(id, bool) },
+                { id -> presenter.deleteGoal(id) })
     }
 
     fun toggleLike(bool: Boolean) {

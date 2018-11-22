@@ -36,3 +36,9 @@ object CommentFactory {
         val content: String
     )
 }
+
+object QuestionFactory {
+    data class Post(
+        val content: String
+    )
+}

@@ -34,6 +34,9 @@ class MainActivity: AppCompatActivity(), MainContract.View {
         mainListView.layoutManager = linearLayoutManager
 
         searchBtn.setOnClickListener(IntentListener.toSearchListener())
+        toUpBtn.setOnClickListener{
+            mainListView.smoothScrollToPosition(0)
+        }
 
         bottomBar.setOnTabSelectListener { tabId ->
             when (tabId) {
@@ -68,7 +71,9 @@ class MainActivity: AppCompatActivity(), MainContract.View {
             mainAdapter = MainViewAdapter(0, mainInfos, null,
                     { id, post -> presenter.toggleLikeForGoal(id, post)},
                     { id, post -> presenter.toggleLikeForGoalLog(id, post)},
-                    { followee: String -> })
+                    { followee: String -> },
+                    { id -> presenter.deleteGoal(id)},
+                    { id -> presenter.deleteGoalLog(id)})
             mainListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             mainListView.adapter = mainAdapter
         } else {

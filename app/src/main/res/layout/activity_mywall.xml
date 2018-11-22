@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <include
-            android:id="@+id/homeTopBarLayout"
-            layout="@layout/item_complete_hometopbar" />
+            android:id="@+id/userTopBarLayout"
+            layout="@layout/item_complete_usertopbar" />
 
         <android.support.v4.widget.SwipeRefreshLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -31,6 +31,15 @@
 
         </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/toUpBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="50dp"
+        app:srcCompat="@android:drawable/arrow_up_float" />
 
     <com.roughike.bottombar.BottomBar
         android:id="@+id/bottomBar"

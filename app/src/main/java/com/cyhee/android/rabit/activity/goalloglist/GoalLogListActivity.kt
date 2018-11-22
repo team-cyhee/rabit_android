@@ -28,6 +28,11 @@ class GoalLogListActivity: AppCompatActivity(), GoalLogListContract.View {
             val goalId = intent.getLongExtra("goalId", -1)
             presenter.goalLogs(goalId)
 
+            searchBtn.setOnClickListener(IntentListener.toSearchListener())
+            toUpBtn.setOnClickListener{
+                glListListView.smoothScrollToPosition(0)
+            }
+
             // swipe refresh
             glListSwipeRefresh.setOnRefreshListener {
                 Toast.makeText(this@GoalLogListActivity, "refreshed!", Toast.LENGTH_SHORT).show()
@@ -40,14 +45,13 @@ class GoalLogListActivity: AppCompatActivity(), GoalLogListContract.View {
         }
 
         searchBtn.setOnClickListener(IntentListener.toSearchListener())
-
-
     }
 
     override fun showComGls(comGls: MutableList<GoalLogInfo>) {
         if (comGlAdapter == null) {
-            comGlAdapter = ComGlViewAdapter(comGls
-            ) { id, post -> presenter.toggleLikeForGoalLog(id, post)}
+            comGlAdapter = ComGlViewAdapter(comGls,
+                    { id, post -> presenter.toggleLikeForGoalLog(id, post)},
+                    {id -> presenter.deleteGoalLog(id)})
             glListListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             glListListView.adapter = comGlAdapter
         } else {
@@ -63,4 +67,6 @@ class GoalLogListActivity: AppCompatActivity(), GoalLogListContract.View {
     fun toggleLike(id: Long, boolean: Boolean) {
         comGlAdapter!!.toggleLike(id, boolean)
     }
+
+
 }

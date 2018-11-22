@@ -12,5 +12,6 @@ class GoalLogContract {
     interface Presenter: BasePresenter {
         fun goalLogInfo(id: Long)
         fun toggleLikeForGoalLog(id: Long, post: Boolean)
+        fun deleteGoalLog(id: Long)
     }
 }

@@ -11,7 +11,7 @@ import com.cyhee.android.rabit.activity.main.MainViewAdapter
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_wall.*
-import kotlinx.android.synthetic.main.item_complete_hometopbar.*
+import kotlinx.android.synthetic.main.item_complete_usertopbar.*
 
 class WallActivity: AppCompatActivity(), WallContract.View {
 
@@ -28,6 +28,11 @@ class WallActivity: AppCompatActivity(), WallContract.View {
             presenter.wallInfo(username)
             usernameText.text = username
 
+            searchBtn.setOnClickListener(IntentListener.toSearchListener())
+            toUpBtn.setOnClickListener{
+                wallListView.smoothScrollToPosition(0)
+            }
+
             // swipe refresh
             wallSwipeRefresh.setOnRefreshListener {
                 Toast.makeText(this@WallActivity, "refreshed!", Toast.LENGTH_SHORT).show()
@@ -39,11 +44,6 @@ class WallActivity: AppCompatActivity(), WallContract.View {
             Toast.makeText(this, "전달된 username이 없습니다", Toast.LENGTH_SHORT).show()
         }
 
-        prevBtn.setOnClickListener {
-            Log.d("preBtn","clicked")
-            finish()
-        }
-
     }
 
     override fun showMainInfos(mainInfos : MutableList<MainInfo>, wallInfo: WallInfo) {
@@ -51,7 +51,9 @@ class WallActivity: AppCompatActivity(), WallContract.View {
             mainAdapter = MainViewAdapter(2, mainInfos, wallInfo,
                     { id, post -> presenter.toggleLikeForGoal(id, post)},
                     { id, post -> presenter.toggleLikeForGoalLog(id, post)},
-                    { followee: String -> presenter.postFollow(followee)})
+                    { followee: String -> presenter.postFollow(followee)},
+                    { id -> presenter.deleteGoal(id)},
+                    { id -> presenter.deleteGoalLog(id)})
             wallListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             wallListView.adapter = mainAdapter
         } else {
