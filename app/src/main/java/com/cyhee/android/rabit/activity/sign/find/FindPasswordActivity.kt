@@ -2,9 +2,9 @@ package com.cyhee.android.rabit.activity.sign.find
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.afollestad.materialdialogs.MaterialDialog
 import com.cyhee.android.rabit.R
-import com.cyhee.android.rabit.activity.base.DialogHandler
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_find_password.*
 
 class FindPasswordActivity : AppCompatActivity(), FindPasswordContract.View {
 
@@ -15,13 +15,18 @@ class FindPasswordActivity : AppCompatActivity(), FindPasswordContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find_password)
 
-        findPasswordBtn.setOnClickListener {
+        findBtn.setOnClickListener {
             presenter.find(usernameText.text.toString())
         }
     }
 
     override fun success() {
-        DialogHandler.confirmDialog(getString(R.string.find_password_confirm), this)
-        finish()
+        MaterialDialog.Builder(this)
+                .content(getString(R.string.find_password_confirm))
+                .positiveText(getString(R.string.confirm))
+                .onPositive { _, _ ->
+                    finish()
+                }
+                .show()
     }
 }

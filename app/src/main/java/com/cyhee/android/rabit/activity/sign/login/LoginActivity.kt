@@ -3,9 +3,11 @@ package com.cyhee.android.rabit.activity.sign.login
 import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.NonNull
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
+import com.afollestad.materialdialogs.MaterialDialog
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.activity.base.DialogHandler
@@ -32,12 +34,12 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, GoogleApiClient.O
 
     private val TAG = LoginActivity::class.qualifiedName
     private val RC_SIGN_IN = 1000
+    private val RC_REGISTER = 2000
+    override var presenter : LoginContract.Presenter = LoginPresenter(this)
+
     private var mGoogleApiClient: GoogleApiClient? = null
     private val WEB_CLIENT_ID = "911047158248-u72ju0uvg1l95fiehhpdund7vf182as9.apps.googleusercontent.com"
     private val callbackManager = CallbackManager.Factory.create()
-    // Configure sign-in to request the user's ID, email address, and basic
-    // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-    override var presenter : LoginContract.Presenter = LoginPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +54,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, GoogleApiClient.O
 
         registerBtn.setOnClickListener {
             val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, RC_REGISTER)
         }
 
         findPasswordBtn.setOnClickListener {
@@ -69,6 +71,60 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, GoogleApiClient.O
         onActivityResultFacebook(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
         onActivityResultGoogle(requestCode, resultCode, data)
+
+        when(requestCode) {
+            RC_REGISTER -> {
+                data?.apply {
+                    when(resultCode) {
+                        RegisterActivity.RESULT_BASIC -> {
+                            presenter.login(getStringExtra("username"), getStringExtra("password"))
+                        }
+                        RegisterActivity.RESULT_BEARER -> {
+                            val token = data.getStringExtra("token")
+                            when(getStringExtra("social")) {
+                                "facebook" -> presenter.loginByFacebook(token)
+                                "google" -> presenter.loginByGoogle(token)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onConnectionFailed(@NonNull connectionResult: ConnectionResult) {
+        Log.d(TAG, "onConnectionFailed")
+        DialogHandler.confirmDialog("Connection failed", this)
+    }
+
+    override fun success(tokenData : TokenData) {
+        Log.d(TAG,"login success!")
+        App.prefs.token = tokenData.accessToken
+        App.prefs.refreshToken = tokenData.refreshToken
+        App.prefs.user = tokenData.user
+
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    override fun fail (t: Throwable?) {
+        Toast.makeText(this@LoginActivity, t.toString(), Toast.LENGTH_SHORT).show()
+        Log.d(TAG,"login fail!")
+    }
+
+    fun socialRegister(type: String, token: String) {
+        MaterialDialog.Builder(this)
+                .content(getString(R.string.social_register,"${type.capitalize()}"))
+                .positiveText(R.string.confirm)
+                .negativeText(R.string.reset)
+                .onPositive { _, _ ->
+                    val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+                    intent.putExtra("type", type)
+                    intent.putExtra("token", token)
+                    startActivityForResult(intent, RC_REGISTER)
+                }
+                .show()
     }
 
     private fun onActivityResultFacebook(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -127,40 +183,5 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, GoogleApiClient.O
             var signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient)
             startActivityForResult(signInIntent,RC_SIGN_IN)
         }
-    }
-
-    /*private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-        Log.e(TAG, "firebaseAuthWithGoogle():" + acct.id!!)
-        val credential = GoogleAuthProvider.getCredential(acct?.idToken, null)
-        mAuth!!.signInWithCredential(credential)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success
-                        val user = mAuth!!.currentUser
-                        Log.d(TAG, user.toString())
-                    } else {
-                        // Sign in fails
-                        Log.d(TAG, "firebaseAuthWithGoogle():" + acct.id!!)
-                    }
-                }
-    }*/
-
-    override fun onConnectionFailed(@NonNull connectionResult: ConnectionResult) {
-    }
-
-    override fun success(tokenData : TokenData) {
-        Log.d(TAG,"login success!")
-        App.prefs.token = tokenData.accessToken
-        App.prefs.refreshToken = tokenData.refreshToken
-        App.prefs.user = tokenData.user
-
-        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    override fun fail (t: Throwable?) {
-        Toast.makeText(this@LoginActivity, t.toString(), Toast.LENGTH_SHORT).show()
-        Log.d(TAG,"login fail!")
     }
 }

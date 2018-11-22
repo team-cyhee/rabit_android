@@ -16,7 +16,7 @@ object DialogHandler {
         when (exception) {
             is HttpException -> {
                 Log.d(TAG, exception.response().errorBody()?.string())
-                showMessageDialog(exception.response().errorBody()!!.string(), context)
+                showMessageDialog(R.string.error_default, context)
             }
             else -> {
                 Log.d(TAG, exception.message)
@@ -27,6 +27,10 @@ object DialogHandler {
 
     fun confirmDialog(msg: String = "", context: Context) {
         showMessageDialog(msg, context)
+    }
+
+    fun confirmDialog(id: Int, context: Context) {
+        showMessageDialog(id, context)
     }
 
     private fun showMessageDialog(msg: String = "", context: Context) {

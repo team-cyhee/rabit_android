@@ -4,7 +4,10 @@
 
     <string name="facebook_app_id">297104847560897</string>
     <string name="fb_login_protocol_scheme">fb297104847560897</string>
+
+    <!-- Common -->
     <string name="confirm">확인</string>
+    <string name="reset">취소</string>
     <string name="unknown_error_message">에러가 발생하였습니다.</string>
     <string name="canceled">취소되었습니다.</string>
 
@@ -17,8 +20,11 @@
     <string name="register_prompt">New User?</string>
     <string name="to_register">Sign up for a new account</string>
 
+    <!-- LoginActivity -->
     <string name="sign_up">Sign Up</string>
     <string name="to_login">Login now</string>
+    <string name="social_register">%1$s 으로 계속하려면, 추가정보 입력이 필요합니다.</string>
+    <string name="login_fail">로그인에 실패하였습니다.</string>
 
     <string name="name">Name</string>
     <string name="email">Email</string>
@@ -30,6 +36,7 @@
     <string name="facebook_login">facebook login</string>
     <string name="google_login">google login</string>
     <string name="username">ID</string>
+    <string name="birth">Birth</string>
 
     <string name="carrot">Carrots</string>
     <string name="following">Following</string>
