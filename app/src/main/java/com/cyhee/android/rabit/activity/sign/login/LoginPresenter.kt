@@ -1,6 +1,7 @@
 package com.cyhee.android.rabit.activity.sign.login
 
 import android.util.Log
+import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.base.DialogHandler
 import com.cyhee.android.rabit.api.core.AuthApiAdapter
 import com.cyhee.android.rabit.api.service.AuthApi
@@ -27,7 +28,7 @@ class LoginPresenter(private val view : LoginActivity) : LoginContract.Presenter
                         },
                         {
                             Log.d(TAG, "failed to login")
-                            DialogHandler.errorDialog(it, view)
+                            DialogHandler.confirmDialog(R.string.login_fail,view)
                         }
                 )
     }
@@ -43,9 +44,12 @@ class LoginPresenter(private val view : LoginActivity) : LoginContract.Presenter
                         },
                         {
                             Log.d(TAG, "failed to login by facebook")
-                            if(it is HttpException && it.code() == 438)
+                            if(it is HttpException && it.code() == 428) {
                                 Log.d(TAG, "need to register")
-                            DialogHandler.errorDialog(it, view)
+                                view.socialRegister("facebook", token)
+                                return@subscribe
+                            }
+                            DialogHandler.confirmDialog(R.string.login_fail,view)
                         }
                 )
     }
@@ -61,9 +65,12 @@ class LoginPresenter(private val view : LoginActivity) : LoginContract.Presenter
                         },
                         {
                             Log.d(TAG, "failed to login by google")
-                            if(it is HttpException && it.code() == 438)
+                            if(it is HttpException && it.code() == 428) {
                                 Log.d(TAG, "need to register")
-                            DialogHandler.errorDialog(it, view)
+                                view.socialRegister("google", token)
+                                return@subscribe
+                            }
+                            DialogHandler.confirmDialog(R.string.login_fail,view)
                         }
                 )
     }

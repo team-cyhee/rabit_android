@@ -6,11 +6,11 @@ import com.cyhee.android.rabit.model.UserFactory
 
 interface RegisterContract {
     interface View : BaseView<Presenter> {
-        fun success()
         fun duplicatedUsername()
     }
 
     interface Presenter : BasePresenter {
-        fun register(user : UserFactory.Post)
+        fun register(user:UserFactory.Post)
+        fun socialRegister(type: String, token: String, user: UserFactory.Post)
     }
 }

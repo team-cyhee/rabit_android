@@ -30,6 +30,10 @@ object DialogHandler {
         showMessageDialog(msg, context)
     }
 
+    fun confirmDialog(id: Int, context: Context) {
+        showMessageDialog(id, context)
+    }
+
     fun confirmDialog(msg: String = "", context: Context, callback: ()->Unit) {
         showMessageDialog(msg, context, callback)
     }
