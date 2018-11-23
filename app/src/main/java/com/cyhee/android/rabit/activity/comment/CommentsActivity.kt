@@ -43,6 +43,8 @@ class CommentsActivity: AppCompatActivity(), CommentsContract.View {
                     "goallog" -> presenter.commentsForGoalLog(id)
                     else -> throw Exception("잘못된 댓글 요청입니다.")
                 }
+
+                commentSwipeRefresh?.isRefreshing = false
             }
         }
     }

@@ -154,3 +154,13 @@ data class Notice (
     var title: String,
     var content: String
 )
+
+data class Alarm (
+    var owner: User,
+    var author: User,
+    var target: ContentType?,
+    var action: ContentType,
+    var actionId: Long,
+    var createDate: Date,
+    var id: Long
+)

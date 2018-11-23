@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import com.cyhee.android.rabit.activity.alarm.AlarmActivity
 import com.cyhee.android.rabit.activity.comgl.ComGlActivity
 import com.cyhee.android.rabit.activity.comment.CommentsActivity
 import com.cyhee.android.rabit.activity.personlist.followerlist.FollowerListActivity
@@ -183,6 +184,11 @@ object IntentListener {
     fun toQuestionWriteListener() = View.OnClickListener {
         val intentToQuestionWrite = Intent(it.context, QuestionActivity::class.java)
         it.context.startActivity(intentToQuestionWrite)
+    }
+
+    fun toAlarmListener() = View.OnClickListener {
+        val intentToAlarm = Intent(it.context, AlarmActivity::class.java)
+        it.context.startActivity(intentToAlarm)
     }
 
     fun toNoticeListListener() = View.OnClickListener {

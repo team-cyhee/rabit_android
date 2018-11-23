@@ -24,10 +24,10 @@ interface ResourceApi {
     @GET("/rest/v1/goals/{id}")
     fun goal(@Path("id") id: Long) : Single<Goal>
 
-    @PUT("rest/v1/goals/{id}")
+    @PUT("/rest/v1/goals/{id}")
     fun putGoal(@Path("id") id: Long, @Body goal: GoalFactory.Post) : Completable
 
-    @DELETE("rest/v1/goals/{id}")
+    @DELETE("/rest/v1/goals/{id}")
     fun deleteGoal(@Path("id") id: Long) : Completable
 
     @GET("/rest/v1/goals/{id}/goallogs/info")
@@ -132,7 +132,7 @@ interface ResourceApi {
     @GET("/rest/v1/comments/{id}")
     fun comment(@Path("id") id: Long) : Single<Comment>
 
-    @POST("rest/v1/questions")
+    @POST("/rest/v1/questions")
     fun postQuestion(@Body question: QuestionFactory.Post) : Completable
 
     @Multipart
@@ -148,4 +148,8 @@ interface ResourceApi {
 
     @GET("/rest/v1/notices/{id}")
     fun notice(@Path("id") id: Long) : Single<Notice>
+
+    @GET("/rest/v1/alarms/user")
+    fun alarms() : Single<Page<Alarm>>
+
 }

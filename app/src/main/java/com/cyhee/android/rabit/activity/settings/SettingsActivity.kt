@@ -26,6 +26,9 @@ class SettingsActivity: AppCompatActivity(), SettingsContract.View {
 
         searchBtn.setOnClickListener(IntentListener.toSearchListener())
 
+        /* alarm */
+        alarmBtn.setOnClickListener(IntentListener.toAlarmListener())
+
         /* question */
         csBtn.setOnClickListener(IntentListener.toQuestionWriteListener())
 
