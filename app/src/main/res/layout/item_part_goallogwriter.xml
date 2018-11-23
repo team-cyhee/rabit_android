@@ -14,13 +14,13 @@
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profileImage"
+            android:id="@+id/profile_image"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/profile" />
 
         <TextView
-            android:id="@+id/nameText"
+            android:id="@+id/name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -30,7 +30,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/createDate"
+            android:id="@+id/create_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -43,7 +43,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/editGoalLog"
+                android:id="@+id/edit_goal_log"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:visibility="invisible"
@@ -52,7 +52,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/titleText"
+        android:id="@+id/title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="65dp"

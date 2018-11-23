@@ -28,24 +28,24 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_goallist)
-        bottomBar.selectTabAtPosition(2)
+        bottom_bar.selectTabAtPosition(2)
 
         if (intent.hasExtra("username")) {
             val username = intent.getStringExtra("username")
             presenter.userGoalInfos(username)
 
             val gridLayoutManager = GridLayoutManager(this, 2)
-            goalListListView.layoutManager = gridLayoutManager
+            goal_list_list_view.layoutManager = gridLayoutManager
 
-            usernameText.text = username
+            username_text.text = username
 
-            searchBtn.setOnClickListener(IntentListener.toSearchListener())
-            toUpBtn.setOnClickListener{
-                goalListListView.smoothScrollToPosition(0)
+            search_btn.setOnClickListener(IntentListener.toSearchListener())
+            to_up_btn.setOnClickListener{
+                goal_list_list_view.smoothScrollToPosition(0)
             }
 
             // swipe refresh
-            goalListSwipeRefresh.setOnRefreshListener {
+            goal_list_swipe_refresh.setOnRefreshListener {
                 Toast.makeText(this@GoalListActivity, "refreshed!", Toast.LENGTH_SHORT).show()
 
                 goalListAdapter?.clear()
@@ -53,7 +53,7 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
             }
         }
 
-        bottomBar.setOnTabSelectListener { tabId ->
+        bottom_bar.setOnTabSelectListener { tabId ->
             when (tabId) {
                 R.id.tabHome -> {
                     val intentToMain = Intent(this, MainActivity::class.java)
@@ -77,14 +77,14 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
     override fun showGoals(goalInfos: MutableList<GoalInfo>) {
         if (goalListAdapter == null) {
             goalListAdapter = GoalListViewAdapter(goalInfos)
-            goalListListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            goalListListView.adapter = goalListAdapter
+            goal_list_list_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+            goal_list_list_view.adapter = goalListAdapter
         } else {
             goalListAdapter!!.appendGoalInfos(goalInfos)
         }
 
-        goalListListView.addItemDecoration(CardItemDeco(this))
-        goalListSwipeRefresh?.isRefreshing = false
+        goal_list_list_view.addItemDecoration(CardItemDeco(this))
+        goal_list_swipe_refresh?.isRefreshing = false
     }
 
 }

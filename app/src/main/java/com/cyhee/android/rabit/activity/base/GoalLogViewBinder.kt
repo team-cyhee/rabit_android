@@ -31,41 +31,41 @@ object GoalLogViewBinder {
 
         with(holder) {
             if (item.author.username == user) {
-                editGoalLog.visibility = View.VISIBLE
+                edit_goal_log.visibility = View.VISIBLE
             }
 
-            nameText.text = item.goal.author.username
-            createDate.text = SimpleDateFormat("MM/dd/yyy").format(item.createDate)
+            name_text.text = item.goal.author.username
+            create_date.text = SimpleDateFormat("MM.dd.yyy").format(item.createDate)
             val goalTitle = item.goal.content + Fun.dateDistance(item)
-            titleText.text = goalTitle
+            title_text.text = goalTitle
 
-            comNumberText.text = item.companionNum.toString()
+            comment_number_text.text = item.companionNum.toString()
             text.text = item.content
 
-            likeNumberText.text = item.likeNum.toString()
-            commentNumberText.text = item.commentNum.toString()
+            like_number_text.text = item.likeNum.toString()
+            comment_number_text.text = item.commentNum.toString()
 
             val isMy = user == item.author.username
-            nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, item.author.username))
-            titleText.setOnClickListener(IntentListener.toGoalListener(item.goal.id))
-            textLayout.setOnClickListener(IntentListener.toGoalLogListener(item.id))
-            commentNumberText.setOnClickListener(IntentListener.toGoalLogCommentsListener(item.id))
-            likeNumberText.setOnClickListener(IntentListener.toGoalLogLikeListListener(item.id))
-            editGoalLog.setOnClickListener(IntentListener.toGoalLogEditListener(item.id, item.goal.content, item.content))
-            comNumberText.setOnClickListener(IntentListener.toCompanionListListener(item.goal.id))
+            name_text.setOnClickListener(IntentListener.toWhichWallListListener(isMy, item.author.username))
+            title_text.setOnClickListener(IntentListener.toGoalListener(item.goal.id))
+            text_layout.setOnClickListener(IntentListener.toGoalLogListener(item.id))
+            comment_number_text.setOnClickListener(IntentListener.toGoalLogCommentsListener(item.id))
+            like_number_text.setOnClickListener(IntentListener.toGoalLogLikeListListener(item.id))
+            edit_goal_log.setOnClickListener(IntentListener.toGoalLogEditListener(item.id, item.goal.content, item.content))
+            com_number_text.setOnClickListener(IntentListener.toCompanionListListener(item.goal.id))
 
-            editGoalLog.setOnClickListener{
-                val pm = PopupMenu(editGoalLog.context, editGoalLog)
+            edit_goal_log.setOnClickListener{
+                val pm = PopupMenu(edit_goal_log.context, edit_goal_log)
                 pm.menuInflater.inflate(R.menu.edit_delete, pm.menu)
 
                 pm.setOnMenuItemClickListener {menu ->
                     when (menu.itemId) {
                         R.id.edit -> {
-                            IntentListener.toGoalLogEdit(item.id, item.goal.content, item.content, editGoalLog.context)
+                            IntentListener.toGoalLogEdit(item.id, item.goal.content, item.content, edit_goal_log.context)
                             true
                         }
                         R.id.delete -> {
-                            DialogHandler.checkDialog("캐럿 삭제하기", "정말 삭제하시겠어요?", editGoalLog.context, item.id, deleteGoalLog)
+                            DialogHandler.checkDialog("캐럿 삭제하기", "정말 삭제하시겠어요?", edit_goal_log.context, item.id, deleteGoalLog)
                             true
                         }
                         else -> false
@@ -73,29 +73,29 @@ object GoalLogViewBinder {
                 }
                 pm.show()
             }
-            likeButton.background =
-                    if (item.liked) DrawableUtil.getDrawable(likeBtn.context, R.drawable.ic_heart_black)
-                    else DrawableUtil.getDrawable(likeBtn.context, R.drawable.ic_heart_outline)
+            like_button.background =
+                    if (item.liked) DrawableUtil.getDrawable(like_btn.context, R.drawable.ic_heart_black)
+                    else DrawableUtil.getDrawable(like_btn.context, R.drawable.ic_heart_outline)
 
-            likeBtnWrapper.background =
-                    if (item.liked) DrawableUtil.getDrawable(likeBtn.context, R.drawable.rect_sq_red)
-                    else DrawableUtil.getDrawable(likeBtn.context, R.drawable.rect_sq)
+            like_btn_wrapper.background =
+                    if (item.liked) DrawableUtil.getDrawable(like_btn.context, R.drawable.rect_sq_red)
+                    else DrawableUtil.getDrawable(like_btn.context, R.drawable.rect_sq)
 
             // post like
-            likeBtn.setOnClickListener {
+            like_btn.setOnClickListener {
                 likeListener(item.id, !item.liked)
             }
 
-            cmtPostBtn.setOnClickListener(IntentListener.toGoalLogCommentsListener(item.id))
+            cmt_post_btn.setOnClickListener(IntentListener.toGoalLogCommentsListener(item.id))
             when (user) {
                 // TODO: 이미 companion이면 버튼 안보이게
-                item.author.username -> coBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(item.goal.id, item.goal.content))
-                else -> coBtn.setOnClickListener(IntentListener.toCompanionWriteListener(item.goal.id, item.goal.content, item.goal.doUnit, item.goal.doTimes))
+                item.author.username -> co_btn.setOnClickListener(IntentListener.toGoalLogWriteListener(item.goal.id, item.goal.content))
+                else -> co_btn.setOnClickListener(IntentListener.toCompanionWriteListener(item.goal.id, item.goal.content, item.goal.doUnit, item.goal.doTimes))
             }
 
-            if(logImage != null && item.file.isNotEmpty()) {
+            if(log_image != null && item.file.isNotEmpty()) {
                 Log.d(TAG, "$baseUrl/${item.file.first().id}")
-                Glide.with(holder.containerView).load("$baseUrl/${item.file.first().id}").into(logImage)
+                Glide.with(holder.containerView).load("$baseUrl/${item.file.first().id}").into(log_image)
             }
 
             Log.d("ViewHolder", item.toString())

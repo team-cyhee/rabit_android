@@ -21,7 +21,7 @@
 
         <TextView
             android:text="@string/app"
-            android:id="@+id/topName"
+            android:id="@+id/top_name"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:gravity="center"

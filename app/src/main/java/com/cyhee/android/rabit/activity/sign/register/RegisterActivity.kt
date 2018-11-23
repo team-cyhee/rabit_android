@@ -1,4 +1,4 @@
-package com.cyhee.android.rabit.activity.sign.login
+package com.cyhee.android.rabit.activity.sign.register
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -32,17 +32,17 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
 
         var validAll = false
 
-        var passwordValid: Observable<Boolean> = passwordText
+        var passwordValid: Observable<Boolean> = password_text
                 .textChanges()
                 .map {
-                    passwordValidator.valid(passwordText)
+                    passwordValidator.valid(password_text)
                 }
 
         var passwordCheck: Observable<Boolean> = Observable
-                .merge(passwordText.textChanges(), passwordCheckText.textChanges())
+                .merge(password_text.textChanges(), password_check_text.textChanges())
                 .map {
-                    if(passwordCheckText.text.toString() != passwordText.text.toString()) {
-                        passwordCheckText.error = "패스워드와 패스워드 체크가 다릅니다."
+                    if(password_check_text.text.toString() != password_text.text.toString()) {
+                        password_check_text.error = "패스워드와 패스워드 체크가 다릅니다."
                         false
                     }
                     else {
@@ -50,11 +50,11 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
                     }
                 }
 
-        var emailValid: Observable<Boolean> = emailText
+        var emailValid: Observable<Boolean> = email_text
                 .textChanges()
                 .map {
                     if(!EmailValidator.valid(it)) {
-                        emailText.error = "올바른 이메일 형식이 아닙니다."
+                        email_text.error = "올바른 이메일 형식이 아닙니다."
                         false
                     }
                     true
@@ -69,12 +69,12 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
             disposables.add(this)
         }
 
-        registerBtn.setOnClickListener {
-            val username = usernameText.text.toString()
-            val password = passwordText.text.toString()
-            val email = emailText.text.toString()
-            val phone = phoneText.text.toString()
-            val age = ageText.text.toString()
+        register_btn.setOnClickListener {
+            val username = username_text.text.toString()
+            val password = password_text.text.toString()
+            val email = email_text.text.toString()
+            val phone = phone_text.text.toString()
+            val age = age_text.text.toString()
 
             val user = UserFactory.Post(username, email, password, phone, Date())
 
@@ -91,7 +91,7 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
     }
 
     override fun duplicatedUsername() {
-        usernameText.error = "중복된 username 입니다."
+        username_text.error = "중복된 username 입니다."
     }
 
     override fun onDestroy() {

@@ -20,7 +20,7 @@ class QuestionActivity: AppCompatActivity(), QuestionContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question)
 
-        searchBtn.setOnClickListener(IntentListener.toSearchListener())
+        search_btn.setOnClickListener(IntentListener.toSearchListener())
 
         post_question_btn.setOnClickListener {
             val content = question_content.text.toString()

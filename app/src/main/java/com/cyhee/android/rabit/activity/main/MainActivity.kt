@@ -31,14 +31,14 @@ class MainActivity: AppCompatActivity(), MainContract.View {
         presenter.mainInfos()
 
         val linearLayoutManager = LinearLayoutManager(this)
-        mainListView.layoutManager = linearLayoutManager
+        main_list_view.layoutManager = linearLayoutManager
 
-        searchBtn.setOnClickListener(IntentListener.toSearchListener())
-        toUpBtn.setOnClickListener{
-            mainListView.smoothScrollToPosition(0)
+        search_btn.setOnClickListener(IntentListener.toSearchListener())
+        to_up_btn.setOnClickListener{
+            main_list_view.smoothScrollToPosition(0)
         }
 
-        bottomBar.setOnTabSelectListener { tabId ->
+        bottom_bar.setOnTabSelectListener { tabId ->
             when (tabId) {
                 R.id.tabWall -> {
                     val intentToMyWall = Intent(this, MyWallActivity:: class.java)
@@ -58,11 +58,12 @@ class MainActivity: AppCompatActivity(), MainContract.View {
         }
 
         // swipe refresh
-        mainSwipeRefresh.setOnRefreshListener {
+        main_swipe_refresh.setOnRefreshListener {
             Toast.makeText(this@MainActivity, "refreshed!", Toast.LENGTH_SHORT).show()
 
             mainAdapter?.clear()
             presenter.mainInfos()
+            main_swipe_refresh?.isRefreshing = false
         }
     }
 
@@ -74,13 +75,11 @@ class MainActivity: AppCompatActivity(), MainContract.View {
                     { followee: String -> },
                     { id -> presenter.deleteGoal(id)},
                     { id -> presenter.deleteGoalLog(id)})
-            mainListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            mainListView.adapter = mainAdapter
+            main_list_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+            main_list_view.adapter = mainAdapter
         } else {
             mainAdapter!!.appendMainInfos(mainInfos)
         }
-
-        mainSwipeRefresh?.isRefreshing = false
     }
 
     fun toggleLike(id: Long, type: ContentType, boolean: Boolean) {

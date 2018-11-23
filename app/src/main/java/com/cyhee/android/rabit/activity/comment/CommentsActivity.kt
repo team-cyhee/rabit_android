@@ -34,7 +34,7 @@ class CommentsActivity: AppCompatActivity(), CommentsContract.View {
                 else -> throw Exception("잘못된 댓글 요청입니다.")
             }
             // swipe refresh
-            commentSwipeRefresh.setOnRefreshListener {
+            comment_swipe_refresh.setOnRefreshListener {
                 Toast.makeText(this@CommentsActivity, "refreshed!", Toast.LENGTH_SHORT).show()
 
                 commentsAdapter?.clear()
@@ -44,7 +44,7 @@ class CommentsActivity: AppCompatActivity(), CommentsContract.View {
                     else -> throw Exception("잘못된 댓글 요청입니다.")
                 }
 
-                commentSwipeRefresh?.isRefreshing = false
+                comment_swipe_refresh?.isRefreshing = false
             }
         }
     }
@@ -56,18 +56,18 @@ class CommentsActivity: AppCompatActivity(), CommentsContract.View {
                 ContentType.GOALLOG -> CommentViewAdapter(id, comments) { goalLogId, comment -> presenter.postCommentForGoalLog(goalLogId, comment)}
                 else -> throw Exception("잘못된 타입에 대한 댓글 포스트 요청 입니다")
             }
-            commentListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            commentListView.adapter = commentsAdapter
+            comment_list_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+            comment_list_view.adapter = commentsAdapter
         } else {
             commentsAdapter!!.appendComments(comments)
         }
 
-        commentListView.addItemDecoration(CardItemDeco(this))
-        commentSwipeRefresh?.isRefreshing = false
+        comment_list_view.addItemDecoration(CardItemDeco(this))
+        comment_swipe_refresh?.isRefreshing = false
     }
 
     fun addComment(comment: Comment) {
         commentsAdapter!!.appendComments(listOf(comment))
-        postingCommentText.text.clear()
+        posting_comment_text.text.clear()
     }
 }

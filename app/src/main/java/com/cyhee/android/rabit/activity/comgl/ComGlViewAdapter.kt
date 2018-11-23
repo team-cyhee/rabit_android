@@ -52,7 +52,7 @@ class ComGlViewAdapter (
         when (holder.itemViewType) {
             0 -> {
                 with (holder as GoalSelectViewHolder) {
-                    comGlText.text = "명이 함께하는 중"
+                    com_gl_text.text = "명이 함께하는 중"
                 }
             }
             1 -> {

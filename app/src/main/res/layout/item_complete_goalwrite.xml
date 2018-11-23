@@ -9,7 +9,7 @@
     sl:scale_base_width="360">
 
     <RadioGroup
-        android:id="@+id/goalRadioGroup"
+        android:id="@+id/goal_radio_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="50dp"
@@ -22,35 +22,35 @@
 
         <RadioButton
             android:text="@string/everyday"
-            android:id="@+id/dailyBtn"
+            android:id="@+id/daily_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
 
         <RadioButton
             android:text="@string/weekly"
-            android:id="@+id/weeklyBtn"
+            android:id="@+id/weekly_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <RadioButton
             android:text="@string/monthly"
-            android:id="@+id/monthlyBtn"
+            android:id="@+id/monthly_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <RadioButton
             android:text="@string/yearly"
-            android:id="@+id/yearlyBtn"
+            android:id="@+id/yearly_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <RadioButton
             android:text="@string/none"
-            android:id="@+id/noneBtn"
+            android:id="@+id/none_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -60,7 +60,7 @@
 
     <EditText
         android:hint="@string/times"
-        android:id="@+id/goalTimeText"
+        android:id="@+id/goal_time_text"
         android:layout_width="313dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn"
@@ -85,7 +85,7 @@
 
     <EditText
         android:hint="@string/goal_write_prompt"
-        android:id="@+id/goalContentText"
+        android:id="@+id/goal_content_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -97,7 +97,7 @@
 
     <EditText
         android:hint="@string/start_date"
-        android:id="@+id/goalStartText"
+        android:id="@+id/goal_start_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -109,7 +109,7 @@
 
     <EditText
         android:hint="@string/end_date"
-        android:id="@+id/goalEndText"
+        android:id="@+id/goal_end_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -121,7 +121,7 @@
 
     <Button
         android:text="@string/post"
-        android:id="@+id/realGoalPostBtn"
+        android:id="@+id/real_goal_post_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

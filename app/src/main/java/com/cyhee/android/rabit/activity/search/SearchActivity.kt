@@ -24,73 +24,76 @@ class SearchActivity: AppCompatActivity(), SearchContract.View {
 
         var text = ""
         var selectedTab = 0
-        val searchTab = searchTab as TabHost
+        val searchTab = search_tab as TabHost
         searchTab.setup()
 
         var spec: TabHost.TabSpec = searchTab.newTabSpec("people")
-        spec.setContent(R.id.userSearchSwipeRefresh)
+        spec.setContent(R.id.user_search_swipe_refresh)
         spec.setIndicator("people")
         searchTab.addTab(spec)
 
         spec = searchTab.newTabSpec("goal")
-        spec.setContent(R.id.goalSearchSwipeRefresh)
+        spec.setContent(R.id.goal_search_swipe_refresh)
         spec.setIndicator("goal")
         searchTab.addTab(spec)
 
         spec = searchTab.newTabSpec("goalLog")
-        spec.setContent(R.id.goalLogSearchSwipeRefresh)
+        spec.setContent(R.id.goal_log_search_swipe_refresh)
         spec.setIndicator("goalLog")
         searchTab.addTab(spec)
 
         selectedTab = searchTab.currentTab
-        searchBtn.performClick()
+        search_btn.performClick()
 
         searchTab.setOnTabChangedListener {
             selectedTab = searchTab.currentTab
 
             searchAdapter?.clear()
             searchAdapter = null
-            searchBtn.performClick()
+            search_btn.performClick()
         }
 
-        searchBtn.setOnClickListener {
+        search_btn.setOnClickListener {
 
             when (selectedTab) {
                 0 -> {
-                    text = searchText.text.toString()
+                    text = search_text.text.toString()
                     presenter.searchUsers(text)
                 }
                 1 -> {
-                    text = searchText.text.toString()
+                    text = search_text.text.toString()
                     presenter.searchGoals(text)
                 }
                 2 -> {
-                    text = searchText.text.toString()
+                    text = search_text.text.toString()
                     presenter.searchGoalLogs(text)
                 }
                 else -> throw Exception("잘못된 탭 선택입니다.")
             }
         }
 
-        userSearchSwipeRefresh.setOnRefreshListener {
+        user_search_swipe_refresh.setOnRefreshListener {
             Toast.makeText(this@SearchActivity, "refreshed!", Toast.LENGTH_SHORT).show()
 
             searchAdapter?.clear()
             presenter.searchUsers(text)
+            user_search_swipe_refresh?.isRefreshing = false
         }
 
-        goalSearchSwipeRefresh.setOnRefreshListener {
+        goal_search_swipe_refresh.setOnRefreshListener {
             Toast.makeText(this@SearchActivity, "refreshed!", Toast.LENGTH_SHORT).show()
 
             searchAdapter?.clear()
             presenter.searchGoals(text)
+            goal_search_swipe_refresh?.isRefreshing = false
         }
 
-        goalLogSearchSwipeRefresh.setOnRefreshListener {
+        goal_log_search_swipe_refresh.setOnRefreshListener {
             Toast.makeText(this@SearchActivity, "refreshed!", Toast.LENGTH_SHORT).show()
 
             searchAdapter?.clear()
             presenter.searchGoalLogs(text)
+            goal_log_search_swipe_refresh?.isRefreshing = false
         }
     }
 
@@ -102,12 +105,11 @@ class SearchActivity: AppCompatActivity(), SearchContract.View {
         }
         if (searchAdapter == null) {
             searchAdapter = SearchViewAdapter(0, results)
-            userSearchListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            userSearchListView.adapter = searchAdapter
+            user_search_list_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+            user_search_list_view.adapter = searchAdapter
         } else {
             searchAdapter!!.appendResults(results)
         }
-        userSearchSwipeRefresh?.isRefreshing = false
     }
 
     override fun showGoalResult(goals: MutableList<Goal>) {
@@ -118,12 +120,11 @@ class SearchActivity: AppCompatActivity(), SearchContract.View {
         }
         if (searchAdapter == null) {
             searchAdapter = SearchViewAdapter(1, results)
-            goalSearchListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            goalSearchListView.adapter = searchAdapter
+            goal_search_list_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+            goal_search_list_view.adapter = searchAdapter
         } else {
             searchAdapter!!.appendResults(results)
         }
-        goalSearchSwipeRefresh?.isRefreshing = false
     }
 
     override fun showGoalLogResult(goalLogs: MutableList<GoalLog>) {
@@ -134,11 +135,10 @@ class SearchActivity: AppCompatActivity(), SearchContract.View {
         }
         if (searchAdapter == null) {
             searchAdapter = SearchViewAdapter(2, results)
-            goalLogSearchListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            goalLogSearchListView.adapter = searchAdapter
+            goal_log_search_list_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+            goal_log_search_list_view.adapter = searchAdapter
         } else {
             searchAdapter!!.appendResults(results)
         }
-        goalLogSearchSwipeRefresh?.isRefreshing = false
     }
 }

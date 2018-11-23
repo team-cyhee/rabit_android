@@ -34,8 +34,8 @@ class FollowingListActivity: AppCompatActivity(), FollowingListContract.View {
     override fun showFollowees(followees: MutableList<User>) {
         if (personViewAdapter == null) {
             personViewAdapter = PersonViewAdapter(followees)
-            likeListLayout.findViewById<RecyclerView>(R.id.listView).addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            likeListLayout.findViewById<RecyclerView>(R.id.listView).adapter = personViewAdapter
+            like_list_layout.findViewById<RecyclerView>(R.id.list_view).addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+            like_list_layout.findViewById<RecyclerView>(R.id.list_view).adapter = personViewAdapter
         } else {
             personViewAdapter!!.appendPeople(followees)
         }

@@ -8,7 +8,7 @@
     android:orientation="horizontal">
 
     <EditText
-        android:id="@+id/searchText"
+        android:id="@+id/search_text"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_weight="1"
@@ -18,7 +18,7 @@
         android:textSize="15sp" />
 
     <Button
-        android:id="@+id/searchBtn"
+        android:id="@+id/search_btn"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:background="@drawable/search"/>

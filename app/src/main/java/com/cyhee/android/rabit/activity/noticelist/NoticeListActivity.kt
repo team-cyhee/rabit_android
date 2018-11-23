@@ -19,7 +19,7 @@ class NoticeListActivity: AppCompatActivity(), NoticeListContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_noticelist)
 
-        searchBtn.setOnClickListener(IntentListener.toSearchListener())
+        search_btn.setOnClickListener(IntentListener.toSearchListener())
 
         presenter.noticeTitles()
     }
@@ -27,7 +27,7 @@ class NoticeListActivity: AppCompatActivity(), NoticeListContract.View {
     override fun showNoticeTitles(noticeTitles: MutableList<Notice>) {
         if (noticeAdapter == null) {
             noticeAdapter = NoticeListViewAdapter(noticeTitles)
-            noticeListView.adapter = noticeAdapter
+            notice_list_view.adapter = noticeAdapter
         } else {
             noticeAdapter!!.appendNoticeTitles(noticeTitles)
         }

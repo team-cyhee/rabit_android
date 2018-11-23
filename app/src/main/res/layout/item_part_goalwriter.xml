@@ -14,13 +14,13 @@
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profileImage"
+            android:id="@+id/profile_image"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/profile" />
 
         <TextView
-            android:id="@+id/nameText"
+            android:id="@+id/name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -30,7 +30,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/createDate"
+            android:id="@+id/create_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -43,7 +43,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/editGoal"
+                android:id="@+id/edit_goal"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:visibility="invisible"
@@ -52,7 +52,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/titleText"
+        android:id="@+id/title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="65dp"
@@ -61,7 +61,7 @@
         android:textSize="16sp" />
 
     <ImageView
-        android:id="@+id/goalImage"
+        android:id="@+id/goal_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -80,20 +80,20 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/startDateText"
+                android:id="@+id/start_date_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/endDateText"
+                android:id="@+id/end_date_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/logNum"
+            android:id="@+id/log_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -101,7 +101,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/logNumText"
+                android:id="@+id/log_num_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

@@ -9,7 +9,7 @@
     android:background="@color/lightGray">
 
     <Button
-        android:id="@+id/searchBtn"
+        android:id="@+id/search_btn"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:background="@drawable/search"/>

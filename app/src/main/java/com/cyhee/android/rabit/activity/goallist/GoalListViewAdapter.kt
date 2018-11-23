@@ -20,9 +20,9 @@ class GoalListViewAdapter (
     override fun onBindViewHolder(holder: GoalListViewHolder, position: Int) {
         goalInfos[position].let { goalInfo ->
             with(holder) {
-                goalCard.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
+                goal_card.setOnClickListener(IntentListener.toGoalListener(goalInfo.id))
 
-                cardGoalName.text = goalInfo.content
+                card_goal_name.text = goalInfo.content
 
 /*                cardGoalComBtn.text = when (user) {
                     goalInfo.author.username -> "당근먹기"
@@ -32,12 +32,12 @@ class GoalListViewAdapter (
                 // 함께하기
                 when (user) {
                     // TODO: 이미 companion이면 버튼 안보이게
-                    goalInfo.author.username -> cardGoalComBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalInfo.id, goalInfo.content))
-                    else -> cardGoalComBtn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id, goalInfo.content, goalInfo.doUnit, goalInfo.doTimes))
+                    goalInfo.author.username -> card_goal_com_btn.setOnClickListener(IntentListener.toGoalLogWriteListener(goalInfo.id, goalInfo.content))
+                    else -> card_goal_com_btn.setOnClickListener(IntentListener.toCompanionWriteListener(goalInfo.id, goalInfo.content, goalInfo.doUnit, goalInfo.doTimes))
                 }
 
-                cardGoalLogBtn.setOnClickListener(IntentListener.toGoalLogListListener(goalInfo.id))
-                cardGoalComLogBtn.setOnClickListener(IntentListener.toComGoalLogListener(goalInfo.id))
+                card_goal_log_btn.setOnClickListener(IntentListener.toGoalLogListListener(goalInfo.id))
+                card_goal_com_log_btn.setOnClickListener(IntentListener.toComGoalLogListener(goalInfo.id))
 
                 Log.d("ViewHolder", goalInfo.toString())
             }

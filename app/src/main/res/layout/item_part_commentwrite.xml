@@ -12,7 +12,7 @@
 
     <EditText
         android:hint="@string/comment_prompt"
-        android:id="@+id/postingCommentText"
+        android:id="@+id/posting_comment_text"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_weight="1"
@@ -21,7 +21,7 @@
         android:textSize="14sp"/>
 
     <Button
-        android:id="@+id/postBtn"
+        android:id="@+id/post_btn"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:text="@string/post"

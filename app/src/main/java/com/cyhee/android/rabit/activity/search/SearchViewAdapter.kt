@@ -38,18 +38,18 @@ class SearchViewAdapter (
         when (holder.itemViewType) {
             0 -> results[position].let { result ->
                 with(holder as SearchPersonViewHolder) {
-                    nameText.text = result.content
+                    name_text.text = result.content
                     Log.d("ViewHolder", result.toString())
-                    nameText.setOnClickListener(
+                    name_text.setOnClickListener(
                             IntentListener.toWhichWallListListener(user == result.user.username, result.user.username)
                     )
                 }
             }
             1 -> results[position].let { result ->
                 with(holder as SearchItemViewHolder) {
-                    itemNameText.text = result.content
+                    item_name_text.text = result.content
                     Log.d("ViewHolder", result.toString())
-                    itemNameText.setOnClickListener(
+                    item_name_text.setOnClickListener(
                             when (result.type) {
                                 ContentType.GOAL -> IntentListener.toGoalListener(result.id)
                                 ContentType.GOALLOG -> IntentListener.toGoalLogListener(result.id)

@@ -30,30 +30,32 @@ class MyWallActivity: AppCompatActivity(), MyWallContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mywall)
-        bottomBar.selectTabAtPosition(1)
+        bottom_bar.selectTabAtPosition(1)
 
         if (intent.hasExtra("username")) {
             val username = intent.getStringExtra("username")
             presenter.wallInfo(username)
-            usernameText.text = username
+            username_text.text = username
 
-            searchBtn.setOnClickListener(IntentListener.toSearchListener())
-            toUpBtn.setOnClickListener{
-                myWallListView.smoothScrollToPosition(0)
+            search_btn.setOnClickListener(IntentListener.toSearchListener())
+            to_up_btn.setOnClickListener{
+                my_wall_list_view.smoothScrollToPosition(0)
             }
 
             // swipe refresh
-            myWallSwipeRefresh.setOnRefreshListener {
+            my_wall_swipe_refresh.setOnRefreshListener {
                 Toast.makeText(this@MyWallActivity, "refreshed!", Toast.LENGTH_SHORT).show()
 
                 mainAdapter?.clear()
                 presenter.wallInfo(username)
+
+                my_wall_swipe_refresh?.isRefreshing = false
             }
         } else {
             Toast.makeText(this, "전달된 username이 없습니다", Toast.LENGTH_SHORT).show()
         }
 
-        bottomBar.setOnTabSelectListener { tabId ->
+        bottom_bar.setOnTabSelectListener { tabId ->
             when (tabId) {
                 R.id.tabHome -> {
                     val intentToMain = Intent(this, MainActivity:: class.java)
@@ -81,13 +83,11 @@ class MyWallActivity: AppCompatActivity(), MyWallContract.View {
                     { followee: String -> },
                     { id -> presenter.deleteGoal(id)},
                     { id -> presenter.deleteGoalLog(id)})
-            myWallListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            myWallListView.adapter = mainAdapter
+            my_wall_list_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+            my_wall_list_view.adapter = mainAdapter
         } else {
             mainAdapter!!.appendMainInfos(mainInfos)
         }
-
-        myWallSwipeRefresh?.isRefreshing = false
     }
 
     fun toggleLike(id: Long, type: ContentType, boolean: Boolean) {

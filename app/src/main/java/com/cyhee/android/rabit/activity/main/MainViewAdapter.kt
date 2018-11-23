@@ -61,34 +61,34 @@ class MainViewAdapter (
             0 -> when (page) {
                 0 -> {
                     with(holder as MainViewHolderForWrite) {
-                        mainWriteBtn.setOnClickListener(IntentListener.toGoalLogWriteListener())
+                        main_write_btn.setOnClickListener(IntentListener.toGoalLogWriteListener())
                     }
                 }
                 1 -> {
                     with(holder as MyWallViewHolder) {
-                        myWallEditInfoBtn.setOnClickListener(IntentListener.toInfoEditListener(user))
-                        myWallPostGoalBtn.setOnClickListener(IntentListener.toGoalWriteListener())
-                        myWallPostGoalLogBtn.setOnClickListener(IntentListener.toGoalLogWriteListener())
-                        myWallFollowingText.setOnClickListener(IntentListener.toFollowingListListener(user))
-                        myWallFollowerText.setOnClickListener(IntentListener.toFollowerListListener(user))
+                        my_wall_edit_info_btn.setOnClickListener(IntentListener.toInfoEditListener(user))
+                        my_wall_post_goal_btn.setOnClickListener(IntentListener.toGoalWriteListener())
+                        my_wall_post_goal_log_btn.setOnClickListener(IntentListener.toGoalLogWriteListener())
+                        my_wall_following_text.setOnClickListener(IntentListener.toFollowingListListener(user))
+                        my_wall_follower_text.setOnClickListener(IntentListener.toFollowerListListener(user))
 
-                        myWallNameText.text = wallInfo!!.username
-                        myWallFollowingText.text = wallInfo.followeeNum.toString()
-                        myWallFollowerText.text = wallInfo.followerNum.toString()
+                        my_wall_name_text.text = wallInfo!!.username
+                        my_wall_following_text.text = wallInfo.followeeNum.toString()
+                        my_wall_follower_text.text = wallInfo.followerNum.toString()
                     }
                 }
                 2 -> {
                     with(holder as WallViewHolder) {
-                        wallGoalListBtn.setOnClickListener(IntentListener.toGoalListListener(wallInfo!!.username))
-                        wallFollowingText.setOnClickListener(IntentListener.toFollowingListListener(wallInfo.username))
-                        wallFollowerText.setOnClickListener(IntentListener.toFollowerListListener(wallInfo.username))
-                        wallFollowBtn.setOnClickListener {
+                        wall_goal_list_btn.setOnClickListener(IntentListener.toGoalListListener(wallInfo!!.username))
+                        wall_following_text.setOnClickListener(IntentListener.toFollowingListListener(wallInfo.username))
+                        wall_follower_text.setOnClickListener(IntentListener.toFollowerListListener(wallInfo.username))
+                        wall_follow_btn.setOnClickListener {
                             sendFollow(wallInfo.username)
                         }
 
-                        wallNameText.text = wallInfo.username
-                        wallFollowingText.text = wallInfo.followeeNum.toString()
-                        wallFollowerText.text = wallInfo.followerNum.toString()
+                        wall_name_text.text = wallInfo.username
+                        wall_following_text.text = wallInfo.followeeNum.toString()
+                        wall_follower_text.text = wallInfo.followerNum.toString()
                     }
                 }
             }

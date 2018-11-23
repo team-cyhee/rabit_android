@@ -18,7 +18,7 @@
 
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/myWallProfileImage"
+                android:id="@+id/my_wall_profile_image"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_marginStart="30dp"
@@ -34,7 +34,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/myWallNameText"
+                    android:id="@+id/my_wall_name_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -52,7 +52,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/myWallEditInfoBtn"
+                android:id="@+id/my_wall_edit_info_btn"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="120dp"
@@ -80,7 +80,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/myWallPostGoalBtn"
+                android:id="@+id/my_wall_post_goal_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
@@ -119,7 +119,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/myWallFollowerText"
+                    android:id="@+id/my_wall_follower_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -149,7 +149,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/myWallFollowingText"
+                    android:id="@+id/my_wall_following_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -170,7 +170,7 @@
             android:layout_height="0.1dp"
             android:background="#ACACAC" />
         <Button
-            android:id="@+id/myWallPostGoalLogBtn"
+            android:id="@+id/my_wall_post_goal_log_btn"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginTop="10dp"

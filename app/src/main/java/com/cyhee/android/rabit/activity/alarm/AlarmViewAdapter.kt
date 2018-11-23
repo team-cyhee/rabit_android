@@ -50,14 +50,14 @@ class AlarmViewAdapter (
                         throw Exception("잘못된 컨텐츠 타입입니다.")
                     }
                 }
-                alarmContent.setText(Html.fromHtml(content), TextView.BufferType.SPANNABLE)
+                alarm_content.setText(Html.fromHtml(content), TextView.BufferType.SPANNABLE)
 
                 when (alarm.action) {
-                    ContentType.GOAL -> alarmContent.setOnClickListener(IntentListener.toGoalListener(alarm.actionId))
-                    ContentType.GOALLOG -> alarmContent.setOnClickListener(IntentListener.toGoalLogListener(alarm.actionId))
+                    ContentType.GOAL -> alarm_content.setOnClickListener(IntentListener.toGoalListener(alarm.actionId))
+                    ContentType.GOALLOG -> alarm_content.setOnClickListener(IntentListener.toGoalLogListener(alarm.actionId))
                     ContentType.FOLLOW -> if (alarm.owner.username == user)
-                        alarmContent.setOnClickListener(IntentListener.toFollowerListListener(user))
-                        else alarmContent.setOnClickListener(IntentListener.toFollowingListListener(user))
+                        alarm_content.setOnClickListener(IntentListener.toFollowerListListener(user))
+                        else alarm_content.setOnClickListener(IntentListener.toFollowingListListener(user))
                     ContentType.COMMENT, ContentType.LIKE -> {}
                     else -> {
                         throw Exception("잘못된 컨텐츠 타입입니다.")

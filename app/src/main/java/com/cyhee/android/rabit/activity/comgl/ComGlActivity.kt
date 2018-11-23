@@ -27,13 +27,13 @@ class ComGlActivity: AppCompatActivity(), ComGlContract.View {
             val goalId = intent.getLongExtra("goalId", -1)
             presenter.comGls(goalId)
 
-            searchBtn.setOnClickListener(IntentListener.toSearchListener())
-            toUpBtn.setOnClickListener{
-                comGlListView.smoothScrollToPosition(0)
+            search_btn.setOnClickListener(IntentListener.toSearchListener())
+            to_up_btn.setOnClickListener{
+                com_gl_list_view.smoothScrollToPosition(0)
             }
 
             // swipe refresh
-            comGlSwipeRefresh.setOnRefreshListener {
+            com_gl_swipe_refresh.setOnRefreshListener {
                 Toast.makeText(this@ComGlActivity, "refreshed!", Toast.LENGTH_SHORT).show()
 
                 comGlAdapter?.clear()
@@ -43,7 +43,7 @@ class ComGlActivity: AppCompatActivity(), ComGlContract.View {
             Toast.makeText(this, "전달된 goalId가 없습니다", Toast.LENGTH_SHORT).show()
         }
 
-        searchBtn.setOnClickListener(IntentListener.toSearchListener())
+        search_btn.setOnClickListener(IntentListener.toSearchListener())
     }
 
     override fun showComGls(comGls: MutableList<GoalLogInfo>) {
@@ -51,13 +51,13 @@ class ComGlActivity: AppCompatActivity(), ComGlContract.View {
             comGlAdapter = ComGlViewAdapter(comGls,
                     { id, post -> presenter.toggleLikeForGoalLog(id, post)},
                     { id -> presenter.deleteGoalLog(id)})
-            comGlListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            comGlListView.adapter = comGlAdapter
+            com_gl_list_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+            com_gl_list_view.adapter = comGlAdapter
         } else {
             comGlAdapter!!.appendComGls(comGls)
         }
 
-        comGlSwipeRefresh?.isRefreshing = false
+        com_gl_swipe_refresh?.isRefreshing = false
     }
 
     override fun setWriteGoalId(id: Long) {

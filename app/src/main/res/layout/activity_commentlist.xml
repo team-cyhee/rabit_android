@@ -13,18 +13,18 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/nullTopBarLayout"
+            android:id="@+id/null_top_bar_layout"
             layout="@layout/item_complete_nulltopbar" />
 
         <android.support.v4.widget.SwipeRefreshLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/commentSwipeRefresh"
+            android:id="@+id/comment_swipe_refresh"
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/commentListView"
+                android:id="@+id/comment_list_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

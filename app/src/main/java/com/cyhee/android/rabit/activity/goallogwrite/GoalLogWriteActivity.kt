@@ -51,14 +51,14 @@ class GoalLogWriteActivity: AppCompatActivity(), GoalLogWriteContract.View {
         var goalId: Long = -1
         when {
             intent.hasExtra("goalId") -> {
-                goalName.visibility = View.VISIBLE
-                goalsNameList.visibility = View.GONE
+                goal_name.visibility = View.VISIBLE
+                goals_name_list.visibility = View.GONE
                 goalId = intent.getLongExtra("goalId", -1)
                 val goalContent = intent.getStringExtra("goalContent")
-                goalName.text = goalContent
+                goal_name.text = goalContent
 
-                realGoalLogPostBtn.setOnClickListener{
-                    val content = goalLogContentText.text.toString()
+                real_goal_log_post_btn.setOnClickListener{
+                    val content = goal_log_content_text.text.toString()
                     val goalLog = GoalLogFactory.Post(content)
 
                     if (mCurrentPhotoPath != null) {
@@ -69,33 +69,33 @@ class GoalLogWriteActivity: AppCompatActivity(), GoalLogWriteContract.View {
                 }
             }
             intent.hasExtra("goalLogId") -> {
-                goalName.visibility = View.VISIBLE
-                goalsNameList.visibility = View.GONE
+                goal_name.visibility = View.VISIBLE
+                goals_name_list.visibility = View.GONE
 
                 val goalLogId = intent.getLongExtra("goalLogId", -1)
                 val goalContent = intent.getStringExtra("goalContent")
                 val content = intent.getStringExtra("content")
 
-                goalName.text = goalContent
-                realGoalLogPostBtn.text = "수정"
-                goalLogContentText.setText(content)
+                goal_name.text = goalContent
+                real_goal_log_post_btn.text = "수정"
+                goal_log_content_text.setText(content)
 
-                realGoalLogPostBtn.setOnClickListener {
-                    val editedContent = goalLogContentText.text.toString()
+                real_goal_log_post_btn.setOnClickListener {
+                    val editedContent = goal_log_content_text.text.toString()
                     val goalLog = GoalLogFactory.Post(editedContent)
 
                     presenter.editGoalLog(goalLogId, goalLog)
                 }
             }
             else -> {
-                goalsNameList.visibility = View.VISIBLE
-                goalName.visibility = View.GONE
+                goals_name_list.visibility = View.VISIBLE
+                goal_name.visibility = View.GONE
                 presenter.goalNames()
 
-                realGoalLogPostBtn.setOnClickListener{
-                    val content = goalLogContentText.text.toString()
+                real_goal_log_post_btn.setOnClickListener{
+                    val content = goal_log_content_text.text.toString()
                     val goalLog = GoalLogFactory.Post(content)
-                    val selectedGoal = goalsNameList.selectedItem as Goal
+                    val selectedGoal = goals_name_list.selectedItem as Goal
                     val parentId = selectedGoal.id
 
                     if (mCurrentPhotoPath != null) {
@@ -107,11 +107,11 @@ class GoalLogWriteActivity: AppCompatActivity(), GoalLogWriteContract.View {
             }
         }
 
-        goalLogGalleryBtn.setOnClickListener {
+        goal_log_gallery_btn.setOnClickListener {
             validatePermissions{getAlbum()}
         }
 
-        goalLogCameraBtn.setOnClickListener {
+        goal_log_camera_btn.setOnClickListener {
             validatePermissions{captureCamera()}
         }
     }
@@ -152,11 +152,11 @@ class GoalLogWriteActivity: AppCompatActivity(), GoalLogWriteContract.View {
             //TODO: 작동안함
             val noGoal: Array<String> = arrayOf("새로운 토끼를 잡아보세요")
             val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, noGoal)
-            goalsNameList.adapter = spinnerAdapter
-            goalsNameList.setOnClickListener(IntentListener.toGoalWriteListener())
+            goals_name_list.adapter = spinnerAdapter
+            goals_name_list.setOnClickListener(IntentListener.toGoalWriteListener())
         } else {
             val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, goals)
-            goalsNameList.adapter = spinnerAdapter
+            goals_name_list.adapter = spinnerAdapter
         }
     }
 
@@ -285,7 +285,7 @@ class GoalLogWriteActivity: AppCompatActivity(), GoalLogWriteContract.View {
             REQUEST_IMAGE_CROP -> if (resultCode == Activity.RESULT_OK) {
 
                 galleryAddPic()
-                uploadImage.setImageURI(albumURI)
+                upload_image.setImageURI(albumURI)
             }
         }
     }

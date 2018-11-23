@@ -7,7 +7,7 @@
     android:background="@color/white">
 
     <TextView
-        android:id="@+id/alarmContent"
+        android:id="@+id/alarm_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rect_sq"

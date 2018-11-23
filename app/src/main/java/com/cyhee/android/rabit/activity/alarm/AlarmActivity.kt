@@ -17,7 +17,7 @@ class AlarmActivity: AppCompatActivity(), AlarmContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alarm)
 
-        searchBtn.setOnClickListener(IntentListener.toSearchListener())
+        search_btn.setOnClickListener(IntentListener.toSearchListener())
 
         presenter.alarms()
     }
@@ -25,7 +25,7 @@ class AlarmActivity: AppCompatActivity(), AlarmContract.View {
     override fun showAlarms(alarms: MutableList<Alarm>) {
         if (alarmAdapter == null) {
             alarmAdapter = AlarmViewAdapter(alarms)
-            alarmListView.adapter = alarmAdapter
+            alarm_list_view.adapter = alarmAdapter
         } else {
             alarmAdapter!!.appendAlarms(alarms)
         }
