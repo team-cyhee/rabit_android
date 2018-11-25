@@ -29,6 +29,7 @@ class MainViewAdapter (
 
     private val TAG = MainViewAdapter::class.qualifiedName
     private val user = App.prefs.user
+    private val headerSize = 1
 
     override fun getItemViewType(position: Int): Int {
         if (position == 0) {
@@ -103,13 +104,13 @@ class MainViewAdapter (
         }
     }
 
-    override fun getItemCount(): Int = mainInfos.size + 1
+    override fun getItemCount(): Int = mainInfos.size + headerSize
 
     fun appendMainInfos(moreMainInfos: List<MainInfo>) {
         val index = this.mainInfos.size
         Log.d("ViewHolder", "index is $index in appendMainInfos")
         mainInfos.addAll(moreMainInfos)
-        notifyItemRangeInserted(index, mainInfos.size)
+        notifyItemRangeInserted(index + headerSize, mainInfos.size)
     }
 
     fun toggleLike(id: Long, type: ContentType, boolean: Boolean) {
@@ -123,7 +124,7 @@ class MainViewAdapter (
                 else info.likeNum--
 
                 Log.d(TAG, "$index changed")
-                notifyItemChanged(index + 1)
+                notifyItemChanged(index + headerSize)
             }
         }
     }
@@ -132,6 +133,6 @@ class MainViewAdapter (
         val size = this.mainInfos.size
         Log.d(TAG, "size is $size in clear")
         this.mainInfos.clear()
-        notifyDataSetChanged()
+        notifyItemRangeRemoved(headerSize, size)
     }
 }

@@ -31,6 +31,7 @@ class ComGlViewAdapter (
 
     private val TAG = ComGlViewAdapter::class.qualifiedName
     private val user = App.prefs.user
+    private val headerSize = 1
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
@@ -68,7 +69,7 @@ class ComGlViewAdapter (
         val index = this.comGls.size
         Log.d("ViewHolder", "index is $index in appendMainInfos")
         comGls.addAll(moreComGls)
-        notifyItemRangeInserted(index, comGls.size)
+        notifyItemRangeInserted(index+headerSize, comGls.size)
     }
 
     fun toggleLike(id: Long, boolean: Boolean) {
@@ -81,7 +82,7 @@ class ComGlViewAdapter (
                 else info.likeNum--
 
                 Log.d(TAG, "$index changed")
-                notifyItemChanged(index + 1)
+                notifyItemChanged(index+headerSize)
             }
         }
     }
@@ -90,7 +91,6 @@ class ComGlViewAdapter (
         val size = this.comGls.size
         Log.d("ViewHolder", "size is $size in clear")
         this.comGls.clear()
-        //notifyItemRangeRemoved(0, size)
-        notifyDataSetChanged()
+        notifyItemRangeRemoved(headerSize, size)
     }
 }

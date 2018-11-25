@@ -95,7 +95,12 @@ object GoalLogViewBinder {
 
             if(log_image != null && item.file.isNotEmpty()) {
                 Log.d(TAG, "$baseUrl/${item.file.first().id}")
+                log_image.visibility = View.VISIBLE
                 Glide.with(holder.containerView).load("$baseUrl/${item.file.first().id}").into(log_image)
+            }
+            else {
+                if(log_image != null)
+                    log_image.visibility = View.GONE
             }
 
             Log.d("ViewHolder", item.toString())
