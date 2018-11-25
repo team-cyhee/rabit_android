@@ -3,16 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:padding="12dp"
-    android:layout_marginBottom="10dp"
-    android:orientation="vertical">
+    android:orientation="horizontal"
+    android:background="@color/white">
 
     <TextView
-        android:id="@+id/com_gl_text"
+        android:id="@+id/alarm_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textSize="17sp"
-        android:textStyle="bold"/>
+        android:background="@drawable/rect_sq"
+        android:padding="20dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"/>
 </LinearLayout>

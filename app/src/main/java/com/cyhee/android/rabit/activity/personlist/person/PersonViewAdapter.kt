@@ -17,7 +17,7 @@ class PersonViewAdapter (
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         people[position].let { person ->
             with(holder) {
-                nameText.text = person.username
+                name_text.text = person.username
                 Log.d("ViewHolder", person.toString())
             }
         }

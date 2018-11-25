@@ -39,19 +39,19 @@ class CommentViewAdapter (
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         when (holder.itemViewType) {
             0 -> with(holder as CommentWriteViewHolder) {
-                postBtn.setOnClickListener{
-                    val comment = postingCommentText.text.toString()
+                post_btn.setOnClickListener{
+                    val comment = posting_comment_text.text.toString()
                     sendComment(id, CommentFactory.Post(comment))
                 }
             }
             1 -> with(holder as CommentViewHolder) {
                 val comment = comments[position]
 
-                commentWriterText.text = comment.author.username
-                commentText.text = comment.content
+                comment_writer_text.text = comment.author.username
+                comment_text.text = comment.content
 
                 val isMy = user == comment.author.username
-                commentWriterText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, comment.author.username))
+                comment_writer_text.setOnClickListener(IntentListener.toWhichWallListListener(isMy, comment.author.username))
                 Log.d(TAG, comment.toString())
             }
         }

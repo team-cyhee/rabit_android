@@ -10,7 +10,7 @@
     android:background="@color/basic">
 
     <Button
-        android:id="@+id/mainWriteBtn"
+        android:id="@+id/main_write_btn"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:background="@drawable/rect_sq"

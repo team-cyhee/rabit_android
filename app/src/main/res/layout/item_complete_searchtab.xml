@@ -8,7 +8,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <TabHost
-        android:id="@+id/searchTab"
+        android:id="@+id/search_tab"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -37,13 +37,13 @@
 
                     <android.support.v4.widget.SwipeRefreshLayout
                         xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:id="@+id/userSearchSwipeRefresh"
+                        android:id="@+id/user_search_swipe_refresh"
                         android:layout_marginTop="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <android.support.v7.widget.RecyclerView
-                            android:id="@+id/userSearchListView"
+                            android:id="@+id/user_search_list_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -62,13 +62,13 @@
 
                     <android.support.v4.widget.SwipeRefreshLayout
                         xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:id="@+id/goalSearchSwipeRefresh"
+                        android:id="@+id/goal_search_swipe_refresh"
                         android:layout_marginTop="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <android.support.v7.widget.RecyclerView
-                            android:id="@+id/goalSearchListView"
+                            android:id="@+id/goal_search_list_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -87,13 +87,13 @@
 
                     <android.support.v4.widget.SwipeRefreshLayout
                         xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:id="@+id/goalLogSearchSwipeRefresh"
+                        android:id="@+id/goal_log_search_swipe_refresh"
                         android:layout_marginTop="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <android.support.v7.widget.RecyclerView
-                            android:id="@+id/goalLogSearchListView"
+                            android:id="@+id/goal_log_search_list_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"

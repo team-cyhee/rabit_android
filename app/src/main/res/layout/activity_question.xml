@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <include
-        android:id="@+id/topBarLayout"
+        android:id="@+id/top_bar_layout"
         layout="@layout/item_complete_topbar" />
 
     <TextView

@@ -32,7 +32,7 @@ class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
             val goalLogId = intent.getLongExtra("goalLogId", -1)
             presenter.goalLogInfo(goalLogId)
 
-            likeNumberText.setOnClickListener(IntentListener.toGoalLogLikeListListener(goalLogId))
+            like_number_text.setOnClickListener(IntentListener.toGoalLogLikeListListener(goalLogId))
 
         } else {
             Toast.makeText(this, "전달된 goalLog 아이디가 없습니다", Toast.LENGTH_SHORT).show()
@@ -52,14 +52,14 @@ class GoalLogActivity: AppCompatActivity(), GoalLogContract.View {
         goalLogInfo.liked = bool
         if(bool) {
             goalLogInfo.likeNum++
-            likeButton.background = DrawableUtil.getDrawable(likeBtn.context, R.drawable.ic_heart_black)
-            likeBtnWrapper.background = DrawableUtil.getDrawable(likeBtn.context, R.drawable.rect_sq_red)
+            like_button.background = DrawableUtil.getDrawable(like_btn.context, R.drawable.ic_heart_black)
+            like_btn_wrapper.background = DrawableUtil.getDrawable(like_btn.context, R.drawable.rect_sq_red)
         }
         else {
             goalLogInfo.likeNum--
-            likeButton.background = DrawableUtil.getDrawable(likeBtn.context, R.drawable.ic_heart_outline)
-            likeBtnWrapper.background = DrawableUtil.getDrawable(likeBtn.context, R.drawable.rect_sq)
+            like_button.background = DrawableUtil.getDrawable(like_btn.context, R.drawable.ic_heart_outline)
+            like_btn_wrapper.background = DrawableUtil.getDrawable(like_btn.context, R.drawable.rect_sq)
         }
-        likeNumberText.text = goalLogInfo.likeNum.toString()
+        like_number_text.text = goalLogInfo.likeNum.toString()
     }
 }

@@ -12,15 +12,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <include
-            android:id="@+id/goalWriterLayout"
+            android:id="@+id/goal_writer_layout"
             layout="@layout/item_part_goalwriter"/>
 
         <include
-            android:id="@+id/reactionLayout"
+            android:id="@+id/reaction_layout"
             layout="@layout/item_part_reaction"/>
 
         <include
-            android:id="@+id/commentGoalWriteLayout"
+            android:id="@+id/comment_goal_write_layout"
             layout="@layout/item_part_actions"/>
 
     </LinearLayout>

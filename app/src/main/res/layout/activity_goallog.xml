@@ -10,12 +10,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <include
-            android:id="@+id/nullTopBarLayout"
+            android:id="@+id/null_top_bar_layout"
             layout="@layout/item_complete_nulltopbar" />
 
         <include
-            android:id="@+id/goalLogLayout"
-            layout="@layout/item_complete_fullgoallog" />
+            android:id="@+id/goal_log_layout"
+            layout="@layout/item_complete_maingoallog" />
 
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

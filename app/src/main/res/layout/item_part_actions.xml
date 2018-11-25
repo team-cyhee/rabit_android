@@ -7,7 +7,7 @@
     android:layout_gravity="center_horizontal">
 
     <LinearLayout
-        android:id="@+id/likeBtnWrapper"
+        android:id="@+id/like_btn_wrapper"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -25,7 +25,7 @@
 
 
         <Button
-            android:id="@+id/likeBtn"
+            android:id="@+id/like_btn"
             android:layout_width="62dp"
             android:layout_height="match_parent"
             android:background="@null"
@@ -50,7 +50,7 @@
             android:src="@drawable/ic_profile"/>
 
         <Button
-            android:id="@+id/coBtn"
+            android:id="@+id/co_btn"
             android:layout_width="72dp"
             android:layout_height="match_parent"
             android:background="@null"
@@ -75,7 +75,7 @@
             android:src="@drawable/ic_profile"/>
 
         <Button
-            android:id="@+id/cmtPostBtn"
+            android:id="@+id/cmt_post_btn"
             android:layout_width="68dp"
             android:layout_height="match_parent"
             android:background="@null"

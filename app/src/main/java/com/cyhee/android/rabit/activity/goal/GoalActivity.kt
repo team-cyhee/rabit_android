@@ -48,14 +48,14 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
         goalInfo.liked = bool
         if(bool) {
             goalInfo.likeNum++
-            likeButton.background = DrawableUtil.getDrawable(likeBtn.context, R.drawable.ic_heart_black)
-            likeBtnWrapper.background = DrawableUtil.getDrawable(likeBtn.context, R.drawable.rect_sq_red)
+            like_button.background = DrawableUtil.getDrawable(like_btn.context, R.drawable.ic_heart_black)
+            like_btn_wrapper.background = DrawableUtil.getDrawable(like_btn.context, R.drawable.rect_sq_red)
         }
         else {
             goalInfo.likeNum--
-            likeButton.background = DrawableUtil.getDrawable(likeBtn.context, R.drawable.ic_heart_outline)
-            likeBtnWrapper.background = DrawableUtil.getDrawable(likeBtn.context, R.drawable.rect_sq)
+            like_button.background = DrawableUtil.getDrawable(like_btn.context, R.drawable.ic_heart_outline)
+            like_btn_wrapper.background = DrawableUtil.getDrawable(like_btn.context, R.drawable.rect_sq)
         }
-        likeNumberText.text = goalInfo.likeNum.toString()
+        like_number_text.text = goalInfo.likeNum.toString()
     }
 }

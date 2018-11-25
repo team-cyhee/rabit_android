@@ -26,46 +26,46 @@ class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
         var goalId: Long? = null
         if (intent.hasExtra("parent")) {
             parent = intent.getLongExtra("parent", -1)
-            goalContentText.isEnabled = false
+            goal_content_text.isEnabled = false
         } else if (intent.hasExtra("goalId")) {
             goalId = intent.getLongExtra("goalId", -1)
-            realGoalPostBtn.text = "수정"
+            real_goal_post_btn.text = "수정"
         }
 
         if (parent != null || goalId != null) {
-            goalContentText.setText(intent.getStringExtra("content"))
+            goal_content_text.setText(intent.getStringExtra("content"))
 
             if (intent.hasExtra("unit") && intent.hasExtra("times")) {
-                goalRadioGroup.findViewById<RadioButton>(resources.getIdentifier
-                ("${intent.getStringExtra("unit").toString().toLowerCase()}Btn", "id", packageName)).isChecked = true
-                for (i in 0 until goalRadioGroup.childCount) {
-                    goalRadioGroup.getChildAt(i).isEnabled = false
+                goal_radio_group.findViewById<RadioButton>(resources.getIdentifier
+                ("${intent.getStringExtra("unit").toString().toLowerCase()}_btn", "id", packageName)).isChecked = true
+                for (i in 0 until goal_radio_group.childCount) {
+                    goal_radio_group.getChildAt(i).isEnabled = false
                 }
-                goalTimeText.setText(intent.getIntExtra("times", -1).toString())
-                goalTimeText.isEnabled = false
+                goal_time_text.setText(intent.getIntExtra("times", -1).toString())
+                goal_time_text.isEnabled = false
             }
 
             if (intent.hasExtra("startDate")) {
-                goalStartText.setText(intent.getStringExtra("startDate"))
+                goal_start_text.setText(intent.getStringExtra("startDate"))
             }
             if (intent.hasExtra("endDate")) {
-                goalStartText.setText(intent.getStringExtra("endDate"))
+                goal_start_text.setText(intent.getStringExtra("endDate"))
             }
 
-            goalContentText.setTextColor(Color.rgb(1,1,1))
+            goal_content_text.setTextColor(Color.rgb(1,1,1))
         }
 
-        var radio: RadioButton = noneBtn
-        goalRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+        var radio: RadioButton = none_btn
+        goal_radio_group.setOnCheckedChangeListener { group, checkedId ->
             radio = findViewById(checkedId)
             if (radio.text == "매일") {
-                goalTimeText.setText("1")
+                goal_time_text.setText("1")
             } else {
-                goalTimeText.text = null
+                goal_time_text.text = null
             }
         }
 
-        realGoalPostBtn.setOnClickListener{
+        real_goal_post_btn.setOnClickListener{
             val unit = when (radio.text) {
                 "매일" -> GoalUnit.DAILY
                 "주별" -> GoalUnit.WEEKLY
@@ -73,19 +73,17 @@ class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
                 "년별" -> GoalUnit.YEARLY
                 else -> null
             }
-            val times =  goalTimeText.text.toString().toInt()
-            val content = goalContentText.text.toString()
+            val times =  goal_time_text.text.toString().toInt()
+            val content = goal_content_text.text.toString()
             // TODO: 날짜 받아오기
             val startDate = Date(System.currentTimeMillis())
 
             val goal = GoalFactory.Post(content, startDate, null, unit, times)
 
-            if (parent != null) {
-                presenter.postCompanion(parent, goal)
-            } else if (goalId != null) {
-                presenter.editGoal(goalId, goal)
-            } else {
-                presenter.postGoal(goal)
+            when {
+                parent != null -> presenter.postCompanion(parent, goal)
+                goalId != null -> presenter.editGoal(goalId, goal)
+                else -> presenter.postGoal(goal)
             }
 
         }

@@ -12,17 +12,17 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/topBarLayout"
+            android:id="@+id/top_bar_layout"
             layout="@layout/item_complete_topbar"/>
 
         <android.support.v4.widget.SwipeRefreshLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/glListSwipeRefresh"
+            android:id="@+id/gl_list_swipe_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/glListListView"
+                android:id="@+id/gl_list_list_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -34,7 +34,7 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/toUpBtn"
+        android:id="@+id/to_up_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

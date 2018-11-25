@@ -13,7 +13,7 @@
             android:id="@+id/top_bar_layout"
             layout="@layout/item_complete_topbar"/>
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/notice_list_view"
+            android:id="@+id/alarm_list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"

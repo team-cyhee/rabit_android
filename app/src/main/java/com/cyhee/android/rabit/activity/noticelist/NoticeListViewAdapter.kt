@@ -19,8 +19,8 @@ class NoticeListViewAdapter (
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         noticeTitles[position].let { notice ->
             with(holder) {
-                noticeTitle.text = notice.title
-                noticeTitle.setOnClickListener(IntentListener.toNoticeListener(notice.id))
+                notice_title.text = notice.title
+                notice_title.setOnClickListener(IntentListener.toNoticeListener(notice.id))
             }
         }
     }

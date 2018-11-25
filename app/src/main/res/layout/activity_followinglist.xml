@@ -10,11 +10,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <include
-            android:id="@+id/nullTopBarLayout"
+            android:id="@+id/null_top_bar_layout"
             layout="@layout/item_complete_nulltopbar" />
 
         <include
-            android:id="@+id/followingListLayout"
+            android:id="@+id/following_list_layout"
             layout="@layout/item_complete_list" />
 
     </LinearLayout>

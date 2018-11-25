@@ -13,8 +13,8 @@ enum class ContentStatus {
     PENDING
 }
 
-enum class ContentType {
-    USER, FOLLOW, GOAL, GOALLOG, COMMENT, FILE
+enum class ContentType(val korean: String) {
+    USER("유저"), FOLLOW("팔로우"), GOAL("래빗"), GOALLOG("캐럿"), COMMENT("댓글"), FILE("파일"), LIKE("응원")
 }
 
 enum class RadioStatus {

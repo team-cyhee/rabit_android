@@ -26,19 +26,21 @@ class WallActivity: AppCompatActivity(), WallContract.View {
         if (intent.hasExtra("username")) {
             val username = intent.getStringExtra("username")
             presenter.wallInfo(username)
-            usernameText.text = username
+            username_text.text = username
 
-            searchBtn.setOnClickListener(IntentListener.toSearchListener())
-            toUpBtn.setOnClickListener{
-                wallListView.smoothScrollToPosition(0)
+            search_btn.setOnClickListener(IntentListener.toSearchListener())
+            to_up_btn.setOnClickListener{
+                wall_list_view.smoothScrollToPosition(0)
             }
 
             // swipe refresh
-            wallSwipeRefresh.setOnRefreshListener {
+            wall_swipe_refresh.setOnRefreshListener {
                 Toast.makeText(this@WallActivity, "refreshed!", Toast.LENGTH_SHORT).show()
 
                 mainAdapter?.clear()
                 presenter.wallInfo(username)
+
+                wall_swipe_refresh?.isRefreshing = false
             }
         } else {
             Toast.makeText(this, "전달된 username이 없습니다", Toast.LENGTH_SHORT).show()
@@ -54,13 +56,11 @@ class WallActivity: AppCompatActivity(), WallContract.View {
                     { followee: String -> presenter.postFollow(followee)},
                     { id -> presenter.deleteGoal(id)},
                     { id -> presenter.deleteGoalLog(id)})
-            wallListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            wallListView.adapter = mainAdapter
+            wall_list_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+            wall_list_view.adapter = mainAdapter
         } else {
             mainAdapter!!.appendMainInfos(mainInfos)
         }
-
-        wallSwipeRefresh?.isRefreshing = false
     }
 
     fun toggleLike(id: Long, type: ContentType, boolean: Boolean) {

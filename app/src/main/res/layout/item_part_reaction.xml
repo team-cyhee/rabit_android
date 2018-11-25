@@ -19,7 +19,7 @@
         android:layout_marginStart="13dp"/>
 
     <TextView
-        android:id="@+id/comNumberText"
+        android:id="@+id/com_number_text"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginStart="5dp"
@@ -32,13 +32,13 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/likeButton"
+            android:id="@+id/like_button"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:src="@drawable/ic_heart_outline" />
 
         <TextView
-            android:id="@+id/likeNumberText"
+            android:id="@+id/like_number_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="5dp"
@@ -52,7 +52,7 @@
             android:src="@drawable/ic_round" />
 
         <TextView
-            android:id="@+id/commentNumberText"
+            android:id="@+id/comment_number_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="5dp"

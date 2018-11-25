@@ -8,13 +8,13 @@
     android:orientation="horizontal">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profileImage"
+        android:id="@+id/profile_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/profile"/>
 
     <TextView
-        android:id="@+id/nameText"
+        android:id="@+id/name_text"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_weight="1"

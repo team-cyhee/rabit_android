@@ -29,8 +29,8 @@ class CompanionListActivity: AppCompatActivity(), CompanionListContract.View {
     override fun showCompanions(companions: MutableList<User>) {
         if (personViewAdapter == null) {
             personViewAdapter = PersonViewAdapter(companions)
-            companionListLayout.findViewById<RecyclerView>(R.id.listView).addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            companionListLayout.findViewById<RecyclerView>(R.id.listView).adapter = personViewAdapter
+            companion_list_layout.findViewById<RecyclerView>(R.id.list_view).addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+            companion_list_layout.findViewById<RecyclerView>(R.id.list_view).adapter = personViewAdapter
         } else {
             personViewAdapter!!.appendPeople(companions)
         }

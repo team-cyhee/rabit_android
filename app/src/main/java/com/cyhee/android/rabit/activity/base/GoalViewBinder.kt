@@ -29,55 +29,55 @@ object GoalViewBinder {
 
         with(holder) {
             if (item.author.username == user) {
-                editGoal.visibility = View.VISIBLE
+                edit_goal.visibility = View.VISIBLE
             }
 
-            nameText.text = item.author.username
-            titleText.text = item.content
+            name_text.text = item.author.username
+            title_text.text = item.content
 
-            createDate.text = SimpleDateFormat("MM/dd/yyy").format(item.lastUpdated)
+            create_date.text = SimpleDateFormat("MM.dd.yyy").format(item.lastUpdated)
             // 함께하는 사람, 시작하는 날, 로그 수, 좋아요 수, 댓글 수
-            comNumberText.text = item.companionNum.toString()
+            com_number_text.text = item.companionNum.toString()
 
             // TODO: 나중에 시작일 의무화
-            startDateText.text = when {
+            start_date_text.text = when {
                 item.startDate != null -> "시작일 ${SimpleDateFormat("dd/MM/yyyy").format(item.startDate)}"
                 else -> "시작일 없음"
             }
-            endDateText.text = when {
+            end_date_text.text = when {
                 item.endDate != null -> "종료일 ${SimpleDateFormat("dd/MM/yyyy").format(item.endDate)}"
                 else -> "종료일 없음"
             }
-            logNumText.text = item.logNum.toString()
+            log_num_text.text = item.logNum.toString()
 
             when (user) {
-                item.author.username -> coBtn.text = "당근먹기"
-                else -> coBtn.text = "함께하기"
+                item.author.username -> co_btn.text = "당근먹기"
+                else -> co_btn.text = "함께하기"
             }
 
-            likeNumberText.text = item.likeNum.toString()
-            commentNumberText.text = item.commentNum.toString()
+            like_number_text.text = item.likeNum.toString()
+            comment_number_text.text = item.commentNum.toString()
 
             val isMy = user == item.author.username
-            nameText.setOnClickListener(IntentListener.toWhichWallListListener(isMy, item.author.username))
-            titleText.setOnClickListener(IntentListener.toGoalListener(item.id))
-            logNum.setOnClickListener(IntentListener.toGoalListener(item.id))
-            commentNumberText.setOnClickListener(IntentListener.toGoalCommentsListener(item.id))
-            likeNumberText.setOnClickListener(IntentListener.toGoalLikeListListener(item.id))
-            comNumberText.setOnClickListener(IntentListener.toCompanionListListener(item.id))
+            name_text.setOnClickListener(IntentListener.toWhichWallListListener(isMy, item.author.username))
+            title_text.setOnClickListener(IntentListener.toGoalListener(item.id))
+            log_num.setOnClickListener(IntentListener.toGoalListener(item.id))
+            comment_number_text.setOnClickListener(IntentListener.toGoalCommentsListener(item.id))
+            like_number_text.setOnClickListener(IntentListener.toGoalLikeListListener(item.id))
+            com_number_text.setOnClickListener(IntentListener.toCompanionListListener(item.id))
 
-            editGoal.setOnClickListener{
-                val pm = PopupMenu(editGoal.context, editGoal)
+            edit_goal.setOnClickListener{
+                val pm = PopupMenu(edit_goal.context, edit_goal)
                 pm.menuInflater.inflate(R.menu.edit_delete, pm.menu)
 
                 pm.setOnMenuItemClickListener {menu ->
                     when (menu.itemId) {
                         R.id.edit -> {
-                            IntentListener.toGoalEdit(item.id, item.content, item.doUnit, item.doTimes, item.startDate, item.endDate, editGoal.context)
+                            IntentListener.toGoalEdit(item.id, item.content, item.doUnit, item.doTimes, item.startDate, item.endDate, edit_goal.context)
                             true
                         }
                         R.id.delete -> {
-                            DialogHandler.checkDialog("래빗 삭제하기", "정말 삭제하시겠어요?", editGoal.context, item.id, deleteGoal)
+                            DialogHandler.checkDialog("래빗 삭제하기", "정말 삭제하시겠어요?", edit_goal.context, item.id, deleteGoal)
                             true
                         }
                         else -> false
@@ -89,27 +89,27 @@ object GoalViewBinder {
             // 함께하기 /
             when (user) {
                 // TODO: 이미 companion이면 버튼 안보이게
-                item.author.username -> coBtn.setOnClickListener(IntentListener.toGoalLogWriteListener(item.id, item.content))
-                else -> coBtn.setOnClickListener(IntentListener.toCompanionWriteListener(item.id, item.content, item.doUnit, item.doTimes))
+                item.author.username -> co_btn.setOnClickListener(IntentListener.toGoalLogWriteListener(item.id, item.content))
+                else -> co_btn.setOnClickListener(IntentListener.toCompanionWriteListener(item.id, item.content, item.doUnit, item.doTimes))
             }
 
-            likeButton.background =
-                    if (item.liked) DrawableUtil.getDrawable(likeBtn.context, R.drawable.ic_heart_black)
-                    else DrawableUtil.getDrawable(likeBtn.context, R.drawable.ic_heart_outline)
+            like_button.background =
+                    if (item.liked) DrawableUtil.getDrawable(like_btn.context, R.drawable.ic_heart_black)
+                    else DrawableUtil.getDrawable(like_btn.context, R.drawable.ic_heart_outline)
 
-            likeBtnWrapper.background =
-                    if (item.liked) DrawableUtil.getDrawable(likeBtn.context, R.drawable.rect_sq_red)
-                    else DrawableUtil.getDrawable(likeBtn.context, R.drawable.rect_sq)
+            like_btn_wrapper.background =
+                    if (item.liked) DrawableUtil.getDrawable(like_btn.context, R.drawable.rect_sq_red)
+                    else DrawableUtil.getDrawable(like_btn.context, R.drawable.rect_sq)
 
             // post like
-            likeBtn.setOnClickListener {
+            like_btn.setOnClickListener {
                 likeListener(item.id, !item.liked)
             }
 
-            cmtPostBtn.setOnClickListener(IntentListener.toGoalCommentsListener(item.id))
+            cmt_post_btn.setOnClickListener(IntentListener.toGoalCommentsListener(item.id))
 
-            if(goalImage != null && !Utility.isNullOrEmpty(item.file)) {
-                Glide.with(holder.containerView).load("$baseUrl/${item.file.first().id}").into(goalImage)
+            if(goal_image != null && !Utility.isNullOrEmpty(item.file)) {
+                Glide.with(holder.containerView).load("$baseUrl/${item.file.first().id}").into(goal_image)
             }
 
             Log.d("ViewHolder", item.toString())

@@ -12,23 +12,23 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <include
-            android:id="@+id/goalLogWriterLayout"
+            android:id="@+id/goal_log_writer_layout"
             layout="@layout/item_part_goallogwriter"/>
 
         <include
-            android:id="@+id/imageLayout"
+            android:id="@+id/image_layout"
             layout="@layout/item_part_image"/>
 
         <include
-            android:id="@+id/textLayout"
+            android:id="@+id/text_layout"
             layout="@layout/item_part_text"/>
 
         <include
-            android:id="@+id/reactionLayout"
+            android:id="@+id/reaction_layout"
             layout="@layout/item_part_reaction"/>
 
         <include
-            android:id="@+id/commentGoalLogWriteLayout"
+            android:id="@+id/comment_goal_log_write_layout"
             layout="@layout/item_part_actions"/>
 
     </LinearLayout>

@@ -7,7 +7,7 @@
     android:background="@color/white">
 
     <TextView
-        android:id="@+id/noticeTitle"
+        android:id="@+id/notice_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rect_sq"

@@ -66,7 +66,7 @@
                     android:src="@drawable/ic_profile"/>
 
                 <EditText
-                    android:id="@+id/usernameText"
+                    android:id="@+id/username_text"
                     android:background="#00000000"
                     android:layout_marginStart="10dp"
                     android:hint="@string/username"
@@ -106,7 +106,7 @@
                     android:src="@drawable/ic_profile"/>
 
                 <EditText
-                    android:id="@+id/nameText"
+                    android:id="@+id/name_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -121,7 +121,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/emailCard"
+            android:id="@+id/email_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -148,7 +148,7 @@
                     android:src="@drawable/mail"/>
 
                 <EditText
-                    android:id="@+id/emailText"
+                    android:id="@+id/email_text"
                     android:background="#00000000"
                     android:layout_marginStart="10dp"
                     android:hint="@string/email"
@@ -163,7 +163,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/pwCard"
+            android:id="@+id/pw_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -190,7 +190,7 @@
                     android:src="@drawable/lock"/>
 
                 <EditText
-                    android:id="@+id/passwordText"
+                    android:id="@+id/password_text"
                     android:background="#00000000"
                     android:layout_marginStart="10dp"
                     android:hint="@string/password"
@@ -204,7 +204,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/pw2Card"
+            android:id="@+id/pw2_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -231,7 +231,7 @@
                     android:src="@drawable/lock"/>
 
                 <EditText
-                    android:id="@+id/passwordCheckText"
+                    android:id="@+id/password_check_text"
                     android:background="#00000000"
                     android:layout_marginStart="10dp"
                     android:hint="@string/password_check"
@@ -271,7 +271,7 @@
                     android:src="@drawable/ic_phone_call_1" />
 
                 <EditText
-                    android:id="@+id/phoneText"
+                    android:id="@+id/phone_text"
                     android:background="#00000000"
                     android:layout_marginStart="10dp"
                     android:hint="@string/phone"
@@ -311,7 +311,7 @@
                     android:src="@drawable/ic_phone_call_1"/>
 
                 <EditText
-                    android:id="@+id/birthText"
+                    android:id="@+id/birth_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -326,7 +326,7 @@
         </android.support.v7.widget.CardView>
 
         <Button
-            android:id="@+id/registerBtn"
+            android:id="@+id/register_btn"
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_marginTop="28.8dp"
@@ -362,7 +362,7 @@
             android:text="@string/login_prompt" />
 
         <TextView
-            android:id="@+id/loginBtn"
+            android:id="@+id/login_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

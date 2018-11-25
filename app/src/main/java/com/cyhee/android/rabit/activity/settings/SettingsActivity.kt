@@ -22,18 +22,21 @@ class SettingsActivity: AppCompatActivity(), SettingsContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-        bottomBar.selectTabAtPosition(3)
+        bottom_bar.selectTabAtPosition(3)
 
-        searchBtn.setOnClickListener(IntentListener.toSearchListener())
+        search_btn.setOnClickListener(IntentListener.toSearchListener())
+
+        /* alarm */
+        alarm_btn.setOnClickListener(IntentListener.toAlarmListener())
 
         /* question */
-        csBtn.setOnClickListener(IntentListener.toQuestionWriteListener())
+        cs_btn.setOnClickListener(IntentListener.toQuestionWriteListener())
 
         /* notice */
-        noticeBtn.setOnClickListener(IntentListener.toNoticeListListener())
+        notice_btn.setOnClickListener(IntentListener.toNoticeListListener())
 
         /* logout */
-        logoutBtn.setOnClickListener{
+        logout_btn.setOnClickListener{
             App.prefs.user = ""
             App.prefs.token = ""
             App.prefs.refreshToken = ""
@@ -42,7 +45,7 @@ class SettingsActivity: AppCompatActivity(), SettingsContract.View {
             it.context.startActivity(intentToLogin)
         }
 
-        bottomBar.setOnTabSelectListener { tabId ->
+        bottom_bar.setOnTabSelectListener { tabId ->
             when (tabId) {
                 R.id.tabHome -> {
                     val intentToMain = Intent(this, MainActivity::class.java)

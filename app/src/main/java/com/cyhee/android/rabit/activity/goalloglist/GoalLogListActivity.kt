@@ -28,13 +28,13 @@ class GoalLogListActivity: AppCompatActivity(), GoalLogListContract.View {
             val goalId = intent.getLongExtra("goalId", -1)
             presenter.goalLogs(goalId)
 
-            searchBtn.setOnClickListener(IntentListener.toSearchListener())
-            toUpBtn.setOnClickListener{
-                glListListView.smoothScrollToPosition(0)
+            search_btn.setOnClickListener(IntentListener.toSearchListener())
+            to_up_btn.setOnClickListener{
+                gl_list_list_view.smoothScrollToPosition(0)
             }
 
             // swipe refresh
-            glListSwipeRefresh.setOnRefreshListener {
+            gl_list_swipe_refresh.setOnRefreshListener {
                 Toast.makeText(this@GoalLogListActivity, "refreshed!", Toast.LENGTH_SHORT).show()
 
                 comGlAdapter?.clear()
@@ -44,7 +44,7 @@ class GoalLogListActivity: AppCompatActivity(), GoalLogListContract.View {
             Toast.makeText(this, "전달된 goalId가 없습니다", Toast.LENGTH_SHORT).show()
         }
 
-        searchBtn.setOnClickListener(IntentListener.toSearchListener())
+        search_btn.setOnClickListener(IntentListener.toSearchListener())
     }
 
     override fun showComGls(comGls: MutableList<GoalLogInfo>) {
@@ -52,13 +52,13 @@ class GoalLogListActivity: AppCompatActivity(), GoalLogListContract.View {
             comGlAdapter = ComGlViewAdapter(comGls,
                     { id, post -> presenter.toggleLikeForGoalLog(id, post)},
                     {id -> presenter.deleteGoalLog(id)})
-            glListListView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            glListListView.adapter = comGlAdapter
+            gl_list_list_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+            gl_list_list_view.adapter = comGlAdapter
         } else {
             comGlAdapter!!.appendComGls(comGls)
         }
 
-        glListSwipeRefresh?.isRefreshing = false
+        gl_list_swipe_refresh?.isRefreshing = false
     }
 
     override fun setWriteGoalId(id: Long) {

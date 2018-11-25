@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/goalCard"
+    android:id="@+id/goal_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -18,7 +18,7 @@
         android:layout_marginBottom="20dp"
         android:layout_gravity="center">
         <TextView
-            android:id="@+id/cardGoalName"
+            android:id="@+id/card_goal_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -37,7 +37,7 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/cardGoalComBtn"
+                android:id="@+id/card_goal_com_btn"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:scaleType="centerCrop"
@@ -51,7 +51,7 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/cardGoalLogBtn"
+                android:id="@+id/card_goal_log_btn"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:scaleType="centerCrop"
@@ -65,7 +65,7 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/cardGoalComLogBtn"
+                android:id="@+id/card_goal_com_log_btn"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:scaleType="centerCrop"

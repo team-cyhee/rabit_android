@@ -20,12 +20,12 @@ class NoticeActivity: AppCompatActivity(), NoticeContract.View {
         if (intent.hasExtra("noticeId")) {
             val noticeId = intent.getLongExtra("noticeId", -1)
             presenter.notice(noticeId)
-            searchBtn.setOnClickListener(IntentListener.toSearchListener())
+            search_btn.setOnClickListener(IntentListener.toSearchListener())
         }
     }
 
     override fun showNotice(notice: Notice) {
-        noticeTitle.text = notice.title
-        noticeContent.text = notice.content
+        notice_title.text = notice.title
+        notice_content.text = notice.content
     }
 }

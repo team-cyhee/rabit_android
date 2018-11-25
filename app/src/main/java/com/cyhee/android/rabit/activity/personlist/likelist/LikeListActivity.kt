@@ -43,8 +43,8 @@ class LikeListActivity: AppCompatActivity(), LikeListContract.View {
     override fun showLikes(likers: MutableList<User>) {
         if (personViewAdapter == null) {
             personViewAdapter = PersonViewAdapter(likers)
-            likeListLayout.findViewById<RecyclerView>(R.id.listView).addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-            likeListLayout.findViewById<RecyclerView>(R.id.listView).adapter = personViewAdapter
+            like_list_layout.findViewById<RecyclerView>(R.id.list_view).addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+            like_list_layout.findViewById<RecyclerView>(R.id.list_view).adapter = personViewAdapter
         } else {
             personViewAdapter!!.appendPeople(likers)
         }

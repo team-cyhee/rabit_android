@@ -15,18 +15,18 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/userTopBarLayout"
+            android:id="@+id/user_top_bar_layout"
             layout="@layout/item_complete_usertopbar" />
 
         <android.support.v4.widget.SwipeRefreshLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/goalListSwipeRefresh"
+            android:id="@+id/goal_list_swipe_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/goalListListView"
+                android:id="@+id/goal_list_list_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -38,7 +38,7 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/toUpBtn"
+        android:id="@+id/to_up_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
@@ -47,7 +47,7 @@
         app:srcCompat="@android:drawable/arrow_up_float" />
 
     <com.roughike.bottombar.BottomBar
-        android:id="@+id/bottomBar"
+        android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"

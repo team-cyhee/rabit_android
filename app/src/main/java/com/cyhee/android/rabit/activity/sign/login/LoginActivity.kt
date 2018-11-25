@@ -27,6 +27,7 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.auth.api.Auth
 
 
+
 /**
  * 로그인 화면을 담당하는 activity
  */
@@ -45,19 +46,19 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, GoogleApiClient.O
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        loginBtn.setOnClickListener {
-            val username = usernameText.text.toString()
-            val password = passwordText.text.toString()
+        login_btn.setOnClickListener {
+            val username = username_text.text.toString()
+            val password = password_text.text.toString()
 
             presenter.login(username, password)
         }
 
-        registerBtn.setOnClickListener {
+        register_btn.setOnClickListener {
             val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
             startActivityForResult(intent, RC_REGISTER)
         }
 
-        findPasswordBtn.setOnClickListener {
+        find_password_btn.setOnClickListener {
             val intent = Intent(this@LoginActivity, FindPasswordActivity::class.java)
             startActivity(intent)
         }
@@ -149,8 +150,8 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, GoogleApiClient.O
     }
 
     private fun setFacebook() {
-        facebookLoginBtn.setReadPermissions("email")
-        facebookLoginBtn.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+        facebook_login_btn.setReadPermissions("email")
+        facebook_login_btn.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(loginResult: LoginResult) {
                 Log.d(TAG, "success to get answer from facebook login request")
                 presenter.loginByFacebook(loginResult.accessToken.token)
@@ -179,7 +180,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, GoogleApiClient.O
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
                 .build()
 
-        googleLoginBtn.setOnClickListener{
+        google_login_btn.setOnClickListener{
             var signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient)
             startActivityForResult(signInIntent,RC_SIGN_IN)
         }
