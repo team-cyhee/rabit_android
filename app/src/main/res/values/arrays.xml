@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="report_type">
+        <item>비방 및 욕설</item>
+        <item>음란물</item>
+        <item>부적절한 게시글</item>
+        <item>기타</item>
+    </string-array>
+</resources>

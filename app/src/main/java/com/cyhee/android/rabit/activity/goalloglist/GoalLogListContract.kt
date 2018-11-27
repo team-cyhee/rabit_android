@@ -16,5 +16,6 @@ class GoalLogListContract {
         fun toggleLikeForGoalLog(id: Long, post:Boolean)
         fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post)
         fun deleteGoalLog(id: Long)
+        fun report(id: Long, reportType: ReportType)
     }
 }

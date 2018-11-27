@@ -1,12 +1,16 @@
 package com.cyhee.android.rabit.activity.goalloglist
 
 import android.util.Log
+import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.base.DialogHandler
 import com.cyhee.android.rabit.api.core.ResourceApiAdapter
 import com.cyhee.android.rabit.api.service.ResourceApi
 import com.cyhee.android.rabit.client.PostClient
+import com.cyhee.android.rabit.client.ReportClient
 import com.cyhee.android.rabit.model.CommentFactory
+import com.cyhee.android.rabit.model.ContentType
 import com.cyhee.android.rabit.model.GoalLogFactory
+import com.cyhee.android.rabit.model.ReportType
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDisposable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -83,5 +87,13 @@ class GoalLogListPresenter(private val view: GoalLogListActivity) : GoalLogListC
                             DialogHandler.errorDialog(it, view)
                         }
                 )
+    }
+
+    override fun report(id: Long, reportType: ReportType) {
+        ReportClient.report(ContentType.GOALLOG, id, reportType, scopeProvider, {
+            DialogHandler.confirmDialog(R.string.report_done, view)
+        }, {
+            DialogHandler.errorDialog(it, view)
+        })
     }
 }

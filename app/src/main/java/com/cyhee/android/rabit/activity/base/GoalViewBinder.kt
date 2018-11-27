@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
 import android.widget.PopupMenu
+import com.afollestad.materialdialogs.MaterialDialog
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.listener.IntentListener
@@ -15,7 +16,9 @@ import kotlinx.android.synthetic.main.item_part_goalwriter.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
 import java.text.SimpleDateFormat
 import com.bumptech.glide.Glide
+import com.cyhee.android.rabit.activity.goal.GoalPresenter
 import com.cyhee.android.rabit.api.resource.RabitUrl
+import com.cyhee.android.rabit.model.ReportType
 import com.facebook.internal.Utility
 
 object GoalViewBinder {
@@ -24,7 +27,7 @@ object GoalViewBinder {
     private val baseUrl = "${RabitUrl.resourceUrl()}/rest/v1/files"
 
     @SuppressLint("SimpleDateFormat")
-    fun bind(holder: LayoutContainer, item: GoalInfo, likeListener: (Long, Boolean) -> Unit, deleteGoal: (Long) -> Unit) {
+    fun bind(holder: LayoutContainer, item: GoalInfo, likeListener: (Long, Boolean) -> Unit, deleteGoal: (Long) -> Unit, reportGoal: (Long, ReportType) -> Unit) {
         val user = App.prefs.user
 
         with(holder) {
@@ -78,6 +81,22 @@ object GoalViewBinder {
                         }
                         R.id.delete -> {
                             DialogHandler.checkDialog("래빗 삭제하기", "정말 삭제하시겠어요?", edit_goal.context, item.id, deleteGoal)
+                            true
+                        }
+                        R.id.report -> {
+                            MaterialDialog.Builder(holder.containerView!!.context)
+                                    .title(R.string.report)
+                                    .items(R.array.report_type)
+                                    .itemsCallback { _, _, position, _ ->
+                                        when(position) {
+                                            0 -> reportGoal(item.id, ReportType.INSULT)
+                                            1 -> reportGoal(item.id, ReportType.PORN)
+                                            2 -> reportGoal(item.id, ReportType.INAPT)
+                                            3 -> reportGoal(item.id, ReportType.ETC)
+                                        }
+                                    }
+                                    .negativeText(R.string.reset)
+                                    .show()
                             true
                         }
                         else -> false

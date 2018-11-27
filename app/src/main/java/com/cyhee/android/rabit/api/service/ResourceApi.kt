@@ -152,4 +152,9 @@ interface ResourceApi {
     @GET("/rest/v1/alarms/user")
     fun alarms() : Single<Page<Alarm>>
 
+    @GET("/rest/v1/reports/{id}")
+    fun report(@Path("id") id: Long) : Single<Report>
+
+    @POST("/rest/v1/reports")
+    fun postReport(@Body report: ReportFactory.Post) : Completable
 }

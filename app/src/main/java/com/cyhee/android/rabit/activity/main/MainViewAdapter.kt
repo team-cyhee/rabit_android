@@ -24,7 +24,8 @@ class MainViewAdapter (
         private val toggleLikeForGoalLog: (Long, Boolean) -> Unit,
         private val sendFollow: (String) -> Unit,
         private val deleteGoal: (Long) -> Unit,
-        private val deleteGoalLog: (Long) -> Unit
+        private val deleteGoalLog: (Long) -> Unit,
+        private val report: (ContentType, Long, ReportType) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
     private val TAG = MainViewAdapter::class.qualifiedName
@@ -95,11 +96,15 @@ class MainViewAdapter (
             }
             1 -> {
                 val goalInfo: GoalInfo = mainInfos[position-1] as GoalInfo
-                GoalViewBinder.bind(holder as MainViewHolderForGoal, goalInfo, toggleLikeForGoal, deleteGoal)
+                GoalViewBinder.bind(holder as MainViewHolderForGoal, goalInfo, toggleLikeForGoal, deleteGoal, { id, reportType ->
+                    report(ContentType.GOAL, id, reportType)
+                })
             }
             2 -> {
                 val goalLogInfo: GoalLogInfo = mainInfos[position-1] as GoalLogInfo
-                GoalLogViewBinder.bind(holder as MainViewHolderForGoalLog, goalLogInfo, toggleLikeForGoalLog, deleteGoalLog)
+                GoalLogViewBinder.bind(holder as MainViewHolderForGoalLog, goalLogInfo, toggleLikeForGoalLog, deleteGoalLog, { id, reportType ->
+                    report(ContentType.GOALLOG, id, reportType)
+                })
             }
         }
     }

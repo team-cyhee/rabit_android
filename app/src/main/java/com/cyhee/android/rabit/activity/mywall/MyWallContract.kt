@@ -18,5 +18,6 @@ class MyWallContract {
         fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post)
         fun deleteGoal(id: Long)
         fun deleteGoalLog(id: Long)
+        fun report(type: ContentType, id: Long, reportType: ReportType)
     }
 }
