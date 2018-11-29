@@ -111,6 +111,7 @@
 
 
             <LinearLayout
+                android:id="@+id/my_wall_follower"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
@@ -141,6 +142,7 @@
 
 
             <LinearLayout
+                android:id="@+id/my_wall_following"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 android:layout_marginTop="10dp"

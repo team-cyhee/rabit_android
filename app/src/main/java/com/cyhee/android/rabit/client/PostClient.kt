@@ -18,7 +18,7 @@ object PostClient {
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
     fun postGoal(goal: GoalFactory.Post, scopeProvider: AndroidLifecycleScopeProvider, callback: () -> Unit) {
-        restClient.postGoal( goal)
+        restClient.postGoal(goal)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)

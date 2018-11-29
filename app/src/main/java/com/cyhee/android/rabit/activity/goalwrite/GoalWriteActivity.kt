@@ -1,21 +1,20 @@
 package com.cyhee.android.rabit.activity.goalwrite
 
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.*
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.base.DatePickerFragment
-import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.item_complete_goalwrite.*
 import java.text.SimpleDateFormat
 import java.util.*
+import com.cyhee.android.rabit.activity.base.BaseLoadPictureActivity
 
 
-class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
+class GoalWriteActivity: BaseLoadPictureActivity(), GoalWriteContract.View {
     override var presenter : GoalWriteContract.Presenter = GoalWritePresenter(this)
 
     private val user = App.prefs.user
@@ -30,9 +29,13 @@ class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
         if (intent.hasExtra("parent")) {
             parent = intent.getLongExtra("parent", -1)
             goal_content_text.isEnabled = false
+            goal_gallery_btn.isEnabled = false
+            goal_camera_btn.isEnabled = false
         } else if (intent.hasExtra("goalId")) {
             goalId = intent.getLongExtra("goalId", -1)
             real_goal_post_btn.text = "수정"
+            goal_gallery_btn.isEnabled = false
+            goal_camera_btn.isEnabled = false
         }
 
         if (parent != null || goalId != null) {
@@ -49,10 +52,10 @@ class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
             }
 
             if (intent.hasExtra("startDate")) {
-                goal_start_text.setText(intent.getStringExtra("startDate"))
+                goal_start_text.text = intent.getStringExtra("startDate")
             }
             if (intent.hasExtra("endDate")) {
-                goal_start_text.setText(intent.getStringExtra("endDate"))
+                goal_end_text.text = intent.getStringExtra("endDate")
             }
 
             goal_content_text.setTextColor(Color.rgb(1,1,1))
@@ -71,7 +74,7 @@ class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
         goal_start_text.setOnClickListener {
             val newFragment = DatePickerFragment()
             newFragment.onSet = { year, month, day ->
-                goal_start_text.setText("$year-$month-$day")
+                goal_start_text.text = "$year-${month+1}-$day"
             }
             newFragment.show(supportFragmentManager, "datePicker")
         }
@@ -79,9 +82,17 @@ class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
         goal_end_text.setOnClickListener {
             val newFragment = DatePickerFragment()
             newFragment.onSet = { year, month, day ->
-                goal_start_text.setText("$year-$month-$day")
+                goal_end_text.text = "$year-${month+1}-$day"
             }
             newFragment.show(supportFragmentManager, "datePicker")
+        }
+
+        goal_gallery_btn.setOnClickListener {
+            validatePermissions{getAlbum()}
+        }
+
+        goal_camera_btn.setOnClickListener {
+            validatePermissions{captureCamera()}
         }
 
         real_goal_post_btn.setOnClickListener{
@@ -107,11 +118,16 @@ class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
             }
             val goal = GoalFactory.Post(content, startDate, endDate, unit, times)
 
-            when {
-                parent != null -> presenter.postCompanion(parent, goal)
-                goalId != null -> presenter.editGoal(goalId, goal)
-                else -> presenter.postGoal(goal)
+            if (mCurrentPhotoPath != null) {
+                presenter.upload(goal, Uri.parse(mCurrentPhotoPath))
+            } else {
+                when {
+                    parent != null -> presenter.postCompanion(parent, goal)
+                    goalId != null -> presenter.editGoal(goalId, goal)
+                    else -> presenter.postGoal(goal)
+                }
             }
+
 
         }
     }

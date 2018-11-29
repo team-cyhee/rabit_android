@@ -20,7 +20,9 @@ object GoalFactory {
         val endDate: Date?,
         val doUnit: GoalUnit?,
         val doTimes: Int?
-    )
+    ) {
+        var fileId: Long? = null
+    }
 }
 
 object GoalLogFactory {

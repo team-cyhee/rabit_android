@@ -97,23 +97,25 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp">
-        <EditText
+        <TextView
             android:hint="@string/start_date"
             android:id="@+id/goal_start_text"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="1"
             android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical"
             android:paddingStart="10dp"
             android:background="@drawable/rect_sq" />
 
-        <EditText
+        <TextView
             android:hint="@string/end_date"
             android:id="@+id/goal_end_text"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="1"
             android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical"
             android:paddingStart="10dp"
             android:background="@drawable/rect_sq" />
     </LinearLayout>
