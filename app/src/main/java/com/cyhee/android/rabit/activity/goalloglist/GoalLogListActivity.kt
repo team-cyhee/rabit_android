@@ -51,7 +51,8 @@ class GoalLogListActivity: AppCompatActivity(), GoalLogListContract.View {
         if (comGlAdapter == null) {
             comGlAdapter = ComGlViewAdapter(comGls,
                     { id, post -> presenter.toggleLikeForGoalLog(id, post)},
-                    {id -> presenter.deleteGoalLog(id)})
+                    { id -> presenter.deleteGoalLog(id)},
+                    { id, reportType -> presenter.report(id, reportType)})
             gl_list_list_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             gl_list_list_view.adapter = comGlAdapter
         } else {

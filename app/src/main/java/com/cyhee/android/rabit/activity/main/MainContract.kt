@@ -2,10 +2,7 @@ package com.cyhee.android.rabit.activity.main
 
 import com.cyhee.android.rabit.base.BasePresenter
 import com.cyhee.android.rabit.base.BaseView
-import com.cyhee.android.rabit.model.CommentFactory
-import com.cyhee.android.rabit.model.Goal
-import com.cyhee.android.rabit.model.GoalLogFactory
-import com.cyhee.android.rabit.model.MainInfo
+import com.cyhee.android.rabit.model.*
 
 class MainContract {
     interface View: BaseView<Presenter> {
@@ -21,5 +18,6 @@ class MainContract {
         fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post)
         fun deleteGoal(id: Long)
         fun deleteGoalLog(id: Long)
+        fun report(type: ContentType, id: Long, reportType: ReportType)
     }
 }

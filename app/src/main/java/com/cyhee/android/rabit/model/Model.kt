@@ -164,3 +164,11 @@ data class Alarm (
     var createDate: Date,
     var id: Long
 )
+
+data class Report (
+    var reporter: User,
+    var type: ReportType,
+    var targetType: ContentType,
+    var targetId: Long,
+    var status: ContentStatus
+)

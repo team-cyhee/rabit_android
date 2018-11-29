@@ -74,7 +74,8 @@ class MainActivity: AppCompatActivity(), MainContract.View {
                     { id, post -> presenter.toggleLikeForGoalLog(id, post)},
                     { followee: String -> },
                     { id -> presenter.deleteGoal(id)},
-                    { id -> presenter.deleteGoalLog(id)})
+                    { id -> presenter.deleteGoalLog(id)},
+                    { type, id, reportType -> presenter.report(type, id, reportType)})
             main_list_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             main_list_view.adapter = mainAdapter
         } else {

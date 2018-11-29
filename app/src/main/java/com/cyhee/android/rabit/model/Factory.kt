@@ -42,3 +42,11 @@ object QuestionFactory {
         val content: String
     )
 }
+
+object ReportFactory {
+    data class Post(
+        var type: ReportType,
+        var targetType: ContentType,
+        var targetId: Long
+    )
+}

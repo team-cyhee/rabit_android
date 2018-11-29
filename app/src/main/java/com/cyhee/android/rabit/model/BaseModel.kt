@@ -10,7 +10,9 @@ enum class ContentStatus {
     // 삭제됨
     DELETED,
     // 게시 보류중
-    PENDING
+    PENDING,
+    // 신고됨
+    REPORTED
 }
 
 enum class ContentType(val korean: String) {
@@ -24,4 +26,15 @@ enum class RadioStatus {
     INACTIVE,
     // 금지됨
     FORBIDDEN;
+}
+
+enum class ReportType {
+    /* 비방글 */
+    INSULT,
+    /* 음란물 */
+    PORN,
+    /* 부적절한 컨탠츠 */
+    INAPT,
+    /* 기타 */
+    ETC;
 }

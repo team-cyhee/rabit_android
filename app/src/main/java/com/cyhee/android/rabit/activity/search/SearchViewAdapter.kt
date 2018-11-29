@@ -17,6 +17,7 @@ class SearchViewAdapter (
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
     private val user = App.prefs.user
+    private val headerSize = 1
 
     override fun getItemViewType(position: Int): Int {
         return when (type) {
@@ -68,14 +69,13 @@ class SearchViewAdapter (
     fun appendResults(moreResults: List<SearchForm>) {
         val index = this.results.size
         results.addAll(moreResults)
-        notifyItemRangeInserted(index, results.size)
+        notifyItemRangeInserted(index+headerSize, results.size)
     }
 
     fun clear() {
         val size = this.results.size
         Log.d("ViewHolder", "size is $size in clear")
         this.results.clear()
-        //notifyItemRangeRemoved(0, size)
-        notifyDataSetChanged()
+        notifyItemRangeRemoved(headerSize, size)
     }
 }
