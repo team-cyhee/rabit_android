@@ -139,7 +139,7 @@ data class WallInfo (
     var username: String,
     var followerNum: Int,
     var followeeNum: Int,
-    var goalContents: List<String> = ArrayList()
+    var goalLogNum: Int
 )
 
 data class SearchForm (

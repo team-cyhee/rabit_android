@@ -75,6 +75,7 @@ class MainViewAdapter (
                         my_wall_name_text.text = wallInfo!!.username
                         my_wall_following_text.text = wallInfo.followeeNum.toString()
                         my_wall_follower_text.text = wallInfo.followerNum.toString()
+                        my_wall_carrot_num.text = wallInfo.goalLogNum.toString()
                     }
                 }
                 2 -> {
@@ -89,6 +90,7 @@ class MainViewAdapter (
                         wall_name_text.text = wallInfo.username
                         wall_following_text.text = wallInfo.followeeNum.toString()
                         wall_follower_text.text = wallInfo.followerNum.toString()
+                        wall_carrot_num.text = wallInfo.goalLogNum.toString()
                     }
                 }
             }

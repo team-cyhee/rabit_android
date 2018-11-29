@@ -7,9 +7,11 @@ import android.util.Log
 import android.widget.*
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
+import com.cyhee.android.rabit.base.DatePickerFragment
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.item_complete_goalwrite.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -17,6 +19,7 @@ class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
     override var presenter : GoalWriteContract.Presenter = GoalWritePresenter(this)
 
     private val user = App.prefs.user
+    private val formatter = SimpleDateFormat("yyyy-M-d")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +68,22 @@ class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
             }
         }
 
+        goal_start_text.setOnClickListener {
+            val newFragment = DatePickerFragment()
+            newFragment.onSet = { year, month, day ->
+                goal_start_text.setText("$year-$month-$day")
+            }
+            newFragment.show(supportFragmentManager, "datePicker")
+        }
+
+        goal_end_text.setOnClickListener {
+            val newFragment = DatePickerFragment()
+            newFragment.onSet = { year, month, day ->
+                goal_start_text.setText("$year-$month-$day")
+            }
+            newFragment.show(supportFragmentManager, "datePicker")
+        }
+
         real_goal_post_btn.setOnClickListener{
             val unit = when (radio.text) {
                 "매일" -> GoalUnit.DAILY
@@ -75,10 +94,18 @@ class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
             }
             val times =  goal_time_text.text.toString().toInt()
             val content = goal_content_text.text.toString()
-            // TODO: 날짜 받아오기
-            val startDate = Date(System.currentTimeMillis())
 
-            val goal = GoalFactory.Post(content, startDate, null, unit, times)
+            val startDate: Date = goal_start_text.text.toString().let {
+                if (it.isNotBlank())
+                    formatter.parse(it)
+                Date(System.currentTimeMillis())
+            }
+            val endDate: Date? = goal_end_text.text.toString().let {
+                if (it.isNotBlank())
+                    formatter.parse(it)
+                null
+            }
+            val goal = GoalFactory.Post(content, startDate, endDate, unit, times)
 
             when {
                 parent != null -> presenter.postCompanion(parent, goal)
