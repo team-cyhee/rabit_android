@@ -48,6 +48,7 @@
     <string name="edit">수정하기</string>
     <string name="delete">삭제하기</string>
     <string name="send">보내기</string>
+    <string name="report">신고하기</string>
 
     <string name="logout">로그아웃</string>
     <string name="evaluate">앱 평가히기</string>
@@ -77,6 +78,8 @@
     <string name="start_date">시작일</string>
     <string name="end_date">종료일</string>
 
+    <!--Report-->
+    <string name="report_done">신고되었습니다.</string>
 
     <!--FindPasswordActivity-->
     <string name="find_password">비밀번호 찾기</string>

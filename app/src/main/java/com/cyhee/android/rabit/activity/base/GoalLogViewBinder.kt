@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
 import android.widget.PopupMenu
+import com.afollestad.materialdialogs.MaterialDialog
 import com.bumptech.glide.Glide
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.api.resource.RabitUrl
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.GoalLogInfo
+import com.cyhee.android.rabit.model.ReportType
 import com.cyhee.android.rabit.useful.Fun
 import com.cyhee.android.rabit.util.DrawableUtil
 import kotlinx.android.extensions.LayoutContainer
@@ -26,7 +28,7 @@ object GoalLogViewBinder {
     private val baseUrl = "${RabitUrl.resourceUrl()}/rest/v1/files"
 
     @SuppressLint("SimpleDateFormat")
-    fun bind(holder: LayoutContainer, item: GoalLogInfo, likeListener: (Long, Boolean) -> Unit, deleteGoalLog: (Long) -> Unit) {
+    fun bind(holder: LayoutContainer, item: GoalLogInfo, likeListener: (Long, Boolean) -> Unit, deleteGoalLog: (Long) -> Unit, reportGoalLog: (Long, ReportType) -> Unit) {
         val user = App.prefs.user
 
         with(holder) {
@@ -68,6 +70,22 @@ object GoalLogViewBinder {
                             DialogHandler.checkDialog("캐럿 삭제하기", "정말 삭제하시겠어요?", edit_goal_log.context, item.id, deleteGoalLog)
                             true
                         }
+                        R.id.report -> {
+                            MaterialDialog.Builder(holder.containerView!!.context)
+                                    .title(R.string.report)
+                                    .items(R.array.report_type)
+                                    .itemsCallback { _, _, position, _ ->
+                                        when(position) {
+                                            0 -> reportGoalLog(item.id, ReportType.INSULT)
+                                            1 -> reportGoalLog(item.id, ReportType.PORN)
+                                            2 -> reportGoalLog(item.id, ReportType.INAPT)
+                                            3 -> reportGoalLog(item.id, ReportType.ETC)
+                                        }
+                                    }
+                                    .negativeText(R.string.reset)
+                                    .show()
+                            true
+                        }
                         else -> false
                     }
                 }
@@ -95,7 +113,12 @@ object GoalLogViewBinder {
 
             if(log_image != null && item.file.isNotEmpty()) {
                 Log.d(TAG, "$baseUrl/${item.file.first().id}")
+                log_image.visibility = View.VISIBLE
                 Glide.with(holder.containerView).load("$baseUrl/${item.file.first().id}").into(log_image)
+            }
+            else {
+                if(log_image != null)
+                    log_image.visibility = View.GONE
             }
 
             Log.d("ViewHolder", item.toString())

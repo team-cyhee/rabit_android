@@ -58,7 +58,7 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
         birth_text.setOnClickListener {
             val newFragment = DatePickerFragment()
             newFragment.onSet = { year, month, day ->
-                birth_text.setText("$year-$month-$day")
+                birth_text.setText("$year-${month+1}-$day")
             }
             newFragment.show(supportFragmentManager, "datePicker")
         }

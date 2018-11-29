@@ -55,7 +55,8 @@ class WallActivity: AppCompatActivity(), WallContract.View {
                     { id, post -> presenter.toggleLikeForGoalLog(id, post)},
                     { followee: String -> presenter.postFollow(followee)},
                     { id -> presenter.deleteGoal(id)},
-                    { id -> presenter.deleteGoalLog(id)})
+                    { id -> presenter.deleteGoalLog(id)},
+                    { type, id, reportType -> presenter.report(type, id, reportType)})
             wall_list_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
             wall_list_view.adapter = mainAdapter
         } else {

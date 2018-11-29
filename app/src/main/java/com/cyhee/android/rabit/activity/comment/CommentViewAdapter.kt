@@ -20,6 +20,7 @@ class CommentViewAdapter (
 
     private val TAG = CommentViewAdapter::class.qualifiedName
     private val user = App.prefs.user
+    private val headerSize = 1
 
     override fun getItemViewType(position: Int): Int {
         val len = comments.size
@@ -62,7 +63,7 @@ class CommentViewAdapter (
     fun appendComments(moreGoals: List<Comment>) {
         val index = this.comments.size
         comments.addAll(moreGoals)
-        notifyItemRangeInserted(index, moreGoals.size)
+        notifyItemRangeInserted(index+headerSize, moreGoals.size)
         Log.d(TAG, "${moreGoals.size} is inserted in index $index")
     }
 
@@ -70,7 +71,6 @@ class CommentViewAdapter (
         val size = this.comments.size
         Log.d(TAG, "size is $size in clear")
         this.comments.clear()
-        //notifyItemRangeRemoved(0, size)
-        notifyDataSetChanged()
+        notifyItemRangeRemoved(headerSize, size)
     }
 }

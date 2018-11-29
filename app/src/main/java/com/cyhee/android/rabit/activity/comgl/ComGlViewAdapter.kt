@@ -26,11 +26,13 @@ import kotlinx.android.synthetic.main.item_part_text.*
 class ComGlViewAdapter (
         private val comGls: MutableList<GoalLogInfo>,
         private val toggleLikeForGoalLog: (Long, Boolean) -> Unit,
-        private val deleteGoalLog: (Long) -> Unit
+        private val deleteGoalLog: (Long) -> Unit,
+        private val report: (Long, ReportType) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
     private val TAG = ComGlViewAdapter::class.qualifiedName
     private val user = App.prefs.user
+    private val headerSize = 1
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
@@ -57,7 +59,9 @@ class ComGlViewAdapter (
             }
             1 -> {
                 val goalLogInfo = comGls[position-1]
-                GoalLogViewBinder.bind(holder as ComGlViewHolder, goalLogInfo, toggleLikeForGoalLog, deleteGoalLog)
+                GoalLogViewBinder.bind(holder as ComGlViewHolder, goalLogInfo, toggleLikeForGoalLog, deleteGoalLog, { id, reportType ->
+                    report(id, reportType)
+                })
             }
         }
     }
@@ -68,7 +72,7 @@ class ComGlViewAdapter (
         val index = this.comGls.size
         Log.d("ViewHolder", "index is $index in appendMainInfos")
         comGls.addAll(moreComGls)
-        notifyItemRangeInserted(index, comGls.size)
+        notifyItemRangeInserted(index+headerSize, comGls.size)
     }
 
     fun toggleLike(id: Long, boolean: Boolean) {
@@ -81,7 +85,7 @@ class ComGlViewAdapter (
                 else info.likeNum--
 
                 Log.d(TAG, "$index changed")
-                notifyItemChanged(index + 1)
+                notifyItemChanged(index+headerSize)
             }
         }
     }
@@ -90,7 +94,6 @@ class ComGlViewAdapter (
         val size = this.comGls.size
         Log.d("ViewHolder", "size is $size in clear")
         this.comGls.clear()
-        //notifyItemRangeRemoved(0, size)
-        notifyDataSetChanged()
+        notifyItemRangeRemoved(headerSize, size)
     }
 }

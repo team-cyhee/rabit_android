@@ -3,6 +3,7 @@ package com.cyhee.android.rabit.activity.base
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.support.annotation.StringRes
 import android.util.Log
 import com.afollestad.materialdialogs.DialogAction
 import com.afollestad.materialdialogs.MaterialDialog
@@ -71,7 +72,7 @@ object DialogHandler {
                 .show()
     }
 
-    private fun showMessageDialog(id: Int, context: Context) {
+    private fun showMessageDialog(@StringRes id: Int, context: Context) {
         MaterialDialog.Builder(context)
                 .content(context.getString(id))
                 .positiveText(R.string.confirm)

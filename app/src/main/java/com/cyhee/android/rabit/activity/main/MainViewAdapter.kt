@@ -24,11 +24,13 @@ class MainViewAdapter (
         private val toggleLikeForGoalLog: (Long, Boolean) -> Unit,
         private val sendFollow: (String) -> Unit,
         private val deleteGoal: (Long) -> Unit,
-        private val deleteGoalLog: (Long) -> Unit
+        private val deleteGoalLog: (Long) -> Unit,
+        private val report: (ContentType, Long, ReportType) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
     private val TAG = MainViewAdapter::class.qualifiedName
     private val user = App.prefs.user
+    private val headerSize = 1
 
     override fun getItemViewType(position: Int): Int {
         if (position == 0) {
@@ -94,22 +96,26 @@ class MainViewAdapter (
             }
             1 -> {
                 val goalInfo: GoalInfo = mainInfos[position-1] as GoalInfo
-                GoalViewBinder.bind(holder as MainViewHolderForGoal, goalInfo, toggleLikeForGoal, deleteGoal)
+                GoalViewBinder.bind(holder as MainViewHolderForGoal, goalInfo, toggleLikeForGoal, deleteGoal, { id, reportType ->
+                    report(ContentType.GOAL, id, reportType)
+                })
             }
             2 -> {
                 val goalLogInfo: GoalLogInfo = mainInfos[position-1] as GoalLogInfo
-                GoalLogViewBinder.bind(holder as MainViewHolderForGoalLog, goalLogInfo, toggleLikeForGoalLog, deleteGoalLog)
+                GoalLogViewBinder.bind(holder as MainViewHolderForGoalLog, goalLogInfo, toggleLikeForGoalLog, deleteGoalLog, { id, reportType ->
+                    report(ContentType.GOALLOG, id, reportType)
+                })
             }
         }
     }
 
-    override fun getItemCount(): Int = mainInfos.size + 1
+    override fun getItemCount(): Int = mainInfos.size + headerSize
 
     fun appendMainInfos(moreMainInfos: List<MainInfo>) {
         val index = this.mainInfos.size
         Log.d("ViewHolder", "index is $index in appendMainInfos")
         mainInfos.addAll(moreMainInfos)
-        notifyItemRangeInserted(index, mainInfos.size)
+        notifyItemRangeInserted(index + headerSize, mainInfos.size)
     }
 
     fun toggleLike(id: Long, type: ContentType, boolean: Boolean) {
@@ -123,7 +129,7 @@ class MainViewAdapter (
                 else info.likeNum--
 
                 Log.d(TAG, "$index changed")
-                notifyItemChanged(index + 1)
+                notifyItemChanged(index + headerSize)
             }
         }
     }
@@ -132,6 +138,6 @@ class MainViewAdapter (
         val size = this.mainInfos.size
         Log.d(TAG, "size is $size in clear")
         this.mainInfos.clear()
-        notifyDataSetChanged()
+        notifyItemRangeRemoved(headerSize, size)
     }
 }
