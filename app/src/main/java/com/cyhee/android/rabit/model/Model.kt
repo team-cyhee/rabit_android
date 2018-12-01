@@ -13,7 +13,9 @@ data class User (
     val birth: Date?,
     val status: UserStatus,
     val createDate: Date,
-    val lastUpdated: Date
+    val lastUpdated: Date,
+    val files: List<FileInfo> = ArrayList(),
+    val introduction: String
 )
 
 enum class UserStatus {

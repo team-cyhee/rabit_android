@@ -22,6 +22,7 @@ import com.cyhee.android.rabit.activity.mywall.MyWallActivity
 import com.cyhee.android.rabit.activity.notice.NoticeActivity
 import com.cyhee.android.rabit.activity.noticelist.NoticeListActivity
 import com.cyhee.android.rabit.activity.personlist.companionlist.CompanionListActivity
+import com.cyhee.android.rabit.activity.profile.EditProfileActivity
 import com.cyhee.android.rabit.activity.question.QuestionActivity
 import com.cyhee.android.rabit.activity.search.SearchActivity
 import com.cyhee.android.rabit.activity.wall.WallActivity
@@ -178,7 +179,8 @@ object IntentListener {
     }
 
     fun toInfoEditListener(username: String) = View.OnClickListener {
-        Log.d("회원정보수정", "회원정보 수정 페이지로 이동")
+        val intentToEditProfile = Intent(it.context, EditProfileActivity::class.java)
+        it.context.startActivity(intentToEditProfile)
     }
 
     fun toQuestionWriteListener() = View.OnClickListener {

@@ -11,6 +11,13 @@ object UserFactory {
         val phone: String?,
         val birth: Date?
     )
+    data class Edit(
+            val name: String,
+            val birth: Date?,
+            val introduction: String
+    ) {
+        var fileId: Long? = null
+    }
 }
 
 object GoalFactory {

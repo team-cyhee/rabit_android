@@ -130,9 +130,6 @@ class GoalWriteActivity: BaseLoadPictureActivity(), GoalWriteContract.View {
                 else Date(System.currentTimeMillis())
             }
 
-            println("---$startDate")
-            println("---${Date(System.currentTimeMillis())}")
-            println("---${startDate < Date(System.currentTimeMillis())}")
             if (startDate < Date(System.currentTimeMillis())) {
                 DialogHandler.confirmDialog("최소 시작일은 오늘입니다", this)
                 return@setOnClickListener
