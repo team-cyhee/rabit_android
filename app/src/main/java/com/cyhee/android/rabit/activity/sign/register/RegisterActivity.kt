@@ -69,10 +69,10 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
             val email = email_text?.text.toString()
             val name = name_text?.text.toString()
             //val phone = phoneText.text.toString()
-            val birth: Date? = birth_text.text.toString().let {
-                if (it.isNotBlank())
-                    formatter.parse(it)
-                null
+            val birth: Date? = birth_text.text.toString().let { date ->
+                if (date.isNotBlank())
+                    formatter.parse(date)
+                else null
             }
 
             val user = UserFactory.Post(username, name, email, password, null, birth)
