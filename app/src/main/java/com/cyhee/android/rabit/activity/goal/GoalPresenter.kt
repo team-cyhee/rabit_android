@@ -23,7 +23,7 @@ class GoalPresenter(private val view: GoalActivity) : GoalContract.Presenter {
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
     override fun goalInfos(id: Long) {
-        restClient.goalInfo(id)
+        restClient.goalInfoWithRate(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)

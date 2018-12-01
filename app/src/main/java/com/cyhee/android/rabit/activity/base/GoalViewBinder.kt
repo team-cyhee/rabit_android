@@ -35,6 +35,9 @@ object GoalViewBinder {
                 edit_goal.visibility = View.VISIBLE
             }
 
+            if (profile_image != null && item.author.files.isNotEmpty()) {
+                Glide.with(holder.containerView).load("$baseUrl/${item.author.files[item.author.files.size-1].id}").into(profile_image)
+            }
             name_text.text = item.author.username
             title_text.text = item.content
 

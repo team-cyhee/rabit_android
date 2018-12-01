@@ -109,6 +109,7 @@ data class GoalInfo (
         var doTimes: Int?,
         var logNum: Int,
         var files: List<FileInfo> = ArrayList(),
+        var achievementRate: Double,
         override var likeNum: Int,
         override var commentNum: Int,
         override var companionNum: Int,
@@ -139,6 +140,8 @@ data class GoalLogInfo (
 data class WallInfo (
     var id: Long,
     var username: String,
+    var introduction: String?,
+    var profilePhoto: FileInfo?,
     var followerNum: Int,
     var followeeNum: Int,
     var goalLogNum: Int

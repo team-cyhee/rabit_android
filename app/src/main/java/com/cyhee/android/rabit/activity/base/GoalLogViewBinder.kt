@@ -36,6 +36,9 @@ object GoalLogViewBinder {
                 edit_goal_log.visibility = View.VISIBLE
             }
 
+            if (profile_image != null && item.goal.author.files.isNotEmpty()) {
+                Glide.with(holder.containerView).load("$baseUrl/${item.goal.author.files[item.goal.author.files.size-1].id}").into(profile_image)
+            }
             name_text.text = item.goal.author.username
             create_date.text = SimpleDateFormat("MM.dd.yyy").format(item.createDate)
             val goalTitle = item.goal.content + Fun.dateDistance(item)

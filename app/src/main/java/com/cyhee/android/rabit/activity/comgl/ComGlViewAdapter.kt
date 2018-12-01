@@ -28,45 +28,24 @@ class ComGlViewAdapter (
         private val toggleLikeForGoalLog: (Long, Boolean) -> Unit,
         private val deleteGoalLog: (Long) -> Unit,
         private val report: (Long, ReportType) -> Unit
-) : RecyclerView.Adapter<BaseViewHolder>() {
+) : RecyclerView.Adapter<ComGlViewHolder>() {
 
     private val TAG = ComGlViewAdapter::class.qualifiedName
     private val user = App.prefs.user
     private val headerSize = 1
 
-    override fun getItemViewType(position: Int): Int {
-        return when (position) {
-            0 -> 0
-            else -> 1
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder{
-        return when (viewType) {
-            0 -> GoalSelectViewHolder(parent)
-            1 -> ComGlViewHolder(parent)
-            else -> throw Exception("잘못된 컴골뷰요청")
-        }
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComGlViewHolder = ComGlViewHolder(parent)
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        when (holder.itemViewType) {
-            0 -> {
-                with (holder as GoalSelectViewHolder) {
-                    com_gl_text.text = "명이 함께하는 중"
-                }
-            }
-            1 -> {
-                val goalLogInfo = comGls[position-1]
-                GoalLogViewBinder.bind(holder as ComGlViewHolder, goalLogInfo, toggleLikeForGoalLog, deleteGoalLog, { id, reportType ->
+    override fun onBindViewHolder(holder: ComGlViewHolder, position: Int) {
+        comGls[position].let { goalLogInfo ->
+                GoalLogViewBinder.bind(holder, goalLogInfo, toggleLikeForGoalLog, deleteGoalLog, { id, reportType ->
                     report(id, reportType)
                 })
             }
-        }
     }
 
-    override fun getItemCount(): Int = comGls.size + 1
+    override fun getItemCount(): Int = comGls.size
 
     fun appendComGls(moreComGls: List<GoalLogInfo>) {
         val index = this.comGls.size
