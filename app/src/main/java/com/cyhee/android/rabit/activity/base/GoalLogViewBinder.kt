@@ -46,6 +46,12 @@ object GoalLogViewBinder {
 
             like_number_text.text = item.likeNum.toString()
             comment_number_text.text = item.commentNum.toString()
+            com_number_text.text = item.companionNum.toString()
+
+            when (user) {
+                item.goal.author.username -> co_btn.text = "캐럿"
+                else -> co_btn.text = "함께하기"
+            }
 
             val isMy = user == item.author.username
             name_text.setOnClickListener(IntentListener.toWhichWallListListener(isMy, item.author.username))

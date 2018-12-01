@@ -1,22 +1,26 @@
 package com.cyhee.android.rabit.activity.goalwrite
 
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.*
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
-import com.cyhee.android.rabit.listener.IntentListener
+import com.cyhee.android.rabit.base.DatePickerFragment
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.item_complete_goalwrite.*
+import java.text.SimpleDateFormat
 import java.util.*
+import com.cyhee.android.rabit.activity.base.BaseLoadPictureActivity
+import com.cyhee.android.rabit.activity.base.DialogHandler
+import java.lang.Exception
 
 
-class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
+class GoalWriteActivity: BaseLoadPictureActivity(), GoalWriteContract.View {
     override var presenter : GoalWriteContract.Presenter = GoalWritePresenter(this)
 
     private val user = App.prefs.user
+    private val formatter = SimpleDateFormat("yyyy-M-d")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,12 +28,17 @@ class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
 
         var parent: Long? = null
         var goalId: Long? = null
+
         if (intent.hasExtra("parent")) {
             parent = intent.getLongExtra("parent", -1)
             goal_content_text.isEnabled = false
+            goal_gallery_btn.isEnabled = false
+            goal_camera_btn.isEnabled = false
         } else if (intent.hasExtra("goalId")) {
             goalId = intent.getLongExtra("goalId", -1)
             real_goal_post_btn.text = "수정"
+            goal_gallery_btn.isEnabled = false
+            goal_camera_btn.isEnabled = false
         }
 
         if (parent != null || goalId != null) {
@@ -46,10 +55,10 @@ class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
             }
 
             if (intent.hasExtra("startDate")) {
-                goal_start_text.setText(intent.getStringExtra("startDate"))
+                goal_start_text.text = intent.getStringExtra("startDate")
             }
             if (intent.hasExtra("endDate")) {
-                goal_start_text.setText(intent.getStringExtra("endDate"))
+                goal_end_text.text = intent.getStringExtra("endDate")
             }
 
             goal_content_text.setTextColor(Color.rgb(1,1,1))
@@ -65,26 +74,78 @@ class GoalWriteActivity: AppCompatActivity(), GoalWriteContract.View {
             }
         }
 
+        goal_start_text.setOnClickListener {
+            val newFragment = DatePickerFragment()
+            newFragment.onSet = { year, month, day ->
+                goal_start_text.text = "$year-${month+1}-$day"
+            }
+            newFragment.show(supportFragmentManager, "datePicker")
+        }
+
+        goal_end_text.setOnClickListener {
+            val newFragment = DatePickerFragment()
+            newFragment.onSet = { year, month, day ->
+                goal_end_text.text = "$year-${month+1}-$day"
+            }
+            newFragment.show(supportFragmentManager, "datePicker")
+        }
+
+        goal_gallery_btn.setOnClickListener {
+            validatePermissions{getAlbum()}
+        }
+
+        goal_camera_btn.setOnClickListener {
+            validatePermissions{captureCamera()}
+        }
+
         real_goal_post_btn.setOnClickListener{
             val unit = when (radio.text) {
                 "매일" -> GoalUnit.DAILY
                 "주별" -> GoalUnit.WEEKLY
                 "월별" -> GoalUnit.MONTHLY
                 "년별" -> GoalUnit.YEARLY
-                else -> null
+                else -> {
+                    DialogHandler.confirmDialog("목표 주기를 선택해주세요(매일/주별/월별/년별)", this)
+                    return@setOnClickListener
+                }
             }
-            val times =  goal_time_text.text.toString().toInt()
+
+            val times = try {
+                goal_time_text.text.toString().toInt()
+            } catch (e: Exception) {
+                DialogHandler.confirmDialog("목표 횟수를 적어주세요", this)
+                return@setOnClickListener
+            }
+
             val content = goal_content_text.text.toString()
-            // TODO: 날짜 받아오기
-            val startDate = Date(System.currentTimeMillis())
 
-            val goal = GoalFactory.Post(content, startDate, null, unit, times)
-
-            when {
-                parent != null -> presenter.postCompanion(parent, goal)
-                goalId != null -> presenter.editGoal(goalId, goal)
-                else -> presenter.postGoal(goal)
+            if (content == "") {
+                DialogHandler.confirmDialog("목표 이름을 정해주세요", this)
+                return@setOnClickListener
             }
+
+            val startDate: Date = goal_start_text.text.toString().let {
+                if (it.isNotBlank())
+                    formatter.parse(it)
+                Date(System.currentTimeMillis())
+            }
+            val endDate: Date? = goal_end_text.text.toString().let {
+                if (it.isNotBlank())
+                    formatter.parse(it)
+                null
+            }
+            val goal = GoalFactory.Post(content, startDate, endDate, unit, times)
+
+            if (mCurrentPhotoPath != null) {
+                presenter.upload(goal, Uri.parse(mCurrentPhotoPath))
+            } else {
+                when {
+                    parent != null -> presenter.postCompanion(parent, goal)
+                    goalId != null -> presenter.editGoal(goalId, goal)
+                    else -> presenter.postGoal(goal)
+                }
+            }
+
 
         }
     }

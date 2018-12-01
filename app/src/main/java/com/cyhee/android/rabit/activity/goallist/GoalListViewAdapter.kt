@@ -24,11 +24,6 @@ class GoalListViewAdapter (
 
                 card_goal_name.text = goalInfo.content
 
-/*                cardGoalComBtn.text = when (user) {
-                    goalInfo.author.username -> "당근먹기"
-                    else -> "함께하기"
-                }*/
-
                 // 함께하기
                 when (user) {
                     // TODO: 이미 companion이면 버튼 안보이게

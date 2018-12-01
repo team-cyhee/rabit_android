@@ -71,19 +71,20 @@ class MainViewAdapter (
                         my_wall_edit_info_btn.setOnClickListener(IntentListener.toInfoEditListener(user))
                         my_wall_post_goal_btn.setOnClickListener(IntentListener.toGoalWriteListener())
                         my_wall_post_goal_log_btn.setOnClickListener(IntentListener.toGoalLogWriteListener())
-                        my_wall_following_text.setOnClickListener(IntentListener.toFollowingListListener(user))
-                        my_wall_follower_text.setOnClickListener(IntentListener.toFollowerListListener(user))
+                        my_wall_following.setOnClickListener(IntentListener.toFollowingListListener(user))
+                        my_wall_follower.setOnClickListener(IntentListener.toFollowerListListener(user))
 
                         my_wall_name_text.text = wallInfo!!.username
                         my_wall_following_text.text = wallInfo.followeeNum.toString()
                         my_wall_follower_text.text = wallInfo.followerNum.toString()
+                        my_wall_carrot_num.text = wallInfo.goalLogNum.toString()
                     }
                 }
                 2 -> {
                     with(holder as WallViewHolder) {
                         wall_goal_list_btn.setOnClickListener(IntentListener.toGoalListListener(wallInfo!!.username))
-                        wall_following_text.setOnClickListener(IntentListener.toFollowingListListener(wallInfo.username))
-                        wall_follower_text.setOnClickListener(IntentListener.toFollowerListListener(wallInfo.username))
+                        wall_following.setOnClickListener(IntentListener.toFollowingListListener(wallInfo.username))
+                        wall_follower.setOnClickListener(IntentListener.toFollowerListListener(wallInfo.username))
                         wall_follow_btn.setOnClickListener {
                             sendFollow(wallInfo.username)
                         }
@@ -91,6 +92,7 @@ class MainViewAdapter (
                         wall_name_text.text = wallInfo.username
                         wall_following_text.text = wallInfo.followeeNum.toString()
                         wall_follower_text.text = wallInfo.followerNum.toString()
+                        wall_carrot_num.text = wallInfo.goalLogNum.toString()
                     }
                 }
             }
