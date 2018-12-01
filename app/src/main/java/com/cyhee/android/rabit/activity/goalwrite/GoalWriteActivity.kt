@@ -12,6 +12,8 @@ import kotlinx.android.synthetic.main.item_complete_goalwrite.*
 import java.text.SimpleDateFormat
 import java.util.*
 import com.cyhee.android.rabit.activity.base.BaseLoadPictureActivity
+import com.cyhee.android.rabit.activity.base.DialogHandler
+import java.lang.Exception
 
 
 class GoalWriteActivity: BaseLoadPictureActivity(), GoalWriteContract.View {
@@ -26,6 +28,7 @@ class GoalWriteActivity: BaseLoadPictureActivity(), GoalWriteContract.View {
 
         var parent: Long? = null
         var goalId: Long? = null
+
         if (intent.hasExtra("parent")) {
             parent = intent.getLongExtra("parent", -1)
             goal_content_text.isEnabled = false
@@ -101,10 +104,25 @@ class GoalWriteActivity: BaseLoadPictureActivity(), GoalWriteContract.View {
                 "주별" -> GoalUnit.WEEKLY
                 "월별" -> GoalUnit.MONTHLY
                 "년별" -> GoalUnit.YEARLY
-                else -> null
+                else -> {
+                    DialogHandler.confirmDialog("목표 주기를 선택해주세요(매일/주별/월별/년별)", this)
+                    return@setOnClickListener
+                }
             }
-            val times =  goal_time_text.text.toString().toInt()
+
+            val times = try {
+                goal_time_text.text.toString().toInt()
+            } catch (e: Exception) {
+                DialogHandler.confirmDialog("목표 횟수를 적어주세요", this)
+                return@setOnClickListener
+            }
+
             val content = goal_content_text.text.toString()
+
+            if (content == "") {
+                DialogHandler.confirmDialog("목표 이름을 정해주세요", this)
+                return@setOnClickListener
+            }
 
             val startDate: Date = goal_start_text.text.toString().let {
                 if (it.isNotBlank())
