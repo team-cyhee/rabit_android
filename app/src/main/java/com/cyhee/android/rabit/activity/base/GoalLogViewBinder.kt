@@ -117,10 +117,10 @@ object GoalLogViewBinder {
                 else -> co_btn.setOnClickListener(IntentListener.toCompanionWriteListener(item.goal.id, item.goal.content, item.goal.doUnit, item.goal.doTimes))
             }
 
-            if(log_image != null && item.file.isNotEmpty()) {
-                Log.d(TAG, "$baseUrl/${item.file.first().id}")
+            if(log_image != null && item.files.isNotEmpty()) {
+                Log.d(TAG, "$baseUrl/${item.files.first().id}")
                 log_image.visibility = View.VISIBLE
-                Glide.with(holder.containerView).load("$baseUrl/${item.file.first().id}").into(log_image)
+                Glide.with(holder.containerView).load("$baseUrl/${item.files.first().id}").into(log_image)
             }
             else {
                 if(log_image != null)

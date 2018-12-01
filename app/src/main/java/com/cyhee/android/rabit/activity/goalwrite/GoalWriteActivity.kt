@@ -98,7 +98,7 @@ class GoalWriteActivity: BaseLoadPictureActivity(), GoalWriteContract.View {
             validatePermissions{captureCamera()}
         }
 
-        real_goal_post_btn.setOnClickListener{
+        real_goal_post_btn.setOnClickListener{ it ->
             val unit = when (radio.text) {
                 "매일" -> GoalUnit.DAILY
                 "주별" -> GoalUnit.WEEKLY
@@ -124,16 +124,31 @@ class GoalWriteActivity: BaseLoadPictureActivity(), GoalWriteContract.View {
                 return@setOnClickListener
             }
 
-            val startDate: Date = goal_start_text.text.toString().let {
-                if (it.isNotBlank())
-                    formatter.parse(it)
-                Date(System.currentTimeMillis())
+            val startDate: Date = goal_start_text.text.toString().let { date ->
+                if (date.isNotBlank())
+                    formatter.parse(date)
+                else Date(System.currentTimeMillis())
             }
-            val endDate: Date? = goal_end_text.text.toString().let {
-                if (it.isNotBlank())
-                    formatter.parse(it)
-                null
+
+            println("---$startDate")
+            println("---${Date(System.currentTimeMillis())}")
+            println("---${startDate < Date(System.currentTimeMillis())}")
+            if (startDate < Date(System.currentTimeMillis())) {
+                DialogHandler.confirmDialog("최소 시작일은 오늘입니다", this)
+                return@setOnClickListener
             }
+
+            val endDate: Date? = goal_end_text.text.toString().let { date ->
+                if (date.isNotBlank())
+                    formatter.parse(date)
+                else null
+            }
+
+            if (endDate != null && startDate >= endDate) {
+                DialogHandler.confirmDialog("목표 종료일이 시작일보다 이전입니다", this)
+                return@setOnClickListener
+            }
+
             val goal = GoalFactory.Post(content, startDate, endDate, unit, times)
 
             if (mCurrentPhotoPath != null) {
@@ -145,8 +160,6 @@ class GoalWriteActivity: BaseLoadPictureActivity(), GoalWriteContract.View {
                     else -> presenter.postGoal(goal)
                 }
             }
-
-
         }
     }
 }

@@ -127,9 +127,9 @@ object GoalViewBinder {
 
             cmt_post_btn.setOnClickListener(IntentListener.toGoalCommentsListener(item.id))
 
-            if(goal_image != null && !Utility.isNullOrEmpty(item.file)) {
+            if(goal_image != null && !Utility.isNullOrEmpty(item.files)) {
                 goal_image.visibility = View.VISIBLE
-                Glide.with(holder.containerView).load("$baseUrl/${item.file.first().id}").into(goal_image)
+                Glide.with(holder.containerView).load("$baseUrl/${item.files.first().id}").into(goal_image)
             }
             else {
                 if(goal_image != null)
