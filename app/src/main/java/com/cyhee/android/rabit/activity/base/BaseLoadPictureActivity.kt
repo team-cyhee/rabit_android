@@ -9,6 +9,7 @@ import android.provider.MediaStore
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
@@ -138,7 +139,7 @@ open class BaseLoadPictureActivity: AppCompatActivity() {
     @Throws(IOException::class)
     fun createImageFile(): File {
         // Create an image file name
-        val imageFileName ="${System.currentTimeMillis()}.jpg"
+        val imageFileName ="${System.currentTimeMillis()}.png"
         var imageFile: File? = null
         val storageDir = File(Environment.getExternalStorageDirectory().toString() + "/Pictures", "rabit")
 
@@ -176,8 +177,8 @@ open class BaseLoadPictureActivity: AppCompatActivity() {
         cropIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         cropIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         cropIntent.setDataAndType(photoURI, "image/*")
-        cropIntent.putExtra("outputX", 200) // crop한 이미지의 x축 크기, 결과물의 크기
-        cropIntent.putExtra("outputY", 200) // crop한 이미지의 y축 크기
+        cropIntent.putExtra("outputX", 800) // crop한 이미지의 x축 크기, 결과물의 크기
+        cropIntent.putExtra("outputY", 800) // crop한 이미지의 y축 크기
         cropIntent.putExtra("aspectX", 1) // crop 박스의 x축 비율, 1&1이면 정사각형
         cropIntent.putExtra("aspectY", 1) // crop 박스의 y축 비율
         cropIntent.putExtra("scale", true)

@@ -15,6 +15,12 @@ interface ResourceApi {
     @GET("/rest/v1/users")
     fun users() : Single<String>
 
+    @GET("/rest/v1/users/username/{username}")
+    fun user(@Path("username") username: String) : Single<User>
+
+    @PUT("/rest/v1/users/username/{username}")
+    fun putUser(@Path("username") username: String, @Body user: UserFactory.Edit) : Completable
+
     @GET("/rest/v1/goals")
     fun goals() : Single<Page<Goal>>
 

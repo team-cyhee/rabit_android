@@ -18,8 +18,8 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_complete_maingoallog.*
 import kotlinx.android.synthetic.main.item_part_actions.*
 import kotlinx.android.synthetic.main.item_part_goallogwriter.*
+import kotlinx.android.synthetic.main.item_part_image.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
-import kotlinx.android.synthetic.main.item_part_text.*
 import java.text.SimpleDateFormat
 
 object GoalLogViewBinder {
@@ -42,7 +42,7 @@ object GoalLogViewBinder {
             title_text.text = goalTitle
 
             comment_number_text.text = item.companionNum.toString()
-            text.text = item.content
+            content.text = item.content
 
             like_number_text.text = item.likeNum.toString()
             comment_number_text.text = item.commentNum.toString()
@@ -56,7 +56,7 @@ object GoalLogViewBinder {
             val isMy = user == item.author.username
             name_text.setOnClickListener(IntentListener.toWhichWallListListener(isMy, item.author.username))
             title_text.setOnClickListener(IntentListener.toGoalListener(item.goal.id))
-            text_layout.setOnClickListener(IntentListener.toGoalLogListener(item.id))
+            content.setOnClickListener(IntentListener.toGoalLogListener(item.id))
             comment_number_text.setOnClickListener(IntentListener.toGoalLogCommentsListener(item.id))
             like_number_text.setOnClickListener(IntentListener.toGoalLogLikeListListener(item.id))
             edit_goal_log.setOnClickListener(IntentListener.toGoalLogEditListener(item.id, item.goal.content, item.content))
@@ -117,14 +117,14 @@ object GoalLogViewBinder {
                 else -> co_btn.setOnClickListener(IntentListener.toCompanionWriteListener(item.goal.id, item.goal.content, item.goal.doUnit, item.goal.doTimes))
             }
 
-            if(log_image != null && item.files.isNotEmpty()) {
+            if(image != null && item.files.isNotEmpty()) {
                 Log.d(TAG, "$baseUrl/${item.files.first().id}")
-                log_image.visibility = View.VISIBLE
-                Glide.with(holder.containerView).load("$baseUrl/${item.files.first().id}").into(log_image)
+                image.visibility = View.VISIBLE
+                Glide.with(holder.containerView).load("$baseUrl/${item.files.first().id}").into(image)
             }
             else {
-                if(log_image != null)
-                    log_image.visibility = View.GONE
+                if(image != null)
+                    image.visibility = View.GONE
             }
 
             Log.d("ViewHolder", item.toString())
