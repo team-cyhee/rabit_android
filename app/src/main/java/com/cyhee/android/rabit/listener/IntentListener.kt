@@ -173,8 +173,8 @@ object IntentListener {
         intentToGoalWrite.putExtra("content", content)
         if (doUnit != null) intentToGoalWrite.putExtra("unit", doUnit.toString())
         if (doTimes != null) intentToGoalWrite.putExtra("times", doTimes)
-        if (startDate != null) intentToGoalWrite.putExtra("startDate", SimpleDateFormat("MM/dd/yyy").format(startDate))
-        if (endDate != null) intentToGoalWrite.putExtra("endDate",  SimpleDateFormat("MM/dd/yyy").format(endDate))
+        if (startDate != null) intentToGoalWrite.putExtra("startDate", SimpleDateFormat("yyyy-M-d").format(startDate))
+        if (endDate != null) intentToGoalWrite.putExtra("endDate",  SimpleDateFormat("yyyy-M-d").format(endDate))
         it.context.startActivity(intentToGoalWrite)
     }
 
@@ -211,8 +211,8 @@ object IntentListener {
         intentToGoalWrite.putExtra("content", content)
         if (doUnit != null) intentToGoalWrite.putExtra("unit", doUnit.toString())
         if (doTimes != null) intentToGoalWrite.putExtra("times", doTimes)
-        if (startDate != null) intentToGoalWrite.putExtra("startDate", SimpleDateFormat("MM/dd/yyy").format(startDate))
-        if (endDate != null) intentToGoalWrite.putExtra("endDate",  SimpleDateFormat("MM/dd/yyy").format(endDate))
+        if (startDate != null) intentToGoalWrite.putExtra("startDate", SimpleDateFormat("yyyy-M-d").format(startDate))
+        if (endDate != null) intentToGoalWrite.putExtra("endDate",  SimpleDateFormat("yyyy-M-d").format(endDate))
         context.startActivity(intentToGoalWrite)
     }
 

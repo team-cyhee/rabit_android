@@ -1,5 +1,6 @@
 package com.cyhee.android.rabit.activity.goalwrite
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -20,6 +21,7 @@ class GoalWriteActivity: BaseLoadPictureActivity(), GoalWriteContract.View {
     override var presenter : GoalWriteContract.Presenter = GoalWritePresenter(this)
 
     private val user = App.prefs.user
+    @SuppressLint("SimpleDateFormat")
     private val formatter = SimpleDateFormat("yyyy-M-d")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,24 +31,29 @@ class GoalWriteActivity: BaseLoadPictureActivity(), GoalWriteContract.View {
         var parent: Long? = null
         var goalId: Long? = null
 
+
+        var radio: RadioButton = none_btn
+        // 함께하는 골의 경우
         if (intent.hasExtra("parent")) {
             parent = intent.getLongExtra("parent", -1)
             goal_content_text.isEnabled = false
             goal_gallery_btn.isEnabled = false
             goal_camera_btn.isEnabled = false
-        } else if (intent.hasExtra("goalId")) {
+        }
+        // 골을 수정하는 경우
+        else if (intent.hasExtra("goalId")) {
             goalId = intent.getLongExtra("goalId", -1)
             real_goal_post_btn.text = "수정"
-            goal_gallery_btn.isEnabled = false
-            goal_camera_btn.isEnabled = false
         }
 
         if (parent != null || goalId != null) {
             goal_content_text.setText(intent.getStringExtra("content"))
 
             if (intent.hasExtra("unit") && intent.hasExtra("times")) {
-                goal_radio_group.findViewById<RadioButton>(resources.getIdentifier
-                ("${intent.getStringExtra("unit").toString().toLowerCase()}_btn", "id", packageName)).isChecked = true
+                val unitId = "${intent.getStringExtra("unit").toString().toLowerCase()}_btn"
+                goal_radio_group.findViewById<RadioButton>(resources.getIdentifier(unitId, "id", packageName)).isChecked = true
+                radio = findViewById(resources.getIdentifier(unitId, "id", packageName))
+
                 for (i in 0 until goal_radio_group.childCount) {
                     goal_radio_group.getChildAt(i).isEnabled = false
                 }
@@ -64,7 +71,6 @@ class GoalWriteActivity: BaseLoadPictureActivity(), GoalWriteContract.View {
             goal_content_text.setTextColor(Color.rgb(1,1,1))
         }
 
-        var radio: RadioButton = none_btn
         goal_radio_group.setOnCheckedChangeListener { group, checkedId ->
             radio = findViewById(checkedId)
             if (radio.text == "매일") {
@@ -130,7 +136,7 @@ class GoalWriteActivity: BaseLoadPictureActivity(), GoalWriteContract.View {
                 else Date(System.currentTimeMillis())
             }
 
-            if (startDate < Date(System.currentTimeMillis())) {
+            if (startDate < Date(System.currentTimeMillis()) && !intent.hasExtra("goalId")) {
                 DialogHandler.confirmDialog("최소 시작일은 오늘입니다", this)
                 return@setOnClickListener
             }
@@ -149,7 +155,10 @@ class GoalWriteActivity: BaseLoadPictureActivity(), GoalWriteContract.View {
             val goal = GoalFactory.Post(content, startDate, endDate, unit, times)
 
             if (mCurrentPhotoPath != null) {
-                presenter.upload(goal, Uri.parse(mCurrentPhotoPath))
+                when {
+                    goalId != null -> presenter.editUpload(goalId, goal, Uri.parse(mCurrentPhotoPath))
+                    else -> presenter.upload(goal, Uri.parse(mCurrentPhotoPath))
+                }
             } else {
                 when {
                     parent != null -> presenter.postCompanion(parent, goal)

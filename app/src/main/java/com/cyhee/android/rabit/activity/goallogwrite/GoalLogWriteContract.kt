@@ -12,8 +12,9 @@ class GoalLogWriteContract {
 
     interface Presenter : BasePresenter {
         fun goalNames()
-        fun postGoalLog(id: Long, goalLog: GoalLogFactory.Post)
+        fun postGoalLog(parenId: Long, goalLog: GoalLogFactory.Post)
         fun editGoalLog(id: Long, goalLog: GoalLogFactory.Post)
-        fun upload(parentId: Long, goalLog: GoalLogFactory.Post, file: Uri?)
+        fun upload(parentId: Long, goalLog: GoalLogFactory.Post, fileUri: Uri?)
+        fun editUpload(id: Long, goalLog: GoalLogFactory.Post, fileUri: Uri?)
     }
 }
