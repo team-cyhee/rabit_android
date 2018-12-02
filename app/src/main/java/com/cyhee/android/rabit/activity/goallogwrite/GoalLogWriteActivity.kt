@@ -26,6 +26,7 @@ class GoalLogWriteActivity: BaseLoadPictureActivity(), GoalLogWriteContract.View
 
         var goalId: Long = -1
         when {
+            // 특정 골에 대해 작성하는 경우
             intent.hasExtra("goalId") -> {
                 goal_name.visibility = View.VISIBLE
                 goals_name_list.visibility = View.GONE
@@ -44,6 +45,7 @@ class GoalLogWriteActivity: BaseLoadPictureActivity(), GoalLogWriteContract.View
                     }
                 }
             }
+            // 골로그를 수정하는 경우
             intent.hasExtra("goalLogId") -> {
                 goal_name.visibility = View.VISIBLE
                 goals_name_list.visibility = View.GONE
@@ -60,9 +62,14 @@ class GoalLogWriteActivity: BaseLoadPictureActivity(), GoalLogWriteContract.View
                     val editedContent = goal_log_content_text.text.toString()
                     val goalLog = GoalLogFactory.Post(editedContent)
 
-                    presenter.editGoalLog(goalLogId, goalLog)
+                    if (mCurrentPhotoPath != null) {
+                        presenter.editUpload(goalLogId, goalLog, Uri.parse(mCurrentPhotoPath))
+                    } else {
+                        presenter.editGoalLog(goalLogId, goalLog)
+                    }
                 }
             }
+            // 골을 골라서 작성하는 경우
             else -> {
                 goals_name_list.visibility = View.VISIBLE
                 goal_name.visibility = View.GONE

@@ -11,6 +11,7 @@ import com.cyhee.android.rabit.activity.base.GoalViewBinder
 import com.cyhee.android.rabit.base.BaseLayoutContainer
 import com.cyhee.android.rabit.model.*
 import com.cyhee.android.rabit.util.DrawableUtil
+import kotlinx.android.synthetic.main.item_complete_progress.*
 import kotlinx.android.synthetic.main.item_part_actions.*
 import kotlinx.android.synthetic.main.item_part_reaction.*
 
@@ -20,6 +21,7 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
     private val TAG = GoalActivity::class.qualifiedName
     override var presenter : GoalContract.Presenter = GoalPresenter(this)
     private lateinit var goalInfo: GoalInfo
+    fun Double.format(digits: Int) = java.lang.String.format("%.${digits}f", this)
 
     private val user = App.prefs.user
 
@@ -42,6 +44,8 @@ class GoalActivity: AppCompatActivity(), GoalContract.View {
                 { id, bool -> presenter.toggleLikeForGoal(id, bool) },
                 { id -> presenter.deleteGoal(id) },
                 { id, reportType -> presenter.report(id, reportType)})
+        progress_status.text = "${(goalInfo.achievementRate*100).format(2)}%"
+        progress_bar_show.progress = (goalInfo.achievementRate*100).toFloat()
     }
 
     fun toggleLike(bool: Boolean) {

@@ -57,6 +57,9 @@ interface ResourceApi {
     @GET("/rest/v1/goals/info/{id}")
     fun goalInfo(@Path("id") id: Long) : Single<GoalInfo>
 
+    @GET("/rest/v1/goals/info/full/{id}")
+    fun goalInfoWithRate(@Path("id") id: Long) : Single<GoalInfo>
+
     @GET("/rest/v1/goallogs")
     fun goalLogs() : Single<Page<GoalLog>>
 

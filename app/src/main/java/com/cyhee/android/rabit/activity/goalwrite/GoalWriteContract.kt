@@ -12,6 +12,7 @@ class GoalWriteContract {
         fun postGoal(goal: GoalFactory.Post)
         fun postCompanion(id: Long, goal: GoalFactory.Post)
         fun editGoal(id: Long, goal: GoalFactory.Post)
-        fun upload(goal: GoalFactory.Post, file: Uri?)
+        fun upload(goal: GoalFactory.Post, fileUri: Uri?)
+        fun editUpload(id: Long, goal: GoalFactory.Post, fileUri: Uri?)
     }
 }

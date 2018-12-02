@@ -35,6 +35,9 @@ object GoalViewBinder {
                 edit_goal.visibility = View.VISIBLE
             }
 
+            if (profile_image != null && item.author.files.isNotEmpty()) {
+                Glide.with(holder.containerView).load("$baseUrl/${item.author.files[item.author.files.size-1].id}").into(profile_image)
+            }
             name_text.text = item.author.username
             title_text.text = item.content
 
@@ -129,7 +132,7 @@ object GoalViewBinder {
 
             if(goal_image != null && !Utility.isNullOrEmpty(item.files)) {
                 goal_image.visibility = View.VISIBLE
-                Glide.with(holder.containerView).load("$baseUrl/${item.files.first().id}").into(goal_image)
+                Glide.with(holder.containerView).load("$baseUrl/${item.files[item.files.size-1].id}").into(goal_image)
             }
             else {
                 if(goal_image != null)

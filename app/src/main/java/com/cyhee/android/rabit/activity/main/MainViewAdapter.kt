@@ -3,10 +3,13 @@ package com.cyhee.android.rabit.activity.main
 import android.annotation.SuppressLint
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.activity.base.GoalLogViewBinder
 import com.cyhee.android.rabit.activity.base.GoalViewBinder
+import com.cyhee.android.rabit.api.resource.RabitUrl
 import com.cyhee.android.rabit.base.BaseViewHolder
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
@@ -29,6 +32,7 @@ class MainViewAdapter (
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
     private val TAG = MainViewAdapter::class.qualifiedName
+    private val baseUrl = "${RabitUrl.resourceUrl()}/rest/v1/files"
     private val user = App.prefs.user
     private val headerSize = 1
 
@@ -75,6 +79,12 @@ class MainViewAdapter (
                         my_wall_follower.setOnClickListener(IntentListener.toFollowerListListener(user))
 
                         my_wall_name_text.text = wallInfo!!.username
+                        if (wallInfo.introduction != null) {
+                            my_wall_introduction_text.text = wallInfo.introduction
+                        }
+                        if (my_wall_profile_image != null && wallInfo.profilePhoto != null) {
+                            Glide.with(holder.containerView).load("$baseUrl/${wallInfo.profilePhoto!!.id}").into(my_wall_profile_image)
+                        }
                         my_wall_following_text.text = wallInfo.followeeNum.toString()
                         my_wall_follower_text.text = wallInfo.followerNum.toString()
                         my_wall_carrot_num.text = wallInfo.goalLogNum.toString()
@@ -90,6 +100,13 @@ class MainViewAdapter (
                         }
 
                         wall_name_text.text = wallInfo.username
+                        if (wallInfo.introduction != null) {
+                            wall_introduction_text.text = wallInfo.introduction
+                        }
+                        if (wall_profile_image != null && wallInfo.profilePhoto != null) {
+                            Log.d(TAG, "$baseUrl/${wallInfo.profilePhoto!!.id}")
+                            Glide.with(holder.containerView).load("$baseUrl/${wallInfo.profilePhoto!!.id}").into(wall_profile_image)
+                        }
                         wall_following_text.text = wallInfo.followeeNum.toString()
                         wall_follower_text.text = wallInfo.followerNum.toString()
                         wall_carrot_num.text = wallInfo.goalLogNum.toString()

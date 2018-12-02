@@ -42,4 +42,18 @@ class GoalWritePresenter(private val view: GoalWriteActivity) : GoalWriteContrac
                 view.finish()
             }
     }
+
+    override fun editUpload(id: Long, goal: GoalFactory.Post, fileUri: Uri?) {
+        if (fileUri != null)
+            FileClient.uploadFile(fileUri, view, scopeProvider) { path ->
+                goal.fileId = path.split("/").last().toLongOrNull()
+                PutClient.putGoal(id, goal, scopeProvider) {
+                    view.finish()
+                }
+            }
+        else
+            PutClient.putGoal(id, goal, scopeProvider) {
+                view.finish()
+            }
+    }
 }

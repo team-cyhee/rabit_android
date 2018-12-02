@@ -45,8 +45,8 @@ class GoalLogWritePresenter(private val view: GoalLogWriteActivity) : GoalLogWri
                 )
     }
 
-    override fun postGoalLog(id: Long, goalLog: GoalLogFactory.Post) {
-        PostClient.postGoalLog(id, goalLog, scopeProvider) {
+    override fun postGoalLog(parentId: Long, goalLog: GoalLogFactory.Post) {
+        PostClient.postGoalLog(parentId, goalLog, scopeProvider) {
             view.finish()
         }
     }
@@ -69,6 +69,20 @@ class GoalLogWritePresenter(private val view: GoalLogWriteActivity) : GoalLogWri
         else
             PostClient.postGoalLog(parentId, goalLog, scopeProvider) {
                 // TODO add log to original activity
+                view.finish()
+            }
+    }
+
+    override fun editUpload(id: Long, goalLog: GoalLogFactory.Post, fileUri: Uri?) {
+        if(fileUri != null)
+            FileClient.uploadFile(fileUri, view, scopeProvider) { path ->
+                goalLog.fileId = path.split("/").last().toLongOrNull()
+                PutClient.putGoalLog(id, goalLog, scopeProvider) {
+                    view.finish()
+                }
+            }
+        else
+            PutClient.putGoalLog(id, goalLog, scopeProvider) {
                 view.finish()
             }
     }

@@ -76,8 +76,8 @@ class EditProfileActivity: BaseLoadPictureActivity(), EditProfileContract.View {
         edit_introduction.setText(user.introduction)
 
         if (upload_image != null && user.files.isNotEmpty()) {
-            Log.d(TAG, "$baseUrl/${user.files.first().id}")
-            Glide.with(this).load("$baseUrl/${user.files.first().id}").into(upload_image)
+            Log.d(TAG, "$baseUrl/${user.files[user.files.size-1].id}")
+            Glide.with(this).load("$baseUrl/${user.files[user.files.size-1].id}").into(upload_image)
         }
     }
 
