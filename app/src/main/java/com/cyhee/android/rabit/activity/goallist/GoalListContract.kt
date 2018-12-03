@@ -10,6 +10,6 @@ class GoalListContract {
    }
 
     interface Presenter: BasePresenter {
-        fun userGoalInfos(username: String)
+        fun userGoalInfos(username: String, time: Long? = null)
     }
 }

@@ -11,6 +11,7 @@ import com.cyhee.android.rabit.activity.App
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_goallist.*
 import android.support.v7.widget.GridLayoutManager
+import com.cyhee.android.rabit.activity.base.InfiniteScrollListener
 import com.cyhee.android.rabit.activity.decoration.CardItemDeco
 import com.cyhee.android.rabit.activity.main.MainActivity
 import com.cyhee.android.rabit.activity.mywall.MyWallActivity
@@ -51,6 +52,11 @@ class GoalListActivity: AppCompatActivity(), GoalListContract.View {
                 goalListAdapter?.clear()
                 presenter.userGoalInfos(username)
             }
+
+            // infinite scroll
+            goal_list_list_view.addOnScrollListener(InfiniteScrollListener(gridLayoutManager) {
+                presenter.userGoalInfos(user, goalListAdapter!!.lastTime())
+            })
         }
 
         bottom_bar.setOnTabSelectListener { tabId ->

@@ -19,17 +19,18 @@ import retrofit2.HttpException
 
 class MainPresenter(private val view: MainActivity) : MainContract.Presenter {
 
+    private val TAG = MainPresenter::class.qualifiedName
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    override fun mainInfos() {
-        restClient.mainInfos()
+    override fun mainInfos(order: Long?) {
+        restClient.mainInfos(order = order)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)
                 .subscribe(
                         {
-                            Log.d("mainInfo",it.toString())
+                            Log.d(TAG, "mainInfos called with $order")
                             view.showMainInfos(it!!.toMutableList())
                         },
                         {

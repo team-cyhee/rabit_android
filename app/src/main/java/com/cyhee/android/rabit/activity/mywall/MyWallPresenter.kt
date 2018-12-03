@@ -48,8 +48,8 @@ class MyWallPresenter(private val view: MyWallActivity) : MyWallContract.Present
                 )
     }
 
-    override fun userMainInfos(username: String, wallInfo: WallInfo) {
-        restClient.userMainInfos(username)
+    override fun userMainInfos(username: String, wallInfo: WallInfo?, time:Long?) {
+        restClient.userMainInfos(username, time)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)

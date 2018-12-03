@@ -16,8 +16,8 @@ class GoalListPresenter(private val view: GoalListActivity) : GoalListContract.P
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    override fun userGoalInfos(username: String) {
-        restClient.userGoalInfos(username)
+    override fun userGoalInfos(username: String, time: Long?) {
+        restClient.userGoalInfos(username, time)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)

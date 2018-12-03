@@ -11,7 +11,7 @@ class ComGlContract {
    }
 
     interface Presenter: BasePresenter {
-        fun comGls(id: Long)
+        fun comGls(id: Long, page: Int = 0)
         fun postGoalLog(id: Long, goalLog: GoalLogFactory.Post)
         fun toggleLikeForGoalLog(id: Long, post:Boolean)
         fun postCommentForGoalLog(id: Long, comment: CommentFactory.Post)

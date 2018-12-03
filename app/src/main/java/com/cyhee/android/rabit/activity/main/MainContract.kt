@@ -10,7 +10,7 @@ class MainContract {
    }
 
     interface Presenter: BasePresenter {
-        fun mainInfos()
+        fun mainInfos(order: Long? = null)
         fun postGoalLog(id: Long, goalLog: GoalLogFactory.Post)
         fun toggleLikeForGoal(id: Long, post:Boolean)
         fun toggleLikeForGoalLog(id: Long, post:Boolean)

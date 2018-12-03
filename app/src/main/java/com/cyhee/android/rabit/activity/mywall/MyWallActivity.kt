@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Toast
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
+import com.cyhee.android.rabit.activity.base.InfiniteScrollListener
 import com.cyhee.android.rabit.activity.goallist.GoalListActivity
 import com.cyhee.android.rabit.activity.main.MainActivity
 import com.cyhee.android.rabit.activity.main.MainViewAdapter
@@ -36,6 +37,8 @@ class MyWallActivity: AppCompatActivity(), MyWallContract.View {
             val username = intent.getStringExtra("username")
             presenter.wallInfo(username)
             username_text.text = username
+            val layoutManager = LinearLayoutManager(this)
+            my_wall_list_view.layoutManager = layoutManager
 
             search_btn.setOnClickListener(IntentListener.toSearchListener())
             to_up_btn.setOnClickListener{
@@ -51,6 +54,11 @@ class MyWallActivity: AppCompatActivity(), MyWallContract.View {
 
                 my_wall_swipe_refresh?.isRefreshing = false
             }
+
+            // infinite scroll
+            my_wall_list_view.addOnScrollListener(InfiniteScrollListener(layoutManager) {
+                presenter.userMainInfos(user, null,  mainAdapter!!.lastTime())
+            })
         } else {
             Toast.makeText(this, "전달된 username이 없습니다", Toast.LENGTH_SHORT).show()
         }
@@ -75,7 +83,7 @@ class MyWallActivity: AppCompatActivity(), MyWallContract.View {
         }
     }
 
-    override fun showMainInfos(mainInfos : MutableList<MainInfo>, wallInfo: WallInfo) {
+    override fun showMainInfos(mainInfos : MutableList<MainInfo>, wallInfo: WallInfo?) {
         if (mainAdapter == null) {
             mainAdapter = MainViewAdapter(1, mainInfos, wallInfo,
                     { id, post -> presenter.toggleLikeForGoal(id, post)},
