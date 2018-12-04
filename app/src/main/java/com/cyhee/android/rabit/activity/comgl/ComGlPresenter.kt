@@ -22,8 +22,8 @@ class ComGlPresenter(private val view: ComGlActivity) : ComGlContract.Presenter 
     private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(view) }
     private val restClient: ResourceApi = ResourceApiAdapter.retrofit(ResourceApi::class.java)
 
-    override fun comGls(id: Long) {
-        restClient.comGoalLogInfos(id)
+    override fun comGls(id: Long, page: Int) {
+        restClient.comGoalLogInfos(id, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(scopeProvider)

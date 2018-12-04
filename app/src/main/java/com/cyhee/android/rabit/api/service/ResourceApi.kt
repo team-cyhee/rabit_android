@@ -49,10 +49,10 @@ interface ResourceApi {
     fun goalCompanions(@Path("id") id: Long) : Single<Page<User>>
 
     @GET("/rest/v1/goals/info/user/{username}")
-    fun userGoalInfos(@Path("username") username: String) : Single<List<GoalInfo>>
+    fun userGoalInfos(@Path("username") username: String, @Query("time") time: Long? = null) : Single<List<GoalInfo>>
 
     @GET("/rest/v1/goals/info/user")
-    fun userGoalInfos() : Single<List<GoalInfo>>
+    fun userGoalInfos(@Query("time") time: Long? = null) : Single<List<GoalInfo>>
 
     @GET("/rest/v1/goals/info/{id}")
     fun goalInfo(@Path("id") id: Long) : Single<GoalInfo>
@@ -82,13 +82,13 @@ interface ResourceApi {
     fun goalLogInfo(@Path("id") id: Long) : Single<GoalLogInfo>
 
     @GET("/rest/v1/goallogs/info/com/{id}")
-    fun comGoalLogInfos(@Path("id") id: Long) : Single<List<GoalLogInfo>>
+    fun comGoalLogInfos(@Path("id") id: Long, @Query("page") page: Int = 0) : Single<List<GoalLogInfo>>
 
     @GET("/rest/v1/maininfos")
-    fun mainInfos() : Single<List<MainInfo>?>
+    fun mainInfos(@Query("order") order: Long? = null) : Single<List<MainInfo>?>
 
     @GET("/rest/v1/maininfos/{username}")
-    fun userMainInfos(@Path("username") username: String) : Single<List<MainInfo>?>
+    fun userMainInfos(@Path("username") username: String, @Query("time") time: Long? = null) : Single<List<MainInfo>?>
 
     @GET("/rest/v1/wallinfo/{username}")
     fun wallInfo(@Path("username") username: String) : Single<WallInfo>

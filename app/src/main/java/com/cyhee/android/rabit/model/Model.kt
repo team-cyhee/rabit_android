@@ -90,9 +90,11 @@ data class FileInfo (
 )
 
 abstract class MainInfo {
+    abstract var order: Long?
     abstract var likeNum: Int
     abstract var commentNum: Int
     abstract var companionNum: Int
+    abstract var createDate: Date
     abstract var lastUpdated: Date
     abstract var type: ContentType
     abstract var liked: Boolean
@@ -110,9 +112,11 @@ data class GoalInfo (
         var logNum: Int,
         var files: List<FileInfo> = ArrayList(),
         var achievementRate: Double,
+        override var order: Long?,
         override var likeNum: Int,
         override var commentNum: Int,
         override var companionNum: Int,
+        override var createDate: Date,
         override var lastUpdated: Date,
         override var liked: Boolean,
         override var type: ContentType = ContentType.GOAL
@@ -127,11 +131,12 @@ data class GoalLogInfo (
     var author: User,
     var goal: Goal,
     var content: String,
-    var createDate: Date,
     var files: List<FileInfo> = ArrayList(),
+    override var order: Long?,
     override var likeNum: Int,
     override var commentNum: Int,
     override var companionNum: Int,
+    override var createDate: Date,
     override var lastUpdated: Date,
     override var liked: Boolean,
     override var type: ContentType = ContentType.GOALLOG

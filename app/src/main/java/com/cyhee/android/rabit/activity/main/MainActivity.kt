@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.widget.*
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
+import com.cyhee.android.rabit.activity.base.InfiniteScrollListener
 import com.cyhee.android.rabit.activity.goallist.GoalListActivity
 import com.cyhee.android.rabit.activity.mywall.MyWallActivity
 import com.cyhee.android.rabit.activity.settings.SettingsActivity
@@ -19,6 +22,7 @@ import kotlinx.android.synthetic.main.item_complete_topbar.*
 
 class MainActivity: AppCompatActivity(), MainContract.View {
 
+    private val TAG = MainActivity::class.qualifiedName
     override var presenter : MainContract.Presenter = MainPresenter(this)
     private var mainAdapter: MainViewAdapter? = null
 
@@ -65,6 +69,11 @@ class MainActivity: AppCompatActivity(), MainContract.View {
             presenter.mainInfos()
             main_swipe_refresh?.isRefreshing = false
         }
+
+        // infinite scroll
+        main_list_view.addOnScrollListener(InfiniteScrollListener(linearLayoutManager) {
+            presenter.mainInfos(order = mainAdapter!!.lastOrder())
+        })
     }
 
     override fun showMainInfos(mainInfos: MutableList<MainInfo>) {

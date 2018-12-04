@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
 import com.cyhee.android.rabit.R
+import com.cyhee.android.rabit.activity.base.InfiniteScrollListener
 import com.cyhee.android.rabit.activity.main.MainViewAdapter
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
@@ -18,15 +19,18 @@ class WallActivity: AppCompatActivity(), WallContract.View {
     private val TAG = WallActivity::class.qualifiedName
     override var presenter : WallContract.Presenter = WallPresenter(this)
     private var mainAdapter: MainViewAdapter? = null
+    private lateinit var username: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wall)
 
         if (intent.hasExtra("username")) {
-            val username = intent.getStringExtra("username")
+            username = intent.getStringExtra("username")
             presenter.wallInfo(username)
             username_text.text = username
+            val layoutManager = LinearLayoutManager(this)
+            wall_list_view.layoutManager = layoutManager
 
             search_btn.setOnClickListener(IntentListener.toSearchListener())
             to_up_btn.setOnClickListener{
@@ -42,13 +46,17 @@ class WallActivity: AppCompatActivity(), WallContract.View {
 
                 wall_swipe_refresh?.isRefreshing = false
             }
+
+            // infinite scroll
+            wall_list_view.addOnScrollListener(InfiniteScrollListener(layoutManager) {
+                presenter.userMainInfos(username, null,  mainAdapter!!.lastTime())
+            })
         } else {
             Toast.makeText(this, "전달된 username이 없습니다", Toast.LENGTH_SHORT).show()
         }
-
     }
 
-    override fun showMainInfos(mainInfos : MutableList<MainInfo>, wallInfo: WallInfo) {
+    override fun showMainInfos(mainInfos : MutableList<MainInfo>, wallInfo: WallInfo?) {
         if (mainAdapter == null) {
             mainAdapter = MainViewAdapter(2, mainInfos, wallInfo,
                     { id, post -> presenter.toggleLikeForGoal(id, post)},

@@ -75,4 +75,6 @@ class ComGlViewAdapter (
         this.comGls.clear()
         notifyItemRangeRemoved(headerSize, size)
     }
+
+    fun lastPage() = this.comGls.size / 10
 }

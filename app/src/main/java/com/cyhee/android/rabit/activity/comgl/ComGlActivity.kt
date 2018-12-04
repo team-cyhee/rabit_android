@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.widget.*
 import com.cyhee.android.rabit.R
 import com.cyhee.android.rabit.activity.App
+import com.cyhee.android.rabit.activity.base.InfiniteScrollListener
 import com.cyhee.android.rabit.listener.IntentListener
 import com.cyhee.android.rabit.model.*
 import kotlinx.android.synthetic.main.activity_comgoallog.*
@@ -26,6 +27,8 @@ class ComGlActivity: AppCompatActivity(), ComGlContract.View {
         if (intent.hasExtra("goalId")) {
             val goalId = intent.getLongExtra("goalId", -1)
             presenter.comGls(goalId)
+            val layoutManager = LinearLayoutManager(this)
+            com_gl_list_view.layoutManager = layoutManager
 
             search_btn.setOnClickListener(IntentListener.toSearchListener())
             to_up_btn.setOnClickListener{
@@ -39,6 +42,11 @@ class ComGlActivity: AppCompatActivity(), ComGlContract.View {
                 comGlAdapter?.clear()
                 presenter.comGls(goalId)
             }
+
+            // infinite scroll
+            com_gl_list_view.addOnScrollListener(InfiniteScrollListener(layoutManager) {
+                presenter.comGls(goalId, comGlAdapter!!.lastPage())
+            })
         } else {
             Toast.makeText(this, "전달된 goalId가 없습니다", Toast.LENGTH_SHORT).show()
         }

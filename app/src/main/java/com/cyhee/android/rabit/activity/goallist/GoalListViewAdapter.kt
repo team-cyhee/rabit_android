@@ -54,4 +54,6 @@ class GoalListViewAdapter (
         //notifyItemRangeRemoved(0, size)
         notifyDataSetChanged()
     }
+
+    fun lastTime() = this.goalInfos.last().createDate.time
 }

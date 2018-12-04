@@ -159,4 +159,8 @@ class MainViewAdapter (
         this.mainInfos.clear()
         notifyItemRangeRemoved(headerSize, size)
     }
+
+    fun lastOrder() = this.mainInfos.last().order
+
+    fun lastTime() = this.mainInfos.last().createDate.time
 }
